@@ -1,5 +1,5 @@
 
-/** * @author Wael Abouelsaadat */ 
+
 
 public class DBAppException extends Exception {
 

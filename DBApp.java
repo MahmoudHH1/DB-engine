@@ -1,5 +1,5 @@
 
-/** * @author Wael Abouelsaadat */ 
+
 
 import Data.Table;
 import Data.TableColumn;
@@ -17,7 +17,7 @@ public class DBApp {
 		
 	}
 
-	// this does whatever initialization you would like 
+	// this does whatever initialization you would like
 	// or leave it empty if there is no code you want to 
 	// execute at application startup 
 	public void init( ){
@@ -101,6 +101,7 @@ public class DBApp {
 
 
 	public static void main( String[] args ){
+		System.out.println("au revoir");
 	
 	try{
 			String strTableName = "Student";
