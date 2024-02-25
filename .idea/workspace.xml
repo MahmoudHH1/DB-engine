@@ -4,10 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2903a983-3615-437d-8dd7-e885eb26849b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Record.java" afterDir="false" />
+    <list default="true" id="2903a983-3615-437d-8dd7-e885eb26849b" name="Changes" comment="Records added">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Page.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Table.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/TableColumn.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Database-Engine/DBApp.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Database-Engine/DBAppException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Page.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Record.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Database-Engine/SQLTerm.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/DBApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Record.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Record.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,28 +69,84 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.DBApp.executor": "Run",
+    "Application.Page.executor": "Run",
     "Application.Record.executor": "Run",
+    "Application.Table.executor": "Run",
+    "Application.TableColumn.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "Saeed",
+    "jdk.selected.JAVA_MODULE": "1.8",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Coding/DataBase/Database_projects/Database_Engine Project/Database-Engine",
+    "last_opened_file_path": "D:/Coding/Java/Eclipse_DATA/My-Game",
     "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
+    "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
-  <component name="RunManager">
-    <configuration name="Record" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Record" />
+  <component name="RunManager" selected="Application.DBApp">
+    <configuration name="DBApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="DBApp" />
       <module name="Database-Engine" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Page" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Data.Page" />
+      <module name="Database-Engine" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Data.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Record" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Data.Record" />
+      <module name="Database-Engine" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Table" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Data.Table" />
+      <module name="Database-Engine" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Data.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TableColumn" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Data.TableColumn" />
+      <module name="Database-Engine" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Data.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.DBApp" />
+        <item itemvalue="Application.Table" />
+        <item itemvalue="Application.TableColumn" />
+        <item itemvalue="Application.Page" />
         <item itemvalue="Application.Record" />
       </list>
     </recent_temporary>
@@ -100,6 +168,15 @@
       <option name="presentableId" value="Default" />
       <updated>1708710544088</updated>
     </task>
+    <task id="LOCAL-00001" summary="Records added">
+      <option name="closed" value="true" />
+      <created>1708890594697</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1708890594697</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -112,5 +189,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Records added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Records added" />
   </component>
 </project>
