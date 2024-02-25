@@ -88,7 +88,7 @@ public class DBApp {
 	
 	try{
 			String strTableName = "Student";
-			DBApp	dbApp = new DBApp( );
+			DBApp dbApp = new DBApp( );
 			
 			Hashtable htblColNameType = new Hashtable( );
 			htblColNameType.put("id", "java.lang.Integer");
