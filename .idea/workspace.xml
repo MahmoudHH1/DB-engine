@@ -4,23 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2903a983-3615-437d-8dd7-e885eb26849b" name="Changes" comment="Records added">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Page.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Table.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/TableColumn.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Database-Engine/DBApp.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Database-Engine/DBAppException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Page.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Record.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Database-Engine/SQLTerm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/DBApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Record.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Record.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="2903a983-3615-437d-8dd7-e885eb26849b" name="Changes" comment="Tables Created successfully" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -176,7 +160,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708890594697</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Tables Created successfully">
+      <option name="closed" value="true" />
+      <created>1708900137792</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1708900137792</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -184,7 +176,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -192,6 +196,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Records added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Records added" />
+    <MESSAGE value="Tables Created successfully" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tables Created successfully" />
   </component>
 </project>
