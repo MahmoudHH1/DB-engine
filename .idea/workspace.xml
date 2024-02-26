@@ -4,10 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="added method storePage to store page in .class file-- to be modified later -- Will probably be used in insert tuple method">
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Saeed added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/DBApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/MetaData.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/MetaData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Page.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/TableColumn.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/TableColumn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data_Entry/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data_Entry/metadata.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/DBApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/TableColumn.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/TableColumn.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data_Entry/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data_Entry/metadata.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/SQLTerm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/SQLTerm.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,17 +56,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;M.dahroug&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.DBApp.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
+    <configuration name="DBApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="DBApp" />
+      <module name="Database-Engine" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="DB-engine" />
       <method v="2">
@@ -69,6 +88,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.DBApp" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -83,6 +107,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added method storePage to store page in .class file-- to be modified later -- Will probably be used in insert tuple method" />
-    <option name="LAST_COMMIT_MESSAGE" value="added method storePage to store page in .class file-- to be modified later -- Will probably be used in insert tuple method" />
+    <MESSAGE value="Saeed added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Saeed added" />
   </component>
 </project>

@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class MetaData {
-    static String filePath = "\\Data_Entry\\metadata.csv";
+    static String filePath = "Data_Entry/metadata.csv";
     public static void writeDataToMetaDatafile( ArrayList<TableColumn> allColumns)
     {
         try {
