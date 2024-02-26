@@ -1,9 +1,7 @@
 package Data;
 
-import java.lang.reflect.Type;
-
 public class TableColumn {
-    String tableName ;
+    String tableName ; // Store tableName in Table Class
     String columnName ;
     String  columnType ;
     boolean isClusterKey ;
@@ -35,7 +33,7 @@ public class TableColumn {
         TableColumn c = new TableColumn("Student" , "ID",
                 "java.lang.String" , true , null , null  );
 
-        System.out.println(c.toString());
+        System.out.println(c);
     }
 }
 
