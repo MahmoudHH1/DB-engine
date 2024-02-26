@@ -101,8 +101,6 @@ public class DBApp {
 
 
 	public static void main( String[] args ){
-		System.out.println("au revoir");
-	
 	try{
 			String strTableName = "Student";
 			DBApp dbApp = new DBApp( );
