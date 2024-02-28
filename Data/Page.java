@@ -8,7 +8,7 @@ import java.util.Vector;
 public class Page implements Serializable {
     Table table ;
     String pageName ;
-    private Vector<Record>allRecords;
+    private Vector<Record> allRecords;
     String pagePath ;
     public Page (Table table) throws IOException {
         this.table = table ;
@@ -19,7 +19,7 @@ public class Page implements Serializable {
     }
 
     public void addRecord(Record record){
-        allRecords.add(record);
+        allRecords.add(record); // in progress akiiiid
     }
 
     public void pageCreator() throws IOException {
