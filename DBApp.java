@@ -51,7 +51,7 @@ public class DBApp {
 			allColumns.add(newColumn);
 		}
 		Table table = new Table(allColumns);
-//		Page page = new Page(table) ;
+		Page page = new Page(table) ;
 	}
 
 
@@ -105,7 +105,7 @@ public class DBApp {
 
 	public static void main( String[] args ){
 	try{
-			String strTableName = "Doctors";
+			String strTableName = "Games";
 			DBApp dbApp = new DBApp( );
 			
 			Hashtable htblColNameType = new Hashtable( );
