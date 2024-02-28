@@ -9,9 +9,9 @@ import java.util.Vector;
 public class Table implements Serializable {
 
 
-    ArrayList<String> pages ;
+    Vector<String> pages ;
     transient ArrayList<TableColumn>allColumns;
-    transient String tablesDirectory  = "Data_Entry/Tables";
+    static String tablesDirectory  = "Data_Entry/Tables";
     String tablePath ;
     String tableName ;
     int pageNum = 1;
@@ -19,17 +19,16 @@ public class Table implements Serializable {
 
     public Table(ArrayList<TableColumn> allColumns) throws IOException {
         tableName = allColumns.get(0).tableName ;
-        tablePath = tablesDirectory+'/'+tableName;
-        File f = new File(tablePath);
+        tablePath = tablesDirectory + File.separator + tableName;
         this.allColumns = allColumns;
-        tableCreator();
+        File f = new File(tablePath);
         System.out.println(f.mkdir()?"Table Created" : "Table not Created");
         MetaData.writeDataToMetaDatafile(allColumns);
-
+        tableCreator();
     }
 
     public void tableCreator() throws IOException {
-        tablePath = tablesDirectory + File.separator + tableName;
+        tablePath = tablesDirectory + File.separator + tableName + File.separator + "PAGES";
         FileCreator.storeAsObject(this, tablePath );
     }
 
@@ -46,7 +45,10 @@ public class Table implements Serializable {
 //        out.close();
 //        fileOut.close();
 //    }
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws IOException {
+        ArrayList<TableColumn> cols = new ArrayList<>();
+        TableColumn col = new TableColumn("test", "cool", "java.lang.String", true, null, null);
+        cols.add(col);
+        Table test = new Table(cols);
     }
 }
