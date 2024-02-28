@@ -28,7 +28,7 @@ public class Table implements Serializable {
     }
 
     public void tableCreator() throws IOException {
-        tablePath = tablesDirectory + File.separator + tableName + File.separator + "PAGES";
+        tablePath = tablesDirectory + File.separator + tableName + File.separator + tableName;
         FileCreator.storeAsObject(this, tablePath );
     }
 

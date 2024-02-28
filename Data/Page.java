@@ -8,14 +8,15 @@ import java.util.Vector;
 public class Page implements Serializable {
     Table table ;
     String pageName ;
-    private Vector<Record> allRecords;
+    Vector<Record> allRecords;
     String pagePath ;
     public Page (Table table) throws IOException {
+        allRecords = new Vector<>();
         this.table = table ;
         this.pageName = table.tableName+table.pageNum ;
         this.pagePath = table.tablePath+'/'+pageName  ;
         pageCreator();
-        allRecords = new Vector<>();
+
     }
 
     public void addRecord(Record record){
