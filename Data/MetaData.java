@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class MetaData {
-    static String filePath = "Data_Entry/metadata.csv";
+    static String metaPath = "Data_Entry/metadata.csv";
     public static void writeDataToMetaDatafile( ArrayList<TableColumn> allColumns)
     {
         try {
-            FileWriter myWriter = new FileWriter(filePath , true);
+            FileWriter myWriter = new FileWriter(metaPath , true);
             for(TableColumn column : allColumns){
                 myWriter.append(column.toString());
             }
@@ -20,4 +20,5 @@ public class MetaData {
             e.printStackTrace();
         }
     }
+
 }

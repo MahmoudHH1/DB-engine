@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Vector;
 public class Page implements Serializable {
     Table table ;
-    String pageName ;
+    String pageName ; // unnecessary attribute
     Vector<Record> allRecords;
     String pagePath ;
     public Page (Table table) throws IOException {
@@ -21,10 +21,11 @@ public class Page implements Serializable {
     }
 
     public void addRecord(Record record){
-        allRecords.add(record); // in progress akiiiid
+        allRecords.add(record); // in progress
     }
 
     public void pageCreator() throws IOException {
+        table.pages.add(pagePath); // store pagePath in corresponding table
         FileCreator.storeAsObject(this , pagePath);
     }
 

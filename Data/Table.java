@@ -38,8 +38,8 @@ public class Table implements Serializable {
 
 
     //    public void createPage(Page p) throws IOException {
-//        String path = tablePath+pagesPathes.size() +".class"; // need to know number of page to put
-//        pagesPathes.add(path);                              // and tableName should belong to Table class not column
+//        String path = tablePath+pagesPaths.size() +".class"; // need to know number of page to put
+//        pagesPaths.add(path);                              // and tableName should belong to Table class not column
 //        FileOutputStream fileOut = new FileOutputStream(path);
 //        ObjectOutputStream out = new ObjectOutputStream(fileOut);
 //        out.writeObject(p);
