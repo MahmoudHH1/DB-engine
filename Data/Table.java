@@ -10,8 +10,8 @@ public class Table implements Serializable {
 
 
     Vector<String> pages ;
-    transient ArrayList<TableColumn>allColumns;
-    static String tablesDirectory  = "Data_Entry/Tables";
+    transient ArrayList<TableColumn> allColumns;
+    static String tablesDirectory = "Data_Entry/Tables";
     String tablePath ;
     String tableName ;
     int pageNum = 1;
