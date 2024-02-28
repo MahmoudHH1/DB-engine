@@ -6,10 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="clean up and comments">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/MetaData.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/MetaData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/DBApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Page.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Record.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Record.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Table.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data_Entry/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data_Entry/metadata.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/DBApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/MetaData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/MetaData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Page.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Page.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Record.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Record.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data_Entry/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data_Entry/metadata.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
