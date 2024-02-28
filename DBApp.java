@@ -1,9 +1,11 @@
 
 
 
+import Data.Page;
 import Data.Table;
 import Data.TableColumn;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Hashtable;
@@ -34,7 +36,7 @@ public class DBApp {
 	// type as value
 	public void createTable(String strTableName, 
 							String strClusteringKeyColumn,  
-							Hashtable<String,String> htblColNameType) throws DBAppException{
+							Hashtable<String,String> htblColNameType) throws DBAppException, IOException {
 		ArrayList<TableColumn> allColumns = new ArrayList<>();
 
 		for( String column : htblColNameType.keySet()){
@@ -49,6 +51,7 @@ public class DBApp {
 			allColumns.add(newColumn);
 		}
 		Table table = new Table(allColumns);
+//		Page page = new Page(table) ;
 	}
 
 
@@ -102,7 +105,7 @@ public class DBApp {
 
 	public static void main( String[] args ){
 	try{
-			String strTableName = "Teatchers";
+			String strTableName = "Doctors";
 			DBApp dbApp = new DBApp( );
 			
 			Hashtable htblColNameType = new Hashtable( );
@@ -111,6 +114,8 @@ public class DBApp {
 			htblColNameType.put("gpa", "java.lang.double");
 			dbApp.createTable( strTableName, "id", htblColNameType );
 //			dbApp.createIndex( strTableName, "gpa", "gpaIndex" );
+
+
 
 //			Hashtable htblColNameValue = new Hashtable( );
 //			htblColNameValue.put("id", new Integer( 2343432 ));
