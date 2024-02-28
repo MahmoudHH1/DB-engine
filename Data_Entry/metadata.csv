@@ -69,3 +69,9 @@ test,cool,java.lang.String,true,null,null
 test,cool,java.lang.String,true,null,null
 test,cool,java.lang.String,true,null,null
 test,cool,java.lang.String,true,null,null
+Games,gpa,java.lang.double,false,null,null
+Games,name,java.lang.String,false,null,null
+Games,id,java.lang.Integer,true,null,null
+Games,gpa,java.lang.double,false,null,null
+Games,name,java.lang.String,false,null,null
+Games,id,java.lang.Integer,true,null,null

@@ -13,8 +13,9 @@ public class Page implements Serializable {
     public Page (Table table) throws IOException {
         allRecords = new Vector<>();
         this.table = table ;
-        this.pageName = table.tableName+table.pageNum ;
-        this.pagePath = table.tablePath+'/'+pageName  ;
+        this.pageName = table.tableName + table.pageNum ;
+        table.pageNum++; // next page num
+        this.pagePath = table.tableDir+'/'+pageName ;
         pageCreator();
 
     }
