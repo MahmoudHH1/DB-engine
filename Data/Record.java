@@ -22,6 +22,6 @@ public class Record extends Vector<Object> {
         r.add("Name");
         r.add("Age");
         r.add("Gender");
-        System.out.println( r.toString());
+        System.out.println(r);
     }
 }
