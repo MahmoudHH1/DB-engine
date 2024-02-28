@@ -41,20 +41,6 @@ public class Page implements Serializable {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public static void main(String[] args) {
 //        Page page = new Page() ;
 //

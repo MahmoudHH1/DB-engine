@@ -10,6 +10,7 @@ public class FileCreator {
         out.close();
         fileOut.close();
     }
+
     public static Object readObject(String path) throws IOException, ClassNotFoundException {
         FileInputStream fileIn = new FileInputStream(path+".class");
         ObjectInputStream in = new ObjectInputStream(fileIn);
