@@ -106,7 +106,7 @@ public class DBApp {
 
 	public static void main( String[] args ){
 	try{
-			String strTableName = "Games";
+			String strTableName = "People";
 			DBApp dbApp = new DBApp( );
 			
 			Hashtable htblColNameType = new Hashtable( );

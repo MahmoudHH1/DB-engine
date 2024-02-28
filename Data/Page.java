@@ -25,8 +25,8 @@ public class Page implements Serializable {
     }
 
     public void pageCreator() throws IOException {
-        table.pages.add(pagePath); // store pagePath in corresponding table
-        FileCreator.storeAsObject(this , pagePath);
+        table.pages.add(this.pagePath); // store pagePath in corresponding table
+        FileCreator.storeAsObject(this , this.pagePath);
     }
 
     public int getPageSize(){

@@ -19,8 +19,9 @@ public class Table implements Serializable {
 
 
     public Table(ArrayList<TableColumn> allColumns) throws IOException {
-        tableName = allColumns.get(0).tableName ;
-        tableDir = tablesDirectory + File.separator + tableName;
+        this.pages = new Vector<>() ;
+        this.tableName = allColumns.get(0).tableName ;
+        this.tableDir = tablesDirectory + File.separator + tableName;
         this.allColumns = allColumns;
         File f = new File(tableDir);
         System.out.println(f.mkdir()?"Table Created" : "Table not Created");

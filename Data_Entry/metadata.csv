@@ -75,3 +75,12 @@ Games,id,java.lang.Integer,true,null,null
 Games,gpa,java.lang.double,false,null,null
 Games,name,java.lang.String,false,null,null
 Games,id,java.lang.Integer,true,null,null
+People,gpa,java.lang.double,false,null,null
+People,name,java.lang.String,false,null,null
+People,id,java.lang.Integer,true,null,null
+People,gpa,java.lang.double,false,null,null
+People,name,java.lang.String,false,null,null
+People,id,java.lang.Integer,true,null,null
+People,gpa,java.lang.double,false,null,null
+People,name,java.lang.String,false,null,null
+People,id,java.lang.Integer,true,null,null
