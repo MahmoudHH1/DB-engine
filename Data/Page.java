@@ -1,19 +1,29 @@
 package Data;
 
+import javafx.scene.control.Tab;
+
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Vector;
 public class Page implements Serializable {
-
+    Table table ;
     String pageName ;
     private Vector<Record>allRecords;
-
-    public Page ( String pageName){
-        this.pageName = pageName ;
+    String pagePath ;
+    public Page (Table table) throws IOException {
+        this.table = table ;
+        this.pageName = table.tableName+table.pageNum ;
+        this.pagePath = table.tablePath+'/'+pageName  ;
+        pageCreator();
         allRecords = new Vector<>();
     }
 
     public void addRecord(Record record){
         allRecords.add(record);
+    }
+
+    public void pageCreator() throws IOException {
+        FileCreator.storeAsObject(this , pagePath);
     }
 
     public int getPageSize(){
@@ -29,7 +39,22 @@ public class Page implements Serializable {
         return pageContent.toString();
     }
 
-//    public static void main(String[] args) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static void main(String[] args) {
 //        Page page = new Page() ;
 //
 //        Record r1 = new Record() ;
@@ -52,6 +77,8 @@ public class Page implements Serializable {
 //        page.addRecord(r3);
 //        System.out.println(page.getPageSize());
 //        System.out.println(page.toString());
-//    }
+
+
+    }
 
 }
