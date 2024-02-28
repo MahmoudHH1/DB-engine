@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Saeed added">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="fixed exception when creating folder and object file">
+      <change beforePath="$PROJECT_DIR$/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/DBApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Table.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -42,6 +41,9 @@
         <option name="url" value="https://github.com/MahmoudHH1/DB-engine.git" />
       </UrlAndAccount>
     </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
@@ -139,9 +141,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.DBApp" />
+        <item itemvalue="Application.Table" />
         <item itemvalue="Application.TableColumn" />
         <item itemvalue="Application.Record" />
-        <item itemvalue="Application.Table" />
         <item itemvalue="Application.Page" />
       </list>
     </recent_temporary>
@@ -162,11 +164,32 @@
       <option name="presentableId" value="Default" />
       <updated>1708726737774</updated>
     </task>
+    <task id="LOCAL-00001" summary="fixed exception when creating folder and object file">
+      <option name="closed" value="true" />
+      <created>1709118724432</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1709118724432</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added method storePage to store page in .class file-- to be modified later -- Will probably be used in insert tuple method" />
     <MESSAGE value="Saeed added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Saeed added" />
+    <MESSAGE value="fixed exception when creating folder and object file" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed exception when creating folder and object file" />
   </component>
 </project>
