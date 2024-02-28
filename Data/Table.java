@@ -9,26 +9,27 @@ import java.util.Vector;
 public class Table implements Serializable {
 
 
-    Vector<String> pages ;
+    Vector<String> pages ; // page paths
     transient ArrayList<TableColumn> allColumns;
     static String tablesDirectory = "Data_Entry/Tables";
     String tablePath ;
+    String tableDir;
     String tableName ;
     int pageNum = 1;
 
 
     public Table(ArrayList<TableColumn> allColumns) throws IOException {
         tableName = allColumns.get(0).tableName ;
-        tablePath = tablesDirectory + File.separator + tableName;
+        tableDir = tablesDirectory + File.separator + tableName;
         this.allColumns = allColumns;
-        File f = new File(tablePath);
+        File f = new File(tableDir);
         System.out.println(f.mkdir()?"Table Created" : "Table not Created");
         MetaData.writeDataToMetaDatafile(allColumns);
         tableCreator();
     }
 
     public void tableCreator() throws IOException {
-        tablePath = tablesDirectory + File.separator + tableName + File.separator + tableName;
+        tablePath = tableDir +  File.separator + tableName;
         FileCreator.storeAsObject(this, tablePath );
     }
 
