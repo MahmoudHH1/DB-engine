@@ -14,7 +14,7 @@ public class Table implements Serializable {
     private Vector<String> pages ; // page paths
     private transient ArrayList<TableColumn> allColumns;
     static String tablesDirectory = "Data_Entry/Tables";
-    private String tablePath ;
+    private String tableFilePath ;
     private String tableDir;
     private String tableName ;
     private int pageNum = 1;
@@ -32,8 +32,8 @@ public class Table implements Serializable {
     }
 
     public void tableCreator() throws IOException {
-        tablePath = tableDir +  File.separator + tableName;
-        FileCreator.storeAsObject(this, tablePath );
+        tableFilePath = tableDir +  File.separator + tableName;
+        FileCreator.storeAsObject(this, tableFilePath );
     }
 
     public ArrayList<TableColumn> getAllColumns() {
@@ -44,8 +44,8 @@ public class Table implements Serializable {
         return tablesDirectory;
     }
 
-    public String getTablePath() {
-        return tablePath;
+    public String getTableFilePath() {
+        return tableFilePath;
     }
 
     public String getTableDir() {
