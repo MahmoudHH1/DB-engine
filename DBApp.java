@@ -1,9 +1,10 @@
 
 
 
-import Data.Page.Page;
+import Data.Table.MetaData;
 import Data.Table.Table;
 import Data.Table.TableColumn;
+import Exceptions.DBAppException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,19 +13,16 @@ import java.util.Hashtable;
 
 
 public class DBApp {
-
-
-
-	public DBApp( ){
-		
+	ArrayList<Table> allTables;
+	public DBApp( ) throws IOException, ClassNotFoundException {
+		init();
 	}
 
 	// this does whatever initialization you would like
 	// or leave it empty if there is no code you want to 
 	// execute at application startup 
-	public void init( ){
-		
-		
+	public void init( ) throws IOException, ClassNotFoundException {
+		allTables = MetaData.loadAllTables();
 	}
 
 
@@ -78,8 +76,10 @@ public class DBApp {
 	public void updateTable(String strTableName, 
 							String strClusteringKeyValue,
 							Hashtable<String,Object> htblColNameValue   )  throws DBAppException{
-
-		throw new DBAppException("not implemented yet");
+		Table tabel = Table.getTable(allTables , strTableName);
+//		System.out.println(tabel.getTableName());
+//		System.out.println(tabel.getAllColumns());
+//		System.out.println(tabel.getPageNum());
 	}
 
 
@@ -103,14 +103,15 @@ public class DBApp {
 
 	public static void main( String[] args ){
 	try{
-			String strTableName = "Cars";
+			String strTableName = "Student";
 			DBApp dbApp = new DBApp( );
+			dbApp.updateTable("Student" , "id" , new Hashtable<>());
 			
-			Hashtable htblColNameType = new Hashtable( );
-			htblColNameType.put("id", "java.lang.Integer");
-			htblColNameType.put("name", "java.lang.String");
-			htblColNameType.put("gpa", "java.lang.double");
-			dbApp.createTable( strTableName, "id", htblColNameType );
+//			Hashtable htblColNameType = new Hashtable( );
+//			htblColNameType.put("id", "java.lang.Integer");
+//			htblColNameType.put("name", "java.lang.String");
+//			htblColNameType.put("gpa", "java.lang.double");
+//			dbApp.createTable( strTableName, "id", htblColNameType );
 //			dbApp.createIndex( strTableName, "gpa", "gpaIndex" );
 
 
