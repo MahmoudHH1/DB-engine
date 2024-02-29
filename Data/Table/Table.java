@@ -1,12 +1,14 @@
 package Data.Table;
 
 import Data.Handler.FileCreator;
+import Exceptions.DBAppException;
 
 import java.io.*;
 import java.util.ArrayList;
 
 import java.io.IOException;
 import java.util.Vector;
+
 
 public class Table implements Serializable {
 
@@ -47,15 +49,12 @@ public class Table implements Serializable {
     public String getTableFilePath() {
         return tableFilePath;
     }
-
     public String getTableDir() {
         return tableDir;
     }
-
     public String getTableName() {
         return tableName;
     }
-
     public int getPageNum() {
         return pageNum;
     }
@@ -65,6 +64,39 @@ public class Table implements Serializable {
     public void addNewPage(String pagePath){
         this.pages.add(pagePath);
     }
+
+    public void setPages(Vector<String> pages) {
+        this.pages = pages;
+    }
+    public void setAllColumns(ArrayList<TableColumn> allColumns) {
+        this.allColumns = allColumns;
+    }
+    public static void setTablesDirectory(String tablesDirectory) {
+        Table.tablesDirectory = tablesDirectory;
+    }
+    public void setTableFilePath(String tableFilePath) {
+        this.tableFilePath = tableFilePath;
+    }
+    public void setTableDir(String tableDir) {
+        this.tableDir = tableDir;
+    }
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
+    }
+    public static String getTableFilePath(String name){
+        return tablesDirectory + File.separator +
+                name + File.separator + name;
+    }
+
+    public static Table getTable(ArrayList<Table> allTables , String tableName) throws DBAppException {
+        for(Table table : allTables){
+            if (table.tableName.equals(tableName)){
+                return table ;
+            }
+        }
+        throw new DBAppException("Table not found");
+    }
+
 
     public static void main(String[] args) throws IOException {
         ArrayList<TableColumn> cols = new ArrayList<>();
