@@ -34,11 +34,10 @@ public class DBApp {
 	// be passed in htblColNameType
 	// htblColNameValue will have the column name as key and the data 
 	// type as value
-	public void createTable(String strTableName, 
+	public void createTable(String strTableName,
 							String strClusteringKeyColumn,  
 							Hashtable<String,String> htblColNameType) throws DBAppException, IOException {
 		ArrayList<TableColumn> allColumns = new ArrayList<>();
-
 		for( String column : htblColNameType.keySet()){
 			TableColumn newColumn = new TableColumn(
 					strTableName ,
@@ -51,7 +50,6 @@ public class DBApp {
 			allColumns.add(newColumn);
 		}
 		Table table = new Table(allColumns);
-		Page page = new Page(table) ;
 	}
 
 
