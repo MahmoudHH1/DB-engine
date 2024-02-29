@@ -66,17 +66,6 @@ public class DBApp {
     public void insertIntoTable(String strTableName,
                                 Hashtable<String, Object> htblColNameValue) throws DBAppException {
 
-        throw new DBAppException("not implemented yet");
-    }
-
-
-    // following method updates one row only
-    // htblColNameValue holds the key and new value
-    // htblColNameValue will not include clustering key as column name
-    // strClusteringKeyValue is the value to look for to find the row to update.
-    public void updateTable(String strTableName,
-                            String strClusteringKeyValue,
-                            Hashtable<String, Object> htblColNameValue) throws DBAppException {
         String path = "Data_Entry/Tables";
         File directory = new File(path, strTableName);
         //checking if the table exists or not
@@ -93,6 +82,17 @@ public class DBApp {
         } else {
             System.out.println("table does not exist.");
         }
+        throw new DBAppException("not implemented yet");
+    }
+
+
+    // following method updates one row only
+    // htblColNameValue holds the key and new value
+    // htblColNameValue will not include clustering key as column name
+    // strClusteringKeyValue is the value to look for to find the row to update.
+    public void updateTable(String strTableName,
+                            String strClusteringKeyValue,
+                            Hashtable<String, Object> htblColNameValue) throws DBAppException {
     }
 		throw new
 
