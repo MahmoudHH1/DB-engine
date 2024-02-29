@@ -81,3 +81,6 @@ People,id,java.lang.Integer,true,null,null
 People,gpa,java.lang.double,false,null,null
 People,name,java.lang.String,false,null,null
 People,id,java.lang.Integer,true,null,null
+People,gpa,java.lang.double,false,null,null
+People,name,java.lang.String,false,null,null
+People,id,java.lang.Integer,true,null,null
