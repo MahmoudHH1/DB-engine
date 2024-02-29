@@ -1,11 +1,13 @@
-package Data;
+package Data.Table;
+
+import Data.Table.TableColumn;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class MetaData {
-    static String metaPath = "Data_Entry/metadata.csv";
+    private static String metaPath = "Data_Entry/metadata.csv";
     public static void writeDataToMetaDatafile( ArrayList<TableColumn> allColumns)
     {
         try {

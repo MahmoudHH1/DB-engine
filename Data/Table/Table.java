@@ -1,4 +1,6 @@
-package Data;
+package Data.Table;
+
+import Data.Handler.FileCreator;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -9,18 +11,18 @@ import java.util.Vector;
 public class Table implements Serializable {
 
 
-    Vector<String> pages ; // page paths
-    transient ArrayList<TableColumn> allColumns;
+    private Vector<String> pages ; // page paths
+    private transient ArrayList<TableColumn> allColumns;
     static String tablesDirectory = "Data_Entry/Tables";
-    String tablePath ;
-    String tableDir;
-    String tableName ;
-    int pageNum = 1;
+    private String tablePath ;
+    private String tableDir;
+    private String tableName ;
+    private int pageNum = 1;
 
 
     public Table(ArrayList<TableColumn> allColumns) throws IOException {
         this.pages = new Vector<>() ;
-        this.tableName = allColumns.get(0).tableName ;
+        this.tableName = allColumns.get(0).getTableName() ;
         this.tableDir = tablesDirectory + File.separator + tableName;
         this.allColumns = allColumns;
         File f = new File(tableDir);
@@ -34,19 +36,36 @@ public class Table implements Serializable {
         FileCreator.storeAsObject(this, tablePath );
     }
 
+    public ArrayList<TableColumn> getAllColumns() {
+        return allColumns;
+    }
 
+    public static String getTablesDirectory() {
+        return tablesDirectory;
+    }
 
+    public String getTablePath() {
+        return tablePath;
+    }
 
+    public String getTableDir() {
+        return tableDir;
+    }
 
-    //    public void createPage(Page p) throws IOException {
-//        String path = tablePath+pagesPaths.size() +".class"; // need to know number of page to put
-//        pagesPaths.add(path);                              // and tableName should belong to Table class not column
-//        FileOutputStream fileOut = new FileOutputStream(path);
-//        ObjectOutputStream out = new ObjectOutputStream(fileOut);
-//        out.writeObject(p);
-//        out.close();
-//        fileOut.close();
-//    }
+    public String getTableName() {
+        return tableName;
+    }
+
+    public int getPageNum() {
+        return pageNum;
+    }
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
+    }
+    public void addNewPage(String pagePath){
+        this.pages.add(pagePath);
+    }
+
     public static void main(String[] args) throws IOException {
         ArrayList<TableColumn> cols = new ArrayList<>();
         TableColumn col = new TableColumn("test", "cool", "java.lang.String", true, null, null);

@@ -1,10 +1,9 @@
 
 
 
-import Data.Page;
-import Data.Table;
-import Data.TableColumn;
-import Data.*;
+import Data.Page.Page;
+import Data.Table.Table;
+import Data.Table.TableColumn;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -106,7 +105,7 @@ public class DBApp {
 
 	public static void main( String[] args ){
 	try{
-			String strTableName = "People";
+			String strTableName = "Cars";
 			DBApp dbApp = new DBApp( );
 			
 			Hashtable htblColNameType = new Hashtable( );
