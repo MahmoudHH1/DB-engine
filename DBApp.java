@@ -78,7 +78,7 @@ public class DBApp {
 	public void updateTable(String strTableName, 
 							String strClusteringKeyValue,
 							Hashtable<String,Object> htblColNameValue   )  throws DBAppException{
-	
+
 		throw new DBAppException("not implemented yet");
 	}
 
