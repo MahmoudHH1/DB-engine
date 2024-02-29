@@ -4,7 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="modifications" />
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="solved creation error">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/DBApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/FileCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Handler/FileCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/MetaData.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Table/MetaData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Page/Page.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Record.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Page/Record.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Table/Table.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/TableColumn.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Table/TableColumn.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -218,39 +227,7 @@
       <option name="project" value="LOCAL" />
       <updated>1709159248989</updated>
     </task>
-    <task id="LOCAL-00008" summary="Splited the code into packages and i added alose getters and setters">
-      <option name="closed" value="true" />
-      <created>1709178140889</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1709178140889</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Splited the code into packages and i added alose getters and setters">
-      <option name="closed" value="true" />
-      <created>1709178152301</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1709178152301</updated>
-    </task>
-    <task id="LOCAL-00010" summary="modifications">
-      <option name="closed" value="true" />
-      <created>1709179713674</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1709179713674</updated>
-    </task>
-    <task id="LOCAL-00011" summary="modifications">
-      <option name="closed" value="true" />
-      <created>1709180033323</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1709180033323</updated>
-    </task>
-    <option name="localTasksCounter" value="12" />
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -273,8 +250,6 @@
     <MESSAGE value="unversioned files" />
     <MESSAGE value="clean up and comments" />
     <MESSAGE value="solved creation error" />
-    <MESSAGE value="Splited the code into packages and i added alose getters and setters" />
-    <MESSAGE value="modifications" />
-    <option name="LAST_COMMIT_MESSAGE" value="modifications" />
+    <option name="LAST_COMMIT_MESSAGE" value="solved creation error" />
   </component>
 </project>
