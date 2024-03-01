@@ -4,30 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="modifications">
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Saeed Merge into master">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/DBApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Page/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Page/Page.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Page/Record.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Page/Record.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Table/MetaData.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Table/MetaData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Table/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/Student/Student.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data_Entry/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data_Entry/metadata.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_29_2024_5_24_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_29_2024_5_24_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_29_2024_5_29_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_29_2024_5_29_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/shelf/Uncommitted_changes_before_Update_at_2_26_2024_10_16_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/shelf/Uncommitted_changes_before_Update_at_2_26_2024_10_16_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/shelf/Uncommitted_changes_before_Update_at_2_26_2024_9_34_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/shelf/Uncommitted_changes_before_Update_at_2_26_2024_9_34_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/shelf/Uncommitted_changes_before_Update_at_2_28_2024_5_11_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/shelf/Uncommitted_changes_before_Update_at_2_28_2024_5_11_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/shelf/Uncommitted_changes_before_Update_at_2_28_2024_9_28_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/shelf/Uncommitted_changes_before_Update_at_2_28_2024_9_28_AM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/shelf/Uncommitted_changes_before_Update_at_2_29_2024_12_20_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/shelf/Uncommitted_changes_before_Update_at_2_29_2024_12_20_AM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/DBApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Page/Page.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Page/Page.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Page/Record.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Page/Record.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/MetaData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/MetaData.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/Table.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data_Entry/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data_Entry/metadata.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/DBApp.config" beforeDir="false" afterPath="$PROJECT_DIR$/resources/DBApp.config" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -282,7 +261,23 @@
       <option name="project" value="LOCAL" />
       <updated>1709228576040</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Saeed Merge into master">
+      <option name="closed" value="true" />
+      <created>1709272024839</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1709272024839</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Saeed Merge into master">
+      <option name="closed" value="true" />
+      <created>1709272036968</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1709272036968</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -307,6 +302,7 @@
     <MESSAGE value="solved creation error" />
     <MESSAGE value="Splited the code into packages and i added alose getters and setters" />
     <MESSAGE value="modifications" />
-    <option name="LAST_COMMIT_MESSAGE" value="modifications" />
+    <MESSAGE value="Saeed Merge into master" />
+    <option name="LAST_COMMIT_MESSAGE" value="Saeed Merge into master" />
   </component>
 </project>
