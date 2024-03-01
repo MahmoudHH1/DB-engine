@@ -72,7 +72,16 @@ public class TableColumn {
     public void setIndexType(String indexType) {
         this.indexType = indexType;
     }
-    public boolean ofName(String s){return columnName.equals(s);}
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof TableColumn){
+            return columnName.equals(((TableColumn) o).columnName);
+        }
+        if(o instanceof String){
+            return columnName.equals(o);
+        }
+        return false;
+    }
 
     @Override
     public String toString() {
