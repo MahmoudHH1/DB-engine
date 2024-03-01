@@ -79,9 +79,11 @@ public class DBApp {
 							String strClusteringKeyValue,
 							Hashtable<String,Object> htblColNameValue   )  throws DBAppException{
 		Table tabel = Table.getTable(allTables , strTableName);
-//		System.out.println(tabel.getTableName());
-//		System.out.println(tabel.getAllColumns());
-//		System.out.println(tabel.getPageNum());
+		for(Page page : tabel.getAllPages()){
+			for(Record record : page.getAllRecords()){
+
+			}
+		}
 	}
 
 
