@@ -119,7 +119,7 @@ public class DBApp {
         Table table = null;
         int rowsAffected = 0;
         for(Table t: allTables){
-            if(t.ofName(strTableName)){
+            if(t.equals(strTableName)){
                 table = t;
                 break;
             }
@@ -128,6 +128,12 @@ public class DBApp {
             throw new DBAppException("Table not found");
 
         ArrayList<Integer> columns = new ArrayList<>();
+        ArrayList<Object> values = new ArrayList<>();
+        for(String key: htblColNameValue.keySet()){
+            columns.add(table.getAllColumns().indexOf(key));
+
+        }
+
     }
 
 

@@ -15,6 +15,7 @@ public class Table implements Serializable {
 
     private static final long serialVersionUID = -9043778273416338053L;
     private Vector<Page> pages ; // page paths
+    private Vector<String> pagePaths ; // page paths
     private transient ArrayList<TableColumn> allColumns;
     static String tablesDirectory = "Data_Entry/Tables";
     private String tableFilePath ;
@@ -97,11 +98,6 @@ public class Table implements Serializable {
         }
         return false;
     }
-    public boolean ofName (String s){
-        return tableName.equals(s);
-    }
-
-
     public static void main(String[] args) throws IOException {
         ArrayList<TableColumn> cols = new ArrayList<>();
         TableColumn col = new TableColumn("test", "cool", "java.lang.String", true, null, null);
