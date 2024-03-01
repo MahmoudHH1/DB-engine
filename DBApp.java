@@ -133,7 +133,7 @@ public class DBApp {
 //		System.out.println(tabel.getPageNum());
 
 		Hashtable h  = new Hashtable<>();
-		h.put("name" , "Omar");
+		h.put("name" , "Ali");
 		dbApp.updateTable("Student" , Integer.valueOf(1) ,h );
 		System.out.println(tabel.getAllPages().get(1).getAllRecords());
 
