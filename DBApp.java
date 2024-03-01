@@ -16,113 +16,126 @@ import java.util.Map;
 
 
 public class DBApp {
-	public ArrayList<Table> allTables;
-	public DBApp( ) throws IOException, ClassNotFoundException {
-		init();
-	}
+    public ArrayList<Table> allTables;
 
-	// this does whatever initialization you would like
-	// or leave it empty if there is no code you want to 
-	// execute at application startup 
-	public void init( ) throws IOException, ClassNotFoundException {
-		allTables = MetaData.loadAllTables();
-	}
+    public DBApp() throws IOException, ClassNotFoundException {
+        init();
+    }
 
-
-	// following method creates one table only
-	// strClusteringKeyColumn is the name of the column that will be the primary
-	// key and the clustering column as well. The data type of that column will
-	// be passed in htblColNameType
-	// htblColNameValue will have the column name as key and the data
-	// type as value
-	public void createTable(String strTableName,
-							String strClusteringKeyColumn,
-							Hashtable<String,String> htblColNameType) throws DBAppException, IOException {
-		ArrayList<TableColumn> allColumns = new ArrayList<>();
-		for( String column : htblColNameType.keySet()){
-			TableColumn newColumn = new TableColumn(
-					strTableName ,
-					column ,
-					htblColNameType.get(column) ,
-					column.equals(strClusteringKeyColumn) ,
-					null ,
-					null
-			);
-			allColumns.add(newColumn);
-		}
-		Table table = new Table(allColumns);
-	}
+    // this does whatever initialization you would like
+    // or leave it empty if there is no code you want to
+    // execute at application startup
+    public void init() throws IOException, ClassNotFoundException {
+        allTables = MetaData.loadAllTables();
+    }
 
 
-	// following method creates a B+tree index
-	public void createIndex(String   strTableName,
-							String   strColName,
-							String   strIndexName) throws DBAppException{
-
-		throw new DBAppException("not implemented yet");
-	}
-
-
-	// following method inserts one row only.
-	// htblColNameValue must include a value for the primary key
-	public void insertIntoTable(String strTableName, 
-								Hashtable<String,Object>  htblColNameValue) throws DBAppException{
-
-		throw new DBAppException("not implemented yet");
-	}
-
-
-	// following method updates one row only
-	// htblColNameValue holds the key and new value
-	// htblColNameValue will not include clustering key as column name
-	// strClusteringKeyValue is the value to look for to find the row to update.
-	public void updateTable(String strTableName,
-							Object strClusteringKeyValue,
-							Hashtable<String,Object> htblColNameValue   ) throws DBAppException, IOException {
-		Table tabel = Table.getTable(allTables , strTableName);
-		outerLoop: // to exit all loops
-		for(Page page : tabel.getAllPages()){
-			for(Record record : page.getAllRecords()){
-				if (record.containsValue(strClusteringKeyValue)){
-					for (Map.Entry<String, Object> entry : htblColNameValue.entrySet()) {
-						String columnName = entry.getKey();
-						Object newValue = entry.getValue();
-						record.updateRecord(columnName , newValue);
-						tabel.tableCreator();
-						break outerLoop;
-					}
-				}
-			}
-		}
-	}
+    // following method creates one table only
+    // strClusteringKeyColumn is the name of the column that will be the primary
+    // key and the clustering column as well. The data type of that column will
+    // be passed in htblColNameType
+    // htblColNameValue will have the column name as key and the data
+    // type as value
+    public void createTable(String strTableName,
+                            String strClusteringKeyColumn,
+                            Hashtable<String, String> htblColNameType) throws DBAppException, IOException {
+        ArrayList<TableColumn> allColumns = new ArrayList<>();
+        for (String column : htblColNameType.keySet()) {
+            TableColumn newColumn = new TableColumn(
+                    strTableName,
+                    column,
+                    htblColNameType.get(column),
+                    column.equals(strClusteringKeyColumn),
+                    null,
+                    null
+            );
+            allColumns.add(newColumn);
+        }
+        Table table = new Table(allColumns);
+    }
 
 
-	// following method could be used to delete one or more rows.
-	// htblColNameValue holds the key and value. This will be used in search
-	// to identify which rows/tuples to delete.
-	// htblColNameValue enteries are ANDED together
-	public void deleteFromTable(String strTableName, 
-								Hashtable<String,Object> htblColNameValue) throws DBAppException{
+    // following method creates a B+tree index
+    public void createIndex(String strTableName,
+                            String strColName,
+                            String strIndexName) throws DBAppException {
 
-		throw new DBAppException("not implemented yet");
-	}
+        throw new DBAppException("not implemented yet");
+    }
 
 
-	public Iterator selectFromTable(SQLTerm[] arrSQLTerms, 
-									String[]  strarrOperators) throws DBAppException{
+    // following method inserts one row only.
+    // htblColNameValue must include a value for the primary key
+    public void insertIntoTable(String strTableName,
+                                Hashtable<String, Object> htblColNameValue) throws DBAppException {
+        /*
+        Assumptions
+        when deleting I assume that the table is deleted form the arraylist containing all table
 
-		return null;
-	}
+         */
+        //-----------------------------------------------------------------------\\
+        //checking whether the table exists or not
+        boolean tableExists = false;
+        for (Table table : allTables)
+            if (table.getTableName().equals(strTableName))
+                tableExists = true;
+        //-----------------------------------------------------------------------\\
+
+    }
 
 
-	public static void main( String[] args ){
-	try{
-		String strTableName = "Student";
-		DBApp dbApp = new DBApp( );
-		Table tabel = Table.getTable(dbApp.allTables , strTableName);
-		System.out.println(tabel.getAllPages().get(1).getAllRecords());
+    // following method updates one row only
+    // htblColNameValue holds the key and new value
+    // htblColNameValue will not include clustering key as column name
+    // strClusteringKeyValue is the value to look for to find the row to update.
+    public void updateTable(String strTableName,
+                            Object strClusteringKeyValue,
+                            Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException {
+        Table tabel = Table.getTable(allTables, strTableName);
+        outerLoop:
+        // to exit all loops
+        for (Page page : tabel.getAllPages()) {
+            for (Record record : page.getAllRecords()) {
+                if (record.containsValue(strClusteringKeyValue)) {
+                    for (Map.Entry<String, Object> entry : htblColNameValue.entrySet()) {
+                        String columnName = entry.getKey();
+                        Object newValue = entry.getValue();
+                        record.updateRecord(columnName, newValue);
+                        tabel.tableCreator();
+                        break outerLoop;
+                    }
+                }
+            }
+        }
+    }
 
 
+    // following method could be used to delete one or more rows.
+    // htblColNameValue holds the key and value. This will be used in search
+    // to identify which rows/tuples to delete.
+    // htblColNameValue enteries are ANDED together
+    public void deleteFromTable(String strTableName,
+                                Hashtable<String, Object> htblColNameValue) throws DBAppException {
+
+        throw new DBAppException("not implemented yet");
+    }
+
+
+    public Iterator selectFromTable(SQLTerm[] arrSQLTerms,
+                                    String[] strarrOperators) throws DBAppException {
+
+        return null;
+    }
+
+
+    public static void main(String[] args) {
+        try {
+            String strTableName = "Student";
+            DBApp dbApp = new DBApp();
+//            Table tabel = Table.getTable(dbApp.allTables, strTableName);
+//            System.out.println(tabel.getAllPages().get(1).getAllRecords());
+
+            dbApp.insertIntoTable("samaloty", new Hashtable<>());
 //		Page p = new Page(tabel);
 //		Record r = new Record();
 //		r.put("id", Integer.valueOf(1));
@@ -132,10 +145,10 @@ public class DBApp {
 //		tabel.tableCreator();
 //		System.out.println(tabel.getPageNum());
 
-		Hashtable h  = new Hashtable<>();
-		h.put("name" , "Ali");
-		dbApp.updateTable("Student" , Integer.valueOf(1) ,h );
-		System.out.println(tabel.getAllPages().get(1).getAllRecords());
+//            Hashtable h = new Hashtable<>();
+//            h.put("name", "Ali");
+//            dbApp.updateTable("Student", Integer.valueOf(1), h);
+//            System.out.println(tabel.getAllPages().get(1).getAllRecords());
 
 //		Hashtable htblColNameType = new Hashtable( );
 //		htblColNameType.put("name", "java.lang.String");
@@ -146,16 +159,12 @@ public class DBApp {
 //		dbApp.createIndex( strTableName, "gpa", "gpaIndex" );
 
 
-
-
 //		Record r = new Record() ;
 //		r.put("id", "java.lang.Integer");
 //		r.put("Name", "Saeed");
 //		r.put("age" , "20");
 
 //		System.out.println(r);
-
-
 
 
 //		Hashtable htblColNameValue = new Hashtable( );
@@ -205,10 +214,9 @@ public class DBApp {
 //		strarrOperators[0] = "OR";
 //		// select * from Student where name = "John Noor" or gpa = 1.5;
 //		Iterator resultSet = dbApp.selectFromTable(arrSQLTerms , strarrOperators);
-	}
-		catch(Exception exp){
-			exp.printStackTrace( );
-		}
-	}
+        } catch (Exception exp) {
+            exp.printStackTrace();
+        }
+    }
 
 }

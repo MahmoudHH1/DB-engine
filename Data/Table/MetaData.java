@@ -6,6 +6,7 @@ import java.io.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 public class MetaData {
 
@@ -58,5 +59,32 @@ public class MetaData {
         br.close();
         return allTables;
     }
+
+    //reading the metadata file to know the columns of each table to check it when trying to insert new record
+    public static Hashtable<String, Object> processMetadataFile(String filePath, String tableName) {
+        Hashtable<String, Object> result = new Hashtable<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                // Split the line into elements
+                String[] elements = line.split(",");
+
+                // Check if the first element matches the given string 'x'
+                if (elements.length >= 3 && elements[0].equals(tableName)) {
+                    // If the condition is met, add a tuple to the result hashtable
+                    String columnName = elements[1];
+                    String columnType = elements[2];
+                    result.put(columnName, columnType);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+
 
 }
