@@ -97,6 +97,9 @@ public class Table implements Serializable {
         }
         return false;
     }
+    public boolean ofName (String s){
+        return tableName.equals(s);
+    }
 
 
     public static void main(String[] args) throws IOException {

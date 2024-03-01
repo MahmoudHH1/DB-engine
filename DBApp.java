@@ -116,8 +116,18 @@ public class DBApp {
     // htblColNameValue enteries are ANDED together
     public void deleteFromTable(String strTableName,
                                 Hashtable<String, Object> htblColNameValue) throws DBAppException {
+        Table table = null;
+        int rowsAffected = 0;
+        for(Table t: allTables){
+            if(t.ofName(strTableName)){
+                table = t;
+                break;
+            }
+        }
+        if(table == null)
+            throw new DBAppException("Table not found");
 
-        throw new DBAppException("not implemented yet");
+        ArrayList<Integer> columns = new ArrayList<>();
     }
 
 

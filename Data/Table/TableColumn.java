@@ -18,6 +18,13 @@ public class TableColumn {
         this.indexType = indexType;
     }
 
+    public TableColumn(String tableName, String columnName, String columnType, boolean isClusterKey) {
+        this.tableName = tableName;
+        this.columnName = columnName;
+        this.columnType = columnType;
+        this.isClusterKey = isClusterKey;
+    }
+
     public String getTableName() {
         return tableName;
     }
@@ -65,6 +72,7 @@ public class TableColumn {
     public void setIndexType(String indexType) {
         this.indexType = indexType;
     }
+    public boolean ofName(String s){return columnName.equals(s);}
 
     @Override
     public String toString() {

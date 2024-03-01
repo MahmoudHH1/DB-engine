@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Saeed Merge into master4">
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="MetaDate path made final.&#10;And Table equals Method added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Table/MetaData.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Table/MetaData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/DBApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/Table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Table/Table.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Table/TableColumn.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Table/TableColumn.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -310,7 +311,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709277618041</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="MetaDate path made final.&#10;And Table equals Method added">
+      <option name="closed" value="true" />
+      <created>1709327162521</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1709327162521</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -338,6 +347,7 @@
     <MESSAGE value="Saeed Merge into master" />
     <MESSAGE value="Saeed Merge into master3" />
     <MESSAGE value="Saeed Merge into master4" />
-    <option name="LAST_COMMIT_MESSAGE" value="Saeed Merge into master4" />
+    <MESSAGE value="MetaDate path made final.&#10;And Table equals Method added" />
+    <option name="LAST_COMMIT_MESSAGE" value="MetaDate path made final.&#10;And Table equals Method added" />
   </component>
 </project>
