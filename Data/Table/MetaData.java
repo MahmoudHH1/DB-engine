@@ -10,7 +10,7 @@ import java.util.Hashtable;
 
 public class MetaData {
 
-    private static String metaPath = "Data_Entry/metadata.csv";
+    private static final String metaPath = "Data_Entry/metadata.csv";
     public static void writeDataToMetaDatafile( ArrayList<TableColumn> allColumns)
     {
         try {

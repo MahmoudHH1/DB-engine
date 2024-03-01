@@ -89,6 +89,14 @@ public class Table implements Serializable {
         }
         throw new DBAppException("Table not found");
     }
+    @Override
+    public boolean equals(Object o){
+        // two tables are equal if they have the same name
+        if(o instanceof Table){
+            return this.tableName.equals(((Table) o).tableName);
+        }
+        return false;
+    }
 
 
     public static void main(String[] args) throws IOException {
