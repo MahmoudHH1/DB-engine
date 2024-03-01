@@ -77,7 +77,7 @@ public class DBApp {
 	// htblColNameValue will not include clustering key as column name
 	// strClusteringKeyValue is the value to look for to find the row to update.
 	public void updateTable(String strTableName,
-							String strClusteringKeyValue,
+							Object strClusteringKeyValue,
 							Hashtable<String,Object> htblColNameValue   ) throws DBAppException, IOException {
 		Table tabel = Table.getTable(allTables , strTableName);
 		outerLoop: // to exit all loops
@@ -120,23 +120,22 @@ public class DBApp {
 		String strTableName = "Student";
 		DBApp dbApp = new DBApp( );
 		Table tabel = Table.getTable(dbApp.allTables , strTableName);
-//		System.out.println(tabel.getAllPages().size());
+		System.out.println(tabel.getAllPages().get(1).getAllRecords());
 
-//		for(Page page : tabel.getAllPages()){
-//			System.out.println(page.getPagePath());
-//		}
 
 //		Page p = new Page(tabel);
 //		Record r = new Record();
-//		Hashtable htblColNameType = new Hashtable( );
-//		htblColNameType.put("id", Integer.valueOf(1));
-//		htblColNameType.put("name", "Mohamed");
-//		htblColNameType.put("gpa", Double.valueOf(2));
-//		r.add(htblColNameType);
+//		r.put("id", Integer.valueOf(1));
+//		r.put("name", "Mohamed");
+//		r.put("gpa", Double.valueOf(2));
+//		p.addRecord(r);
+//		tabel.tableCreator();
 //		System.out.println(tabel.getPageNum());
 
-
-//		dbApp.updateTable("Student" , "id" , new Hashtable<>());
+		Hashtable h  = new Hashtable<>();
+		h.put("name" , "Omar");
+		dbApp.updateTable("Student" , Integer.valueOf(1) ,h );
+		System.out.println(tabel.getAllPages().get(1).getAllRecords());
 
 //		Hashtable htblColNameType = new Hashtable( );
 //		htblColNameType.put("name", "java.lang.String");
@@ -150,12 +149,10 @@ public class DBApp {
 
 
 //		Record r = new Record() ;
-//		Hashtable h= new Hashtable( );
-//		h.put("id", "java.lang.Integer");
-//		h.put("Name", "Saeed");
-//		h.put("age" , "20");
-//
-//		r.add(h);
+//		r.put("id", "java.lang.Integer");
+//		r.put("Name", "Saeed");
+//		r.put("age" , "20");
+
 //		System.out.println(r);
 
 
