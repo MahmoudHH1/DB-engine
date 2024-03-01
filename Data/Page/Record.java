@@ -7,13 +7,25 @@ import java.util.Hashtable;
 import java.util.Map;
 import java.util.Vector;
 
-public class Record extends Hashtable<Object, String >{
+public class Record extends Hashtable<String, Object >{
+    public void updateRecord(String columnName, Object newValue) {
+        if (columnExists(columnName)) {
+            this.remove(columnName); // Remove old value
+            this.put(columnName, newValue); // Update with new value
+        } else {
+            throw new IllegalArgumentException("Column " + columnName + " does not exist in this record.");
+        }
+    }
+    private boolean columnExists(String columnName) {
+        return this.containsKey(columnName);
+    }
+
     @Override
     public synchronized String toString() {
         StringBuilder record = new StringBuilder();
         record.append('"');
-        for (Map.Entry<Object, String> entry : entrySet()) {
-            String value = entry.getValue();
+        for (Map.Entry<String, Object> entry : entrySet()) {
+            Object value = entry.getValue();
             record.append(value);
             record.append(',');
         }

@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Hashtable;
+import java.util.Map;
 
 
 public class DBApp {
@@ -77,11 +78,20 @@ public class DBApp {
 	// strClusteringKeyValue is the value to look for to find the row to update.
 	public void updateTable(String strTableName,
 							String strClusteringKeyValue,
-							Hashtable<String,Object> htblColNameValue   )  throws DBAppException{
+							Hashtable<String,Object> htblColNameValue   ) throws DBAppException, IOException {
 		Table tabel = Table.getTable(allTables , strTableName);
+		outerLoop: // to exit all loops
 		for(Page page : tabel.getAllPages()){
 			for(Record record : page.getAllRecords()){
-
+				if (record.containsValue(strClusteringKeyValue)){
+					for (Map.Entry<String, Object> entry : htblColNameValue.entrySet()) {
+						String columnName = entry.getKey();
+						Object newValue = entry.getValue();
+						record.updateRecord(columnName , newValue);
+						tabel.tableCreator();
+						break outerLoop;
+					}
+				}
 			}
 		}
 	}

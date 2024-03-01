@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Saeed Merge into master">
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Saeed Merge into master3">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/DBApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/Page/Record.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Page/Record.java" afterDir="false" />
@@ -278,7 +278,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709272036968</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Saeed Merge into master3">
+      <option name="closed" value="true" />
+      <created>1709273676793</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1709273676793</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -304,6 +312,7 @@
     <MESSAGE value="Splited the code into packages and i added alose getters and setters" />
     <MESSAGE value="modifications" />
     <MESSAGE value="Saeed Merge into master" />
-    <option name="LAST_COMMIT_MESSAGE" value="Saeed Merge into master" />
+    <MESSAGE value="Saeed Merge into master3" />
+    <option name="LAST_COMMIT_MESSAGE" value="Saeed Merge into master3" />
   </component>
 </project>
