@@ -93,8 +93,12 @@ public class Table implements Serializable {
     @Override
     public boolean equals(Object o){
         // two tables are equal if they have the same name
+        // to be revisited
         if(o instanceof Table){
             return this.tableName.equals(((Table) o).tableName);
+        }
+        if(o instanceof String){
+            return tableName.equals(o);
         }
         return false;
     }

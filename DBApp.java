@@ -118,6 +118,7 @@ public class DBApp {
                                 Hashtable<String, Object> htblColNameValue) throws DBAppException {
         Table table = null;
         int rowsAffected = 0;
+        // find table
         for(Table t: allTables){
             if(t.equals(strTableName)){
                 table = t;
@@ -125,14 +126,25 @@ public class DBApp {
             }
         }
         if(table == null)
-            throw new DBAppException("Table not found");
+            throw new DBAppException("Table " + strTableName + " not found");
 
         ArrayList<Integer> columns = new ArrayList<>();
-        ArrayList<Object> values = new ArrayList<>();
+        ArrayList<Object> values = new ArrayList<>(); // hashtable better for readability
+        // find column index
         for(String key: htblColNameValue.keySet()){
-            columns.add(table.getAllColumns().indexOf(key));
-
+            boolean found = false;
+            for(int i =0 ; i<table.getAllColumns().size(); i++){
+                if(table.getAllColumns().get(i).equals(key)){
+                    columns.add(i);
+                    found = true;
+                    break;
+                }
+            }
+            if(!found)
+                throw new DBAppException("Invalid Column Name: " + key);
+            values.add(htblColNameValue.get(key));
         }
+
 
     }
 
