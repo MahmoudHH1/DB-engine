@@ -1,15 +1,21 @@
 package Data.Page;
 
+import Data.Table.TableColumn;
+
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Vector;
 
-public class Record extends Vector<Object> {
+public class Record extends Vector<Hashtable<Object, String >> {
     @Override
     public synchronized String toString() {
         StringBuilder record = new StringBuilder();
         record.append('"');
-        for(Object o : this) {
-            record.append(o.toString());
-            record.append(',');
+        for (Hashtable<Object, String> hashtable : this) {
+            for (String value : hashtable.values()) {
+                record.append(value);
+                record.append(',');
+            }
         }
         record.deleteCharAt(record.length()-1);
         record.append('"');
@@ -17,11 +23,6 @@ public class Record extends Vector<Object> {
     }
 
     public static void main(String[] args) {
-        Record r = new Record() ;
-        r.add("ID");
-        r.add("Name");
-        r.add("Age");
-        r.add("Gender");
-        System.out.println(r);
+
     }
 }

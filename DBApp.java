@@ -1,6 +1,8 @@
 
 
 
+import Data.Page.Page;
+import Data.Page.Record;
 import Data.Table.MetaData;
 import Data.Table.Table;
 import Data.Table.TableColumn;
@@ -13,7 +15,7 @@ import java.util.Hashtable;
 
 
 public class DBApp {
-	ArrayList<Table> allTables;
+	public ArrayList<Table> allTables;
 	public DBApp( ) throws IOException, ClassNotFoundException {
 		init();
 	}
@@ -103,16 +105,47 @@ public class DBApp {
 
 	public static void main( String[] args ){
 	try{
-			String strTableName = "Student";
-			DBApp dbApp = new DBApp( );
-			dbApp.updateTable("Student" , "id" , new Hashtable<>());
-			
-//			Hashtable htblColNameType = new Hashtable( );
-//			htblColNameType.put("id", "java.lang.Integer");
-//			htblColNameType.put("name", "java.lang.String");
-//			htblColNameType.put("gpa", "java.lang.double");
-//			dbApp.createTable( strTableName, "id", htblColNameType );
-//			dbApp.createIndex( strTableName, "gpa", "gpaIndex" );
+		String strTableName = "Student";
+		DBApp dbApp = new DBApp( );
+		Table tabel = Table.getTable(dbApp.allTables , strTableName);
+//		System.out.println(tabel.getAllPages().size());
+
+//		for(Page page : tabel.getAllPages()){
+//			System.out.println(page.getPagePath());
+//		}
+
+//		Page p = new Page(tabel);
+//		Record r = new Record();
+//		Hashtable htblColNameType = new Hashtable( );
+//		htblColNameType.put("id", Integer.valueOf(1));
+//		htblColNameType.put("name", "Mohamed");
+//		htblColNameType.put("gpa", Double.valueOf(2));
+//		r.add(htblColNameType);
+//		System.out.println(tabel.getPageNum());
+
+
+//		dbApp.updateTable("Student" , "id" , new Hashtable<>());
+
+//		Hashtable htblColNameType = new Hashtable( );
+//		htblColNameType.put("name", "java.lang.String");
+//		htblColNameType.put("gpa", "java.lang.double");
+//		htblColNameType.put("id", "java.lang.Integer");
+//		dbApp.createTable( strTableName, "id", htblColNameType );
+
+//		dbApp.createIndex( strTableName, "gpa", "gpaIndex" );
+
+
+
+
+//		Record r = new Record() ;
+//		Hashtable h= new Hashtable( );
+//		h.put("id", "java.lang.Integer");
+//		h.put("Name", "Saeed");
+//		h.put("age" , "20");
+//
+//		r.add(h);
+//		System.out.println(r);
+
 
 
 

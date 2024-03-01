@@ -1,6 +1,7 @@
 package Data.Table;
 
 import Data.Handler.FileCreator;
+import Data.Page.Page;
 import Exceptions.DBAppException;
 
 import java.io.*;
@@ -12,8 +13,8 @@ import java.util.Vector;
 
 public class Table implements Serializable {
 
-
-    private Vector<String> pages ; // page paths
+    private static final long serialVersionUID = -9043778273416338053L;
+    private Vector<Page> pages ; // page paths
     private transient ArrayList<TableColumn> allColumns;
     static String tablesDirectory = "Data_Entry/Tables";
     private String tableFilePath ;
@@ -58,31 +59,23 @@ public class Table implements Serializable {
     public int getPageNum() {
         return pageNum;
     }
+    public Vector<Page> getAllPages(){return pages ;}
     public void setPageNum(int pageNum) {
         this.pageNum = pageNum;
     }
-    public void addNewPage(String pagePath){
-        this.pages.add(pagePath);
+    public void addNewPage(Page newPage){
+        this.pages.add(newPage);
     }
-
-    public void setPages(Vector<String> pages) {
+    public void setPages(Vector<Page> pages) {
         this.pages = pages;
     }
     public void setAllColumns(ArrayList<TableColumn> allColumns) {
         this.allColumns = allColumns;
     }
-    public static void setTablesDirectory(String tablesDirectory) {
-        Table.tablesDirectory = tablesDirectory;
-    }
-    public void setTableFilePath(String tableFilePath) {
-        this.tableFilePath = tableFilePath;
-    }
-    public void setTableDir(String tableDir) {
-        this.tableDir = tableDir;
-    }
     public void setTableName(String tableName) {
         this.tableName = tableName;
     }
+
     public static String getTableFilePath(String name){
         return tablesDirectory + File.separator +
                 name + File.separator + name;
