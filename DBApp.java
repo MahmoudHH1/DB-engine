@@ -120,8 +120,36 @@ public class DBApp {
     // htblColNameValue enteries are ANDED together
     public void deleteFromTable(String strTableName,
                                 Hashtable<String, Object> htblColNameValue) throws DBAppException {
+        Table table = null;
+        int rowsAffected = 0;
+        // find table
+        for(Table t: allTables){
+            if(t.equals(strTableName)){
+                table = t;
+                break;
+            }
+        }
+        if(table == null)
+            throw new DBAppException("Table " + strTableName + " not found");
 
-        throw new DBAppException("not implemented yet");
+        ArrayList<Integer> columns = new ArrayList<>();
+        ArrayList<Object> values = new ArrayList<>(); // hashtable better for readability
+        // find column index
+        for(String key: htblColNameValue.keySet()){
+            boolean found = false;
+            for(int i =0 ; i<table.getAllColumns().size(); i++){
+                if(table.getAllColumns().get(i).equals(key)){
+                    columns.add(i);
+                    found = true;
+                    break;
+                }
+            }
+            if(!found)
+                throw new DBAppException("Invalid Column Name: " + key);
+            values.add(htblColNameValue.get(key));
+        }
+
+
     }
 
 
