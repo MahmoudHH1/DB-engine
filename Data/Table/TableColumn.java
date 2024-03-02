@@ -18,6 +18,7 @@ public class TableColumn {
         this.indexType = indexType;
     }
 
+
     public String getTableName() {
         return tableName;
     }
