@@ -127,7 +127,7 @@ public class DBApp {
 
     public Iterator selectFromTable(SQLTerm[] arrSQLTerms,
                                     String[] strarrOperators) throws DBAppException {
-
+            // habiba will do this
         return null;
     }
 
