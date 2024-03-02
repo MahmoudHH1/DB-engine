@@ -109,14 +109,14 @@ public class MetaData {
     }
 
 
-    public static void main(String[] args){
-        Hashtable<String,Object> htblColNameValue = new Hashtable<>();
-        htblColNameValue.put("id", new Integer( 2343432 ));
-        htblColNameValue.put("name", new String("Ahmed Noor" ) );
-        htblColNameValue.put("gpa", new Double( 0.95 ) );
-        System.out.println(IsValidTuple("Student" , htblColNameValue)) ;
-
-    }
+//    public static void main(String[] args){
+//        Hashtable<String,Object> htblColNameValue = new Hashtable<>();
+//        htblColNameValue.put("id", new Integer( 2343432 ));
+//        htblColNameValue.put("name", new String("Ahmed Noor" ) );
+//        htblColNameValue.put("gpa", new Double( 0.95 ) );
+//        System.out.println(IsValidTuple("Student" , htblColNameValue)) ;
+//
+//    }
 
 
 

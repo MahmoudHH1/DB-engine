@@ -16,7 +16,7 @@ import java.util.Vector;
 
 public class Table implements Serializable {
 
-    private static final long serialVersionUID = -9043778273416338053L;
+//    private static final long serialVersionUID = -9043778273416338053L;
     private Vector<Page> pages ; // page paths
 
     public Vector<String> getPagePaths() {
