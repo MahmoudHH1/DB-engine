@@ -136,15 +136,12 @@ public class DBApp {
         }
         if(table == null)
             throw new DBAppException("Table " + strTableName + " not found");
+        // map column name to idx
         Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
-
         for(String path: table.getPagePaths()){
             Page page = (Page) FileCreator.readObject(path);
             for(Record record: page.getAllRecords()){
-                boolean matching = true;
-                for(int idx: colIdxVal.keySet()){
-                    matching = matching && (record.get(idx) == colIdxVal.get(idx));
-                }
+                boolean matching = record.isMatching(colIdxVal);
                 if(matching){
 
                 }

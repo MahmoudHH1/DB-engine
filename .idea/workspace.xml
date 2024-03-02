@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="saeed playing on master">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="table idxFromName&#10;and DBApp deleteFromTable">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/DBApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Table/Table.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Page/Record.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Page/Record.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -411,7 +409,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709379046250</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="table idxFromName&#10;and DBApp deleteFromTable">
+      <option name="closed" value="true" />
+      <created>1709380006106</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1709380006106</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -447,7 +453,8 @@
     <MESSAGE value="dahroug added delete" />
     <MESSAGE value="saeed playing" />
     <MESSAGE value="saeed playing on master" />
-    <option name="LAST_COMMIT_MESSAGE" value="saeed playing on master" />
+    <MESSAGE value="table idxFromName&#10;and DBApp deleteFromTable" />
+    <option name="LAST_COMMIT_MESSAGE" value="table idxFromName&#10;and DBApp deleteFromTable" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

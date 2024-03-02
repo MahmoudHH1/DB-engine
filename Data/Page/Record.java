@@ -26,6 +26,13 @@ public class Record extends Vector<Object>{
         record.append('"');
         return record.toString();
     }
+    public boolean isMatching(Hashtable<Integer, Object> ht){
+        for(int idx : ht.keySet()){
+            if(!get(idx).equals(ht.get(idx)))
+                return false;
+        }
+        return true;
+    }
 
     public static void main(String[] args) {
 
