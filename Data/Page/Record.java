@@ -7,7 +7,7 @@ import java.util.Hashtable;
 import java.util.Map;
 import java.util.Vector;
 
-public class Record extends Hashtable<String, Object >{
+public class Record extends Vector<Object>{
     public void updateRecord(String columnName, Object newValue) {
         if (columnExists(columnName)) {
             this.remove(columnName); // Remove old value
