@@ -1,6 +1,7 @@
 
 
 
+import Data.Handler.FileCreator;
 import Data.Page.Page;
 import Data.Page.Record;
 import Data.Table.MetaData;
@@ -8,6 +9,7 @@ import Data.Table.Table;
 import Data.Table.TableColumn;
 import Exceptions.DBAppException;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -122,7 +124,7 @@ public class DBApp {
     // to identify which rows/tuples to delete.
     // htblColNameValue enteries are ANDED together
     public void deleteFromTable(String strTableName,
-                                Hashtable<String, Object> htblColNameValue) throws DBAppException {
+                                Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
         Table table = null;
         int rowsAffected = 0;
         // find table
@@ -134,22 +136,20 @@ public class DBApp {
         }
         if(table == null)
             throw new DBAppException("Table " + strTableName + " not found");
+        Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
 
-        ArrayList<Integer> columns = new ArrayList<>();
-        ArrayList<Object> values = new ArrayList<>(); // hashtable better for readability
-        // find column index
-        for(String key: htblColNameValue.keySet()){
-            boolean found = false;
-            for(int i =0 ; i<table.getAllColumns().size(); i++){
-                if(table.getAllColumns().get(i).equals(key)){
-                    columns.add(i);
-                    found = true;
-                    break;
+        for(String path: table.getPagePaths()){
+            Page page = (Page) FileCreator.readObject(path);
+            for(Record record: page.getAllRecords()){
+                boolean matching = true;
+                for(int idx: colIdxVal.keySet()){
+                    matching = matching && (record.get(idx) == colIdxVal.get(idx));
+                }
+                if(matching){
+
                 }
             }
-            if(!found)
-                throw new DBAppException("Invalid Column Name: " + key);
-            values.add(htblColNameValue.get(key));
+
         }
 
 

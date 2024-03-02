@@ -17,6 +17,11 @@ public class Table implements Serializable {
 
     private static final long serialVersionUID = -9043778273416338053L;
     private Vector<Page> pages ; // page paths
+
+    public Vector<String> getPagePaths() {
+        return pagePaths;
+    }
+
     private Vector<String> pagePaths ; // page paths
     private transient ArrayList<TableColumn> allColumns;
     static String tablesDirectory = "Data_Entry/Tables";
@@ -104,19 +109,19 @@ public class Table implements Serializable {
     public Hashtable<Integer, Object> getColIdxVal(Hashtable<String, Object> ht) throws DBAppException {
         Hashtable<Integer, Object> res = new Hashtable<>();
         for(String key: ht.keySet()){
-            boolean found = false;
-            for(int i =0 ; i<getAllColumns().size(); i++){
-                if(getAllColumns().get(i).equals(key)){
-                    res.put(i, ht.get(key));
-                    found = true;
-                    break;
-                }
-            }
-            if(!found)
-                throw new DBAppException("Invalid Column Name: " + key);
+            res.put(idxFromName(key), ht.get(key));
         }
         return res;
     }
+    public int idxFromName(String name) throws DBAppException {
+        for(int i =0 ; i<getAllColumns().size(); i++){
+            if(getAllColumns().get(i).equals(name)){
+                return i;
+            }
+        }
+        throw new DBAppException("Invalid Column Name: " + name);
+    }
+
     @Override
     public boolean equals(Object o){
         // two tables are equal if they have the same name
