@@ -92,6 +92,15 @@ public class Table implements Serializable {
         }
         throw new DBAppException("Table not found");
     }
+
+    public Object[] getClusterKeyAndIndex() throws DBAppException {
+        for (int i = 0; i < allColumns.size(); i++) {
+            if(allColumns.get(i).isClusterKey()){
+                return new Object[]{allColumns.get(i) , i};
+            }
+        }
+        throw new DBAppException("No cluster Key for this Table");
+    }
     public Hashtable<Integer, Object> getColIdxVal(Hashtable<String, Object> ht) throws DBAppException {
         Hashtable<Integer, Object> res = new Hashtable<>();
         for(String key: ht.keySet()){
