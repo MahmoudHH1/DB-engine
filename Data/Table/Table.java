@@ -92,22 +92,22 @@ public class Table implements Serializable {
         }
         throw new DBAppException("Table not found");
     }
-//    public Hashtable<Integer, Object> getColIdxVal(Hashtable<String, Object> ht) throws DBAppException {
-//        Hashtable<Integer, Object> res = new Hashtable<>();
-//        for(String key: ht.keySet()){
-//            boolean found = false;
-//            for(int i =0 ; i<getAllColumns().size(); i++){
-//                if(getAllColumns().get(i).equals(key)){
-//                    res.put(i, )
-//                    found = true;
-//                    break;
-//                }
-//            }
-//            if(!found)
-//                throw new DBAppException("Invalid Column Name: " + key);
-//            values.add(ht.get(key));
-//        }
-//    }
+    public Hashtable<Integer, Object> getColIdxVal(Hashtable<String, Object> ht) throws DBAppException {
+        Hashtable<Integer, Object> res = new Hashtable<>();
+        for(String key: ht.keySet()){
+            boolean found = false;
+            for(int i =0 ; i<getAllColumns().size(); i++){
+                if(getAllColumns().get(i).equals(key)){
+                    res.put(i, ht.get(key));
+                    found = true;
+                    break;
+                }
+            }
+            if(!found)
+                throw new DBAppException("Invalid Column Name: " + key);
+        }
+        return res;
+    }
     @Override
     public boolean equals(Object o){
         // two tables are equal if they have the same name
