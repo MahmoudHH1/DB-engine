@@ -105,33 +105,19 @@ public class DBApp {
                 clusterKeyVal = Integer.parseInt(strClusteringKeyValue); break;
         }
         Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
+        outerLoop:
         for(String path: table.getPagePaths()){
             // still need to adjust for index
             Page page = (Page) FileCreator.readObject(path);
-            ArrayList<Record> toUpdate = new ArrayList<>();
             for(Record record: page.getAllRecords()){
-                boolean matching = record.isMatching(colIdxVal);
-//                if(matching)
-
+                if (record.get(((Integer) clusterKeyColIndex[1])).equals(clusterKeyVal)) {
+                    record.updateRecord(colIdxVal);
+                    page.save();
+                    table.save();
+                    break outerLoop;
+                }
             }
         }
-
-
-//        outerLoop:
-//        // to exit all loops
-//        for (Page page : tabel.getAllPages()) {
-//            for (int i = 0; i <page.getAllRecords().size() ; i++) {
-//                Record current = page.getAllRecords().get(i)
-//                if (page.getAllRecords().get(((Integer) clusterKeyColIndex[1])).equals(clusterKeyVal)) {
-//                    boolean matching = .isMatching(colIdxVal);
-//
-//                    Hashtable<Integer , Object> ht=  tabel.getColIdxVal(htblColNameValue) ;
-//
-//                    tabel.tableCreator();
-//                    break outerLoop;
-//                }
-//            }
-//        }
     }
 
 
@@ -164,8 +150,9 @@ public class DBApp {
                     toRemove.add(record);
             }
             page.getAllRecords().removeAll(toRemove);
+            page.save();
         }
-
+        // table.save();
 
     }
 

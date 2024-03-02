@@ -2,14 +2,18 @@ package Data.Page;
 
 import Data.Table.TableColumn;
 
+import javax.jws.Oneway;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.Vector;
 
 public class Record extends Vector<Object>{
-    public void updateRecord(int valueIndex, Object newValue) {
-            this.add(valueIndex , newValue);
+    public void updateRecord(Hashtable<Integer , Object> ht) {
+        for(int idx : ht.keySet()){
+            this.remove(idx) ;
+            this.add(idx , ht.get(idx));
+        }
     }
 
     @Override

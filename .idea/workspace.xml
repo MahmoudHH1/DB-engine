@@ -8,15 +8,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/DBApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Table/MetaData.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Table/MetaData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/Student/Student.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data_Entry/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data_Entry/metadata.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/DBApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/MetaData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/MetaData.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/Table.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data_Entry/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data_Entry/metadata.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Page/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Page/Page.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Page/Record.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Page/Record.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Table/Table.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -500,30 +494,5 @@
     <MESSAGE value="table search method in progress not complete" />
     <MESSAGE value="saeed playing on master" />
     <option name="LAST_COMMIT_MESSAGE" value="saeed playing on master" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>114</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>115</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>113</line>
-          <properties class="Data.Table.MetaData" method="checkValidDataType">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

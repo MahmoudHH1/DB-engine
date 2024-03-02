@@ -16,10 +16,6 @@ public class Table implements Serializable {
 //    private static final long serialVersionUID = -9043778273416338053L;
     private Vector<Page> pages; // page paths
 
-    public Vector<String> getPagePaths() {
-        return pagePaths;
-    }
-
     private Vector<String> pagePaths; // page paths
     private transient ArrayList<TableColumn> allColumns;
     static String tablesDirectory = "Data_Entry"+  File.separator +"Tables";
@@ -37,10 +33,10 @@ public class Table implements Serializable {
         File f = new File(tableDir);
         System.out.println(f.mkdir() ? "Table Created" : "Table not Created");
         MetaData.writeDataToMetaDatafile(allColumns);
-        tableCreator();
+        save();
     }
 
-    public void tableCreator() throws IOException {
+    public void save() throws IOException {
         tableFilePath = tableDir + File.separator + tableName;
         FileCreator.storeAsObject(this, tableFilePath);
     }
@@ -74,7 +70,9 @@ public class Table implements Serializable {
     public ArrayList<TableColumn> getAllColumns() {
         return allColumns;
     }
-
+    public Vector<String> getPagePaths() {
+        return pagePaths;
+    }
     public static String getTablesDirectory() {
         return tablesDirectory;
     }
@@ -143,6 +141,7 @@ public class Table implements Serializable {
     }
 
     public Hashtable<Integer, Object> getColIdxVal(Hashtable<String, Object> ht) throws DBAppException {
+
         Hashtable<Integer, Object> res = new Hashtable<>();
         for (String key : ht.keySet()) {
             res.put(idxFromName(key), ht.get(key));

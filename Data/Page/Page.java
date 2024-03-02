@@ -20,11 +20,11 @@ public class Page implements Serializable {
         this.pageName = table.getTableName() + table.getPageNum() ;
         table.setPageNum(table.getPageNum()+1); // next page num
         this.pagePath = table.getTableDir()+'/'+pageName ;
-        pageCreator();
-        table.tableCreator();
+        save();
+        table.save();
     }
 
-    public void pageCreator() throws IOException {
+    public void save() throws IOException {
         table.addNewPage(this);// store pagePath in corresponding table
         FileCreator.storeAsObject(this , this.pagePath);
     }
