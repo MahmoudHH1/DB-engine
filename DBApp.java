@@ -1,6 +1,7 @@
 
 
 
+import Data.Handler.FileCreator;
 import Data.Page.Page;
 import Data.Page.Record;
 import Data.Table.MetaData;
@@ -12,7 +13,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Hashtable;
-import java.util.Map;
 
 
 public class DBApp {
@@ -93,21 +93,28 @@ public class DBApp {
     // htblColNameValue will not include clustering key as column name
     // strClusteringKeyValue is the value to look for to find the row to update.
     public void updateTable(String strTableName,
-                            Object strClusteringKeyValue,
-                            Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException {
-        Table tabel = Table.getTable(allTables, strTableName);
+                            String strClusteringKeyValue,
+                            Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
+        Table table = Table.getTable(allTables, strTableName);
+        Object clusterKeyVal = strClusteringKeyValue ;
+        Object[]clusterKeyColIndex = (table.getClusterKeyAndIndex()) ;
+        switch ( ((TableColumn)clusterKeyColIndex[0]).getColumnType() ){
+            case "java.lang.double" :
+                clusterKeyVal = Double.parseDouble(strClusteringKeyValue); break;
+            case "java.lang.Integer" :
+                clusterKeyVal = Integer.parseInt(strClusteringKeyValue); break;
+        }
+        Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
         outerLoop:
-        // to exit all loops
-        for (Page page : tabel.getAllPages()) {
-            for (Record record : page.getAllRecords()) {
-                if (record.containsValue(strClusteringKeyValue)) {
-                    for (Map.Entry<String, Object> entry : htblColNameValue.entrySet()) {
-                        String columnName = entry.getKey();
-                        Object newValue = entry.getValue();
-                        record.updateRecord(columnName, newValue);
-                        tabel.tableCreator();
-                        break outerLoop;
-                    }
+        for(String path: table.getPagePaths()){
+            // still need to adjust for index
+            Page page = (Page) FileCreator.readObject(path);
+            for(Record record: page.getAllRecords()){
+                if (record.get(((Integer) clusterKeyColIndex[1])).equals(clusterKeyVal)) {
+                    record.updateRecord(colIdxVal);
+                    page.save();
+                    table.save();
+                    break outerLoop;
                 }
             }
         }
@@ -119,9 +126,34 @@ public class DBApp {
     // to identify which rows/tuples to delete.
     // htblColNameValue enteries are ANDED together
     public void deleteFromTable(String strTableName,
-                                Hashtable<String, Object> htblColNameValue) throws DBAppException {
+                                Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
+        Table table = null;
+        int rowsAffected = 0;
+        // find table
+        for(Table t: allTables){
+            if(t.equals(strTableName)){
+                table = t;
+                break;
+            }
+        }
+        if(table == null)
+            throw new DBAppException("Table " + strTableName + " not found");
+        // map column name to idx
+        Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
+        for(String path: table.getPagePaths()){
+            // still need to adjust for index
+            Page page = (Page) FileCreator.readObject(path);
+            ArrayList<Record> toRemove = new ArrayList<>();
+            for(Record record: page.getAllRecords()){
+                boolean matching = record.isMatching(colIdxVal);
+                if(matching)
+                    toRemove.add(record);
+            }
+            page.getAllRecords().removeAll(toRemove);
+            page.save();
+        }
+        // table.save();
 
-        throw new DBAppException("not implemented yet");
     }
 
 
@@ -139,8 +171,12 @@ public class DBApp {
             DBApp dbApp = new DBApp();
 //            Table tabel = Table.getTable(dbApp.allTables, strTableName);
 //            System.out.println(tabel.getAllPages().get(1).getAllRecords());
-
-            dbApp.insertIntoTable("samaloty", new Hashtable<>());
+            Hashtable htblColNameType = new Hashtable( );
+            htblColNameType.put("name", "java.lang.String");
+            htblColNameType.put("gpa", "java.lang.double");
+            htblColNameType.put("id", "java.lang.Integer");
+            dbApp.createTable(strTableName, "id", htblColNameType);
+//            dbApp.insertIntoTable("samaloty", new Hashtable<>());
 //		Page p = new Page(tabel);
 //		Record r = new Record();
 //		r.put("id", Integer.valueOf(1));

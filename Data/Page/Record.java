@@ -2,31 +2,26 @@ package Data.Page;
 
 import Data.Table.TableColumn;
 
+import javax.jws.Oneway;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.Vector;
 
-public class Record extends Hashtable<String, Object >{
-    public void updateRecord(String columnName, Object newValue) {
-        if (columnExists(columnName)) {
-            this.remove(columnName); // Remove old value
-            this.put(columnName, newValue); // Update with new value
-        } else {
-            throw new IllegalArgumentException("Column " + columnName + " does not exist in this record.");
+public class Record extends Vector<Object>{
+    public void updateRecord(Hashtable<Integer , Object> ht) {
+        for(int idx : ht.keySet()){
+            this.remove(idx) ;
+            this.add(idx , ht.get(idx));
         }
-    }
-    private boolean columnExists(String columnName) {
-        return this.containsKey(columnName);
     }
 
     @Override
     public synchronized String toString() {
         StringBuilder record = new StringBuilder();
         record.append('"');
-        for (Map.Entry<String, Object> entry : entrySet()) {
-            Object value = entry.getValue();
-            record.append(value);
+        for (Object o : this) {
+            record.append(o.toString());
             record.append(',');
         }
         if (record.length() > 1) {
@@ -34,6 +29,13 @@ public class Record extends Hashtable<String, Object >{
         }
         record.append('"');
         return record.toString();
+    }
+    public boolean isMatching(Hashtable<Integer, Object> ht){
+        for(int idx : ht.keySet()){
+            if(!get(idx).equals(ht.get(idx)))
+                return false;
+        }
+        return true;
     }
 
     public static void main(String[] args) {

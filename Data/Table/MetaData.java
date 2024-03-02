@@ -9,7 +9,7 @@ import java.util.*;
 
 public class MetaData {
 
-    private static String metaPath = "Data_Entry/metadata.csv";
+    private static final String metaPath = "Data_Entry/metadata.csv";
     public static void writeDataToMetaDatafile( ArrayList<TableColumn> allColumns)
     {
         try {
@@ -30,11 +30,20 @@ public class MetaData {
         BufferedReader br = new BufferedReader(new FileReader(metaPath));
         ArrayList<Table> allTables = new ArrayList<>();
         ArrayList<TableColumn> currentCols = new ArrayList<>();
+
+
         br.readLine(); // skip first line
         String line = br.readLine();
-
         while(line != null) {
             String[] s = line.split(",");
+            while(line != null && s.length <6){
+                s = line.split(",");
+                line = br.readLine();
+                if(line == null)
+                    break;
+            }
+            if(line == null)
+                break;
             TableColumn col = new TableColumn(s[0], s[1], s[2], Boolean.parseBoolean(s[3]), s[4], s[5]);
 
             if (!currentCols.isEmpty() && !currentCols.get(0).getTableName().equals(col.getTableName())) {
@@ -109,14 +118,15 @@ public class MetaData {
     }
 
 
-    public static void main(String[] args){
-        Hashtable<String,Object> htblColNameValue = new Hashtable<>();
-        htblColNameValue.put("id", new Integer( 2343432 ));
-        htblColNameValue.put("name", new String("Ahmed Noor" ) );
-        htblColNameValue.put("gpa", new Double( 0.95 ) );
-        System.out.println(IsValidTuple("Student" , htblColNameValue)) ;
+//    public static void main(String[] args){
+//        Hashtable<String,Object> htblColNameValue = new Hashtable<>();
+//        htblColNameValue.put("id", new Integer( 2343432 ));
+//        htblColNameValue.put("name", new String("Ahmed Noor" ) );
+//        htblColNameValue.put("gpa", new Double( 0.95 ) );
+//        System.out.println(IsValidTuple("Student" , htblColNameValue)) ;
+//
+//    }
 
-    }
 
 
 }

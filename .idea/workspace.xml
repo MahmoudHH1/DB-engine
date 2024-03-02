@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="" />
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="saeed playing on master">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/DBApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Page/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Page/Page.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Page/Record.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Page/Record.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Table/Table.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,7 +40,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Habiba" />
+        <entry key="$PROJECT_DIR$" value="Saeed" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -66,7 +73,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-    &quot;Application.DBApp.executor&quot;: &quot;Debug&quot;,
+    &quot;Application.DBApp.executor&quot;: &quot;Run&quot;,
     &quot;Application.MetaData.executor&quot;: &quot;Run&quot;,
     &quot;Application.Record.executor&quot;: &quot;Run&quot;,
     &quot;Application.TableColumn.executor&quot;: &quot;Run&quot;,
@@ -84,7 +91,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;indent.rainbow.settings.IrConfigurable&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.MetaData">
+  <component name="RunManager" selected="Application.DBApp">
     <configuration name="DBApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="DBApp" />
       <module name="Database-Engine" />
@@ -160,8 +167,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MetaData" />
         <item itemvalue="Application.DBApp" />
+        <item itemvalue="Application.MetaData" />
         <item itemvalue="Application.Record" />
         <item itemvalue="Application.Table" />
         <item itemvalue="Application.TableColumn" />
@@ -350,7 +357,103 @@
       <option name="project" value="LOCAL" />
       <updated>1709364507752</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="bb">
+      <option name="closed" value="true" />
+      <created>1709373510730</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1709373510730</updated>
+    </task>
+    <task id="LOCAL-00023" summary="dahroug added delete">
+      <option name="closed" value="true" />
+      <created>1709374066241</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1709374066242</updated>
+    </task>
+    <task id="LOCAL-00024" summary="dahroug added delete">
+      <option name="closed" value="true" />
+      <created>1709374220710</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1709374220710</updated>
+    </task>
+    <task id="LOCAL-00025" summary="saeed playing">
+      <option name="closed" value="true" />
+      <created>1709374512375</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1709374512375</updated>
+    </task>
+    <task id="LOCAL-00026" summary="saeed playing on master">
+      <option name="closed" value="true" />
+      <created>1709378108349</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1709378108349</updated>
+    </task>
+    <task id="LOCAL-00027" summary="saeed playing on master">
+      <option name="closed" value="true" />
+      <created>1709378579992</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1709378579992</updated>
+    </task>
+    <task id="LOCAL-00028" summary="saeed playing on master">
+      <option name="closed" value="true" />
+      <created>1709379046250</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1709379046250</updated>
+    </task>
+    <task id="LOCAL-00029" summary="table idxFromName&#10;and DBApp deleteFromTable">
+      <option name="closed" value="true" />
+      <created>1709380006106</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1709380006106</updated>
+    </task>
+    <task id="LOCAL-00030" summary="matching method">
+      <option name="closed" value="true" />
+      <created>1709380801382</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1709380801382</updated>
+    </task>
+    <task id="LOCAL-00031" summary="shwayet basics delet keda">
+      <option name="closed" value="true" />
+      <created>1709381515998</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1709381515998</updated>
+    </task>
+    <task id="LOCAL-00032" summary="table search method in progress not complete">
+      <option name="closed" value="true" />
+      <created>1709385464231</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1709385464231</updated>
+    </task>
+    <task id="LOCAL-00033" summary="saeed playing on master">
+      <option name="closed" value="true" />
+      <created>1709420514594</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1709420514594</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -382,81 +485,14 @@
     <MESSAGE value="." />
     <MESSAGE value="habiba pushed this" />
     <MESSAGE value="habiba pushed this from master" />
-    <option name="LAST_COMMIT_MESSAGE" value="habiba pushed this from master" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>82</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>81</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>83</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>91</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>92</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>93</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>105</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>106</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>90</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>89</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>88</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>87</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>104</line>
-          <properties class="Data.Table.MetaData" method="checkValidDataType">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="bb" />
+    <MESSAGE value="dahroug added delete" />
+    <MESSAGE value="saeed playing" />
+    <MESSAGE value="table idxFromName&#10;and DBApp deleteFromTable" />
+    <MESSAGE value="matching method" />
+    <MESSAGE value="shwayet basics delet keda" />
+    <MESSAGE value="table search method in progress not complete" />
+    <MESSAGE value="saeed playing on master" />
+    <option name="LAST_COMMIT_MESSAGE" value="saeed playing on master" />
   </component>
 </project>
