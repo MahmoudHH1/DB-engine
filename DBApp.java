@@ -164,16 +164,10 @@ public class DBApp {
         try {
             String strTableName = "Student";
             DBApp dbApp = new DBApp();
-            Hashtable ht = new Hashtable();
-            ht.put("ID", "java.lang.Integer");
-            ht.put("name", "java.lang.String");
-            ht.put("gpa", "java.lang.double");
-            dbApp.createTable(strTableName, "ID", ht);
-
 //            Table tabel = Table.getTable(dbApp.allTables, strTableName);
 //            System.out.println(tabel.getAllPages().get(1).getAllRecords());
 
-//            dbApp.insertIntoTable("samaloty", new Hashtable<>());
+            dbApp.insertIntoTable("samaloty", new Hashtable<>());
 //		Page p = new Page(tabel);
 //		Record r = new Record();
 //		r.put("id", Integer.valueOf(1));
