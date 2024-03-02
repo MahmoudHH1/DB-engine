@@ -4,16 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="el project msh nawy y5las bayen">
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="table search method in progress not complete">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/DBApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Table/Table.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data_Entry/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data_Entry/metadata.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_29_2024_5_24_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_29_2024_5_24_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_29_2024_5_29_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_29_2024_5_29_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/shelf/Uncommitted_changes_before_Update_at_2_26_2024_10_16_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/shelf/Uncommitted_changes_before_Update_at_2_26_2024_10_16_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/shelf/Uncommitted_changes_before_Update_at_2_26_2024_9_34_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/shelf/Uncommitted_changes_before_Update_at_2_26_2024_9_34_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/shelf/Uncommitted_changes_before_Update_at_2_28_2024_5_11_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/shelf/Uncommitted_changes_before_Update_at_2_28_2024_5_11_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/shelf/Uncommitted_changes_before_Update_at_2_28_2024_9_28_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/shelf/Uncommitted_changes_before_Update_at_2_28_2024_9_28_AM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/shelf/Uncommitted_changes_before_Update_at_2_29_2024_12_20_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/shelf/Uncommitted_changes_before_Update_at_2_29_2024_12_20_AM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/DBApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/MetaData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/MetaData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/Table.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data_Entry/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data_Entry/metadata.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/SQLTerm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/SQLTerm.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -448,15 +452,7 @@
       <option name="project" value="LOCAL" />
       <updated>1709385464231</updated>
     </task>
-    <task id="LOCAL-00033" summary="el project msh nawy y5las bayen">
-      <option name="closed" value="true" />
-      <created>1709418993827</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1709418993827</updated>
-    </task>
-    <option name="localTasksCounter" value="34" />
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -471,6 +467,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="added method storePage to store page in .class file-- to be modified later -- Will probably be used in insert tuple method" />
     <MESSAGE value="Saeed added" />
     <MESSAGE value="fixed exception when creating folder and object file" />
     <MESSAGE value="no progress" />
@@ -495,8 +492,7 @@
     <MESSAGE value="matching method" />
     <MESSAGE value="shwayet basics delet keda" />
     <MESSAGE value="table search method in progress not complete" />
-    <MESSAGE value="el project msh nawy y5las bayen" />
-    <option name="LAST_COMMIT_MESSAGE" value="el project msh nawy y5las bayen" />
+    <option name="LAST_COMMIT_MESSAGE" value="table search method in progress not complete" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -565,31 +561,6 @@
           <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
           <line>86</line>
           <option name="timeStamp" value="20" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/DBApp.java</url>
-          <line>172</line>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/DBApp.java</url>
-          <line>171</line>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/DBApp.java</url>
-          <line>170</line>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/DBApp.java</url>
-          <line>169</line>
-          <option name="timeStamp" value="25" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/DBApp.java</url>
-          <line>168</line>
-          <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>

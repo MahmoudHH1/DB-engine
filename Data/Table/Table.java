@@ -22,7 +22,7 @@ public class Table implements Serializable {
 
     private Vector<String> pagePaths; // page paths
     private transient ArrayList<TableColumn> allColumns;
-    static String tablesDirectory = "Data_Entry/Tables";
+    static String tablesDirectory = "Data_Entry"+  File.separator +"Tables";
     private String tableFilePath;
     private String tableDir;
     private String tableName;
