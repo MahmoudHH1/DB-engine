@@ -4,6 +4,7 @@ import Data.Handler.FileCreator;
 import Data.Page.Page;
 import Exceptions.DBAppException;
 
+import javax.jws.Oneway;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -23,6 +24,7 @@ public class Table implements Serializable {
     private String tableFilePath ;
     private String tableDir;
     private String tableName ;
+    private String clusterKey ;
     private int pageNum = 1;
 
 
@@ -49,7 +51,6 @@ public class Table implements Serializable {
     public static String getTablesDirectory() {
         return tablesDirectory;
     }
-
     public String getTableFilePath() {
         return tableFilePath;
     }
@@ -63,6 +64,17 @@ public class Table implements Serializable {
         return pageNum;
     }
     public Vector<Page> getAllPages(){return pages ;}
+    public  Object[] getClusterKeyAndIndex() throws DBAppException {
+
+        for (int i = 0; i < allColumns.size(); i++) {
+            if(allColumns.get(i).isClusterKey()){
+                return  new Object[]{allColumns.get(i) ,i};
+            }
+        }
+
+        throw new   DBAppException("No cluster Key !");
+    }
+
     public void setPageNum(int pageNum) {
         this.pageNum = pageNum;
     }
@@ -92,22 +104,22 @@ public class Table implements Serializable {
         }
         throw new DBAppException("Table not found");
     }
-//    public Hashtable<Integer, Object> getColIdxVal(Hashtable<String, Object> ht) throws DBAppException {
-//        Hashtable<Integer, Object> res = new Hashtable<>();
-//        for(String key: ht.keySet()){
-//            boolean found = false;
-//            for(int i =0 ; i<getAllColumns().size(); i++){
-//                if(getAllColumns().get(i).equals(key)){
-//                    res.put(i, )
-//                    found = true;
-//                    break;
-//                }
-//            }
-//            if(!found)
-//                throw new DBAppException("Invalid Column Name: " + key);
-//            values.add(ht.get(key));
-//        }
-//    }
+    public Hashtable<Integer, Object> getColIdxVal(Hashtable<String, Object> ht) throws DBAppException {
+        Hashtable<Integer, Object> res = new Hashtable<>();
+        for(String key: ht.keySet()){
+            boolean found = false;
+            for(int i =0 ; i<getAllColumns().size(); i++){
+                if(getAllColumns().get(i).equals(key)){
+                    res.put(i, ht.get(key));
+                    found = true;
+                    break;
+                }
+            }
+            if(!found)
+                throw new DBAppException("Invalid Column Name: " + key);
+        }
+        return res ;
+    }
     @Override
     public boolean equals(Object o){
         // two tables are equal if they have the same name

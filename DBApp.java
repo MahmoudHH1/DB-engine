@@ -93,21 +93,23 @@ public class DBApp {
     // htblColNameValue will not include clustering key as column name
     // strClusteringKeyValue is the value to look for to find the row to update.
     public void updateTable(String strTableName,
-                            Object strClusteringKeyValue,
+                            String strClusteringKeyValue,
                             Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException {
         Table tabel = Table.getTable(allTables, strTableName);
+        Object clusterKeyVal = strClusteringKeyValue ;
+        Object[]clusterKeyColIndex = (tabel.getClusterKeyAndIndex()) ;
+        switch ( ((TableColumn)clusterKeyColIndex[0]).getColumnType() ){
+            case "java.lang.double" :
+                clusterKeyVal = Double.parseDouble(strClusteringKeyValue); break;
+            case "java.lang.Integer" :
+                clusterKeyVal = Integer.parseInt(strClusteringKeyValue); break;
+        }
         outerLoop:
         // to exit all loops
         for (Page page : tabel.getAllPages()) {
-            for (Record record : page.getAllRecords()) {
-                if (record.containsValue(strClusteringKeyValue)) {
-                    for (Map.Entry<String, Object> entry : htblColNameValue.entrySet()) {
-                        String columnName = entry.getKey();
-                        Object newValue = entry.getValue();
-                        record.updateRecord(columnName, newValue);
-                        tabel.tableCreator();
-                        break outerLoop;
-                    }
+            for (int i = 0; i <page.getAllRecords().size() ; i++) {
+                if (page.getAllRecords().get(((Integer) clusterKeyColIndex[1])).equals(clusterKeyVal)) {
+
                 }
             }
         }
