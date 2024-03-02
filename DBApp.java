@@ -110,6 +110,7 @@ public class DBApp {
             for (int i = 0; i <page.getAllRecords().size() ; i++) {
                 if (page.getAllRecords().get(((Integer) clusterKeyColIndex[1])).equals(clusterKeyVal)) {
 
+                    break outerLoop;
                 }
             }
         }
