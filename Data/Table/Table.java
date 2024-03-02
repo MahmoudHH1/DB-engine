@@ -4,7 +4,6 @@ import Data.Handler.FileCreator;
 import Data.Page.Page;
 import Exceptions.DBAppException;
 
-import javax.jws.Oneway;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -24,7 +23,6 @@ public class Table implements Serializable {
     private String tableFilePath ;
     private String tableDir;
     private String tableName ;
-    private String clusterKey ;
     private int pageNum = 1;
 
 
@@ -51,6 +49,7 @@ public class Table implements Serializable {
     public static String getTablesDirectory() {
         return tablesDirectory;
     }
+
     public String getTableFilePath() {
         return tableFilePath;
     }
@@ -64,17 +63,6 @@ public class Table implements Serializable {
         return pageNum;
     }
     public Vector<Page> getAllPages(){return pages ;}
-    public  Object[] getClusterKeyAndIndex() throws DBAppException {
-
-        for (int i = 0; i < allColumns.size(); i++) {
-            if(allColumns.get(i).isClusterKey()){
-                return  new Object[]{allColumns.get(i) ,i};
-            }
-        }
-
-        throw new   DBAppException("No cluster Key !");
-    }
-
     public void setPageNum(int pageNum) {
         this.pageNum = pageNum;
     }
@@ -118,7 +106,7 @@ public class Table implements Serializable {
             if(!found)
                 throw new DBAppException("Invalid Column Name: " + key);
         }
-        return res ;
+        return res;
     }
     @Override
     public boolean equals(Object o){
