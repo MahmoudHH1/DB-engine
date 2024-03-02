@@ -2,6 +2,7 @@ package Data.Table;
 
 import Data.Handler.FileCreator;
 import Data.Page.Page;
+import Data.Page.Record;
 import Exceptions.DBAppException;
 
 import java.io.*;
@@ -120,6 +121,22 @@ public class Table implements Serializable {
             }
         }
         throw new DBAppException("Invalid Column Name: " + name);
+    }
+    // skeleton method for searching for records O(n)
+    // To be modified later
+    public ArrayList<Record> searchFor(Hashtable<Integer, Object> colIdxVal) throws IOException, ClassNotFoundException, DBAppException {
+        for(String path: getPagePaths()){
+            // still need to adjust for index
+            Page page = (Page) FileCreator.readObject(path);
+            ArrayList<Record> toRemove = new ArrayList<>();
+            for(Record record: page.getAllRecords()){
+                boolean matching = record.isMatching(colIdxVal);
+                if(matching)
+                    toRemove.add(record);
+            }
+            page.getAllRecords().removeAll(toRemove);
+        }
+        throw new DBAppException("Not implemented yet"); // do not use method yet
     }
 
     @Override
