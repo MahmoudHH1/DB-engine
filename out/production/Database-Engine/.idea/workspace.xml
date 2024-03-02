@@ -4,23 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="table search method in progress not complete">
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="saeed playing on master">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/DBApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/Table/MetaData.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Table/MetaData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Table/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/Student/Student.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/Student/Student1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/Student/Student2.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Data_Entry/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data_Entry/metadata.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/DBApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Page/Record.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Page/Record.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/MetaData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/MetaData.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/Table.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/TableColumn.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/TableColumn.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/SQLTerm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/SQLTerm.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +72,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-    &quot;Application.DBApp.executor&quot;: &quot;Debug&quot;,
+    &quot;Application.DBApp.executor&quot;: &quot;Run&quot;,
     &quot;Application.MetaData.executor&quot;: &quot;Run&quot;,
     &quot;Application.Record.executor&quot;: &quot;Run&quot;,
     &quot;Application.TableColumn.executor&quot;: &quot;Run&quot;,
@@ -455,7 +444,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709385464231</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="saeed playing on master">
+      <option name="closed" value="true" />
+      <created>1709420514594</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1709420514594</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -490,84 +487,29 @@
     <MESSAGE value="bb" />
     <MESSAGE value="dahroug added delete" />
     <MESSAGE value="saeed playing" />
-    <MESSAGE value="saeed playing on master" />
     <MESSAGE value="table idxFromName&#10;and DBApp deleteFromTable" />
     <MESSAGE value="matching method" />
     <MESSAGE value="shwayet basics delet keda" />
     <MESSAGE value="table search method in progress not complete" />
-    <option name="LAST_COMMIT_MESSAGE" value="table search method in progress not complete" />
+    <MESSAGE value="saeed playing on master" />
+    <option name="LAST_COMMIT_MESSAGE" value="saeed playing on master" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>82</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>81</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>83</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>92</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>93</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>105</line>
+          <line>110</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>106</line>
+          <line>111</line>
           <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>90</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>91</line>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>89</line>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>88</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>87</line>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>86</line>
-          <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>104</line>
+          <line>109</line>
           <properties class="Data.Table.MetaData" method="checkValidDataType">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />

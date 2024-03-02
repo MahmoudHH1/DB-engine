@@ -111,7 +111,7 @@ public class DBApp {
             ArrayList<Record> toUpdate = new ArrayList<>();
             for(Record record: page.getAllRecords()){
                 boolean matching = record.isMatching(colIdxVal);
-                if(matching)
+//                if(matching)
 
             }
         }
