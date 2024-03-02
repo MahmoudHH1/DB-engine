@@ -5,8 +5,7 @@ import Data.Table.TableColumn;
 import java.io.*;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.*;
 
 public class MetaData {
 
@@ -61,10 +60,11 @@ public class MetaData {
     }
 
     //reading the metadata file to know the columns of each table to check it when trying to insert new record
-    public static Hashtable<String, Object> processMetadataFile(String filePath, String tableName) {
-        Hashtable<String, Object> result = new Hashtable<>();
-
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+    // el function sha8ala bas el gam3a bayza
+    public static boolean IsValidTuple(String tableName , Hashtable<String,Object> insertedTuple) {
+        Hashtable<String, String> TasbleColcsv = new Hashtable<>();
+        boolean isValid = true ;
+        try (BufferedReader br = new BufferedReader(new FileReader("Data_Entry/metadata.csv"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 // Split the line into elements
@@ -75,16 +75,48 @@ public class MetaData {
                     // If the condition is met, add a tuple to the result hashtable
                     String columnName = elements[1];
                     String columnType = elements[2];
-                    result.put(columnName, columnType);
+                    TasbleColcsv.put(columnName, columnType);
+                }
+            }
+            //checking first whether the inserted tuple has the same size
+            //as the table attributes
+            if (TasbleColcsv.size()!=insertedTuple.size()){
+                return false ;
+            }
+            //checking whether the data in the csv file matches the inserted tuple
+            Iterator<Map.Entry<String, String>> ResIterator = TasbleColcsv.entrySet().iterator();
+            Iterator<Map.Entry<String, Object>> InsertIterator = insertedTuple.entrySet().iterator();
+            while (ResIterator.hasNext()) {
+                Map.Entry<String, String> col = ResIterator.next();
+                Map.Entry<String, Object> insertedCol = InsertIterator.next();
+                System.out.println(col.getValue());
+                if (!Objects.equals(col.getKey(), insertedCol.getKey()) || !checkValidDataType(col.getValue(),insertedCol.getValue())){
+                    isValid = false ;
+                    break;
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        return result;
+        return isValid ;
     }
 
+    //A function to return true if the value I am inserting matches the datatype in
+    //the csv file
+    private static boolean checkValidDataType (String dataType , Object colValue) {
+        String elementClassName = colValue.getClass().getName() ;
+        return dataType.equals(elementClassName) ;
+    }
+
+
+    public static void main(String[] args){
+        Hashtable<String,Object> htblColNameValue = new Hashtable<>();
+        htblColNameValue.put("id", new Integer( 2343432 ));
+        htblColNameValue.put("name", new String("Ahmed Noor" ) );
+        htblColNameValue.put("gpa", new Double( 0.95 ) );
+        System.out.println(IsValidTuple("Student" , htblColNameValue)) ;
+
+    }
 
 
 }

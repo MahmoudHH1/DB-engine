@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="function kda f metadata w showaya kda f insert" />
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment=".">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/DBApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Table/MetaData.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Table/MetaData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/DBApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/SQLTerm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/SQLTerm.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -54,6 +61,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.DBApp.executor": "Debug",
+    "Application.MetaData.executor": "Run",
     "Application.Record.executor": "Run",
     "Application.TableColumn.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
@@ -70,7 +78,7 @@
     "settings.editor.selected.configurable": "indent.rainbow.settings.IrConfigurable"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.DBApp">
+  <component name="RunManager" selected="Application.MetaData">
     <configuration name="DBApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="DBApp" />
       <module name="Database-Engine" />
@@ -78,8 +86,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Page" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Data.Page.Page" />
+    <configuration name="MetaData" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Data.Table.MetaData" />
       <module name="Database-Engine" />
       <extension name="coverage">
         <pattern>
@@ -138,19 +146,19 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.MetaData" />
       <item itemvalue="Application.DBApp" />
-      <item itemvalue="Application.Page" />
       <item itemvalue="Application.Record" />
       <item itemvalue="Application.Table" />
       <item itemvalue="Application.TableColumn" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.MetaData" />
         <item itemvalue="Application.DBApp" />
         <item itemvalue="Application.Record" />
         <item itemvalue="Application.Table" />
         <item itemvalue="Application.TableColumn" />
-        <item itemvalue="Application.Page" />
       </list>
     </recent_temporary>
   </component>
@@ -314,7 +322,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709297590066</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary=".">
+      <option name="closed" value="true" />
+      <created>1709355795543</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1709355795543</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -343,6 +359,82 @@
     <MESSAGE value="Saeed Merge into master3" />
     <MESSAGE value="Saeed Merge into master4" />
     <MESSAGE value="function kda f metadata w showaya kda f insert" />
-    <option name="LAST_COMMIT_MESSAGE" value="function kda f metadata w showaya kda f insert" />
+    <MESSAGE value="." />
+    <option name="LAST_COMMIT_MESSAGE" value="." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
+          <line>82</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
+          <line>81</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
+          <line>83</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
+          <line>91</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
+          <line>92</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
+          <line>93</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
+          <line>105</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
+          <line>106</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
+          <line>90</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
+          <line>89</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
+          <line>88</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
+          <line>87</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
+          <line>104</line>
+          <properties class="Data.Table.MetaData" method="checkValidDataType">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

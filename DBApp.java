@@ -80,7 +80,11 @@ public class DBApp {
             if (table.getTableName().equals(strTableName))
                 tableExists = true;
         //-----------------------------------------------------------------------\\
+        if (tableExists) {
+            // checking whether the inserted tuple have the same is valid one
 
+        } else
+            throw new DBAppException("The table is not implemented yet");
     }
 
 
