@@ -166,8 +166,12 @@ public class DBApp {
             DBApp dbApp = new DBApp();
 //            Table tabel = Table.getTable(dbApp.allTables, strTableName);
 //            System.out.println(tabel.getAllPages().get(1).getAllRecords());
-
-            dbApp.insertIntoTable("samaloty", new Hashtable<>());
+            Hashtable htblColNameType = new Hashtable( );
+            htblColNameType.put("name", "java.lang.String");
+            htblColNameType.put("gpa", "java.lang.double");
+            htblColNameType.put("id", "java.lang.Integer");
+            dbApp.createTable(strTableName, "id", htblColNameType);
+//            dbApp.insertIntoTable("samaloty", new Hashtable<>());
 //		Page p = new Page(tabel);
 //		Record r = new Record();
 //		r.put("id", Integer.valueOf(1));
