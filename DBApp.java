@@ -9,12 +9,10 @@ import Data.Table.Table;
 import Data.Table.TableColumn;
 import Exceptions.DBAppException;
 
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Hashtable;
-import java.util.Map;
 
 
 public class DBApp {
@@ -139,14 +137,15 @@ public class DBApp {
         // map column name to idx
         Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
         for(String path: table.getPagePaths()){
+            // still need to adjust for index
             Page page = (Page) FileCreator.readObject(path);
+            ArrayList<Record> toRemove = new ArrayList<>();
             for(Record record: page.getAllRecords()){
                 boolean matching = record.isMatching(colIdxVal);
-                if(matching){
-
-                }
+                if(matching)
+                    toRemove.add(record);
             }
-
+            page.getAllRecords().removeAll(toRemove);
         }
 
 
