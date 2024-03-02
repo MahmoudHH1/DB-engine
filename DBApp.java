@@ -94,26 +94,44 @@ public class DBApp {
     // strClusteringKeyValue is the value to look for to find the row to update.
     public void updateTable(String strTableName,
                             String strClusteringKeyValue,
-                            Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException {
-        Table tabel = Table.getTable(allTables, strTableName);
+                            Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
+        Table table = Table.getTable(allTables, strTableName);
         Object clusterKeyVal = strClusteringKeyValue ;
-        Object[]clusterKeyColIndex = (tabel.getClusterKeyAndIndex()) ;
+        Object[]clusterKeyColIndex = (table.getClusterKeyAndIndex()) ;
         switch ( ((TableColumn)clusterKeyColIndex[0]).getColumnType() ){
             case "java.lang.double" :
                 clusterKeyVal = Double.parseDouble(strClusteringKeyValue); break;
             case "java.lang.Integer" :
                 clusterKeyVal = Integer.parseInt(strClusteringKeyValue); break;
         }
-        outerLoop:
-        // to exit all loops
-        for (Page page : tabel.getAllPages()) {
-            for (int i = 0; i <page.getAllRecords().size() ; i++) {
-                if (page.getAllRecords().get(((Integer) clusterKeyColIndex[1])).equals(clusterKeyVal)) {
+        Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
+        for(String path: table.getPagePaths()){
+            // still need to adjust for index
+            Page page = (Page) FileCreator.readObject(path);
+            ArrayList<Record> toUpdate = new ArrayList<>();
+            for(Record record: page.getAllRecords()){
+                boolean matching = record.isMatching(colIdxVal);
+                if(matching)
 
-                    break outerLoop;
-                }
             }
         }
+
+
+//        outerLoop:
+//        // to exit all loops
+//        for (Page page : tabel.getAllPages()) {
+//            for (int i = 0; i <page.getAllRecords().size() ; i++) {
+//                Record current = page.getAllRecords().get(i)
+//                if (page.getAllRecords().get(((Integer) clusterKeyColIndex[1])).equals(clusterKeyVal)) {
+//                    boolean matching = .isMatching(colIdxVal);
+//
+//                    Hashtable<Integer , Object> ht=  tabel.getColIdxVal(htblColNameValue) ;
+//
+//                    tabel.tableCreator();
+//                    break outerLoop;
+//                }
+//            }
+//        }
     }
 
 
