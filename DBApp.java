@@ -45,9 +45,7 @@ public class DBApp {
                     strTableName,
                     column,
                     htblColNameType.get(column),
-                    column.equals(strClusteringKeyColumn),
-                    null,
-                    null
+                    column.equals(strClusteringKeyColumn)
             );
             allColumns.add(newColumn);
         }

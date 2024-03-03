@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="tableDir made final. tableName shouldn't have a setter">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="removed page vector refactoring later">
       <change beforePath="$PROJECT_DIR$/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/DBApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Page/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Page/Page.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -474,7 +472,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709465462815</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="removed page vector refactoring later">
+      <option name="closed" value="true" />
+      <created>1709465823206</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1709465823206</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -489,7 +495,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="no progress" />
     <MESSAGE value="Added tableDir attribute to reference table's directory instead of tablePath which references the file with page paths." />
     <MESSAGE value="unversioned files" />
     <MESSAGE value="clean up and comments" />
@@ -514,6 +519,7 @@
     <MESSAGE value="clean up" />
     <MESSAGE value="removed vector&lt;pages&gt; pages from table" />
     <MESSAGE value="tableDir made final. tableName shouldn't have a setter" />
-    <option name="LAST_COMMIT_MESSAGE" value="tableDir made final. tableName shouldn't have a setter" />
+    <MESSAGE value="removed page vector refactoring later" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed page vector refactoring later" />
   </component>
 </project>
