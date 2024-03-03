@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Hashtable;
-import java.util.Vector;
 
 
 public class DBApp {
@@ -46,9 +45,7 @@ public class DBApp {
                     strTableName,
                     column,
                     htblColNameType.get(column),
-                    column.equals(strClusteringKeyColumn),
-                    null,
-                    null
+                    column.equals(strClusteringKeyColumn)
             );
             allColumns.add(newColumn);
         }
@@ -97,22 +94,20 @@ public class DBApp {
                             String strClusteringKeyValue,
                             Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
         Table table = Table.getTable(allTables, strTableName);
-        Object clusterKeyVal = strClusteringKeyValue;
-        Object[] clusterKeyColIndex = (table.getClusterKeyAndIndex());
-        switch (((TableColumn) clusterKeyColIndex[0]).getColumnType()) {
-            case "java.lang.double":
-                clusterKeyVal = Double.parseDouble(strClusteringKeyValue);
-                break;
-            case "java.lang.Integer":
-                clusterKeyVal = Integer.parseInt(strClusteringKeyValue);
-                break;
+        Object clusterKeyVal = strClusteringKeyValue ;
+        Object[]clusterKeyColIndex = (table.getClusterKeyAndIndex()) ;
+        switch ( ((TableColumn)clusterKeyColIndex[0]).getColumnType() ){
+            case "java.lang.double" :
+                clusterKeyVal = Double.parseDouble(strClusteringKeyValue); break;
+            case "java.lang.Integer" :
+                clusterKeyVal = Integer.parseInt(strClusteringKeyValue); break;
         }
         Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
         outerLoop:
-        for (String path : table.getPagePaths()) {
+        for(String path: table.getPagePaths()){
             // still need to adjust for index
             Page page = (Page) FileCreator.readObject(path);
-            for (Record record : page.getAllRecords()) {
+            for(Record record: page.getAllRecords()){
                 if (record.get(((Integer) clusterKeyColIndex[1])).equals(clusterKeyVal)) {
                     record.updateRecord(colIdxVal);
                     page.save();
@@ -130,26 +125,18 @@ public class DBApp {
     // htblColNameValue enteries are ANDED together
     public void deleteFromTable(String strTableName,
                                 Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
-        Table table = null;
+        Table table = Table.getTable(allTables, strTableName);
         int rowsAffected = 0;
-        // find table
-        for (Table t : allTables) {
-            if (t.equals(strTableName)) {
-                table = t;
-                break;
-            }
-        }
-        if (table == null)
-            throw new DBAppException("Table " + strTableName + " not found");
+
         // map column name to idx
         Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
-        for (String path : table.getPagePaths()) {
+        for(String path: table.getPagePaths()){
             // still need to adjust for index
             Page page = (Page) FileCreator.readObject(path);
             ArrayList<Record> toRemove = new ArrayList<>();
-            for (Record record : page.getAllRecords()) {
+            for(Record record: page.getAllRecords()){
                 boolean matching = record.isMatching(colIdxVal);
-                if (matching)
+                if(matching)
                     toRemove.add(record);
             }
             page.getAllRecords().removeAll(toRemove);
@@ -162,52 +149,40 @@ public class DBApp {
 
     public Iterator selectFromTable(SQLTerm[] arrSQLTerms,
                                     String[] strarrOperators) throws DBAppException {
-        // habiba will do this
-        // habiba on master now
+            // habiba will do this
+            // habiba on master now
         return null;
     }
 
 
     public static void main(String[] args) {
         try {
-
+            String strTableName = "Student";
             DBApp dbApp = new DBApp();
+            Table tabel = Table.getTable(dbApp.allTables, strTableName);
+//            System.out.println(tabel.getAllPages().get(1).getAllRecords());
 
 
-//            String strTableName = "Student";
-//            Hashtable htblColNameType = new Hashtable( );
+            Hashtable htblColNameType = new Hashtable( );
 //            htblColNameType.put("name", "java.lang.String");
 //            htblColNameType.put("gpa", "java.lang.double");
 //            htblColNameType.put("id", "java.lang.Integer");
 //            dbApp.createTable(strTableName, "id", htblColNameType);
-//            String anotherTableName = "Course";
-//            Hashtable<String, String> anotherColNameType = new Hashtable<>();
-//            anotherColNameType.put("courseName", "java.lang.String");
-//            anotherColNameType.put("credits", "java.lang.double");
-//            anotherColNameType.put("courseID", "java.lang.Integer");
-//            dbApp.createTable(anotherTableName, "courseID", anotherColNameType);
+//            dbApp.createIndex( strTableName, "gpa", "gpaIndex" );
 
 
-            Hashtable htblColNameValue = new Hashtable();
-            htblColNameValue.put("id", new Integer(2343432));
-            htblColNameValue.put("name", new String("Ahmed Noor"));
-            htblColNameValue.put("gpa", new Double(0.95));
-            dbApp.insertIntoTable("Student", htblColNameValue);
-            for (Table table : dbApp.allTables) {
-                if (table.getTableName().equals("Student")) {
-                    table.viewTable();
-//                    table.insertIntoTable(htblColNameValue);
-//                    System.out.println(table.getPagePaths().size());
-                }
-            }
-
+            Hashtable htblColNameValue = new Hashtable( );
+//            htblColNameValue.put("id", new Integer( 2343432 ));
+//            htblColNameValue.put("name", new String("Ahmed Noor" ) );
+//            htblColNameValue.put("gpa", new Double( 0.95 ) );
+//            dbApp.insertIntoTable( strTableName , htblColNameValue );
 //
 //            htblColNameValue.clear( );
 //            htblColNameValue.put("id", new Integer( 453455 ));
 //            htblColNameValue.put("name", new String("Ahmed Noor" ) );
 //            htblColNameValue.put("gpa", new Double( 0.95 ) );
 //            dbApp.insertIntoTable( strTableName , htblColNameValue );
-////
+//
 //            htblColNameValue.clear( );
 //            htblColNameValue.put("id", new Integer( 5674567 ));
 //            htblColNameValue.put("name", new String("Dalia Noor" ) );

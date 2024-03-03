@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="modifications">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_26_2024_4_53_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_26_2024_4_53_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_26_2024_4_53_PM__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_26_2024_4_53_PM__Changes_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_26_2024_9_13_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_26_2024_9_13_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2_26_2024_9_21_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2_26_2024_9_21_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_26_2024_4_52_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_26_2024_4_52_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="removed page vector refactoring later">
       <change beforePath="$PROJECT_DIR$/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/DBApp.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -26,9 +20,22 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="Habiba" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="Saeed" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -42,7 +49,7 @@
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
-        <option name="accountId" value="6af82350-8f58-46a5-abfb-f477c75a4115" />
+        <option name="accountId" value="8c5aaf22-1b37-4541-be87-188d8703f940" />
         <option name="url" value="https://github.com/MahmoudHH1/DB-engine.git" />
       </UrlAndAccount>
     </option>
@@ -59,26 +66,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.DBApp.executor": "Run",
-    "Application.Record.executor": "Run",
-    "Application.TableColumn.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Mr__X",
-    "kotlin-language-version-configured": "true",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "indent.rainbow.settings.IrConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.DBApp.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MetaData.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Record.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TableColumn.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;indent.rainbow.settings.IrConfigurable&quot;
   }
-}]]></component>
-  <component name="RunManager">
+}</component>
+  <component name="RunManager" selected="Application.DBApp">
     <configuration name="DBApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="DBApp" />
       <module name="Database-Engine" />
@@ -86,8 +94,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Page" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Data.Page.Page" />
+    <configuration name="MetaData" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Data.Table.MetaData" />
       <module name="Database-Engine" />
       <extension name="coverage">
         <pattern>
@@ -146,8 +154,8 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.MetaData" />
       <item itemvalue="Application.DBApp" />
-      <item itemvalue="Application.Page" />
       <item itemvalue="Application.Record" />
       <item itemvalue="Application.Table" />
       <item itemvalue="Application.TableColumn" />
@@ -155,10 +163,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.DBApp" />
+        <item itemvalue="Application.MetaData" />
+        <item itemvalue="Application.Record" />
         <item itemvalue="Application.Table" />
         <item itemvalue="Application.TableColumn" />
-        <item itemvalue="Application.Record" />
-        <item itemvalue="Application.Page" />
       </list>
     </recent_temporary>
   </component>
@@ -266,7 +274,213 @@
       <option name="project" value="LOCAL" />
       <updated>1709180033323</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="modifications">
+      <option name="closed" value="true" />
+      <created>1709228576040</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1709228576040</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Saeed Merge into master">
+      <option name="closed" value="true" />
+      <created>1709272024839</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1709272024839</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Saeed Merge into master">
+      <option name="closed" value="true" />
+      <created>1709272036968</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1709272036968</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Saeed Merge into master3">
+      <option name="closed" value="true" />
+      <created>1709273676793</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1709273676793</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Saeed Merge into master4">
+      <option name="closed" value="true" />
+      <created>1709275178465</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1709275178465</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Saeed Merge into master4">
+      <option name="closed" value="true" />
+      <created>1709277618041</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1709277618041</updated>
+    </task>
+    <task id="LOCAL-00018" summary="function kda f metadata w showaya kda f insert">
+      <option name="closed" value="true" />
+      <created>1709297590066</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1709297590066</updated>
+    </task>
+    <task id="LOCAL-00019" summary=".">
+      <option name="closed" value="true" />
+      <created>1709355795543</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1709355795543</updated>
+    </task>
+    <task id="LOCAL-00020" summary="habiba pushed this">
+      <created>1709364200815</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1709364200815</updated>
+    </task>
+    <task id="LOCAL-00021" summary="habiba pushed this from master">
+      <created>1709364507752</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1709364507752</updated>
+    </task>
+    <task id="LOCAL-00022" summary="bb">
+      <option name="closed" value="true" />
+      <created>1709373510730</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1709373510730</updated>
+    </task>
+    <task id="LOCAL-00023" summary="dahroug added delete">
+      <option name="closed" value="true" />
+      <created>1709374066241</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1709374066242</updated>
+    </task>
+    <task id="LOCAL-00024" summary="dahroug added delete">
+      <option name="closed" value="true" />
+      <created>1709374220710</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1709374220710</updated>
+    </task>
+    <task id="LOCAL-00025" summary="saeed playing">
+      <option name="closed" value="true" />
+      <created>1709374512375</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1709374512375</updated>
+    </task>
+    <task id="LOCAL-00026" summary="saeed playing on master">
+      <option name="closed" value="true" />
+      <created>1709378108349</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1709378108349</updated>
+    </task>
+    <task id="LOCAL-00027" summary="saeed playing on master">
+      <option name="closed" value="true" />
+      <created>1709378579992</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1709378579992</updated>
+    </task>
+    <task id="LOCAL-00028" summary="saeed playing on master">
+      <option name="closed" value="true" />
+      <created>1709379046250</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1709379046250</updated>
+    </task>
+    <task id="LOCAL-00029" summary="table idxFromName&#10;and DBApp deleteFromTable">
+      <option name="closed" value="true" />
+      <created>1709380006106</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1709380006106</updated>
+    </task>
+    <task id="LOCAL-00030" summary="matching method">
+      <option name="closed" value="true" />
+      <created>1709380801382</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1709380801382</updated>
+    </task>
+    <task id="LOCAL-00031" summary="shwayet basics delet keda">
+      <option name="closed" value="true" />
+      <created>1709381515998</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1709381515998</updated>
+    </task>
+    <task id="LOCAL-00032" summary="table search method in progress not complete">
+      <option name="closed" value="true" />
+      <created>1709385464231</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1709385464231</updated>
+    </task>
+    <task id="LOCAL-00033" summary="saeed playing on master">
+      <option name="closed" value="true" />
+      <created>1709420514594</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1709420514594</updated>
+    </task>
+    <task id="LOCAL-00034" summary="clean up">
+      <option name="closed" value="true" />
+      <created>1709465202598</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1709465202598</updated>
+    </task>
+    <task id="LOCAL-00035" summary="removed vector&lt;pages&gt; pages from table">
+      <option name="closed" value="true" />
+      <created>1709465300963</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1709465300963</updated>
+    </task>
+    <task id="LOCAL-00036" summary="tableDir made final. tableName shouldn't have a setter">
+      <option name="closed" value="true" />
+      <created>1709465462815</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1709465462815</updated>
+    </task>
+    <task id="LOCAL-00037" summary="removed page vector refactoring later">
+      <option name="closed" value="true" />
+      <created>1709465823206</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1709465823206</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -281,16 +495,31 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added method storePage to store page in .class file-- to be modified later -- Will probably be used in insert tuple method" />
-    <MESSAGE value="Saeed added" />
-    <MESSAGE value="fixed exception when creating folder and object file" />
-    <MESSAGE value="no progress" />
     <MESSAGE value="Added tableDir attribute to reference table's directory instead of tablePath which references the file with page paths." />
     <MESSAGE value="unversioned files" />
     <MESSAGE value="clean up and comments" />
     <MESSAGE value="solved creation error" />
     <MESSAGE value="Splited the code into packages and i added alose getters and setters" />
     <MESSAGE value="modifications" />
-    <option name="LAST_COMMIT_MESSAGE" value="modifications" />
+    <MESSAGE value="Saeed Merge into master" />
+    <MESSAGE value="Saeed Merge into master3" />
+    <MESSAGE value="Saeed Merge into master4" />
+    <MESSAGE value="function kda f metadata w showaya kda f insert" />
+    <MESSAGE value="." />
+    <MESSAGE value="habiba pushed this" />
+    <MESSAGE value="habiba pushed this from master" />
+    <MESSAGE value="bb" />
+    <MESSAGE value="dahroug added delete" />
+    <MESSAGE value="saeed playing" />
+    <MESSAGE value="table idxFromName&#10;and DBApp deleteFromTable" />
+    <MESSAGE value="matching method" />
+    <MESSAGE value="shwayet basics delet keda" />
+    <MESSAGE value="table search method in progress not complete" />
+    <MESSAGE value="saeed playing on master" />
+    <MESSAGE value="clean up" />
+    <MESSAGE value="removed vector&lt;pages&gt; pages from table" />
+    <MESSAGE value="tableDir made final. tableName shouldn't have a setter" />
+    <MESSAGE value="removed page vector refactoring later" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed page vector refactoring later" />
   </component>
 </project>

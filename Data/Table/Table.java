@@ -13,10 +13,12 @@ import java.io.IOException;
 
 public class Table implements Serializable {
 
-    private static final long serialVersionUID = -9043778273416338053L;
-    private Vector<String> pagePaths = new Vector<>(); // page paths
+//    private static final long serialVersionUID = -9043778273416338053L;
+    private Vector<Page> pages; // page paths
+
+    private Vector<String> pagePaths; // page paths
     private transient ArrayList<TableColumn> allColumns;
-    static String tablesDirectory = "Data_Entry" + File.separator + "Tables";
+    static String tablesDirectory = "Data_Entry"+  File.separator +"Tables";
     private String tableFilePath;
     private String tableDir;
     private String tableName;
@@ -24,6 +26,7 @@ public class Table implements Serializable {
 
 
     public Table(ArrayList<TableColumn> allColumns) throws IOException {
+        this.pages = new Vector<>();
         this.tableName = allColumns.get(0).getTableName();
         this.tableDir = tablesDirectory + File.separator + tableName;
         this.allColumns = allColumns;
@@ -38,14 +41,13 @@ public class Table implements Serializable {
         FileCreator.storeAsObject(this, tableFilePath);
     }
 
+
     public ArrayList<TableColumn> getAllColumns() {
         return allColumns;
     }
-
     public Vector<String> getPagePaths() {
         return pagePaths;
     }
-
     public static String getTablesDirectory() {
         return tablesDirectory;
     }
@@ -66,9 +68,20 @@ public class Table implements Serializable {
         return pageNum;
     }
 
+    public Vector<Page> getAllPages() {
+        return pages;
+    }
 
     public void setPageNum(int pageNum) {
         this.pageNum = pageNum;
+    }
+
+    public void addNewPage(Page newPage) {
+        this.pages.add(newPage);
+    }
+
+    public void setPages(Vector<Page> pages) {
+        this.pages = pages;
     }
 
     public void setAllColumns(ArrayList<TableColumn> allColumns) {
@@ -79,12 +92,6 @@ public class Table implements Serializable {
         this.tableName = tableName;
     }
 
-    public void setPagePaths(Vector<String> pagePaths) {
-        this.pagePaths = pagePaths;
-    }
-    public void appendPagePath (String filePath){
-        pagePaths.add(filePath) ;
-    }
     public static String getTableFilePath(String name) {
         return tablesDirectory + File.separator +
                 name + File.separator + name;
@@ -108,8 +115,8 @@ public class Table implements Serializable {
         throw new DBAppException("No cluster Key for this Table");
     }
 
-
     public Hashtable<Integer, Object> getColIdxVal(Hashtable<String, Object> ht) throws DBAppException {
+
         Hashtable<Integer, Object> res = new Hashtable<>();
         for (String key : ht.keySet()) {
             res.put(idxFromName(key), ht.get(key));
@@ -221,6 +228,7 @@ public class Table implements Serializable {
     }
 
     //----------------------------------------------------------------------------------------------
+
     public static void main(String[] args) throws IOException {
         ArrayList<TableColumn> cols = new ArrayList<>();
         TableColumn col = new TableColumn("test", "cool", "java.lang.String", true, null, null);
