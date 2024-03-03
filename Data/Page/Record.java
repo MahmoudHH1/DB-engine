@@ -9,6 +9,14 @@ import java.util.Map;
 import java.util.Vector;
 
 public class Record extends Vector<Object>{
+    public void insertRecord(Hashtable<Integer , Object> ht) {
+        this.setSize(ht.size());
+        for(int idx : ht.keySet()){
+            this.add(idx , ht.get(idx));
+        }
+    }
+
+
     public void updateRecord(Hashtable<Integer , Object> ht) {
         for(int idx : ht.keySet()){
             this.remove(idx) ;

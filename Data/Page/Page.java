@@ -6,6 +6,7 @@ import Data.Handler.FileCreator;
 import Data.Table.MetaData;
 import Data.Table.Table;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Vector;
@@ -19,13 +20,13 @@ public class Page implements Serializable {
         this.table = table ;
         this.pageName = table.getTableName() + table.getPageNum() ;
         table.setPageNum(table.getPageNum()+1); // next page num
-        this.pagePath = table.getTableDir()+'/'+pageName ;
+        this.pagePath = table.getTableDir()+ File.pathSeparator+pageName ;
+        table.appendPagePath(this.pagePath);
         save();
         table.save();
     }
 
     public void save() throws IOException {
-        table.addNewPage(this);// store pagePath in corresponding table
         FileCreator.storeAsObject(this , this.pagePath);
     }
 

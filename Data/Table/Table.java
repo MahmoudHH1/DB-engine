@@ -13,12 +13,10 @@ import java.io.IOException;
 
 public class Table implements Serializable {
 
-//    private static final long serialVersionUID = -9043778273416338053L;
-    private Vector<Page> pages; // page paths
-
-    private Vector<String> pagePaths; // page paths
+    private static final long serialVersionUID = -9043778273416338053L;
+    private Vector<String> pagePaths = new Vector<>(); // page paths
     private transient ArrayList<TableColumn> allColumns;
-    static String tablesDirectory = "Data_Entry"+  File.separator +"Tables";
+    static String tablesDirectory = "Data_Entry" + File.separator + "Tables";
     private String tableFilePath;
     private String tableDir;
     private String tableName;
@@ -26,7 +24,6 @@ public class Table implements Serializable {
 
 
     public Table(ArrayList<TableColumn> allColumns) throws IOException {
-        this.pages = new Vector<>();
         this.tableName = allColumns.get(0).getTableName();
         this.tableDir = tablesDirectory + File.separator + tableName;
         this.allColumns = allColumns;
@@ -41,38 +38,14 @@ public class Table implements Serializable {
         FileCreator.storeAsObject(this, tableFilePath);
     }
 
-    public void insertIntoTable(Hashtable<String, Object> insertedTuple) throws DBAppException {
-        if (insertedTuple.size() == allColumns.size() && IsValidTuple(insertedTuple)) {
-            System.out.println("valid ya man ");
-        } else {
-            throw new DBAppException("The tuple you are trying to insert is not valid");
-        }
-    }
-
-    private boolean IsValidTuple(Hashtable<String, Object> insertedTuple) {
-        boolean isValid = true;
-        Iterator<Map.Entry<String, Object>> InsertIterator = insertedTuple.entrySet().iterator();
-        for (TableColumn column : allColumns) {
-            Map.Entry<String, Object> insertedCol = InsertIterator.next();
-            if (!Objects.equals(column.getColumnName(), insertedCol.getKey()) ||
-                    !checkValidDataType(column.getColumnType(), insertedCol.getValue())) {
-                isValid = false;
-            }
-        }
-        return isValid;
-    }
-
-    private static boolean checkValidDataType(String dataType, Object colValue) {
-        String elementClassName = colValue.getClass().getName();
-        return dataType.equals(elementClassName);
-    }
-
     public ArrayList<TableColumn> getAllColumns() {
         return allColumns;
     }
+
     public Vector<String> getPagePaths() {
         return pagePaths;
     }
+
     public static String getTablesDirectory() {
         return tablesDirectory;
     }
@@ -93,20 +66,9 @@ public class Table implements Serializable {
         return pageNum;
     }
 
-    public Vector<Page> getAllPages() {
-        return pages;
-    }
 
     public void setPageNum(int pageNum) {
         this.pageNum = pageNum;
-    }
-
-    public void addNewPage(Page newPage) {
-        this.pages.add(newPage);
-    }
-
-    public void setPages(Vector<Page> pages) {
-        this.pages = pages;
     }
 
     public void setAllColumns(ArrayList<TableColumn> allColumns) {
@@ -117,6 +79,12 @@ public class Table implements Serializable {
         this.tableName = tableName;
     }
 
+    public void setPagePaths(Vector<String> pagePaths) {
+        this.pagePaths = pagePaths;
+    }
+    public void appendPagePath (String filePath){
+        pagePaths.add(filePath) ;
+    }
     public static String getTableFilePath(String name) {
         return tablesDirectory + File.separator +
                 name + File.separator + name;
@@ -140,8 +108,8 @@ public class Table implements Serializable {
         throw new DBAppException("No cluster Key for this Table");
     }
 
-    public Hashtable<Integer, Object> getColIdxVal(Hashtable<String, Object> ht) throws DBAppException {
 
+    public Hashtable<Integer, Object> getColIdxVal(Hashtable<String, Object> ht) throws DBAppException {
         Hashtable<Integer, Object> res = new Hashtable<>();
         for (String key : ht.keySet()) {
             res.put(idxFromName(key), ht.get(key));
@@ -188,6 +156,71 @@ public class Table implements Serializable {
         return false;
     }
 
+    //----------------------------------------------------------------------------------
+    //functions by MX
+
+    public void viewTable() throws IOException, ClassNotFoundException {
+        if (!pagePaths.isEmpty()) {
+            for (String pagePath : pagePaths) {
+                Page page = (Page) FileCreator.readObject(pagePath);
+                System.out.println(page);
+            }
+        }
+    }
+
+    public void insertIntoTable(Hashtable<String, Object> insertedTuple) throws DBAppException, IOException {
+        if (insertedTuple.size() == allColumns.size() && IsValidTuple(insertedTuple)) {
+            //if it is the first record to be inserted
+            if (pagePaths.isEmpty()){
+                Record rec = new Record() ;
+                rec.insertRecord(getColIdxVal(insertedTuple));
+                //creating a new page
+                Page firstPage = new Page(this) ;
+                firstPage.addRecord(rec);
+                this.save();
+                firstPage.save();
+            }
+        } else {
+            throw new DBAppException("The tuple you are trying to insert is not valid");
+        }
+    }
+
+    //converting the given hashtable to a record
+    public Record convertToRecord (Hashtable<String, Object> insertedTuple){
+        Record rec = new Record() ;
+        Enumeration<String> keys = insertedTuple.keys();
+        while (keys.hasMoreElements()) {
+            String key = keys.nextElement();
+            Object value = insertedTuple.get(key);
+            rec.add(value);
+        }
+        return rec ;
+    }
+
+    //this function takes the path of a page and the clustering index to check whether
+    //it should be inserted in this page or not
+//    private boolean isInRange (String pagePath , String clutsertinKey){
+//
+//    }
+    private boolean IsValidTuple(Hashtable<String, Object> insertedTuple) {
+        boolean isValid = true;
+        Iterator<Map.Entry<String, Object>> InsertIterator = insertedTuple.entrySet().iterator();
+        for (TableColumn column : allColumns) {
+            Map.Entry<String, Object> insertedCol = InsertIterator.next();
+            if (!Objects.equals(column.getColumnName(), insertedCol.getKey()) ||
+                    !checkValidDataType(column.getColumnType(), insertedCol.getValue())) {
+                isValid = false;
+            }
+        }
+        return isValid;
+    }
+
+    private static boolean checkValidDataType(String dataType, Object colValue) {
+        String elementClassName = colValue.getClass().getName();
+        return dataType.equalsIgnoreCase(elementClassName);
+    }
+
+    //----------------------------------------------------------------------------------------------
     public static void main(String[] args) throws IOException {
         ArrayList<TableColumn> cols = new ArrayList<>();
         TableColumn col = new TableColumn("test", "cool", "java.lang.String", true, null, null);

@@ -2,3 +2,6 @@ Table_Name,Column_Name,Column_Type,Clustering_Key,Index_Name,Index_Type
 Student,gpa,java.lang.double,false,null,null
 Student,name,java.lang.String,false,null,null
 Student,id,java.lang.Integer,true,null,null
+Course,credits,java.lang.double,false,null,null
+Course,courseName,java.lang.String,false,null,null
+Course,courseID,java.lang.Integer,true,null,null
