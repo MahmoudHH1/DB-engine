@@ -127,17 +127,9 @@ public class DBApp {
     // htblColNameValue enteries are ANDED together
     public void deleteFromTable(String strTableName,
                                 Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
-        Table table = null;
+        Table table = Table.getTable(allTables, strTableName);
         int rowsAffected = 0;
-        // find table
-        for(Table t: allTables){
-            if(t.equals(strTableName)){
-                table = t;
-                break;
-            }
-        }
-        if(table == null)
-            throw new DBAppException("Table " + strTableName + " not found");
+
         // map column name to idx
         Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
         for(String path: table.getPagePaths()){

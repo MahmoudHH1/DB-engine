@@ -128,7 +128,7 @@ public class Table implements Serializable {
                 return table;
             }
         }
-        throw new DBAppException("Table not found");
+        throw new DBAppException("Table "+ tableName+ " not found");
     }
 
     public Object[] getClusterKeyAndIndex() throws DBAppException {
