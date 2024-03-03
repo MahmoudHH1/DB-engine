@@ -95,6 +95,7 @@ public class DBApp {
     public void updateTable(String strTableName,
                             String strClusteringKeyValue,
                             Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
+        // check if htblColNameValue size  = table.allcol.size()
         Table table = Table.getTable(allTables, strTableName);
         Object clusterKeyVal = strClusteringKeyValue ;
         Object[]clusterKeyColIndex = (table.getClusterKeyAndIndex()) ;

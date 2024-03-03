@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Vector;
 
 public class Record extends Vector<Object>{
+  //  set name  = "mohamed" , age = 20  where id  =1    -> 1: "Mohamed" , 2 : 20
     public void updateRecord(Hashtable<Integer , Object> ht) {
         for(int idx : ht.keySet()){
             this.remove(idx) ;

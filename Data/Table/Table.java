@@ -61,12 +61,10 @@ public class Table implements Serializable {
         }
         return isValid;
     }
-
     private static boolean checkValidDataType(String dataType, Object colValue) {
         String elementClassName = colValue.getClass().getName();
         return dataType.equals(elementClassName);
     }
-
     public ArrayList<TableColumn> getAllColumns() {
         return allColumns;
     }
@@ -140,6 +138,7 @@ public class Table implements Serializable {
         throw new DBAppException("No cluster Key for this Table");
     }
 
+    // id , name  , gpa    // "1, saeed , 2.0"  ::       id : 1 ->  0 :1
     public Hashtable<Integer, Object> getColIdxVal(Hashtable<String, Object> ht) throws DBAppException {
 
         Hashtable<Integer, Object> res = new Hashtable<>();
