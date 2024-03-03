@@ -14,7 +14,6 @@ import java.io.IOException;
 public class Table implements Serializable {
 
 //    private static final long serialVersionUID = -9043778273416338053L;
-    private Vector<Page> pages; // page paths
 
     private Vector<String> pagePaths; // page paths
     private transient ArrayList<TableColumn> allColumns;
@@ -26,7 +25,6 @@ public class Table implements Serializable {
 
 
     public Table(ArrayList<TableColumn> allColumns) throws IOException {
-        this.pages = new Vector<>();
         this.tableName = allColumns.get(0).getTableName();
         this.tableDir = tablesDirectory + File.separator + tableName;
         this.allColumns = allColumns;
@@ -92,21 +90,8 @@ public class Table implements Serializable {
     public int getPageNum() {
         return pageNum;
     }
-
-    public Vector<Page> getAllPages() {
-        return pages;
-    }
-
     public void setPageNum(int pageNum) {
         this.pageNum = pageNum;
-    }
-
-    public void addNewPage(Page newPage) {
-        this.pages.add(newPage);
-    }
-
-    public void setPages(Vector<Page> pages) {
-        this.pages = pages;
     }
 
     public void setAllColumns(ArrayList<TableColumn> allColumns) {
