@@ -25,6 +25,7 @@ public class TableColumn {
         this.isClusterKey = isClusterKey;
     }
 
+
     public String getTableName() {
         return tableName;
     }
