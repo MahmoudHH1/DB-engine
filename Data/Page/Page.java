@@ -25,7 +25,7 @@ public class Page implements Serializable {
     }
 
     public void save() throws IOException {
-        table.addNewPage(this);// store pagePath in corresponding table
+        // store pagePath in corresponding table
         FileCreator.storeAsObject(this , this.pagePath);
     }
 

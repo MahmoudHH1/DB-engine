@@ -162,7 +162,7 @@ public class DBApp {
             String strTableName = "Student";
             DBApp dbApp = new DBApp();
             Table tabel = Table.getTable(dbApp.allTables, strTableName);
-            System.out.println(tabel.getAllPages().get(1).getAllRecords());
+//            System.out.println(tabel.getAllPages().get(1).getAllRecords());
 
 
             Hashtable htblColNameType = new Hashtable( );
