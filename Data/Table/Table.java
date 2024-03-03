@@ -19,8 +19,8 @@ public class Table implements Serializable {
     private transient ArrayList<TableColumn> allColumns;
     static String tablesDirectory = "Data_Entry"+  File.separator +"Tables";
     private String tableFilePath;
-    private String tableDir;
-    private String tableName;
+    private final String tableDir;
+    private String tableName; // tableName shouldn't have a setter
     private int pageNum = 1;
 
 
@@ -99,7 +99,7 @@ public class Table implements Serializable {
     }
 
     public void setTableName(String tableName) {
-        this.tableName = tableName;
+        this.tableName = tableName; // tableName shouldn't have a setter
     }
 
     public static String getTableFilePath(String name) {

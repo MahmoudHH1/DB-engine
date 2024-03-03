@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="clean up">
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="removed vector&lt;pages&gt; pages from table">
       <change beforePath="$PROJECT_DIR$/Data/Table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Table/Table.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -456,7 +456,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709465202598</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="removed vector&lt;pages&gt; pages from table">
+      <option name="closed" value="true" />
+      <created>1709465300963</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1709465300963</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -471,7 +479,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Saeed added" />
     <MESSAGE value="fixed exception when creating folder and object file" />
     <MESSAGE value="no progress" />
     <MESSAGE value="Added tableDir attribute to reference table's directory instead of tablePath which references the file with page paths." />
@@ -496,6 +503,7 @@
     <MESSAGE value="table search method in progress not complete" />
     <MESSAGE value="saeed playing on master" />
     <MESSAGE value="clean up" />
-    <option name="LAST_COMMIT_MESSAGE" value="clean up" />
+    <MESSAGE value="removed vector&lt;pages&gt; pages from table" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed vector&lt;pages&gt; pages from table" />
   </component>
 </project>
