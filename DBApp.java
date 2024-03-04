@@ -144,8 +144,10 @@ public class DBApp {
                         selectedTuples.addAll(apply(term)); // duplicates included 3adi wla eh
                         break;
                     case "XOR":
-                        selectedTuples.addAll(apply(term)); // ghalat
-                        selectedTuples.removeAll(selectedTuples); // (selectedTuples.addAll(apply(term)')).addAll((selectedTuples'.addAll(apply(term)')
+                        //selectedTuples.addAll(apply(term)); // ghalat
+                        //selectedTuples.removeAll(selectedTuples); // (selectedTuples.addAll(apply(term)')).addAll((selectedTuples'.addAll(apply(term))
+                        selectedTuples.addAll(applycomplement(term));
+                        //(selectedTuples-Record).addAll(apply(term));
                         break;
                     default:
                         throw new DBAppException("Invalid logical operator: " + operator);
@@ -203,6 +205,59 @@ public class DBApp {
                                 break;
                             case "<=":
                                 found = comparableValue.compareTo(comparableObjValue) <= 0;
+                                break;
+                            default:
+                                throw new DBAppException("Unsupported operator");
+                        }
+                        if (found) {
+                            tuples.add(record);
+                        }
+                    }
+                }
+            }
+        }
+
+        return tuples;
+    }
+    private ArrayList<Record> applycomplement(SQLTerm cond) throws DBAppException{
+        ArrayList<Record> tuples = new ArrayList<>();  /// records that satisfies condition saved here
+        for (Table table : allTables) { // loop through all the tables
+            if (table.getTableName().equals(cond._strTableName)) { // the table we want
+                for (Page page : table.getAllPages()) { //to get all pages of the table
+                    for (Record record : page.getAllRecords()) { //to get all records
+                        Object columnValue = null;
+                        for (TableColumn column : table.getAllColumns()) {
+                            if (column.getColumnName().equals(cond._strColumnName)) {
+                                columnValue = record.get(column.getColumnName());
+                                break;
+                            }
+                        }
+                        // Check if the column value is null
+                        if (columnValue == null) {
+                            throw new DBAppException("not found");
+                        }
+                        // Compare the column value with the value specified in the SQLTerm using the operator
+                        boolean found = false;
+                        Comparable<Object> comparableValue = (Comparable<Object>) columnValue;
+                        Comparable<Object> comparableObjValue = (Comparable<Object>) cond._objValue;
+                        switch (cond._strOperator) {
+                            case "=":
+                                found = comparableValue.compareTo(comparableObjValue) != 0;
+                                break;
+                            case "!=":
+                                found = comparableValue.compareTo(comparableObjValue) == 0;
+                                break;
+                            case ">":
+                                found = comparableValue.compareTo(comparableObjValue) <= 0;
+                                break;
+                            case ">=":
+                                found = comparableValue.compareTo(comparableObjValue) < 0;
+                                break;
+                            case "<":
+                                found = comparableValue.compareTo(comparableObjValue) >= 0;
+                                break;
+                            case "<=":
+                                found = comparableValue.compareTo(comparableObjValue) > 0;
                                 break;
                             default:
                                 throw new DBAppException("Unsupported operator");
