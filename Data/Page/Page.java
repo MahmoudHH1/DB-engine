@@ -24,11 +24,10 @@ public class Page implements Serializable {
         table.appendPagePath(this.pagePath);
         System.out.println(pagePath);
         save();
-        table.save();
     }
-
     public void save() throws IOException {
         FileCreator.storeAsObject(this , this.pagePath);
+        table.save();
     }
 
     public Table getTable() {

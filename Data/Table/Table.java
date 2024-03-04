@@ -15,8 +15,6 @@ import java.io.IOException;
 public class Table implements Serializable {
 
 //    private static final long serialVersionUID = -9043778273416338053L;
-    private Vector<Page> pages; // page paths
-
     private Vector<String> pagePaths; // page paths
     private transient ArrayList<TableColumn> allColumns;
     static String tablesDirectory = "Data_Entry"+  File.separator +"Tables";
@@ -27,20 +25,19 @@ public class Table implements Serializable {
 
 
     public Table(ArrayList<TableColumn> allColumns) throws IOException {
-        this.pages = new Vector<>();
         this.pagePaths = new Vector<>() ;
         this.tableName = allColumns.get(0).getTableName();
         this.tableDir = tablesDirectory + File.separator + tableName;
         this.allColumns = allColumns;
         File f = new File(tableDir);
         System.out.println(f.mkdir() ? "Table Created" : "Table not Created");
-        MetaData.writeDataToMetaDatafile(allColumns);
+        System.out.println(f.mkdir() ? "Table Created" : "Table not Created");
         save();
     }
-
     public void save() throws IOException {
         tableFilePath = tableDir + File.separator + tableName;
         FileCreator.storeAsObject(this, tableFilePath);
+        MetaData.writeDataToMetaDatafile(allColumns);
     }
 
 
@@ -70,20 +67,8 @@ public class Table implements Serializable {
         return pageNum;
     }
 
-    public Vector<Page> getAllPages() {
-        return pages;
-    }
-
     public void setPageNum(int pageNum) {
         this.pageNum = pageNum;
-    }
-
-    public void addNewPage(Page newPage) {
-        this.pages.add(newPage);
-    }
-
-    public void setPages(Vector<Page> pages) {
-        this.pages = pages;
     }
 
     public void setAllColumns(ArrayList<TableColumn> allColumns) {

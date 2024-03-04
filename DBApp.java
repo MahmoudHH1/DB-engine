@@ -15,7 +15,6 @@ import java.util.Hashtable;
 
 public class DBApp {
     public ArrayList<Table> allTables;
-
     public DBApp() throws IOException, ClassNotFoundException {
         init();
     }
@@ -51,13 +50,29 @@ public class DBApp {
     }
 
 
-    // following method creates a B+tree index
-    public void createIndex(String strTableName,
-                            String strColName,
-                            String strIndexName) throws DBAppException {
 
-        throw new DBAppException("not implemented yet");
+
+    // following method creates a B+tree index
+    public void createIndex(String   strTableName,
+                            String   strColName,
+                            String   strIndexName) throws DBAppException, IOException {
+        try{
+            Table table = Table.getTable(allTables, strTableName);
+            for (TableColumn col : table.getAllColumns()){
+                if(col.getColumnName().equals(strColName)) {
+                    col.setIndexName(strIndexName);
+                    col.setIndexType("B+ Tree");
+                    table.save();
+                    break;
+                }
+            }
+            MetaData.updateOnMetaDataFile(strTableName , strColName , strIndexName);
+        }
+        catch (Exception e){
+            throw new DBAppException("not implemented yet");
+        }
     }
+
 
 
     // following method inserts one row only.
@@ -91,6 +106,7 @@ public class DBApp {
     public void updateTable(String strTableName,
                             String strClusteringKeyValue,
                             Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
+        // check if htblColNameValue size  = table.allcol.size()
         Table table = Table.getTable(allTables, strTableName);
         Object clusterKeyVal = strClusteringKeyValue ;
         Validator.IsValidTuple(htblColNameValue , table);
@@ -158,22 +174,23 @@ public class DBApp {
         try {
             String strTableName = "Student";
             DBApp dbApp = new DBApp();
-//            Table tabel = Table.getTable(dbApp.allTables, strTableName);
+            Table tabel = Table.getTable(dbApp.allTables, strTableName);
 
 //            Hashtable htblColNameType = new Hashtable( );
 //            htblColNameType.put("name", "java.lang.String");
 //            htblColNameType.put("gpa", "java.lang.double");
 //            htblColNameType.put("id", "java.lang.Integer");
 //            dbApp.createTable(strTableName, "id", htblColNameType);
-//            dbApp.createIndex( strTableName, "gpa", "gpaIndex" );
+//            dbApp.createIndex( strTableName, "id", "IdIndex" );
 
+//            System.out.println(tabel.getAllColumns().get(2).isClusterKey());
 
 //            System.out.println(tabel.getAllColumns().get(0));
 //            System.out.println(tabel.getAllColumns().get(1));
 //            System.out.println(tabel.getAllColumns().get(2));
 
 
-            Hashtable htblColNameValue = new Hashtable( );
+//            Hashtable htblColNameValue = new Hashtable( );
 //            htblColNameValue.put("id", new Integer( 2343432 ));
 //            htblColNameValue.put("name", new String("Ahmed Noor" ) );
 //            htblColNameValue.put("gpa", new Double( 0.95 ) );

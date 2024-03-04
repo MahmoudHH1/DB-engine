@@ -24,6 +24,45 @@ public class MetaData {
             e.printStackTrace();
         }
     }
+
+    public static void updateOnMetaDataFile(
+            String tableNameToModify,
+            String columnNameToModify,
+            String newIndexName) {
+        try {
+            // Read existing metadata from the file
+            BufferedReader reader = new BufferedReader(new FileReader(metaPath));
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String [] a = line.split(",") ;
+                if (a[0].equals(tableNameToModify) && a[1].equals(columnNameToModify)){
+                    a[4] = newIndexName ;
+                    a[5] = "B+ Tree" ;
+                    line =convertArrStr(a , ",");
+                }
+                sb.append(line).append(System.lineSeparator());
+            }
+            reader.close();
+            String metaDataContent = sb.toString();
+            FileWriter writer = new FileWriter(metaPath);
+            writer.write(metaDataContent); // Write existing data
+            writer.close();
+
+            System.out.println("Successfully modified the Metadata file.");
+
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+    private static String convertArrStr(String[] strArr, String delimiter) {
+        StringBuilder sb = new StringBuilder();
+        for (String str : strArr)
+            sb.append(str).append(delimiter);
+        return sb.substring(0, sb.length() - 1);
+    }
+
     public static ArrayList<Table> loadAllTables() throws IOException, ClassNotFoundException {
         // prepare csv for reading
 
