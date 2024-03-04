@@ -141,11 +141,11 @@ public class DBApp {
                         selectedTuples.retainAll(apply(term));
                         break;
                     case "OR":
-                        selectedTuples.addAll(apply(term));
+                        selectedTuples.addAll(apply(term)); // duplicates included 3adi wla eh
                         break;
                     case "XOR":
-                        selectedTuples.addAll(apply(term));
-                        selectedTuples.removeAll(selectedTuples);
+                        selectedTuples.addAll(apply(term)); // ghalat
+                        selectedTuples.removeAll(selectedTuples); // (selectedTuples.addAll(apply(term)')).addAll((selectedTuples'.addAll(apply(term)')
                         break;
                     default:
                         throw new DBAppException("Invalid logical operator: " + operator);
