@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Saeed Merge into master4">
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/DBApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SQLTerm.java" beforeDir="false" afterPath="$PROJECT_DIR$/SQLTerm.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,9 +21,22 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="Habiba" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="Habiba" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -38,7 +50,7 @@
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
-        <option name="accountId" value="6af82350-8f58-46a5-abfb-f477c75a4115" />
+        <option name="accountId" value="8c5aaf22-1b37-4541-be87-188d8703f940" />
         <option name="url" value="https://github.com/MahmoudHH1/DB-engine.git" />
       </UrlAndAccount>
     </option>
@@ -55,26 +67,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.DBApp.executor": "Run",
-    "Application.Record.executor": "Run",
-    "Application.TableColumn.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "indent.rainbow.settings.IrConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.DBApp.executor&quot;: &quot;Debug&quot;,
+    &quot;Application.MetaData.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Record.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TableColumn.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;indent.rainbow.settings.IrConfigurable&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="Application.DBApp">
+}</component>
+  <component name="RunManager" selected="Application.MetaData">
     <configuration name="DBApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="DBApp" />
       <module name="Database-Engine" />
@@ -82,8 +95,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Page" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Data.Page.Page" />
+    <configuration name="MetaData" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Data.Table.MetaData" />
       <module name="Database-Engine" />
       <extension name="coverage">
         <pattern>
@@ -142,19 +155,19 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.MetaData" />
       <item itemvalue="Application.DBApp" />
-      <item itemvalue="Application.Page" />
       <item itemvalue="Application.Record" />
       <item itemvalue="Application.Table" />
       <item itemvalue="Application.TableColumn" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.MetaData" />
         <item itemvalue="Application.DBApp" />
         <item itemvalue="Application.Record" />
         <item itemvalue="Application.Table" />
         <item itemvalue="Application.TableColumn" />
-        <item itemvalue="Application.Page" />
       </list>
     </recent_temporary>
   </component>
@@ -310,7 +323,44 @@
       <option name="project" value="LOCAL" />
       <updated>1709277618041</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="function kda f metadata w showaya kda f insert">
+      <option name="closed" value="true" />
+      <created>1709297590066</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1709297590066</updated>
+    </task>
+    <task id="LOCAL-00019" summary=".">
+      <option name="closed" value="true" />
+      <created>1709355795543</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1709355795543</updated>
+    </task>
+    <task id="LOCAL-00020" summary="habiba pushed this">
+      <created>1709364200815</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1709364200815</updated>
+    </task>
+    <task id="LOCAL-00021" summary="habiba pushed this from master">
+      <created>1709364507752</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1709364507752</updated>
+    </task>
+    <task id="LOCAL-00022" summary="habiba pushed this from master">
+      <created>1709364786167</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1709364786167</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -338,24 +388,83 @@
     <MESSAGE value="Saeed Merge into master" />
     <MESSAGE value="Saeed Merge into master3" />
     <MESSAGE value="Saeed Merge into master4" />
-    <option name="LAST_COMMIT_MESSAGE" value="Saeed Merge into master4" />
+    <MESSAGE value="function kda f metadata w showaya kda f insert" />
+    <MESSAGE value="." />
+    <MESSAGE value="habiba pushed this" />
+    <MESSAGE value="habiba pushed this from master" />
+    <option name="LAST_COMMIT_MESSAGE" value="habiba pushed this from master" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Page/Record.java</url>
-          <line>19</line>
-          <option name="timeStamp" value="29" />
+          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
+          <line>82</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
+          <line>81</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
+          <line>83</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
+          <line>91</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
+          <line>92</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
+          <line>93</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
+          <line>105</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
+          <line>106</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
+          <line>90</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
+          <line>89</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
+          <line>88</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
+          <line>87</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/Data/Page/Record.java</url>
-          <line>18</line>
-          <properties class="Data.Page.Record" method="columnExists">
+          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
+          <line>104</line>
+          <properties class="Data.Table.MetaData" method="checkValidDataType">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
-          <option name="timeStamp" value="28" />
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

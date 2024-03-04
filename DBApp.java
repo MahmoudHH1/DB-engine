@@ -9,10 +9,7 @@ import Data.Table.TableColumn;
 import Exceptions.DBAppException;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Hashtable;
-import java.util.Map;
+import java.util.*;
 
 
 public class DBApp {
@@ -125,13 +122,102 @@ public class DBApp {
     }
 
 
-    public Iterator selectFromTable(SQLTerm[] arrSQLTerms,
-                                    String[] strarrOperators) throws DBAppException {
-            // habiba will do this
-            // habiba on master now
+    public Iterator selectFromTable(SQLTerm[] arrSQLTerms, String[] strarrOperators) throws DBAppException {
+        if (arrSQLTerms == null || strarrOperators == null || arrSQLTerms.length == 0 || strarrOperators.length == 0) {
+            throw new DBAppException("Invalid SQL terms or operator");  }
+        if (arrSQLTerms.length != strarrOperators.length + 1){
+            throw new DBAppException("Invalid inputs"); }
+        List<Record> selectedTuples = new ArrayList<>();
+        for (int i = 0; i < arrSQLTerms.length; i++) {
+            SQLTerm term = arrSQLTerms[i];
+            if (term == null || term._strTableName == null || term._strColumnName == null || term._strOperator == null || term._objValue == null) {
+                throw new DBAppException("Invalid SQL term"); }
+            if (i == 0) {
+                selectedTuples.addAll(apply(term)); }
+            else {
+                String operator = strarrOperators[i - 1]; // to get the logical operator of the current condition
+                switch (operator.toUpperCase()) {
+                    case "AND":
+                        selectedTuples.retainAll(apply(term));
+                        break;
+                    case "OR":
+                        selectedTuples.addAll(apply(term));
+                        break;
+                    case "XOR":
+                        selectedTuples.addAll(apply(term));
+                        selectedTuples.removeAll(selectedTuples);
+                        break;
+                    default:
+                        throw new DBAppException("Invalid logical operator: " + operator);
+                }
+            }
+        }
 
-        return null;
+        return selectedTuples.iterator();
     }
+
+
+
+
+
+    // helper method for select to apply the select condition on table
+    // one table contains many pages!!!!!!!!!!!!!!!!!!!
+    // Table table = Table.getTable(allTables, cond._strTableName);
+    // ArrayList<TableColumn> column = table.getAllColumns();
+    private ArrayList<Record> apply(SQLTerm cond) throws DBAppException{
+        ArrayList<Record> tuples = new ArrayList<>();  /// records that satisfies condition saved here
+        for (Table table : allTables) { // loop through all the tables
+            if (table.getTableName().equals(cond._strTableName)) { // the table we want
+                for (Page page : table.getAllPages()) { //to get all pages of the table
+                    for (Record record : page.getAllRecords()) { //to get all records
+                        Object columnValue = null;
+                        for (TableColumn column : table.getAllColumns()) {
+                            if (column.getColumnName().equals(cond._strColumnName)) {
+                                columnValue = record.get(column.getColumnName());
+                                break;
+                            }
+                        }
+                        // Check if the column value is null
+                        if (columnValue == null) {
+                            throw new DBAppException("not found");
+                        }
+                        // Compare the column value with the value specified in the SQLTerm using the operator
+                        boolean found = false;
+                        Comparable<Object> comparableValue = (Comparable<Object>) columnValue;
+                        Comparable<Object> comparableObjValue = (Comparable<Object>) cond._objValue;
+                        switch (cond._strOperator) {
+                            case "=":
+                                found = comparableValue.compareTo(comparableObjValue) == 0;
+                                break;
+                            case "!=":
+                                found = comparableValue.compareTo(comparableObjValue) != 0;
+                                break;
+                            case ">":
+                                found = comparableValue.compareTo(comparableObjValue) > 0;
+                                break;
+                            case ">=":
+                                found = comparableValue.compareTo(comparableObjValue) >= 0;
+                                break;
+                            case "<":
+                                found = comparableValue.compareTo(comparableObjValue) < 0;
+                                break;
+                            case "<=":
+                                found = comparableValue.compareTo(comparableObjValue) <= 0;
+                                break;
+                            default:
+                                throw new DBAppException("Unsupported operator");
+                        }
+                        if (found) {
+                            tuples.add(record);
+                        }
+                    }
+                }
+            }
+        }
+
+        return tuples;
+    }
+
 
 
     public static void main(String[] args) {
@@ -142,6 +228,7 @@ public class DBApp {
 //            System.out.println(tabel.getAllPages().get(1).getAllRecords());
 
             dbApp.insertIntoTable("samaloty", new Hashtable<>());
+            
 //		Page p = new Page(tabel);
 //		Record r = new Record();
 //		r.put("id", Integer.valueOf(1));
