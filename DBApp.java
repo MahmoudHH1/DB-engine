@@ -143,11 +143,12 @@ public class DBApp {
                     case "OR":
                         selectedTuples.addAll(apply(term)); // duplicates included 3adi wla eh
                         break;
-                    case "XOR":
+                    case "XOR": // XOR is everything minus the intersection xy'+ x'y
                         //selectedTuples.addAll(apply(term)); // ghalat
                         //selectedTuples.removeAll(selectedTuples); // (selectedTuples.addAll(apply(term)')).addAll((selectedTuples'.addAll(apply(term))
-                        selectedTuples.addAll(applycomplement(term));
-                        //(selectedTuples-Record).addAll(apply(term));
+                        selectedTuples.addAll(apply(term)); // kolo x+y
+                        selectedTuples.removeAll(applycomplement(term)); // removing the xy'
+                        selectedTuples.addAll(applycomplement(term));  //
                         break;
                     default:
                         throw new DBAppException("Invalid logical operator: " + operator);
