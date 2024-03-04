@@ -154,7 +154,6 @@ public class DBApp {
                 }
             }
         }
-
         return selectedTuples.iterator();
     }
 
