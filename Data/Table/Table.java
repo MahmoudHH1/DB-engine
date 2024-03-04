@@ -3,6 +3,7 @@ package Data.Table;
 import Data.Handler.FileCreator;
 import Data.Page.Page;
 import Data.Page.Record;
+import Data.Validator.Validator;
 import Exceptions.DBAppException;
 
 import java.io.*;
@@ -27,6 +28,7 @@ public class Table implements Serializable {
 
     public Table(ArrayList<TableColumn> allColumns) throws IOException {
         this.pages = new Vector<>();
+        this.pagePaths = new Vector<>() ;
         this.tableName = allColumns.get(0).getTableName();
         this.tableDir = tablesDirectory + File.separator + tableName;
         this.allColumns = allColumns;
@@ -41,30 +43,7 @@ public class Table implements Serializable {
         FileCreator.storeAsObject(this, tableFilePath);
     }
 
-    public void insertIntoTable(Hashtable<String, Object> insertedTuple) throws DBAppException {
-        if (insertedTuple.size() == allColumns.size() && IsValidTuple(insertedTuple)) {
-            System.out.println("valid ya man ");
-        } else {
-            throw new DBAppException("The tuple you are trying to insert is not valid");
-        }
-    }
 
-    private boolean IsValidTuple(Hashtable<String, Object> insertedTuple) {
-        boolean isValid = true;
-        Iterator<Map.Entry<String, Object>> InsertIterator = insertedTuple.entrySet().iterator();
-        for (TableColumn column : allColumns) {
-            Map.Entry<String, Object> insertedCol = InsertIterator.next();
-            if (!Objects.equals(column.getColumnName(), insertedCol.getKey()) ||
-                    !checkValidDataType(column.getColumnType(), insertedCol.getValue())) {
-                isValid = false;
-            }
-        }
-        return isValid;
-    }
-    private static boolean checkValidDataType(String dataType, Object colValue) {
-        String elementClassName = colValue.getClass().getName();
-        return dataType.equals(elementClassName);
-    }
     public ArrayList<TableColumn> getAllColumns() {
         return allColumns;
     }
@@ -120,6 +99,10 @@ public class Table implements Serializable {
                 name + File.separator + name;
     }
 
+    public void appendPagePath (String filePath){
+        pagePaths.add(filePath) ;
+    }
+
     public static Table getTable(ArrayList<Table> allTables, String tableName) throws DBAppException {
         for (Table table : allTables) {
             if (table.tableName.equals(tableName)) {
@@ -138,7 +121,6 @@ public class Table implements Serializable {
         throw new DBAppException("No cluster Key for this Table");
     }
 
-    // id , name  , gpa    // "1, saeed , 2.0"  ::       id : 1 ->  0 :1
     public Hashtable<Integer, Object> getColIdxVal(Hashtable<String, Object> ht) throws DBAppException {
 
         Hashtable<Integer, Object> res = new Hashtable<>();
@@ -186,6 +168,57 @@ public class Table implements Serializable {
         }
         return false;
     }
+
+    //----------------------------------------------------------------------------------
+    //functions by MX
+
+    public void viewTable() throws IOException, ClassNotFoundException {
+        if (!pagePaths.isEmpty()) {
+            for (String pagePath : pagePaths) {
+                Page page = (Page) FileCreator.readObject(pagePath);
+                System.out.println(page);
+            }
+        }
+    }
+
+    public void insertIntoTable(Hashtable<String, Object> insertedTuple) throws DBAppException, IOException {
+        if (insertedTuple.size() == allColumns.size() && Validator.IsValidTuple(insertedTuple , this)) {
+            //if it is the first record to be inserted
+            if (pagePaths.isEmpty()){
+                Record rec = new Record() ;
+                rec.insertRecord(getColIdxVal(insertedTuple));
+                //creating a new page
+                Page firstPage = new Page(this) ;
+                firstPage.addRecord(rec);
+                this.save();
+                firstPage.save();
+            }
+        } else {
+            throw new DBAppException("The tuple you are trying to insert is not valid");
+        }
+    }
+
+    //converting the given hashtable to a record
+    public Record convertToRecord (Hashtable<String, Object> insertedTuple){
+        Record rec = new Record() ;
+        Enumeration<String> keys = insertedTuple.keys();
+        while (keys.hasMoreElements()) {
+            String key = keys.nextElement();
+            Object value = insertedTuple.get(key);
+            rec.add(value);
+        }
+        return rec ;
+    }
+
+    //this function takes the path of a page and the clustering index to check whether
+    //it should be inserted in this page or not
+//    private boolean isInRange (String pagePath , String clutsertinKey){
+//
+//    }
+
+
+
+    //----------------------------------------------------------------------------------------------
 
     public static void main(String[] args) throws IOException {
         ArrayList<TableColumn> cols = new ArrayList<>();

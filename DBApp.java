@@ -1,12 +1,10 @@
-
-
-
 import Data.Handler.FileCreator;
 import Data.Page.Page;
 import Data.Page.Record;
 import Data.Table.MetaData;
 import Data.Table.Table;
 import Data.Table.TableColumn;
+import Data.Validator.Validator;
 import Exceptions.DBAppException;
 
 import java.io.IOException;
@@ -45,9 +43,7 @@ public class DBApp {
                     strTableName,
                     column,
                     htblColNameType.get(column),
-                    column.equals(strClusteringKeyColumn),
-                    null,
-                    null
+                    column.equals(strClusteringKeyColumn)
             );
             allColumns.add(newColumn);
         }
@@ -98,6 +94,7 @@ public class DBApp {
         // check if htblColNameValue size  = table.allcol.size()
         Table table = Table.getTable(allTables, strTableName);
         Object clusterKeyVal = strClusteringKeyValue ;
+        Validator.IsValidTuple(htblColNameValue , table);
         Object[]clusterKeyColIndex = (table.getClusterKeyAndIndex()) ;
         switch ( ((TableColumn)clusterKeyColIndex[0]).getColumnType() ){
             case "java.lang.double" :
@@ -128,17 +125,9 @@ public class DBApp {
     // htblColNameValue enteries are ANDED together
     public void deleteFromTable(String strTableName,
                                 Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
-        Table table = null;
+        Table table = Table.getTable(allTables, strTableName);
         int rowsAffected = 0;
-        // find table
-        for(Table t: allTables){
-            if(t.equals(strTableName)){
-                table = t;
-                break;
-            }
-        }
-        if(table == null)
-            throw new DBAppException("Table " + strTableName + " not found");
+
         // map column name to idx
         Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
         for(String path: table.getPagePaths()){
@@ -170,16 +159,19 @@ public class DBApp {
         try {
             String strTableName = "Student";
             DBApp dbApp = new DBApp();
-            Table tabel = Table.getTable(dbApp.allTables, strTableName);
-            System.out.println(tabel.getAllPages().get(1).getAllRecords());
+//            Table tabel = Table.getTable(dbApp.allTables, strTableName);
 
-
-            Hashtable htblColNameType = new Hashtable( );
+//            Hashtable htblColNameType = new Hashtable( );
 //            htblColNameType.put("name", "java.lang.String");
 //            htblColNameType.put("gpa", "java.lang.double");
 //            htblColNameType.put("id", "java.lang.Integer");
 //            dbApp.createTable(strTableName, "id", htblColNameType);
 //            dbApp.createIndex( strTableName, "gpa", "gpaIndex" );
+
+
+//            System.out.println(tabel.getAllColumns().get(0));
+//            System.out.println(tabel.getAllColumns().get(1));
+//            System.out.println(tabel.getAllColumns().get(2));
 
 
             Hashtable htblColNameValue = new Hashtable( );
@@ -216,17 +208,22 @@ public class DBApp {
 //            Page p = new Page(tabel);
 //            Record r = new Record();
 //            r.add(0.79);
-//            r.add("dahroug");
+//            r.add("saeed");
 //            r.add(1);
 //            p.addRecord(r);
 //            tabel.save();
 //            System.out.println(p.getAllRecords());
+//
 
 
 //            htblColNameValue.clear();
-//            htblColNameValue.put("name" , "Saeed");
+//            htblColNameValue.put("name" , "Ali");
+//            htblColNameValue.put("gpa" , "4.0");
 //            dbApp.updateTable("Student", "1", htblColNameValue);
-//            System.out.println(tabel.getAllPages().get(1).getAllRecords());
+//            System.out.println(tabel.getPagePaths().get(0));
+//            Page p = ((Page) FileCreator.readObject(tabel.getPagePaths().get(0)));
+//            System.out.println(p.getAllRecords());
+
 
 
 //            SQLTerm[] arrSQLTerms;

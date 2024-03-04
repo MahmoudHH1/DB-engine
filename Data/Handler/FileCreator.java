@@ -1,5 +1,7 @@
 package Data.Handler;
 
+import Data.Table.Table;
+
 import java.io.*;
 
 public class FileCreator {
@@ -19,4 +21,6 @@ public class FileCreator {
         fileIn.close();
         return o;
     }
+
+
 }

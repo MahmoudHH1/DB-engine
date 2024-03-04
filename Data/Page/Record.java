@@ -2,18 +2,25 @@ package Data.Page;
 
 import Data.Table.TableColumn;
 
-import javax.jws.Oneway;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.Vector;
 
 public class Record extends Vector<Object>{
-  //  set name  = "mohamed" , age = 20  where id  =1    -> 1: "Mohamed" , 2 : 20
+    public void insertRecord(Hashtable<Integer , Object> ht) {
+        this.setSize(ht.size());
+        for(int idx : ht.keySet()){
+            this.add(idx , ht.get(idx));
+        }
+    }
+
+
     public void updateRecord(Hashtable<Integer , Object> ht) {
         for(int idx : ht.keySet()){
-            this.remove(idx) ;
-            this.add(idx , ht.get(idx));
+            this.setElementAt(ht.get(idx), idx);
+//            this.remove(idx) ;
+//            this.add(idx , ht.get(idx));
         }
     }
 
