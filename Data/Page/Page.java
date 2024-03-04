@@ -20,8 +20,9 @@ public class Page implements Serializable {
         this.table = table ;
         this.pageName = table.getTableName() + table.getPageNum() ;
         table.setPageNum(table.getPageNum()+1); // next page num
-        this.pagePath = table.getTableDir()+ File.pathSeparator+pageName ;
+        this.pagePath = table.getTableDir()+'/'+pageName ;
         table.appendPagePath(this.pagePath);
+        System.out.println(pagePath);
         save();
         table.save();
     }

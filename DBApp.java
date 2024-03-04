@@ -160,8 +160,6 @@ public class DBApp {
             String strTableName = "Student";
             DBApp dbApp = new DBApp();
             Table tabel = Table.getTable(dbApp.allTables, strTableName);
-//            System.out.println(tabel.getAllPages().get(1).getAllRecords());
-
 
             Hashtable htblColNameType = new Hashtable( );
 //            htblColNameType.put("name", "java.lang.String");
@@ -169,6 +167,10 @@ public class DBApp {
 //            htblColNameType.put("id", "java.lang.Integer");
 //            dbApp.createTable(strTableName, "id", htblColNameType);
 //            dbApp.createIndex( strTableName, "gpa", "gpaIndex" );
+
+//            System.out.println(tabel.getAllColumns().get(0));
+//            System.out.println(tabel.getAllColumns().get(1));
+//            System.out.println(tabel.getAllColumns().get(2));
 
 
             Hashtable htblColNameValue = new Hashtable( );
@@ -205,17 +207,22 @@ public class DBApp {
 //            Page p = new Page(tabel);
 //            Record r = new Record();
 //            r.add(0.79);
-//            r.add("dahroug");
+//            r.add("saeed");
 //            r.add(1);
 //            p.addRecord(r);
 //            tabel.save();
 //            System.out.println(p.getAllRecords());
+//
 
 
 //            htblColNameValue.clear();
-//            htblColNameValue.put("name" , "Saeed");
+//            htblColNameValue.put("name" , "Ali");
+//            htblColNameValue.put("gpa" , "4.0");
 //            dbApp.updateTable("Student", "1", htblColNameValue);
-//            System.out.println(tabel.getAllPages().get(1).getAllRecords());
+//            System.out.println(tabel.getPagePaths().get(0));
+//            Page p = ((Page) FileCreator.readObject(tabel.getPagePaths().get(0)));
+//            System.out.println(p.getAllRecords());
+
 
 
 //            SQLTerm[] arrSQLTerms;

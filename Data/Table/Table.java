@@ -28,6 +28,7 @@ public class Table implements Serializable {
 
     public Table(ArrayList<TableColumn> allColumns) throws IOException {
         this.pages = new Vector<>();
+        this.pagePaths = new Vector<>() ;
         this.tableName = allColumns.get(0).getTableName();
         this.tableDir = tablesDirectory + File.separator + tableName;
         this.allColumns = allColumns;
