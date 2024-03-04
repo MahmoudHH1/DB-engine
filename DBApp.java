@@ -4,7 +4,7 @@ import Data.Page.Record;
 import Data.Table.MetaData;
 import Data.Table.Table;
 import Data.Table.TableColumn;
-import Data.Validator.Validator;
+import Data.Validator.TupleValidator;
 import Exceptions.DBAppException;
 
 import java.io.IOException;
@@ -109,7 +109,7 @@ public class DBApp {
         // check if htblColNameValue size  = table.allcol.size()
         Table table = Table.getTable(allTables, strTableName);
         Object clusterKeyVal = strClusteringKeyValue ;
-        Validator.IsValidTuple(htblColNameValue , table);
+        TupleValidator.IsValidTuple(htblColNameValue , table);
         Object[]clusterKeyColIndex = (table.getClusterKeyAndIndex()) ;
         switch ( ((TableColumn)clusterKeyColIndex[0]).getColumnType() ){
             case "java.lang.double" :

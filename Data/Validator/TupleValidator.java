@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 
-public class Validator  {
+public class TupleValidator {
 
     public static boolean IsValidTuple(Hashtable<String, Object> insertedTuple , Table table) {
         boolean isValid = true;

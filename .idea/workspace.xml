@@ -5,20 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="saeed made check for his function">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_26_2024_4_53_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_26_2024_4_53_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_26_2024_9_13_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_26_2024_9_13_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2_26_2024_9_21_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2_26_2024_9_21_PM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/DBApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Page/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Page/Page.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/Table/MetaData.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Table/MetaData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Table/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/Student/Student.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data_Entry/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data_Entry/metadata.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/DBApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/MetaData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/MetaData.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/Table.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data_Entry/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data_Entry/metadata.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +36,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="Raed" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -91,7 +79,7 @@
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Saeed",
+    "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
@@ -175,11 +163,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.TableColumn" />
+        <item itemvalue="Application.Table" />
+        <item itemvalue="Application.Record" />
         <item itemvalue="Application.DBApp" />
         <item itemvalue="Application.MetaData" />
-        <item itemvalue="Application.Record" />
-        <item itemvalue="Application.Table" />
-        <item itemvalue="Application.TableColumn" />
       </list>
     </recent_temporary>
   </component>
@@ -501,7 +489,23 @@
       <option name="project" value="LOCAL" />
       <updated>1709578398493</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="saeed made check for his function">
+      <option name="closed" value="true" />
+      <created>1709589240124</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1709589240124</updated>
+    </task>
+    <task id="LOCAL-00040" summary="saeed made check for his function">
+      <option name="closed" value="true" />
+      <created>1709589247615</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1709589247615</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

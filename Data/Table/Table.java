@@ -3,7 +3,7 @@ package Data.Table;
 import Data.Handler.FileCreator;
 import Data.Page.Page;
 import Data.Page.Record;
-import Data.Validator.Validator;
+import Data.Validator.TupleValidator;
 import Exceptions.DBAppException;
 
 import java.io.*;
@@ -167,7 +167,7 @@ public class Table implements Serializable {
     }
 
     public void insertIntoTable(Hashtable<String, Object> insertedTuple) throws DBAppException, IOException {
-        if (insertedTuple.size() == allColumns.size() && Validator.IsValidTuple(insertedTuple , this)) {
+        if (insertedTuple.size() == allColumns.size() && TupleValidator.IsValidTuple(insertedTuple , this)) {
             //if it is the first record to be inserted
             if (pagePaths.isEmpty()){
                 Record rec = new Record() ;
