@@ -1,12 +1,10 @@
-
-
-
 import Data.Handler.FileCreator;
 import Data.Page.Page;
 import Data.Page.Record;
 import Data.Table.MetaData;
 import Data.Table.Table;
 import Data.Table.TableColumn;
+import Data.Validator.Validator;
 import Exceptions.DBAppException;
 
 import java.io.IOException;
@@ -95,6 +93,7 @@ public class DBApp {
                             Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
         Table table = Table.getTable(allTables, strTableName);
         Object clusterKeyVal = strClusteringKeyValue ;
+        Validator.IsValidTuple(htblColNameValue , table);
         Object[]clusterKeyColIndex = (table.getClusterKeyAndIndex()) ;
         switch ( ((TableColumn)clusterKeyColIndex[0]).getColumnType() ){
             case "java.lang.double" :
@@ -159,14 +158,15 @@ public class DBApp {
         try {
             String strTableName = "Student";
             DBApp dbApp = new DBApp();
-            Table tabel = Table.getTable(dbApp.allTables, strTableName);
+//            Table tabel = Table.getTable(dbApp.allTables, strTableName);
 
-            Hashtable htblColNameType = new Hashtable( );
+//            Hashtable htblColNameType = new Hashtable( );
 //            htblColNameType.put("name", "java.lang.String");
 //            htblColNameType.put("gpa", "java.lang.double");
 //            htblColNameType.put("id", "java.lang.Integer");
 //            dbApp.createTable(strTableName, "id", htblColNameType);
 //            dbApp.createIndex( strTableName, "gpa", "gpaIndex" );
+
 
 //            System.out.println(tabel.getAllColumns().get(0));
 //            System.out.println(tabel.getAllColumns().get(1));
