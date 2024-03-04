@@ -3,6 +3,7 @@ package Data.Table;
 import Data.Handler.FileCreator;
 import Data.Page.Page;
 import Data.Page.Record;
+import Data.Validator.Validator;
 import Exceptions.DBAppException;
 
 import java.io.*;
@@ -97,6 +98,10 @@ public class Table implements Serializable {
                 name + File.separator + name;
     }
 
+    public void appendPagePath (String filePath){
+        pagePaths.add(filePath) ;
+    }
+
     public static Table getTable(ArrayList<Table> allTables, String tableName) throws DBAppException {
         for (Table table : allTables) {
             if (table.tableName.equals(tableName)) {
@@ -176,7 +181,7 @@ public class Table implements Serializable {
     }
 
     public void insertIntoTable(Hashtable<String, Object> insertedTuple) throws DBAppException, IOException {
-        if (insertedTuple.size() == allColumns.size() && IsValidTuple(insertedTuple)) {
+        if (insertedTuple.size() == allColumns.size() && Validator.IsValidTuple(insertedTuple , this)) {
             //if it is the first record to be inserted
             if (pagePaths.isEmpty()){
                 Record rec = new Record() ;
@@ -209,23 +214,8 @@ public class Table implements Serializable {
 //    private boolean isInRange (String pagePath , String clutsertinKey){
 //
 //    }
-    private boolean IsValidTuple(Hashtable<String, Object> insertedTuple) {
-        boolean isValid = true;
-        Iterator<Map.Entry<String, Object>> InsertIterator = insertedTuple.entrySet().iterator();
-        for (TableColumn column : allColumns) {
-            Map.Entry<String, Object> insertedCol = InsertIterator.next();
-            if (!Objects.equals(column.getColumnName(), insertedCol.getKey()) ||
-                    !checkValidDataType(column.getColumnType(), insertedCol.getValue())) {
-                isValid = false;
-            }
-        }
-        return isValid;
-    }
 
-    private static boolean checkValidDataType(String dataType, Object colValue) {
-        String elementClassName = colValue.getClass().getName();
-        return dataType.equalsIgnoreCase(elementClassName);
-    }
+
 
     //----------------------------------------------------------------------------------------------
 
