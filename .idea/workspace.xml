@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="saeed made check for his function">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Table/MetaData.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Table/MetaData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/DBApp.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +36,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Raed" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -50,7 +50,7 @@
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
-        <option name="accountId" value="8c5aaf22-1b37-4541-be87-188d8703f940" />
+        <option name="accountId" value="6af82350-8f58-46a5-abfb-f477c75a4115" />
         <option name="url" value="https://github.com/MahmoudHH1/DB-engine.git" />
       </UrlAndAccount>
     </option>
@@ -79,7 +79,7 @@
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "Habiba",
     "kotlin-language-version-configured": "true",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
@@ -520,7 +520,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed exception when creating folder and object file" />
     <MESSAGE value="no progress" />
     <MESSAGE value="Added tableDir attribute to reference table's directory instead of tablePath which references the file with page paths." />
     <MESSAGE value="unversioned files" />
@@ -545,6 +544,7 @@
     <MESSAGE value="saeed playing on master" />
     <MESSAGE value="saeed playing on master and he requesting for the Khalas beacause of Khalas (samaloty yaba el hag)" />
     <MESSAGE value="saeed made check for his function" />
-    <option name="LAST_COMMIT_MESSAGE" value="saeed made check for his function" />
+    <MESSAGE value="class validator added" />
+    <option name="LAST_COMMIT_MESSAGE" value="class validator added" />
   </component>
 </project>

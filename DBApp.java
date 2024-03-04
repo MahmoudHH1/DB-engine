@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Hashtable;
+import java.util.List;
 
 
 public class DBApp {
@@ -162,11 +163,159 @@ public class DBApp {
     }
 
 
-    public Iterator selectFromTable(SQLTerm[] arrSQLTerms,
-                                    String[] strarrOperators) throws DBAppException {
-            // habiba will do this
-            // habiba on master now
-        return null;
+    public Iterator selectFromTable(SQLTerm[] arrSQLTerms, String[] strarrOperators) throws DBAppException, IOException, ClassNotFoundException {
+        if (arrSQLTerms == null || strarrOperators == null || arrSQLTerms.length == 0 || strarrOperators.length == 0) {
+            throw new DBAppException("Invalid SQL terms or operator");  }
+        if (arrSQLTerms.length != strarrOperators.length + 1){
+            throw new DBAppException("Invalid inputs"); }
+        List<Record> selectedTuples = new ArrayList<>();
+        for (int i = 0; i < arrSQLTerms.length; i++) {
+            SQLTerm term = arrSQLTerms[i];
+            if (term == null || term._strTableName == null || term._strColumnName == null || term._strOperator == null || term._objValue == null) {
+                throw new DBAppException("Invalid SQL term"); }
+            if (i == 0) {
+                selectedTuples.addAll(apply(term)); }
+            else {
+                String operator = strarrOperators[i - 1]; // to get the logical operator of the current condition
+                switch (operator.toUpperCase()) {
+                    case "AND":
+                        selectedTuples.retainAll(apply(term));
+                        break;
+                    case "OR":
+                        selectedTuples.addAll(apply(term)); // duplicates included 3adi wla eh
+                        break;
+                    case "XOR": // XOR is everything minus the intersection xy'+ x'y
+                        //selectedTuples.addAll(apply(term)); // ghalat
+                        //selectedTuples.removeAll(selectedTuples); // (selectedTuples.addAll(apply(term)')).addAll((selectedTuples'.addAll(apply(term))
+                        selectedTuples.addAll(apply(term)); // kolo x+y
+                        selectedTuples.removeAll(applycomplement(term)); // removing the xy'
+                        selectedTuples.addAll(applycomplement(term));  //
+                        break;
+                    default:
+                        throw new DBAppException("Invalid logical operator: " + operator);
+                }
+            }
+        }
+        return selectedTuples.iterator();
+    }
+
+
+
+
+
+    // helper method for select to apply the select condition on table
+    // one table contains many pages!!!!!!!!!!!!!!!!!!!
+    // Table table = Table.getTable(allTables, cond._strTableName);
+    // ArrayList<TableColumn> column = table.getAllColumns();
+    private ArrayList<Record> apply(SQLTerm cond) throws DBAppException, IOException, ClassNotFoundException {
+        ArrayList<Record> tuples = new ArrayList<>();  /// records that satisfies condition saved here
+        for (Table table : allTables) { // loop through all the tables
+            if (table.getTableName().equals(cond._strTableName)) { // the table we want
+                for(String path: table.getPagePaths()){
+                    Page page = (Page) FileCreator.readObject(path);
+                    for (Record record : page.getAllRecords()) { //to get all records
+                        Object columnValue = null;
+                        for (TableColumn column : table.getAllColumns()) {
+                            if (column.getColumnName().equals(cond._strColumnName)) {
+                                columnValue = record.get(column.getColumnName());
+                                break;
+                            }
+                        }
+                        // Check if the column value is null
+                        if (columnValue == null) {
+                            throw new DBAppException("not found");
+                        }
+                        // Compare the column value with the value specified in the SQLTerm using the operator
+                        boolean found = false;
+                        Comparable<Object> comparableValue = (Comparable<Object>) columnValue;
+                        Comparable<Object> comparableObjValue = (Comparable<Object>) cond._objValue;
+                        switch (cond._strOperator) {
+                            case "=":
+                                found = comparableValue.compareTo(comparableObjValue) == 0;
+                                break;
+                            case "!=":
+                                found = comparableValue.compareTo(comparableObjValue) != 0;
+                                break;
+                            case ">":
+                                found = comparableValue.compareTo(comparableObjValue) > 0;
+                                break;
+                            case ">=":
+                                found = comparableValue.compareTo(comparableObjValue) >= 0;
+                                break;
+                            case "<":
+                                found = comparableValue.compareTo(comparableObjValue) < 0;
+                                break;
+                            case "<=":
+                                found = comparableValue.compareTo(comparableObjValue) <= 0;
+                                break;
+                            default:
+                                throw new DBAppException("Unsupported operator");
+                        }
+                        if (found) {
+                            tuples.add(record);
+                        }
+                    }
+                }
+            }
+        }
+
+        return tuples;
+    }
+    private ArrayList<Record> applycomplement(SQLTerm cond) throws DBAppException, IOException, ClassNotFoundException {
+        ArrayList<Record> tuples = new ArrayList<>();  /// records that satisfies condition saved here
+        for (Table table : allTables) { // loop through all the tables
+            if (table.getTableName().equals(cond._strTableName)) { // the table we want
+                for(String path: table.getPagePaths()){
+
+                    Page page = (Page) FileCreator.readObject(path);
+                    for (Record record : page.getAllRecords()) { //to get all records
+                        Object columnValue = null;
+                        for (TableColumn column : table.getAllColumns()) {
+                            if (column.getColumnName().equals(cond._strColumnName)) {
+                                columnValue = record.get(column.getColumnName());
+                                break;
+                            }
+                        }
+                        // Check if the column value is null
+                        if (columnValue == null) {
+                            throw new DBAppException("not found");
+                        }
+                        // Compare the column value with the value specified in the SQLTerm using the operator
+                        boolean found = false;
+                        Comparable<Object> comparableValue = (Comparable<Object>) columnValue;
+                        Comparable<Object> comparableObjValue = (Comparable<Object>) cond._objValue;
+                        switch (cond._strOperator) {
+                            case "=":
+                                found = comparableValue.compareTo(comparableObjValue) != 0;
+                                break;
+                            case "!=":
+                                found = comparableValue.compareTo(comparableObjValue) == 0;
+                                break;
+                            case ">":
+                                found = comparableValue.compareTo(comparableObjValue) <= 0;
+                                break;
+                            case ">=":
+                                found = comparableValue.compareTo(comparableObjValue) < 0;
+                                break;
+                            case "<":
+                                found = comparableValue.compareTo(comparableObjValue) >= 0;
+                                break;
+                            case "<=":
+                                found = comparableValue.compareTo(comparableObjValue) > 0;
+                                break;
+                            default:
+                                throw new DBAppException("Unsupported operator");
+                        }
+                        if (found) {
+                            tuples.add(record);
+                        }
+                    }
+
+                }
+            }
+        }
+
+        return tuples;
     }
 
 
