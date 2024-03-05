@@ -30,16 +30,15 @@ public class MetaData {
             String columnNameToModify,
             String newIndexName) {
         try {
-            // Read existing metadata from the file
             BufferedReader reader = new BufferedReader(new FileReader(metaPath));
             StringBuilder sb = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
-                String [] a = line.split(",") ;
-                if (a[0].equals(tableNameToModify) && a[1].equals(columnNameToModify)){
-                    a[4] = newIndexName ;
-                    a[5] = "B+ Tree" ;
-                    line =convertArrStr(a , ",");
+                String[] a = line.split(",");
+                if (a[0].equals(tableNameToModify) && a[1].equals(columnNameToModify)) {
+                    a[4] = newIndexName;
+                    a[5] = "B+ Tree";
+                    line = convertArrStr(a, ",");
                 }
                 sb.append(line).append(System.lineSeparator());
             }
@@ -48,9 +47,7 @@ public class MetaData {
             FileWriter writer = new FileWriter(metaPath);
             writer.write(metaDataContent); // Write existing data
             writer.close();
-
             System.out.println("Successfully modified the Metadata file.");
-
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();

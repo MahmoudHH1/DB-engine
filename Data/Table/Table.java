@@ -31,14 +31,14 @@ public class Table implements Serializable {
         this.allColumns = allColumns;
         File f = new File(tableDir);
         System.out.println(f.mkdir() ? "Table Created" : "Table not Created");
-        System.out.println(f.mkdir() ? "Table Created" : "Table not Created");
         save();
+        MetaData.writeDataToMetaDatafile(allColumns);
     }
     public void save() throws IOException {
         tableFilePath = tableDir + File.separator + tableName;
         FileCreator.storeAsObject(this, tableFilePath);
-        MetaData.writeDataToMetaDatafile(allColumns);
     }
+
 
 
     public ArrayList<TableColumn> getAllColumns() {

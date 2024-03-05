@@ -174,14 +174,14 @@ public class DBApp {
         try {
             String strTableName = "Student";
             DBApp dbApp = new DBApp();
-            Table tabel = Table.getTable(dbApp.allTables, strTableName);
-
-//            Hashtable htblColNameType = new Hashtable( );
+//            Table tabel = Table.getTable(dbApp.allTables, strTableName);
+//
+//            Hashtable htblColNameType = new Hashtable();
 //            htblColNameType.put("name", "java.lang.String");
 //            htblColNameType.put("gpa", "java.lang.double");
 //            htblColNameType.put("id", "java.lang.Integer");
 //            dbApp.createTable(strTableName, "id", htblColNameType);
-//            dbApp.createIndex( strTableName, "id", "IdIndex" );
+            dbApp.createIndex( strTableName, "name", "nameIndex" );
 
 //            System.out.println(tabel.getAllColumns().get(2).isClusterKey());
 
