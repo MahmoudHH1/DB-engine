@@ -109,7 +109,7 @@ public class DBApp {
         // check if htblColNameValue size  = table.allcol.size()
         Table table = Table.getTable(allTables, strTableName);
         Object clusterKeyVal = strClusteringKeyValue ;
-        TupleValidator.IsValidTuple(htblColNameValue , table);
+//        TupleValidator.IsValidTuple(htblColNameValue , table);
         Object[]clusterKeyColIndex = (table.getClusterKeyAndIndex()) ;
         switch ( ((TableColumn)clusterKeyColIndex[0]).getColumnType() ){
             case "java.lang.double" :
@@ -118,18 +118,21 @@ public class DBApp {
                 clusterKeyVal = Integer.parseInt(strClusteringKeyValue); break;
         }
         Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
-        outerLoop:
+//        outerLoop:
         for(String path: table.getPagePaths()){
             // still need to adjust for index
             Page page = (Page) FileCreator.readObject(path);
-            for(Record record: page){
-                if (record.get(((Integer) clusterKeyColIndex[1])).equals(clusterKeyVal)) {
-                    record.updateRecord(colIdxVal);
-                    page.save();
-                    table.save();
-                    break outerLoop;
-                }
-            }
+            Record record = page.searchRecord(clusterKeyVal , (Integer) clusterKeyColIndex[1]);
+//            for(Record record: page){
+//                if (record.get(((Integer) clusterKeyColIndex[1])).equals(clusterKeyVal)) {
+                    if (record != null){
+                        record.updateRecord(colIdxVal);
+                        page.save();
+                        table.save();
+                    }
+//                    break outerLoop;
+//                }
+//            }
         }
     }
 
@@ -176,12 +179,12 @@ public class DBApp {
             DBApp dbApp = new DBApp();
 //            Table tabel = Table.getTable(dbApp.allTables, strTableName);
 //
-//            Hashtable htblColNameType = new Hashtable();
-//            htblColNameType.put("name", "java.lang.String");
-//            htblColNameType.put("gpa", "java.lang.double");
-//            htblColNameType.put("id", "java.lang.Integer");
-//            dbApp.createTable(strTableName, "id", htblColNameType);
-            dbApp.createIndex( strTableName, "name", "nameIndex" );
+            Hashtable htblColNameType = new Hashtable();
+            htblColNameType.put("name", "java.lang.String");
+            htblColNameType.put("gpa", "java.lang.double");
+            htblColNameType.put("id", "java.lang.Integer");
+            dbApp.createTable(strTableName, "id", htblColNameType);
+//            dbApp.createIndex( strTableName, "name", "nameIndex" );
 
 //            System.out.println(tabel.getAllColumns().get(2).isClusterKey());
 
@@ -190,7 +193,7 @@ public class DBApp {
 //            System.out.println(tabel.getAllColumns().get(2));
 
 
-//            Hashtable htblColNameValue = new Hashtable( );
+            Hashtable htblColNameValue = new Hashtable( );
 //            htblColNameValue.put("id", new Integer( 2343432 ));
 //            htblColNameValue.put("name", new String("Ahmed Noor" ) );
 //            htblColNameValue.put("gpa", new Double( 0.95 ) );
@@ -226,10 +229,10 @@ public class DBApp {
 //            r.add(0.79);
 //            r.add("saeed");
 //            r.add(1);
-//            p.addRecord(r);
+//            p.add(r);
 //            tabel.save();
-//            System.out.println(p);
-//
+//            System.out.println(p.toString());
+
 
 
 //            htblColNameValue.clear();

@@ -51,7 +51,26 @@ public class Page extends Vector<Record> {
     public void setPagePath(String pagePath) {
         this.pagePath = pagePath;
     }
-    public int search(Comparable clusterVal, int clusterIdx){
+    public Record searchRecord(Object clusterVal1, int clusterIdx){
+        Comparable clusterVal =(Comparable) clusterVal1 ;
+        int start = 0;
+        int end = this.size()-1;
+        int mid = 0;
+        while(start<=end){
+            mid = start + (end-start)/2;
+            if(clusterVal.compareTo(this.get(mid).get(clusterIdx)) < 0){
+                end = mid-1;
+            } else if(clusterVal.compareTo(this.get(mid).get(clusterIdx)) > 0){
+                start = mid+1;
+            } else{
+                return this.get(mid);
+            }
+        }
+        return null;
+    }
+
+    public int searchRecordIdx(Object clusterVal1, int clusterIdx){
+        Comparable clusterVal =(Comparable) clusterVal1 ;
         int start = 0;
         int end = this.size()-1;
         int mid = 0;

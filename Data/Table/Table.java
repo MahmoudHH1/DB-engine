@@ -155,7 +155,7 @@ public class Table implements Serializable {
             } else if(clusterKey.compareTo(page.get(page.size()-1).get(clusterIdx)) > 0){
                 start = mid+1;
             } else{
-                pageIdx = page.search(clusterKey, clusterIdx);
+                pageIdx = page.searchRecordIdx(clusterKey, clusterIdx);
             }
         }
         return mid*1000 + pageIdx;
