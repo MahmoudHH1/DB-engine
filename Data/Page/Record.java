@@ -2,23 +2,20 @@ package Data.Page;
 
 import Data.Table.TableColumn;
 
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Map;
-import java.util.Vector;
+import java.util.*;
 
-public class Record extends Vector<Object>{
+public class Record extends Vector<Comparable>{
     public void insertRecord(Hashtable<Integer , Object> ht) {
         this.setSize(ht.size());
         for(int idx : ht.keySet()){
-            this.add(idx , ht.get(idx));
+            this.add(idx , (Comparable) ht.get(idx));
         }
     }
 
 
     public void updateRecord(Hashtable<Integer , Object> ht) {
         for(int idx : ht.keySet()){
-            this.setElementAt(ht.get(idx), idx);
+            this.setElementAt((Comparable)ht.get(idx), idx);
 //            this.remove(idx) ;
 //            this.add(idx , ht.get(idx));
         }
