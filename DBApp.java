@@ -236,13 +236,13 @@ public class DBApp {
 
 
 
-            htblColNameValue.clear();
-            htblColNameValue.put("name" , "Ali");
-            htblColNameValue.put("gpa" , "4.0");
-            dbApp.updateTable("Student", "1", htblColNameValue);
-            System.out.println(tabel.getPagePaths().get(0));
-            Page p = ((Page) FileCreator.readObject(tabel.getPagePaths().get(0)));
-            System.out.println(p);
+//            htblColNameValue.clear();
+//            htblColNameValue.put("name" , "Ali");
+//            htblColNameValue.put("gpa" , "4.0");
+//            dbApp.updateTable("Student", "1", htblColNameValue);
+//            System.out.println(tabel.getPagePaths().get(0));
+//            Page p = ((Page) FileCreator.readObject(tabel.getPagePaths().get(0)));
+//            System.out.println(p);
 
 
 
