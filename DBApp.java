@@ -177,13 +177,13 @@ public class DBApp {
         try {
             String strTableName = "Student";
             DBApp dbApp = new DBApp();
-//            Table tabel = Table.getTable(dbApp.allTables, strTableName);
+            Table tabel = Table.getTable(dbApp.allTables, strTableName);
 //
-            Hashtable htblColNameType = new Hashtable();
-            htblColNameType.put("name", "java.lang.String");
-            htblColNameType.put("gpa", "java.lang.double");
-            htblColNameType.put("id", "java.lang.Integer");
-            dbApp.createTable(strTableName, "id", htblColNameType);
+//            Hashtable htblColNameType = new Hashtable();
+//            htblColNameType.put("name", "java.lang.String");
+//            htblColNameType.put("gpa", "java.lang.double");
+//            htblColNameType.put("id", "java.lang.Integer");
+//            dbApp.createTable(strTableName, "id", htblColNameType);
 //            dbApp.createIndex( strTableName, "name", "nameIndex" );
 
 //            System.out.println(tabel.getAllColumns().get(2).isClusterKey());
@@ -230,18 +230,19 @@ public class DBApp {
 //            r.add("saeed");
 //            r.add(1);
 //            p.add(r);
+//            p.save();
 //            tabel.save();
-//            System.out.println(p.toString());
-
-
-
-//            htblColNameValue.clear();
-//            htblColNameValue.put("name" , "Ali");
-//            htblColNameValue.put("gpa" , "4.0");
-//            dbApp.updateTable("Student", "1", htblColNameValue);
-//            System.out.println(tabel.getPagePaths().get(0));
-//            Page p = ((Page) FileCreator.readObject(tabel.getPagePaths().get(0)));
 //            System.out.println(p);
+
+
+
+            htblColNameValue.clear();
+            htblColNameValue.put("name" , "Ali");
+            htblColNameValue.put("gpa" , "4.0");
+            dbApp.updateTable("Student", "1", htblColNameValue);
+            System.out.println(tabel.getPagePaths().get(0));
+            Page p = ((Page) FileCreator.readObject(tabel.getPagePaths().get(0)));
+            System.out.println(p);
 
 
 
