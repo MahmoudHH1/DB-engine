@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Made page extend vector&lt;Record&gt; to comply with grading scheme in description and refactored code">
+    <list default="trueid="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Made page extend vector&lt;Record&gt; to comply with grading scheme in description and refactored code">
+
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Comparable">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/Table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Table/Table.java" afterDir="false" />
     </list>

@@ -31,8 +31,8 @@ public class Table implements Serializable {
         this.allColumns = allColumns;
         File f = new File(tableDir);
         System.out.println(f.mkdir() ? "Table Created" : "Table not Created");
-        save();
         MetaData.writeDataToMetaDatafile(allColumns);
+        save();
     }
     public void save() throws IOException {
         tableFilePath = tableDir + File.separator + tableName;
