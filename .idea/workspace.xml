@@ -4,23 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="working on binary search for clusterK key">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/DBApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/Student/Student.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data_Entry/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data_Entry/metadata.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/DBApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Handler/FileCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Handler/FileCreator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Page/Page.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Page/Page.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Page/Record.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Page/Record.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/MetaData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/MetaData.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/Table.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Validator/MetaDataValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Validator/MetaDataValidator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Validator/TupleValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Validator/TupleValidator.class" afterDir="false" />
-    </list>
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="gamadannnnnnn" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -550,7 +534,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709741176536</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="gamadannnnnnn">
+      <option name="closed" value="true" />
+      <created>1709763580173</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1709763580173</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -592,7 +584,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="clean up and comments" />
     <MESSAGE value="solved creation error" />
     <MESSAGE value="Splited the code into packages and i added alose getters and setters" />
     <MESSAGE value="modifications" />
@@ -617,7 +608,8 @@
     <MESSAGE value="Comparable" />
     <MESSAGE value="Made page extend vector&lt;Record&gt; to comply with grading scheme in description and refactored code" />
     <MESSAGE value="working on binary search for clusterK key" />
-    <option name="LAST_COMMIT_MESSAGE" value="working on binary search for clusterK key" />
+    <MESSAGE value="gamadannnnnnn" />
+    <option name="LAST_COMMIT_MESSAGE" value="gamadannnnnnn" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -786,6 +778,11 @@
           <url>file://$PROJECT_DIR$/Data/Page/Page.java</url>
           <line>64</line>
           <option name="timeStamp" value="101" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/DBApp.java</url>
+          <line>241</line>
+          <option name="timeStamp" value="102" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
