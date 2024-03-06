@@ -131,12 +131,12 @@ public class Table implements Serializable {
             // still need to adjust for index
             Page page = (Page) FileCreator.readObject(path);
             ArrayList<Record> toRemove = new ArrayList<>();
-            for (Record record : page.getAllRecords()) {
+            for (Record record : page) {
                 boolean matching = record.isMatching(colIdxVal);
                 if (matching)
                     toRemove.add(record);
             }
-            page.getAllRecords().removeAll(toRemove);
+            page.removeAll(toRemove);
         }
         throw new DBAppException("Not implemented yet"); // do not use method yet
     }
@@ -174,7 +174,7 @@ public class Table implements Serializable {
                 rec.insertRecord(getColIdxVal(insertedTuple));
                 //creating a new page
                 Page firstPage = new Page(this) ;
-                firstPage.addRecord(rec);
+                firstPage.add(rec);
                 this.save();
                 firstPage.save();
             }
@@ -190,7 +190,7 @@ public class Table implements Serializable {
         while (keys.hasMoreElements()) {
             String key = keys.nextElement();
             Object value = insertedTuple.get(key);
-            rec.add(value);
+            rec.add((Comparable) value);
         }
         return rec ;
     }

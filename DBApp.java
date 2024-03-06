@@ -122,7 +122,7 @@ public class DBApp {
         for(String path: table.getPagePaths()){
             // still need to adjust for index
             Page page = (Page) FileCreator.readObject(path);
-            for(Record record: page.getAllRecords()){
+            for(Record record: page){
                 if (record.get(((Integer) clusterKeyColIndex[1])).equals(clusterKeyVal)) {
                     record.updateRecord(colIdxVal);
                     page.save();
@@ -149,12 +149,12 @@ public class DBApp {
             // still need to adjust for index
             Page page = (Page) FileCreator.readObject(path);
             ArrayList<Record> toRemove = new ArrayList<>();
-            for(Record record: page.getAllRecords()){
+            for(Record record: page){
                 boolean matching = record.isMatching(colIdxVal);
                 if(matching)
                     toRemove.add(record);
             }
-            page.getAllRecords().removeAll(toRemove);
+            page.removeAll(toRemove);
             page.save();
         }
         // table.save();
@@ -228,7 +228,7 @@ public class DBApp {
 //            r.add(1);
 //            p.addRecord(r);
 //            tabel.save();
-//            System.out.println(p.getAllRecords());
+//            System.out.println(p);
 //
 
 
@@ -238,7 +238,7 @@ public class DBApp {
 //            dbApp.updateTable("Student", "1", htblColNameValue);
 //            System.out.println(tabel.getPagePaths().get(0));
 //            Page p = ((Page) FileCreator.readObject(tabel.getPagePaths().get(0)));
-//            System.out.println(p.getAllRecords());
+//            System.out.println(p);
 
 
 

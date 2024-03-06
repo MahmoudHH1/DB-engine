@@ -10,13 +10,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Vector;
-public class Page implements Serializable {
+public class Page extends Vector<Record> {
     private Table table ;
-    private String pageName ; // unnecessary attribute
-    private Vector<Record> allRecords;
+    private String pageName ; // unnecessary attribute?
     private String pagePath ;
     public Page (Table table) throws IOException {
-        allRecords = new Vector<>();
         this.table = table ;
         this.pageName = table.getTableName() + table.getPageNum() ;
         table.setPageNum(table.getPageNum()+1); // next page num
@@ -46,14 +44,6 @@ public class Page implements Serializable {
         this.pageName = pageName;
     }
 
-    public Vector<Record> getAllRecords() {
-        return allRecords;
-    }
-
-    public void setAllRecords(Vector<Record> allRecords) {
-        this.allRecords = allRecords;
-    }
-
     public String getPagePath() {
         return pagePath;
     }
@@ -63,18 +53,10 @@ public class Page implements Serializable {
     }
 
 
-    public void addRecord(Record record){
-        allRecords.add(record); // in progress
-    }
-
-    public int getPageSize(){
-        return allRecords.size();
-    }
-
     @Override
     public String toString() {
         StringBuilder pageContent = new StringBuilder();
-        for (Record record : allRecords) {
+        for (Record record : this /*allrecords*/) {
             pageContent.append(record.toString()).append(",").append("\n");
         }
         return pageContent.toString();
