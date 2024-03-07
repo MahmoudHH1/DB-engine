@@ -9,10 +9,7 @@ import Data.Validator.TupleValidator;
 import Exceptions.DBAppException;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Hashtable;
-import java.util.Map;
+import java.util.*;
 
 
 public class DBApp {
@@ -77,7 +74,7 @@ public class DBApp {
     // following method inserts one row only.
     // htblColNameValue must include a value for the primary key
     public void insertIntoTable(String strTableName,
-                                Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException {
+                                Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
         /*
         Assumptions
         when deleting I assume that the table is deleted form the arraylist containing all table
@@ -184,8 +181,13 @@ public class DBApp {
 
             String strTableName = "Student";
             DBApp dbApp = new DBApp();
-            Table.getTable(dbApp.allTables,"Student").viewTable();
-
+//            System.out.println((int)Table.getTable(dbApp.allTables,"Student").getClusterKeyAndIndex()[1]);
+//            System.out.println(Integer.valueOf((Table.getTable(dbApp.allTables, "Student").getClusterKeyAndIndex()).toString()));
+//            System.out.println(Table.getTable(dbApp.allTables,"Student").getClusterKeyAndIndex()[1]);
+            Table.getTable(dbApp.allTables, "Student").viewTable();
+//            Table.getTable(dbApp.allTables , "Student").removeTable();
+//            Table.getTable(dbApp.allTables,"Student");
+//            Hashtable htblColNameValue = new Hashtable();
 //            htblColNameValue.put("id", new Integer(2343432));
 //            htblColNameValue.put("name", new String("Ahmed Noor"));
 //            htblColNameValue.put("gpa", new Double(0.95));
@@ -198,7 +200,8 @@ public class DBApp {
 //                Object value = entry.getValue();
 //                System.out.println("Key: " + key + ", Value: " + value);
 //            }
-//            Table.getTable(dbApp.allTables,"Student").viewTable();
+//            System.out.println(Table.getTable(dbApp.allTables,"Student").getPagePaths().size());
+
 //            FileRemover.removeFileFromDirectory("Student" , "Student1");
 //            Table.getTable(dbApp.allTables,"Student").removeTable();
 //            Hashtable htblColNameType = new Hashtable();
@@ -206,7 +209,7 @@ public class DBApp {
 //            htblColNameType.put("gpa", "java.lang.double");
 //            htblColNameType.put("id", "java.lang.Integer");
 //            dbApp.createTable(strTableName, "id", htblColNameType);
-//
+
 //            Hashtable<String, String> htblColNameType2 = new Hashtable<>();
 //            htblColNameType2.put("title", "java.lang.String");
 //            htblColNameType2.put("author", "java.lang.String");
@@ -220,20 +223,31 @@ public class DBApp {
 //            System.out.println(tabel.getAllColumns().get(1));
 //            System.out.println(tabel.getAllColumns().get(2));
 
-
-//            Hashtable htblColNameValue = new Hashtable();
+//
+//
 //            htblColNameValue.put("id", new Integer(2343432));
 //            htblColNameValue.put("name", new String("Ahmed Noor"));
 //            htblColNameValue.put("gpa", new Double(0.95));
 //            dbApp.insertIntoTable(strTableName, htblColNameValue);
+//            FileRemover.removeFileFromDirectory("Student" , "Student1");
 //            Table.getTable(dbApp.allTables,"Student").viewTable();
 
-//            htblColNameValue.clear( );
-//            htblColNameValue.put("id", new Integer( 453455 ));
+////
+
+//            htblColNameValue.put("id", new Integer( 12 ));
 //            htblColNameValue.put("name", new String("Ahmed Noor" ) );
 //            htblColNameValue.put("gpa", new Double( 0.95 ) );
 //            dbApp.insertIntoTable( strTableName , htblColNameValue );
-//
+//            Hashtable htblColNameValue = new Hashtable();
+//            Random random = new Random();
+//            for (int i = 0; i < 200; i++) {
+//                int randomNumber = random.nextInt(1_000_000) + 1;
+//                htblColNameValue.clear();
+//                htblColNameValue.put("id", randomNumber);
+//                htblColNameValue.put("name", "Ahmed Noor " + i);
+//                htblColNameValue.put("gpa", 0.95 + i * 0.01);
+//                dbApp.insertIntoTable(strTableName, htblColNameValue);
+//        }
 //            htblColNameValue.clear( );
 //            Hashtable htblColNameValue = new Hashtable();
 //            htblColNameValue.put("id", new Integer(5674567));

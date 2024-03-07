@@ -8,7 +8,7 @@ public class Record extends Vector<Comparable>{
     public void insertRecord(Hashtable<Integer , Object> ht) {
         this.setSize(ht.size());
         for(int idx : ht.keySet()){
-            this.add(idx);
+            this.setElementAt((Comparable)ht.get(idx), idx);
         }
     }
 
@@ -25,7 +25,7 @@ public class Record extends Vector<Comparable>{
     public synchronized String toString() {
         StringBuilder record = new StringBuilder();
         record.append('"');
-        for (Object o : this.toArray()) {
+        for (Object o : this) {
             record.append(o.toString());
             record.append(',');
         }
@@ -46,4 +46,14 @@ public class Record extends Vector<Comparable>{
     public static void main(String[] args) {
 
     }
+
+//    @Override public int compareTo(Student comparestu) {
+//        int compareage
+//                = ((Student)comparestu).getStudentage();
+//
+//        //  For Ascending order
+//        return this.studentage - compareage;
+//
+//    }
+
 }

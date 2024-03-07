@@ -5,13 +5,16 @@ package Data.Page;
 import Data.Handler.FileCreator;
 import Data.Table.MetaData;
 import Data.Table.Table;
+import Exceptions.DBAppException;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Vector;
-public class Page extends Vector<Record> {
+public class Page extends Vector<Record>  {
     private Table table ;
     private String pageName ; // unnecessary attribute?
     private String pagePath ;
@@ -24,6 +27,8 @@ public class Page extends Vector<Record> {
         System.out.println(pagePath);
         save();
     }
+
+
     public void save() throws IOException {
         FileCreator.storeAsObject(this , this.pagePath);
         table.save();
@@ -53,6 +58,31 @@ public class Page extends Vector<Record> {
         this.pagePath = pagePath;
     }
 
+    public void insertIntoPage (Record rec) throws DBAppException, IOException, ClassNotFoundException {
+        //getting the clustering key index
+        int clusterKeyIdx = (int)Table.getTable(MetaData.loadAllTables(),table.getTableName()).getClusterKeyAndIndex()[1] ;
+        if (searchRecord((int)rec.get(clusterKeyIdx) ,clusterKeyIdx)==null){
+            this.add(rec) ;
+            sortRecords(clusterKeyIdx);}
+        else {
+            throw new DBAppException("non unique primary key") ;
+        }
+    }
+
+    public void sortRecords(int sortIndex) {
+        // Create a custom Comparator
+        Comparator<Record> comparator = new Comparator<Record>() {
+            @Override
+            public int compare(Record record1, Record record2) {
+                Comparable element1 = record1.get(sortIndex);
+                Comparable element2 = record2.get(sortIndex);
+                return element1.compareTo(element2);
+            }
+        };
+
+        // Sort the records using the comparator
+        this.sort(comparator);
+    }
 
     public Record searchRecord(Object clusterVal1, int clusterIdx){
         Comparable clusterVal =(Comparable) clusterVal1 ;
