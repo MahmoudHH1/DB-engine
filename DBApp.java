@@ -107,9 +107,11 @@ public class DBApp {
                             Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
         // check if htblColNameValue size  = table.allcol.size()
         Table table = Table.getTable(allTables, strTableName);
+        TupleValidator.IsValidTuple(htblColNameValue , table);
+
         Object clusterKeyVal = strClusteringKeyValue;
-//        TupleValidator.IsValidTuple(htblColNameValue , table);
         Object[] clusterKeyColIndex = (table.getClusterKeyAndIndex());
+
         switch (((TableColumn) clusterKeyColIndex[0]).getColumnType()) {
             case "java.lang.double":
                 clusterKeyVal = Double.parseDouble(strClusteringKeyValue);
@@ -119,21 +121,14 @@ public class DBApp {
                 break;
         }
         Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
-//        outerLoop:
         for (String path : table.getPagePaths()) {
-            // still need to adjust for index
             Page page = (Page) FileCreator.readObject(path);
             Record record = page.searchRecord(clusterKeyVal, (Integer) clusterKeyColIndex[1]);
-//            for(Record record: page){
-//                if (record.get(((Integer) clusterKeyColIndex[1])).equals(clusterKeyVal)) {
             if (record != null) {
                 record.updateRecord(colIdxVal);
                 page.save();
                 table.save();
             }
-//                    break outerLoop;
-//                }
-//            }
         }
     }
 
@@ -187,7 +182,7 @@ public class DBApp {
 //            System.out.println(Integer.valueOf((Table.getTable(dbApp.allTables, "Student").getClusterKeyAndIndex()).toString()));
 //            System.out.println(Table.getTable(dbApp.allTables,"Student").getClusterKeyAndIndex()[1]);
             Table table = Table.getTable(dbApp.allTables,"Student");
-            table.viewTable();
+//            table.viewTable();
 //            table.removeTable();
 
 
@@ -278,8 +273,8 @@ public class DBApp {
 
 
             htblColNameValue.clear();
-            htblColNameValue.put("name" , "Saeed");
-            htblColNameValue.put("gpa" , "4.0");
+            htblColNameValue.put("name" , "Mahmoud");
+            htblColNameValue.put("gpa" , new Integer(9));
             dbApp.updateTable("Student", "9", htblColNameValue);
             System.out.println(table.getPagePaths().get(0));
 //            Page p = ((Page) FileCreator.readObject(table.getPagePaths().get(0)));
