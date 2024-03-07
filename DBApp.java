@@ -1,4 +1,5 @@
 import Data.Handler.FileCreator;
+import Data.Handler.FileRemover;
 import Data.Page.Page;
 import Data.Page.Record;
 import Data.Table.MetaData;
@@ -8,13 +9,12 @@ import Data.Validator.TupleValidator;
 import Exceptions.DBAppException;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Hashtable;
+import java.util.*;
 
 
 public class DBApp {
-    public ArrayList<Table> allTables;
+    public static  ArrayList<Table> allTables;
+
     public DBApp() throws IOException, ClassNotFoundException {
         init();
     }
@@ -50,35 +50,31 @@ public class DBApp {
     }
 
 
-
-
     // following method creates a B+tree index
-    public void createIndex(String   strTableName,
-                            String   strColName,
-                            String   strIndexName) throws DBAppException, IOException {
-        try{
+    public void createIndex(String strTableName,
+                            String strColName,
+                            String strIndexName) throws DBAppException, IOException {
+        try {
             Table table = Table.getTable(allTables, strTableName);
-            for (TableColumn col : table.getAllColumns()){
-                if(col.getColumnName().equals(strColName)) {
+            for (TableColumn col : table.getAllColumns()) {
+                if (col.getColumnName().equals(strColName)) {
                     col.setIndexName(strIndexName);
                     col.setIndexType("B+ Tree");
                     table.save();
                     break;
                 }
             }
-            MetaData.updateOnMetaDataFile(strTableName , strColName , strIndexName);
-        }
-        catch (Exception e){
+            MetaData.updateOnMetaDataFile(strTableName, strColName, strIndexName);
+        } catch (Exception e) {
             throw new DBAppException("not implemented yet");
         }
     }
 
 
-
     // following method inserts one row only.
     // htblColNameValue must include a value for the primary key
     public void insertIntoTable(String strTableName,
-                                Hashtable<String, Object> htblColNameValue) throws DBAppException {
+                                Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
         /*
         Assumptions
         when deleting I assume that the table is deleted form the arraylist containing all table
@@ -87,13 +83,16 @@ public class DBApp {
         //-----------------------------------------------------------------------\\
         //checking whether the table exists or not
         boolean tableExists = false;
-        for (Table table : allTables)
-            if (table.getTableName().equals(strTableName))
+        for (Table table : allTables) {
+            if (table.getTableName().equals(strTableName)) {
                 tableExists = true;
+            }
+        }
         //-----------------------------------------------------------------------\\
         if (tableExists) {
-            // checking whether the inserted tuple have the same is valid one
-
+            Table table = Table.getTable(this.allTables, strTableName);
+//            System.out.println(table.getAllColumns());
+            table.insertIntoTable(htblColNameValue);
         } else
             throw new DBAppException("The table is not implemented yet");
     }
@@ -108,28 +107,33 @@ public class DBApp {
                             Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
         // check if htblColNameValue size  = table.allcol.size()
         Table table = Table.getTable(allTables, strTableName);
-        Object clusterKeyVal = strClusteringKeyValue ;
-        TupleValidator.IsValidTuple(htblColNameValue , table);
-        Object[]clusterKeyColIndex = (table.getClusterKeyAndIndex()) ;
-        switch ( ((TableColumn)clusterKeyColIndex[0]).getColumnType() ){
-            case "java.lang.double" :
-                clusterKeyVal = Double.parseDouble(strClusteringKeyValue); break;
-            case "java.lang.Integer" :
-                clusterKeyVal = Integer.parseInt(strClusteringKeyValue); break;
+        Object clusterKeyVal = strClusteringKeyValue;
+//        TupleValidator.IsValidTuple(htblColNameValue , table);
+        Object[] clusterKeyColIndex = (table.getClusterKeyAndIndex());
+        switch (((TableColumn) clusterKeyColIndex[0]).getColumnType()) {
+            case "java.lang.double":
+                clusterKeyVal = Double.parseDouble(strClusteringKeyValue);
+                break;
+            case "java.lang.Integer":
+                clusterKeyVal = Integer.parseInt(strClusteringKeyValue);
+                break;
         }
         Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
-        outerLoop:
-        for(String path: table.getPagePaths()){
+//        outerLoop:
+        for (String path : table.getPagePaths()) {
             // still need to adjust for index
             Page page = (Page) FileCreator.readObject(path);
-            for(Record record: page.getAllRecords()){
-                if (record.get(((Integer) clusterKeyColIndex[1])).equals(clusterKeyVal)) {
-                    record.updateRecord(colIdxVal);
-                    page.save();
-                    table.save();
-                    break outerLoop;
-                }
+            Record record = page.searchRecord(clusterKeyVal, (Integer) clusterKeyColIndex[1]);
+//            for(Record record: page){
+//                if (record.get(((Integer) clusterKeyColIndex[1])).equals(clusterKeyVal)) {
+            if (record != null) {
+                record.updateRecord(colIdxVal);
+                page.save();
+                table.save();
             }
+//                    break outerLoop;
+//                }
+//            }
         }
     }
 
@@ -145,16 +149,16 @@ public class DBApp {
 
         // map column name to idx
         Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
-        for(String path: table.getPagePaths()){
+        for (String path : table.getPagePaths()) {
             // still need to adjust for index
             Page page = (Page) FileCreator.readObject(path);
             ArrayList<Record> toRemove = new ArrayList<>();
-            for(Record record: page.getAllRecords()){
+            for (Record record : page) {
                 boolean matching = record.isMatching(colIdxVal);
-                if(matching)
+                if (matching)
                     toRemove.add(record);
             }
-            page.getAllRecords().removeAll(toRemove);
+            page.removeAll(toRemove);
             page.save();
         }
         // table.save();
@@ -164,24 +168,49 @@ public class DBApp {
 
     public Iterator selectFromTable(SQLTerm[] arrSQLTerms,
                                     String[] strarrOperators) throws DBAppException {
-            // habiba will do this
-            // habiba on master now
+        // habiba will do this
+        // habiba on master now
         return null;
     }
 
 
+    public void deleteTable(String tableName) throws DBAppException {
+        Table.getTable(this.allTables, tableName).removeTable();
+    }
+
     public static void main(String[] args) {
         try {
+
             String strTableName = "Student";
             DBApp dbApp = new DBApp();
-//            Table tabel = Table.getTable(dbApp.allTables, strTableName);
-//
+//            System.out.println((int)Table.getTable(dbApp.allTables,"Student").getClusterKeyAndIndex()[1]);
+//            System.out.println(Integer.valueOf((Table.getTable(dbApp.allTables, "Student").getClusterKeyAndIndex()).toString()));
+//            System.out.println(Table.getTable(dbApp.allTables,"Student").getClusterKeyAndIndex()[1]);
+            Table table = Table.getTable(dbApp.allTables,"Student");
+            table.viewTable();
+//            table.removeTable();
+
+
+            Hashtable htblColNameValue = new Hashtable();
+//            htblColNameValue.put("id", new Integer(2343432));
+//            htblColNameValue.put("name", new String("Ahmed Noor"));
+//            htblColNameValue.put("gpa", new Double(0.95));
+
+//            FileRemover.removeFileFromDirectory("Student" , "Student1");
+
+
 //            Hashtable htblColNameType = new Hashtable();
 //            htblColNameType.put("name", "java.lang.String");
 //            htblColNameType.put("gpa", "java.lang.double");
 //            htblColNameType.put("id", "java.lang.Integer");
 //            dbApp.createTable(strTableName, "id", htblColNameType);
-            dbApp.createIndex( strTableName, "name", "nameIndex" );
+
+//            Hashtable<String, String> htblColNameType2 = new Hashtable<>();
+//            htblColNameType2.put("title", "java.lang.String");
+//            htblColNameType2.put("author", "java.lang.String");
+//            htblColNameType2.put("year", "java.lang.Integer");
+//            dbApp.createTable("Book", "year", htblColNameType2);
+//            dbApp.createIndex( strTableName, "name", "nameIndex" );
 
 //            System.out.println(tabel.getAllColumns().get(2).isClusterKey());
 
@@ -189,25 +218,41 @@ public class DBApp {
 //            System.out.println(tabel.getAllColumns().get(1));
 //            System.out.println(tabel.getAllColumns().get(2));
 
+//
+//
+//            htblColNameValue.put("id", new Integer(2343432));
+//            htblColNameValue.put("name", new String("Ahmed Noor"));
+//            htblColNameValue.put("gpa", new Double(0.95));
+//            dbApp.insertIntoTable(strTableName, htblColNameValue);
+//            FileRemover.removeFileFromDirectory("Student" , "Student1");
+//            Table.getTable(dbApp.allTables,"Student").viewTable();
 
-//            Hashtable htblColNameValue = new Hashtable( );
-//            htblColNameValue.put("id", new Integer( 2343432 ));
+////
+
+//            htblColNameValue.put("id", new Integer( 12 ));
 //            htblColNameValue.put("name", new String("Ahmed Noor" ) );
 //            htblColNameValue.put("gpa", new Double( 0.95 ) );
 //            dbApp.insertIntoTable( strTableName , htblColNameValue );
-//
-//            htblColNameValue.clear( );
-//            htblColNameValue.put("id", new Integer( 453455 ));
-//            htblColNameValue.put("name", new String("Ahmed Noor" ) );
-//            htblColNameValue.put("gpa", new Double( 0.95 ) );
-//            dbApp.insertIntoTable( strTableName , htblColNameValue );
-//
-//            htblColNameValue.clear( );
-//            htblColNameValue.put("id", new Integer( 5674567 ));
-//            htblColNameValue.put("name", new String("Dalia Noor" ) );
-//            htblColNameValue.put("gpa", new Double( 1.25 ) );
-//            dbApp.insertIntoTable( strTableName , htblColNameValue );
-//
+
+//            Hashtable htblColNameValue = new Hashtable();
+//            Random random = new Random();
+//            for (int i = 0; i < 200; i++) {
+//                int randomNumber = random.nextInt(20) + 1;
+//                htblColNameValue.clear();
+//                htblColNameValue.put("id", randomNumber);
+//                htblColNameValue.put("name", "Ahmed Noor");
+//                htblColNameValue.put("gpa", 0.95 + i * 0.01);
+//                dbApp.insertIntoTable(strTableName, htblColNameValue);
+//            }
+//            htblColNameValue.clear();
+
+
+//            Hashtable htblColNameValue = new Hashtable();
+//            htblColNameValue.put("id", new Integer(5674567));
+//            htblColNameValue.put("name", new String("Dalia Noor"));
+//            htblColNameValue.put("gpa", new Double(1.25));
+//            dbApp.insertIntoTable(strTableName, htblColNameValue);
+
 //            htblColNameValue.clear( );
 //            htblColNameValue.put("id", new Integer( 23498 ));
 //            htblColNameValue.put("name", new String("John Noor" ) );
@@ -226,20 +271,20 @@ public class DBApp {
 //            r.add(0.79);
 //            r.add("saeed");
 //            r.add(1);
-//            p.addRecord(r);
+//            p.add(r);
+//            p.save();
 //            tabel.save();
-//            System.out.println(p.getAllRecords());
-//
+//            System.out.println(p);
 
 
-//            htblColNameValue.clear();
-//            htblColNameValue.put("name" , "Ali");
-//            htblColNameValue.put("gpa" , "4.0");
-//            dbApp.updateTable("Student", "1", htblColNameValue);
-//            System.out.println(tabel.getPagePaths().get(0));
-//            Page p = ((Page) FileCreator.readObject(tabel.getPagePaths().get(0)));
-//            System.out.println(p.getAllRecords());
-
+            htblColNameValue.clear();
+            htblColNameValue.put("name" , "Saeed");
+            htblColNameValue.put("gpa" , "4.0");
+            dbApp.updateTable("Student", "9", htblColNameValue);
+            System.out.println(table.getPagePaths().get(0));
+//            Page p = ((Page) FileCreator.readObject(table.getPagePaths().get(0)));
+//            System.out.println(p);
+            table.viewTable();
 
 
 //            SQLTerm[] arrSQLTerms;

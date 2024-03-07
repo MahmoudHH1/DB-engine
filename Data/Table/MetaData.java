@@ -5,7 +5,12 @@ import Data.Table.TableColumn;
 import java.io.*;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.*;
+import java.nio.file.* ;
+
+import static java.nio.file.Path.*;
 
 public class MetaData {
 
@@ -104,16 +109,42 @@ public class MetaData {
         return allTables;
     }
 
+    public static void deleteTableFromCSV(String strTableName) {
+        try {
+            File inputFile = new File(metaPath);
+            File tempFile = new File("temp.csv");
 
+            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
 
-//    public static void main(String[] args){
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] row = line.split(",");
+                if (row.length > 0 && !row[0].equals(strTableName)) {
+                    writer.write(line);
+                    writer.newLine();
+                }
+            }
+
+            writer.close();
+            reader.close();
+
+            // Replace the original file with the modified file
+            Files.move(tempFile.toPath(), inputFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args){
+        deleteTableFromCSV("Student");
 //        Hashtable<String,Object> htblColNameValue = new Hashtable<>();
 //        htblColNameValue.put("id", new Integer( 2343432 ));
 //        htblColNameValue.put("name", new String("Ahmed Noor" ) );
 //        htblColNameValue.put("gpa", new Double( 0.95 ) );
 //        System.out.println(IsValidTuple("Student" , htblColNameValue)) ;
 //
-//    }
+    }
 
 
 
