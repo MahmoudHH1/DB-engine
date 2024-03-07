@@ -13,7 +13,7 @@ import java.util.*;
 
 
 public class DBApp {
-    public ArrayList<Table> allTables;
+    public static  ArrayList<Table> allTables;
 
     public DBApp() throws IOException, ClassNotFoundException {
         init();
@@ -90,7 +90,9 @@ public class DBApp {
         }
         //-----------------------------------------------------------------------\\
         if (tableExists) {
-            Table.getTable(this.allTables, strTableName).insertIntoTable(htblColNameValue);
+            Table table = Table.getTable(this.allTables, strTableName);
+//            System.out.println(table.getAllColumns());
+            table.insertIntoTable(htblColNameValue);
         } else
             throw new DBAppException("The table is not implemented yet");
     }
@@ -184,26 +186,19 @@ public class DBApp {
 //            System.out.println((int)Table.getTable(dbApp.allTables,"Student").getClusterKeyAndIndex()[1]);
 //            System.out.println(Integer.valueOf((Table.getTable(dbApp.allTables, "Student").getClusterKeyAndIndex()).toString()));
 //            System.out.println(Table.getTable(dbApp.allTables,"Student").getClusterKeyAndIndex()[1]);
-            Table.getTable(dbApp.allTables, "Student").viewTable();
-//            Table.getTable(dbApp.allTables , "Student").removeTable();
-//            Table.getTable(dbApp.allTables,"Student");
-//            Hashtable htblColNameValue = new Hashtable();
+            Table table = Table.getTable(dbApp.allTables,"Student");
+            table.viewTable();
+//            table.removeTable();
+
+
+            Hashtable htblColNameValue = new Hashtable();
 //            htblColNameValue.put("id", new Integer(2343432));
 //            htblColNameValue.put("name", new String("Ahmed Noor"));
 //            htblColNameValue.put("gpa", new Double(0.95));
-//            Hashtable res = new Hashtable<Integer,Object>() ;
-//            res = Table.getTable(dbApp.allTables,"Student").getColIdxVal(htblColNameValue) ;
-//            Iterator<Map.Entry<Integer, Object>> iterator = res.entrySet().iterator();
-//            while (iterator.hasNext()) {
-//                Map.Entry<Integer, Object> entry = iterator.next();
-//                Integer key = entry.getKey();
-//                Object value = entry.getValue();
-//                System.out.println("Key: " + key + ", Value: " + value);
-//            }
-//            System.out.println(Table.getTable(dbApp.allTables,"Student").getPagePaths().size());
 
 //            FileRemover.removeFileFromDirectory("Student" , "Student1");
-//            Table.getTable(dbApp.allTables,"Student").removeTable();
+
+
 //            Hashtable htblColNameType = new Hashtable();
 //            htblColNameType.put("name", "java.lang.String");
 //            htblColNameType.put("gpa", "java.lang.double");
@@ -238,17 +233,20 @@ public class DBApp {
 //            htblColNameValue.put("name", new String("Ahmed Noor" ) );
 //            htblColNameValue.put("gpa", new Double( 0.95 ) );
 //            dbApp.insertIntoTable( strTableName , htblColNameValue );
+
 //            Hashtable htblColNameValue = new Hashtable();
 //            Random random = new Random();
 //            for (int i = 0; i < 200; i++) {
-//                int randomNumber = random.nextInt(1_000_000) + 1;
+//                int randomNumber = random.nextInt(20) + 1;
 //                htblColNameValue.clear();
 //                htblColNameValue.put("id", randomNumber);
-//                htblColNameValue.put("name", "Ahmed Noor " + i);
+//                htblColNameValue.put("name", "Ahmed Noor");
 //                htblColNameValue.put("gpa", 0.95 + i * 0.01);
 //                dbApp.insertIntoTable(strTableName, htblColNameValue);
-//        }
-//            htblColNameValue.clear( );
+//            }
+//            htblColNameValue.clear();
+
+
 //            Hashtable htblColNameValue = new Hashtable();
 //            htblColNameValue.put("id", new Integer(5674567));
 //            htblColNameValue.put("name", new String("Dalia Noor"));
@@ -279,13 +277,14 @@ public class DBApp {
 //            System.out.println(p);
 
 
-//            htblColNameValue.clear();
-//            htblColNameValue.put("name" , "Ali");
-//            htblColNameValue.put("gpa" , "4.0");
-//            dbApp.updateTable("Student", "1", htblColNameValue);
-//            System.out.println(tabel.getPagePaths().get(0));
-//            Page p = ((Page) FileCreator.readObject(tabel.getPagePaths().get(0)));
+            htblColNameValue.clear();
+            htblColNameValue.put("name" , "Saeed");
+            htblColNameValue.put("gpa" , "4.0");
+            dbApp.updateTable("Student", "9", htblColNameValue);
+            System.out.println(table.getPagePaths().get(0));
+//            Page p = ((Page) FileCreator.readObject(table.getPagePaths().get(0)));
 //            System.out.println(p);
+            table.viewTable();
 
 
 //            SQLTerm[] arrSQLTerms;
