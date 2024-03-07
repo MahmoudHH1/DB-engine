@@ -204,6 +204,7 @@ public class Table implements Serializable {
                 firstPage.add(rec);
                 firstPage.save();
             } else {
+                System.out.println(allColumns);
                 Page page = (Page) FileCreator.readObject(this.pagePaths.get(0)) ;
                 page.insertIntoPage(rec);
                 page.save();
