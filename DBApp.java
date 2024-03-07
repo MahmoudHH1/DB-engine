@@ -165,8 +165,7 @@ public class DBApp {
 
     }
 
-
-    public Iterator selectFromTable(SQLTerm[] arrSQLTerms, String[] strarrOperators) throws DBAppException, IOException, ClassNotFoundException {
+    public Iterator selectFromTable(SQLTerm[] arrSQLTerms, String[] strarrOperators) throws DBAppException {
         if (arrSQLTerms == null || strarrOperators == null || arrSQLTerms.length == 0 || strarrOperators.length == 0) {
             throw new DBAppException("Invalid SQL terms or operator");  }
         if (arrSQLTerms.length != strarrOperators.length + 1){
@@ -175,9 +174,11 @@ public class DBApp {
         for (int i = 0; i < arrSQLTerms.length; i++) {
             SQLTerm term = arrSQLTerms[i];
             if (term == null || term._strTableName == null || term._strColumnName == null || term._strOperator == null || term._objValue == null) {
-                throw new DBAppException("Invalid SQL term"); }
+                throw new DBAppException("Invalid SQL term");
+            }
             if (i == 0) {
-                selectedTuples.addAll(apply(term)); }
+                selectedTuples.addAll(apply(term));
+            }
             else {
                 String operator = strarrOperators[i - 1]; // to get the logical operator of the current condition
                 switch (operator.toUpperCase()) {
@@ -212,10 +213,22 @@ public class DBApp {
     // ArrayList<TableColumn> column = table.getAllColumns();
     private ArrayList<Record> apply(SQLTerm cond) throws DBAppException, IOException, ClassNotFoundException {
         ArrayList<Record> tuples = new ArrayList<>();  /// records that satisfies condition saved here
+        Table table = Table.getTable(allTables, cond._strTableName);
+        Hashtable< String , Object> htblColNameValue = new Hashtable<>();
+        htblColNameValue.put(cond._strColumnName , cond._objValue);
+        Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
+        for(String path: table.getPagePaths()){
+            Page page = (Page) FileCreator.readObject(path);
+            for(Record record: page){
+
+            }
+        }
+
+
+
         for (Table table : allTables) { // loop through all the tables
             if (table.getTableName().equals(cond._strTableName)) { // the table we want
-                for(String path: table.getPagePaths()){
-                    Page page = (Page) FileCreator.readObject(path);
+                for (Page page : table.getAllPages()) { //to get all pages of the table
                     for (Record record : page.getAllRecords()) { //to get all records
                         Object columnValue = null;
                         for (TableColumn column : table.getAllColumns()) {
@@ -264,13 +277,11 @@ public class DBApp {
 
         return tuples;
     }
-    private ArrayList<Record> applycomplement(SQLTerm cond) throws DBAppException, IOException, ClassNotFoundException {
+    private ArrayList<Record> applycomplement(SQLTerm cond) throws DBAppException{
         ArrayList<Record> tuples = new ArrayList<>();  /// records that satisfies condition saved here
         for (Table table : allTables) { // loop through all the tables
             if (table.getTableName().equals(cond._strTableName)) { // the table we want
-                for(String path: table.getPagePaths()){
-
-                    Page page = (Page) FileCreator.readObject(path);
+                for (Page page : table.getAllPages()) { //to get all pages of the table
                     for (Record record : page.getAllRecords()) { //to get all records
                         Object columnValue = null;
                         for (TableColumn column : table.getAllColumns()) {
@@ -313,13 +324,15 @@ public class DBApp {
                             tuples.add(record);
                         }
                     }
-
                 }
             }
         }
 
         return tuples;
     }
+
+
+
 
 
     public static void main(String[] args) {
@@ -384,7 +397,7 @@ public class DBApp {
 //            System.out.println(p);
 
 
-
+                                        // update table
 //            htblColNameValue.clear();
 //            htblColNameValue.put("name" , "Ali");
 //            htblColNameValue.put("gpa" , "4.0");
