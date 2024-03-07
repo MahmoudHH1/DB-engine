@@ -9,6 +9,7 @@ import Data.Table.Table;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Vector;
 public class Page extends Vector<Record> {
     private Table table ;
@@ -89,6 +90,19 @@ public class Page extends Vector<Record> {
         return mid;
     }
 
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        boolean changed = super.removeAll(c);
+        if(this.isEmpty()){
+            File myObj = new File(this.pagePath + ".class");
+            if (myObj.delete()) {
+                System.out.println("Deleted the file: " + myObj.getName());
+            } else {
+                System.out.println("Failed to delete the file.");
+            }
+        }
+        return changed;
+    }
 
     @Override
     public String toString() {
