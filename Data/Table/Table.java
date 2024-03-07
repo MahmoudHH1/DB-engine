@@ -1,6 +1,7 @@
 package Data.Table;
 
 import Data.Handler.FileCreator;
+import Data.Handler.FileRemover;
 import Data.Page.Page;
 import Data.Page.Record;
 import Data.Validator.TupleValidator;
@@ -14,10 +15,10 @@ import java.io.IOException;
 
 public class Table implements Serializable {
 
-//    private static final long serialVersionUID = -9043778273416338053L;
+    //    private static final long serialVersionUID = -9043778273416338053L;
     private Vector<String> pagePaths; // page paths
     private transient ArrayList<TableColumn> allColumns;
-    static String tablesDirectory = "Data_Entry"+  File.separator +"Tables";
+    static String tablesDirectory = "Data_Entry" + File.separator + "Tables";
     private String tableFilePath;
     private String tableDir;
     private String tableName;
@@ -25,7 +26,7 @@ public class Table implements Serializable {
 
 
     public Table(ArrayList<TableColumn> allColumns) throws IOException {
-        this.pagePaths = new Vector<>() ;
+        this.pagePaths = new Vector<>();
         this.tableName = allColumns.get(0).getTableName();
         this.tableDir = tablesDirectory + File.separator + tableName;
         this.allColumns = allColumns;
@@ -34,19 +35,20 @@ public class Table implements Serializable {
         MetaData.writeDataToMetaDatafile(allColumns);
         save();
     }
+
     public void save() throws IOException {
         tableFilePath = tableDir + File.separator + tableName;
         FileCreator.storeAsObject(this, tableFilePath);
     }
 
-
-
     public ArrayList<TableColumn> getAllColumns() {
         return allColumns;
     }
+
     public Vector<String> getPagePaths() {
         return pagePaths;
     }
+
     public static String getTablesDirectory() {
         return tablesDirectory;
     }
@@ -79,13 +81,17 @@ public class Table implements Serializable {
         this.tableName = tableName;
     }
 
+    public void removePageFromArr(String pagePath) {
+        this.pagePaths.remove(pagePath);
+    }
+
     public static String getTableFilePath(String name) {
         return tablesDirectory + File.separator +
                 name + File.separator + name;
     }
 
-    public void appendPagePath (String filePath){
-        pagePaths.add(filePath) ;
+    public void appendPagePath(String filePath) {
+        pagePaths.add(filePath);
     }
 
     public static Table getTable(ArrayList<Table> allTables, String tableName) throws DBAppException {
@@ -140,25 +146,26 @@ public class Table implements Serializable {
         }
         throw new DBAppException("Not implemented yet"); // do not use method yet
     }
+
     // binary search on cluster Key
     // in progress
     public int search(Comparable clusterKey, int clusterIdx) throws IOException, ClassNotFoundException {
         int start = 0;
-        int end = pagePaths.size()-1;
+        int end = pagePaths.size() - 1;
         int mid = 0;
         int pageIdx = 0;
-        while(start<=end){
-            mid = start + (end-start)/2;
+        while (start <= end) {
+            mid = start + (end - start) / 2;
             Page page = (Page) FileCreator.readObject(pagePaths.get(mid));
-            if(clusterKey.compareTo(page.get(0).get(clusterIdx)) < 0){
-                end = mid-1;
-            } else if(clusterKey.compareTo(page.get(page.size()-1).get(clusterIdx)) > 0){
-                start = mid+1;
-            } else{
+            if (clusterKey.compareTo(page.get(0).get(clusterIdx)) < 0) {
+                end = mid - 1;
+            } else if (clusterKey.compareTo(page.get(page.size() - 1).get(clusterIdx)) > 0) {
+                start = mid + 1;
+            } else {
                 pageIdx = page.searchRecordIdx(clusterKey, clusterIdx);
             }
         }
-        return mid*1000 + pageIdx;
+        return mid * 1000 + pageIdx;
     }
 
     @Override
@@ -187,16 +194,18 @@ public class Table implements Serializable {
     }
 
     public void insertIntoTable(Hashtable<String, Object> insertedTuple) throws DBAppException, IOException {
-        if (insertedTuple.size() == allColumns.size() && TupleValidator.IsValidTuple(insertedTuple , this)) {
+        if (insertedTuple.size() == allColumns.size() && TupleValidator.IsValidTuple(insertedTuple, this)) {
             //if it is the first record to be inserted
-            if (pagePaths.isEmpty()){
-                Record rec = new Record() ;
+            if (pagePaths.isEmpty()) {
+                Record rec = new Record();
                 rec.insertRecord(getColIdxVal(insertedTuple));
                 //creating a new page
-                Page firstPage = new Page(this) ;
+                Page firstPage = new Page(this);
                 firstPage.add(rec);
                 this.save();
                 firstPage.save();
+            } else {
+
             }
         } else {
             throw new DBAppException("The tuple you are trying to insert is not valid");
@@ -204,15 +213,20 @@ public class Table implements Serializable {
     }
 
     //converting the given hashtable to a record
-    public Record convertToRecord (Hashtable<String, Object> insertedTuple){
-        Record rec = new Record() ;
+    public Record convertToRecord(Hashtable<String, Object> insertedTuple) {
+        Record rec = new Record();
         Enumeration<String> keys = insertedTuple.keys();
         while (keys.hasMoreElements()) {
             String key = keys.nextElement();
             Object value = insertedTuple.get(key);
             rec.add((Comparable) value);
         }
-        return rec ;
+        return rec;
+    }
+
+    public void removeTable() {
+        MetaData.deleteTableFromCSV(this.getTableName());
+        FileRemover.removeDirectory(this.getTableName());
     }
 
     //this function takes the path of a page and the clustering index to check whether
@@ -222,15 +236,9 @@ public class Table implements Serializable {
 //    }
 
 
-
     //----------------------------------------------------------------------------------------------
 
-    public static void main(String[] args) throws IOException {
-        ArrayList<TableColumn> cols = new ArrayList<>();
-        TableColumn col = new TableColumn("test", "cool", "java.lang.String", true, null, null);
-        cols.add(col);
-        Table test = new Table(cols);
-
+    public static void main(String[] args) throws IOException, DBAppException {
 
     }
 }

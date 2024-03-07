@@ -5,16 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="gamadannnnnnn">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Handler/FileRemover.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_26_2024_4_53_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_26_2024_4_53_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_26_2024_9_13_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_26_2024_9_13_PM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/Student/Student.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/Student/Student1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SQLTerm.java" beforeDir="false" afterPath="$PROJECT_DIR$/SQLTerm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/DBApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Page/Page.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Page/Page.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Page/Record.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Page/Record.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/MetaData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/MetaData.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/Table.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Table/MetaData.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Table/MetaData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Table/Table.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +40,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="Habiba" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -87,7 +83,7 @@
     &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Habiba&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
@@ -95,7 +91,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;indent.rainbow.settings.IrConfigurable&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.DBApp">
+  <component name="RunManager" selected="Application.FileRemover">
     <configuration name="DBApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="DBApp" />
       <module name="Database-Engine" />
@@ -103,12 +99,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MetaData" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Data.Table.MetaData" />
+    <configuration name="FileRemover" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Data.Handler.FileRemover" />
       <module name="Database-Engine" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Data.Table.*" />
+          <option name="PATTERN" value="Data.Handler.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -163,19 +159,19 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.FileRemover" />
       <item itemvalue="Application.DBApp" />
-      <item itemvalue="Application.MetaData" />
       <item itemvalue="Application.Record" />
-      <item itemvalue="Application.TableColumn" />
       <item itemvalue="Application.Table" />
+      <item itemvalue="Application.TableColumn" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.FileRemover" />
         <item itemvalue="Application.DBApp" />
         <item itemvalue="Application.TableColumn" />
         <item itemvalue="Application.Table" />
         <item itemvalue="Application.Record" />
-        <item itemvalue="Application.MetaData" />
       </list>
     </recent_temporary>
   </component>
@@ -626,74 +622,19 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>85</line>
-          <option name="timeStamp" value="59" />
+          <url>file://$PROJECT_DIR$/DBApp.java</url>
+          <line>124</line>
+          <option name="timeStamp" value="81" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>84</line>
-          <option name="timeStamp" value="60" />
+          <url>file://$PROJECT_DIR$/DBApp.java</url>
+          <line>128</line>
+          <option name="timeStamp" value="82" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>83</line>
-          <option name="timeStamp" value="61" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>82</line>
-          <option name="timeStamp" value="63" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>81</line>
-          <option name="timeStamp" value="64" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>69</line>
-          <option name="timeStamp" value="66" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>68</line>
-          <option name="timeStamp" value="67" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>73</line>
-          <option name="timeStamp" value="68" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>75</line>
-          <option name="timeStamp" value="69" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>74</line>
-          <option name="timeStamp" value="70" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>77</line>
-          <option name="timeStamp" value="71" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>72</line>
-          <option name="timeStamp" value="72" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>71</line>
-          <option name="timeStamp" value="73" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/MetaData.java</url>
-          <line>78</line>
-          <option name="timeStamp" value="74" />
+          <url>file://$PROJECT_DIR$/DBApp.java</url>
+          <line>127</line>
+          <option name="timeStamp" value="85" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Data/Page/Page.java</url>
@@ -774,6 +715,11 @@
           <url>file://$PROJECT_DIR$/Data/Page/Page.java</url>
           <line>64</line>
           <option name="timeStamp" value="101" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/DBApp.java</url>
+          <line>241</line>
+          <option name="timeStamp" value="102" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

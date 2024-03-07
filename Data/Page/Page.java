@@ -18,7 +18,7 @@ public class Page extends Vector<Record> {
         this.table = table ;
         this.pageName = table.getTableName() + table.getPageNum() ;
         table.setPageNum(table.getPageNum()+1); // next page num
-        this.pagePath = table.getTableDir()+'/'+pageName ;
+        this.pagePath = table.getTableDir()+File.separator+pageName ;
         table.appendPagePath(this.pagePath);
         System.out.println(pagePath);
         save();
@@ -51,6 +51,8 @@ public class Page extends Vector<Record> {
     public void setPagePath(String pagePath) {
         this.pagePath = pagePath;
     }
+
+
     public Record searchRecord(Object clusterVal1, int clusterIdx){
         Comparable clusterVal =(Comparable) clusterVal1 ;
         int start = 0;
