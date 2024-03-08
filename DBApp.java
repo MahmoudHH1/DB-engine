@@ -197,7 +197,7 @@ public class DBApp {
 //            table.removeTable();
 
 
-            Hashtable htblColNameValue = new Hashtable();
+//            Hashtable htblColNameValue = new Hashtable();
 //            dbApp.deleteTable("Student");
 //            htblColNameValue.put("id", new Integer(2343432));
 //            htblColNameValue.put("name", new String("Ahmed Noor"));
