@@ -70,6 +70,22 @@ public class Page extends Vector<Record>  {
         }
     }
 
+    public Comparable [] getRange() throws IOException, ClassNotFoundException, DBAppException {
+        //getting the clustering key index
+        int clusterKeyIdx = (int)Table.getTable(MetaData.loadAllTables(),table.getTableName()).getClusterKeyAndIndex()[1] ;
+        return new Comparable[]{this.get(0).get(clusterKeyIdx) , this.get(this.size()-1).get(clusterKeyIdx)};
+    }
+
+    //this function is simply checking whether the size
+    //of the page exceeded 200, and it returns the overflow
+    //record and remove it from the page
+    /* THIS METHOD GET EXECUTED AFTER SORTING EL PAGE
+    * 3SHAN MNLBSSH FEL 7ETA  */
+    public Record overFlow (){
+        if (this.size()>200)
+            return this.remove(200) ;
+        return null ;
+    }
     public void sortRecords(int sortIndex) {
         // Create a custom Comparator
         Comparator<Record> comparator = new Comparator<Record>() {

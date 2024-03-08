@@ -192,19 +192,20 @@ public class DBApp {
 //            System.out.println((int)Table.getTable(dbApp.allTables,"Student").getClusterKeyAndIndex()[1]);
 //            System.out.println(Integer.valueOf((Table.getTable(dbApp.allTables, "Student").getClusterKeyAndIndex()).toString()));
 //            System.out.println(Table.getTable(dbApp.allTables,"Student").getClusterKeyAndIndex()[1]);
-            Table table = Table.getTable(dbApp.allTables,"Student");
-            table.viewTable();
+//            Table table = Table.getTable(dbApp.allTables,"Student");
+//            table.viewTable();
 //            table.removeTable();
 
 
-            Hashtable htblColNameValue = new Hashtable();
+//            Hashtable htblColNameValue = new Hashtable();
+//            dbApp.deleteTable("Student");
 //            htblColNameValue.put("id", new Integer(2343432));
 //            htblColNameValue.put("name", new String("Ahmed Noor"));
 //            htblColNameValue.put("gpa", new Double(0.95));
 
 //            FileRemover.removeFileFromDirectory("Student" , "Student1");
 
-
+//
 //            Hashtable htblColNameType = new Hashtable();
 //            htblColNameType.put("name", "java.lang.String");
 //            htblColNameType.put("gpa", "java.lang.double");
@@ -243,13 +244,17 @@ public class DBApp {
 //            Hashtable htblColNameValue = new Hashtable();
 //            Random random = new Random();
 //            for (int i = 0; i < 200; i++) {
-//                int randomNumber = random.nextInt(20) + 1;
+//                int randomNumber = random.nextInt(10000000) + 1;
 //                htblColNameValue.clear();
 //                htblColNameValue.put("id", randomNumber);
 //                htblColNameValue.put("name", "Ahmed Noor");
-//                htblColNameValue.put("gpa", 0.95 + i * 0.01);
+//                htblColNameValue.put("gpa", 0.95 );
 //                dbApp.insertIntoTable(strTableName, htblColNameValue);
 //            }
+//            Table table = Table.getTable(dbApp.allTables,"Student");
+//            table.viewTable();
+
+
 //            htblColNameValue.clear();
 
 
@@ -292,27 +297,27 @@ public class DBApp {
 //            System.out.println(p);
 //            table.viewTable();
 
-            System.out.println("Selection Results:__________");
-            SQLTerm[] arrSQLTerms;
-            arrSQLTerms = new SQLTerm[]{new SQLTerm() , new SQLTerm()};
-            arrSQLTerms[0]._strTableName =  "Student";
-            arrSQLTerms[0]._strColumnName=  "name";
-            arrSQLTerms[0]._strOperator  =  "=";
-            arrSQLTerms[0]._objValue     =  "John Noor";
-
-            arrSQLTerms[1]._strTableName =  "Student";
-            arrSQLTerms[1]._strColumnName=  "gpa";
-            arrSQLTerms[1]._strOperator  =  ">";
-            arrSQLTerms[1]._objValue     =  new Double( 9.9 );
-
-            String[]strarrOperators = new String[1];
-            strarrOperators[0] = "OR";
+//            System.out.println("Selection Results:__________");
+//            SQLTerm[] arrSQLTerms;
+//            arrSQLTerms = new SQLTerm[]{new SQLTerm() , new SQLTerm()};
+//            arrSQLTerms[0]._strTableName =  "Student";
+//            arrSQLTerms[0]._strColumnName=  "name";
+//            arrSQLTerms[0]._strOperator  =  "=";
+//            arrSQLTerms[0]._objValue     =  "John Noor";
+//
+//            arrSQLTerms[1]._strTableName =  "Student";
+//            arrSQLTerms[1]._strColumnName=  "gpa";
+//            arrSQLTerms[1]._strOperator  =  ">";
+//            arrSQLTerms[1]._objValue     =  new Double( 9.9 );
+//
+//            String[]strarrOperators = new String[1];
+//            strarrOperators[0] = "OR";
 
             // select * from Student where name = "John Noor" or gpa = 1.5;
-            Iterator resultSet = dbApp.selectFromTable(arrSQLTerms , strarrOperators);
-            while(resultSet.hasNext()) {
-                System.out.println(resultSet.next());
-            }
+//            Iterator resultSet = dbApp.selectFromTable(arrSQLTerms , strarrOperators);
+//            while(resultSet.hasNext()) {
+//                System.out.println(resultSet.next());
+//            }
         } catch (Exception exp) {
             exp.printStackTrace();
         }
