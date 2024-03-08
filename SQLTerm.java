@@ -14,7 +14,17 @@ public class SQLTerm {
 
     // convert sql terms to boolean arrays
     // select * from Student where name = "John Noor" or gpa = 1.5 ;
-    public static boolean[] evaluateSql(SQLTerm[] terms,Record r, Table t) throws DBAppException {
+
+    public  static boolean evalExp(SQLTerm[] terms,Record r, Table t , String[]ops) throws DBAppException {
+       boolean[]evaluatedSqlTerm =  evaluateSql(terms,r,t);
+       return foldBool(evaluatedSqlTerm , ops);
+    }
+
+    //binary search to reduce range of search ex:(id , age)
+    // [(1,5) ,(2,20),(3,6) ,(4,20) ,5 , 6, 7, 7, 8] ->( id < 5 )->
+    // [ (1,5) ,(2,20),(3,6) ,(4,20) ] -> (age = 20)-> [(2,20) ,(4,20)]
+
+    private static boolean[] evaluateSql(SQLTerm[] terms,Record r, Table t) throws DBAppException {
         boolean[] evals = new boolean[terms.length];
         for(int i = 0 ; i < terms.length; i++){
             int idx = t.idxFromName(terms[i]._strColumnName);
@@ -25,7 +35,7 @@ public class SQLTerm {
     }
     // collapses boolean array to one bool
     // true or false and true xor true -> false
-    public static boolean foldBool(boolean[] terms, String[] ops) throws DBAppException {
+    private static boolean foldBool(boolean[] terms, String[] ops) throws DBAppException {
         if(terms.length != ops.length+1)
             throw new DBAppException("insufficient stuff");
         if(terms.length == 0)
@@ -35,27 +45,26 @@ public class SQLTerm {
             res = applyGates(res, ops[i-1], terms[i]);
         return res;
     }
-    public static boolean applyComparison(Object o1, String comp, Object o2) throws DBAppException {
+    private static boolean applyComparison(Object o1, String comp, Object o2) throws DBAppException {
         Comparable c1 = (Comparable) o1;
         Comparable c2 = (Comparable) o2;
-        return switch (comp) {
-            case "=" -> c1.compareTo(c2) == 0;
-            case "!=" -> c1.compareTo(c2) != 0;
-            case ">" -> c1.compareTo(c2) > 0;
-            case ">=" -> c1.compareTo(c2) >= 0;
-            case "<" -> c1.compareTo(c2) < 0;
-            case "<=" -> c1.compareTo(c2) <= 0;
-            default -> throw new DBAppException("Unsupported operator");
-        };
+        switch (comp) {
+            case "=" : return c1.compareTo(c2) == 0;
+            case "!=" :return c1.compareTo(c2) != 0;
+            case ">" :return c1.compareTo(c2) > 0;
+            case ">=" :return c1.compareTo(c2) >= 0;
+            case "<" :return c1.compareTo(c2) < 0;
+            case "<=" :return c1.compareTo(c2) <= 0;
+            default :throw new DBAppException("Unsupported operator");
+        }
     }
-    public static boolean applyGates(boolean term1, String op, boolean term2) throws DBAppException {
-        return switch (op) {
-            case "AND" -> term1 && term2;
-            case "OR" -> term1 || term2; // duplicates included 3adi wla eh
-            case "XOR" -> // XOR is everything minus the intersection xy'+ x'y
-                    term1 ^ term2;
-            default -> throw new DBAppException("Invalid logical operator: " + op);
-        };
+    private static boolean applyGates(boolean term1, String op, boolean term2) throws DBAppException {
+        switch (op) {
+            case "AND" : return term1 && term2;
+            case "OR" : return term1 || term2; // duplicates included 3adi wla eh
+            case "XOR" :return  term1 ^ term2;  // XOR is everything minus the intersection xy'+ x'y
+            default : throw new DBAppException("Invalid logical operator: " + op);
+        }
     }
 
 

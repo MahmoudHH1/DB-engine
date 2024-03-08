@@ -3,6 +3,7 @@ package Data.Page;
 //import javafx.scene.control.Tab;
 
 import Data.Handler.FileCreator;
+import Data.Handler.FileRemover;
 import Data.Table.MetaData;
 import Data.Table.Table;
 import Exceptions.DBAppException;
@@ -124,6 +125,7 @@ public class Page extends Vector<Record>  {
     public boolean removeAll(Collection<?> c) {
         boolean changed = super.removeAll(c);
         if(this.isEmpty()){
+            FileRemover.removeFileFromDirectory(table.getTableName(),pageName);
             File myObj = new File(this.pagePath + ".class");
             if (myObj.delete()) {
                 System.out.println("Deleted the file: " + myObj.getName());

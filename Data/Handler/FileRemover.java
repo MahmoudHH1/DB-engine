@@ -35,7 +35,6 @@ public class FileRemover {
         String path = tablesDirectory + File.separator + tableName ;
         fileName = fileName + ".class" ;
         Path filePath = Paths.get(path, fileName);
-
         try {
             if (Files.exists(filePath)) {
                 Files.delete(filePath);

@@ -162,10 +162,21 @@ public class DBApp {
 
 
     public Iterator selectFromTable(SQLTerm[] arrSQLTerms,
-                                    String[] strarrOperators) throws DBAppException {
-        // habiba will do this
-        // habiba on master now
-        return null;
+                                    String[] strarrOperators) throws DBAppException, IOException, ClassNotFoundException {
+        ArrayList<Object>validRecords = new ArrayList<>();
+        Table table = Table.getTable(allTables,arrSQLTerms[0]._strTableName);
+        for (String path : table.getPagePaths()) {
+            Page page = (Page) FileCreator.readObject(path);
+            for(Record record : page){
+                if (SQLTerm.evalExp(arrSQLTerms,record,table,strarrOperators)){
+                  validRecords.add(record);
+                };
+            }
+        }
+        if (validRecords.size() == 0){
+            validRecords.add("No valid results");
+        }
+        return validRecords.iterator();
     }
 
 
@@ -182,7 +193,7 @@ public class DBApp {
 //            System.out.println(Integer.valueOf((Table.getTable(dbApp.allTables, "Student").getClusterKeyAndIndex()).toString()));
 //            System.out.println(Table.getTable(dbApp.allTables,"Student").getClusterKeyAndIndex()[1]);
             Table table = Table.getTable(dbApp.allTables,"Student");
-//            table.viewTable();
+            table.viewTable();
 //            table.removeTable();
 
 
@@ -272,32 +283,36 @@ public class DBApp {
 //            System.out.println(p);
 
 
-            htblColNameValue.clear();
-            htblColNameValue.put("name" , "Mahmoud");
-            htblColNameValue.put("gpa" , new Integer(9));
-            dbApp.updateTable("Student", "9", htblColNameValue);
-            System.out.println(table.getPagePaths().get(0));
-//            Page p = ((Page) FileCreator.readObject(table.getPagePaths().get(0)));
+//            htblColNameValue.clear();
+//            htblColNameValue.put("name" , "Mahmoud");
+//            htblColNameValue.put("gpa" , new Integer(9));
+//            dbApp.updateTable("Student", "9", htblColNameValue);
+//            System.out.println(table.getPagePaths().get(0));
+////            Page p = ((Page) FileCreator.readObject(table.getPagePaths().get(0)));
 //            System.out.println(p);
-            table.viewTable();
+//            table.viewTable();
 
+            System.out.println("Selection Results:__________");
+            SQLTerm[] arrSQLTerms;
+            arrSQLTerms = new SQLTerm[]{new SQLTerm() , new SQLTerm()};
+            arrSQLTerms[0]._strTableName =  "Student";
+            arrSQLTerms[0]._strColumnName=  "name";
+            arrSQLTerms[0]._strOperator  =  "=";
+            arrSQLTerms[0]._objValue     =  "John Noor";
 
-//            SQLTerm[] arrSQLTerms;
-//            arrSQLTerms = new SQLTerm[2];
-//            arrSQLTerms[0]._strTableName =  "Student";
-//            arrSQLTerms[0]._strColumnName=  "name";
-//            arrSQLTerms[0]._strOperator  =  "=";
-//            arrSQLTerms[0]._objValue     =  "John Noor";
-//
-//            arrSQLTerms[1]._strTableName =  "Student";
-//            arrSQLTerms[1]._strColumnName=  "gpa";
-//            arrSQLTerms[1]._strOperator  =  "=";
-//            arrSQLTerms[1]._objValue     =  new Double( 1.5 );
-//
-//            String[]strarrOperators = new String[1];
-//            strarrOperators[0] = "OR";
-//            // select * from Student where name = "John Noor" or gpa = 1.5;
-//            Iterator resultSet = dbApp.selectFromTable(arrSQLTerms , strarrOperators);
+            arrSQLTerms[1]._strTableName =  "Student";
+            arrSQLTerms[1]._strColumnName=  "gpa";
+            arrSQLTerms[1]._strOperator  =  ">";
+            arrSQLTerms[1]._objValue     =  new Double( 9.9 );
+
+            String[]strarrOperators = new String[1];
+            strarrOperators[0] = "OR";
+
+            // select * from Student where name = "John Noor" or gpa = 1.5;
+            Iterator resultSet = dbApp.selectFromTable(arrSQLTerms , strarrOperators);
+            while(resultSet.hasNext()) {
+                System.out.println(resultSet.next());
+            }
         } catch (Exception exp) {
             exp.printStackTrace();
         }
