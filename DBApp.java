@@ -11,6 +11,10 @@ import Exceptions.DBAppException;
 import java.io.IOException;
 import java.util.*;
 
+import gen.MySQLParser;
+import org.antlr.runtime.*;
+import org.antlr.runtime.tree.*;
+
 
 public class DBApp {
     public static  ArrayList<Table> allTables;
@@ -178,7 +182,30 @@ public class DBApp {
         }
         return validRecords.iterator();
     }
+    // below method returns Iterator with result set if passed
+    // strbufSQL is a select, otherwise returns null.
+    public Iterator parseSQL( StringBuffer strbufSQL ) throws DBAppException {
+        // Create an ANTLR input stream from your SQL statement
+        ANTLRStringStream input = new ANTLRStringStream("SELECT * FROM table_name WHERE condition");
 
+        // Create a lexer that feeds off of the input stream
+        MySQLLexer lexer = new MySQLLexer(input);
+
+        // Create a stream of tokens fed by the lexer
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+
+        // Create a parser that feeds off the token stream
+        MySQLParser parser = new MySQLParser(tokens);
+
+        // Start parsing at the compilationUnit rule
+        MySQLParser.CompilationUnitContext result = parser.compilationUnit();
+
+        // Do something with the parsed SQL statement
+        // For example, you can access the parsed tree:
+        // CommonTree tree = (CommonTree) result.getTree();
+        // Then traverse the tree to extract information about the SQL statement
+        throw new DBAppException("not implemented");
+    }
 
     public void deleteTable(String tableName) throws DBAppException {
         Table.getTable(this.allTables, tableName).removeTable();

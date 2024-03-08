@@ -4,18 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="saeed tested mahmoud">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="saeed is working on bonus">
+      <change afterPath="$PROJECT_DIR$/MySQL.g4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MySqlLexer.g4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MySqlParser.g4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sql2003Lexer.g4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sql2003Parser.g4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Database-Engine.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Database-Engine.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/DBApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Handler/FileRemover.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Handler/FileRemover.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Page/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Page/Page.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SQLTerm.java" beforeDir="false" afterPath="$PROJECT_DIR$/SQLTerm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/DBApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/Table.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Validator/TupleValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Validator/TupleValidator.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +42,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Habiba" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -81,6 +78,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "Application.DBApp.executor": "Run",
     "Application.FileRemover.executor": "Run",
     "Application.MetaData.executor": "Run",
@@ -92,14 +90,24 @@
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "Saeed",
     "kotlin-language-version-configured": "true",
-    "project.structure.last.edited": "Project",
+    "last_opened_file_path": "D:/Coding/DataBase/Database_projects/Database_Engine Project/Database-Engine",
+    "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Coding\DataBase\Database_projects\Database_Engine Project\Database-Engine" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Coding\DataBase\Database_projects\Database_Engine Project\Database-Engine" />
+      <recent name="D:\Coding\DataBase\Database_projects\Database_Engine Project\Database-Engine\SQL" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.DBApp">
     <configuration name="DBApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="DBApp" />
@@ -182,9 +190,9 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.DBApp" />
         <item itemvalue="Application.TableColumn" />
         <item itemvalue="Application.Table" />
+        <item itemvalue="Application.DBApp" />
         <item itemvalue="Application.MetaData" />
         <item itemvalue="Application.FileRemover" />
       </list>
@@ -614,7 +622,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Splited the code into packages and i added alose getters and setters" />
     <MESSAGE value="modifications" />
     <MESSAGE value="Saeed Merge into master" />
     <MESSAGE value="Saeed Merge into master3" />
@@ -639,7 +646,8 @@
     <MESSAGE value="working on binary search for clusterK key" />
     <MESSAGE value="gamadannnnnnn" />
     <MESSAGE value="saeed tested validator" />
-    <option name="LAST_COMMIT_MESSAGE" value="saeed tested validator" />
+    <MESSAGE value="saeed is working on bonus" />
+    <option name="LAST_COMMIT_MESSAGE" value="saeed is working on bonus" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
