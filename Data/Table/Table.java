@@ -197,6 +197,8 @@ public class Table implements Serializable {
         TupleValidator.IsValidTuple(insertedTuple, this);
         if (insertedTuple.size() == allColumns.size()) {
             Record rec = new Record();
+            //overflow record for shifting purposes
+            Record overFlowRec = new Record();
             rec.insertRecord(getColIdxVal(insertedTuple));
             //if it is the first record to be inserted
             if (pagePaths.isEmpty()) {
@@ -205,25 +207,37 @@ public class Table implements Serializable {
                 firstPage.add(rec);
                 firstPage.save();
             } else {
-                System.out.println(allColumns);
-                Page page = (Page) FileCreator.readObject(this.pagePaths.get(0)) ;
-                page.insertIntoPage(rec);
-                page.save();
+                for (String pagePath : this.pagePaths) {
+                    Page page = (Page) FileCreator.readObject(pagePath);
+                    Comparable clusterValue = rec.get((int) (getClusterKeyAndIndex()[1]));
+                    Comparable minPageVal = page.getRange()[0];
+                    Comparable maxPageVal = page.getRange()[1];
+                    if (minPageVal.equals(maxPageVal) || isBetween(clusterValue, minPageVal, maxPageVal))
+                        page.insertIntoPage(rec);
+                    //if the record is inserted successfully there will be no overflow
+                    //if overflow insert the keep inserting and shifting all records
+                    //until you reach the last page of the table
+                    overFlowRec = page.overFlow();
+                    //can I read the next page while I am in this page
+                    //we will find out
+                    if (overFlowRec != null && this.pagePaths.indexOf(pagePath) < this.pagePaths.size() - 1)
+                        ((Page) FileCreator.readObject(this.pagePaths.get(pagePaths.indexOf(pagePath) + 1))).insertIntoPage(overFlowRec);
+                    page.save();
+                }
+                //checking whether I reached the last page and the overflow is not inserted yet
+                //making a new page to insert the overflow
+                if (overFlowRec != null) {
+                    Page newP = new Page(this);
+                    newP.insertIntoPage(overFlowRec);
+                    newP.save();
+                }
             }
             this.save();
         }
     }
 
-    //converting the given hashtable to a record
-    public Record convertToRecord(Hashtable<String, Object> insertedTuple) {
-        Record rec = new Record();
-        Enumeration<String> keys = insertedTuple.keys();
-        while (keys.hasMoreElements()) {
-            String key = keys.nextElement();
-            Object value = insertedTuple.get(key);
-            rec.add((Comparable) value);
-        }
-        return rec;
+    public static <T extends Comparable<T>> boolean isBetween(T value, T minValue, T maxValue) {
+        return value.compareTo(minValue) >= 0 && value.compareTo(maxValue) <= 0;
     }
 
     public void removeTable() {
