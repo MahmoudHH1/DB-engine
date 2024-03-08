@@ -194,7 +194,8 @@ public class Table implements Serializable {
     }
 
     public void insertIntoTable(Hashtable<String, Object> insertedTuple) throws DBAppException, IOException, ClassNotFoundException {
-        if (insertedTuple.size() == allColumns.size() && TupleValidator.IsValidTuple(insertedTuple, this)) {
+        TupleValidator.IsValidTuple(insertedTuple, this);
+        if (insertedTuple.size() == allColumns.size()) {
             Record rec = new Record();
             rec.insertRecord(getColIdxVal(insertedTuple));
             //if it is the first record to be inserted
@@ -204,13 +205,12 @@ public class Table implements Serializable {
                 firstPage.add(rec);
                 firstPage.save();
             } else {
+                System.out.println(allColumns);
                 Page page = (Page) FileCreator.readObject(this.pagePaths.get(0)) ;
                 page.insertIntoPage(rec);
                 page.save();
             }
             this.save();
-        } else {
-            throw new DBAppException("The tuple you are trying to insert is not valid");
         }
     }
 

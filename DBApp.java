@@ -13,7 +13,7 @@ import java.util.*;
 
 
 public class DBApp {
-    public ArrayList<Table> allTables;
+    public static  ArrayList<Table> allTables;
 
     public DBApp() throws IOException, ClassNotFoundException {
         init();
@@ -90,7 +90,9 @@ public class DBApp {
         }
         //-----------------------------------------------------------------------\\
         if (tableExists) {
-            Table.getTable(this.allTables, strTableName).insertIntoTable(htblColNameValue);
+            Table table = Table.getTable(this.allTables, strTableName);
+//            System.out.println(table.getAllColumns());
+            table.insertIntoTable(htblColNameValue);
         } else
             throw new DBAppException("The table is not implemented yet");
     }
@@ -105,9 +107,11 @@ public class DBApp {
                             Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
         // check if htblColNameValue size  = table.allcol.size()
         Table table = Table.getTable(allTables, strTableName);
+        TupleValidator.IsValidTuple(htblColNameValue , table);
+
         Object clusterKeyVal = strClusteringKeyValue;
-//        TupleValidator.IsValidTuple(htblColNameValue , table);
         Object[] clusterKeyColIndex = (table.getClusterKeyAndIndex());
+
         switch (((TableColumn) clusterKeyColIndex[0]).getColumnType()) {
             case "java.lang.double":
                 clusterKeyVal = Double.parseDouble(strClusteringKeyValue);
@@ -117,21 +121,14 @@ public class DBApp {
                 break;
         }
         Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
-//        outerLoop:
         for (String path : table.getPagePaths()) {
-            // still need to adjust for index
             Page page = (Page) FileCreator.readObject(path);
             Record record = page.searchRecord(clusterKeyVal, (Integer) clusterKeyColIndex[1]);
-//            for(Record record: page){
-//                if (record.get(((Integer) clusterKeyColIndex[1])).equals(clusterKeyVal)) {
             if (record != null) {
                 record.updateRecord(colIdxVal);
                 page.save();
                 table.save();
             }
-//                    break outerLoop;
-//                }
-//            }
         }
     }
 
@@ -165,10 +162,21 @@ public class DBApp {
 
 
     public Iterator selectFromTable(SQLTerm[] arrSQLTerms,
-                                    String[] strarrOperators) throws DBAppException {
-        // habiba will do this
-        // habiba on master now
-        return null;
+                                    String[] strarrOperators) throws DBAppException, IOException, ClassNotFoundException {
+        ArrayList<Object>validRecords = new ArrayList<>();
+        Table table = Table.getTable(allTables,arrSQLTerms[0]._strTableName);
+        for (String path : table.getPagePaths()) {
+            Page page = (Page) FileCreator.readObject(path);
+            for(Record record : page){
+                if (SQLTerm.evalExp(arrSQLTerms,record,table,strarrOperators)){
+                  validRecords.add(record);
+                };
+            }
+        }
+        if (validRecords.size() == 0){
+            validRecords.add("No valid results");
+        }
+        return validRecords.iterator();
     }
 
 
@@ -184,26 +192,19 @@ public class DBApp {
 //            System.out.println((int)Table.getTable(dbApp.allTables,"Student").getClusterKeyAndIndex()[1]);
 //            System.out.println(Integer.valueOf((Table.getTable(dbApp.allTables, "Student").getClusterKeyAndIndex()).toString()));
 //            System.out.println(Table.getTable(dbApp.allTables,"Student").getClusterKeyAndIndex()[1]);
-            Table.getTable(dbApp.allTables, "Student").viewTable();
-//            Table.getTable(dbApp.allTables , "Student").removeTable();
-//            Table.getTable(dbApp.allTables,"Student");
-//            Hashtable htblColNameValue = new Hashtable();
+            Table table = Table.getTable(dbApp.allTables,"Student");
+            table.viewTable();
+//            table.removeTable();
+
+
+            Hashtable htblColNameValue = new Hashtable();
 //            htblColNameValue.put("id", new Integer(2343432));
 //            htblColNameValue.put("name", new String("Ahmed Noor"));
 //            htblColNameValue.put("gpa", new Double(0.95));
-//            Hashtable res = new Hashtable<Integer,Object>() ;
-//            res = Table.getTable(dbApp.allTables,"Student").getColIdxVal(htblColNameValue) ;
-//            Iterator<Map.Entry<Integer, Object>> iterator = res.entrySet().iterator();
-//            while (iterator.hasNext()) {
-//                Map.Entry<Integer, Object> entry = iterator.next();
-//                Integer key = entry.getKey();
-//                Object value = entry.getValue();
-//                System.out.println("Key: " + key + ", Value: " + value);
-//            }
-//            System.out.println(Table.getTable(dbApp.allTables,"Student").getPagePaths().size());
 
 //            FileRemover.removeFileFromDirectory("Student" , "Student1");
-//            Table.getTable(dbApp.allTables,"Student").removeTable();
+
+
 //            Hashtable htblColNameType = new Hashtable();
 //            htblColNameType.put("name", "java.lang.String");
 //            htblColNameType.put("gpa", "java.lang.double");
@@ -238,17 +239,20 @@ public class DBApp {
 //            htblColNameValue.put("name", new String("Ahmed Noor" ) );
 //            htblColNameValue.put("gpa", new Double( 0.95 ) );
 //            dbApp.insertIntoTable( strTableName , htblColNameValue );
+
 //            Hashtable htblColNameValue = new Hashtable();
 //            Random random = new Random();
 //            for (int i = 0; i < 200; i++) {
-//                int randomNumber = random.nextInt(1_000_000) + 1;
+//                int randomNumber = random.nextInt(20) + 1;
 //                htblColNameValue.clear();
 //                htblColNameValue.put("id", randomNumber);
-//                htblColNameValue.put("name", "Ahmed Noor " + i);
+//                htblColNameValue.put("name", "Ahmed Noor");
 //                htblColNameValue.put("gpa", 0.95 + i * 0.01);
 //                dbApp.insertIntoTable(strTableName, htblColNameValue);
-//        }
-//            htblColNameValue.clear( );
+//            }
+//            htblColNameValue.clear();
+
+
 //            Hashtable htblColNameValue = new Hashtable();
 //            htblColNameValue.put("id", new Integer(5674567));
 //            htblColNameValue.put("name", new String("Dalia Noor"));
@@ -280,30 +284,35 @@ public class DBApp {
 
 
 //            htblColNameValue.clear();
-//            htblColNameValue.put("name" , "Ali");
-//            htblColNameValue.put("gpa" , "4.0");
-//            dbApp.updateTable("Student", "1", htblColNameValue);
-//            System.out.println(tabel.getPagePaths().get(0));
-//            Page p = ((Page) FileCreator.readObject(tabel.getPagePaths().get(0)));
+//            htblColNameValue.put("name" , "Mahmoud");
+//            htblColNameValue.put("gpa" , new Integer(9));
+//            dbApp.updateTable("Student", "9", htblColNameValue);
+//            System.out.println(table.getPagePaths().get(0));
+////            Page p = ((Page) FileCreator.readObject(table.getPagePaths().get(0)));
 //            System.out.println(p);
+//            table.viewTable();
 
+            System.out.println("Selection Results:__________");
+            SQLTerm[] arrSQLTerms;
+            arrSQLTerms = new SQLTerm[]{new SQLTerm() , new SQLTerm()};
+            arrSQLTerms[0]._strTableName =  "Student";
+            arrSQLTerms[0]._strColumnName=  "name";
+            arrSQLTerms[0]._strOperator  =  "=";
+            arrSQLTerms[0]._objValue     =  "John Noor";
 
-//            SQLTerm[] arrSQLTerms;
-//            arrSQLTerms = new SQLTerm[2];
-//            arrSQLTerms[0]._strTableName =  "Student";
-//            arrSQLTerms[0]._strColumnName=  "name";
-//            arrSQLTerms[0]._strOperator  =  "=";
-//            arrSQLTerms[0]._objValue     =  "John Noor";
-//
-//            arrSQLTerms[1]._strTableName =  "Student";
-//            arrSQLTerms[1]._strColumnName=  "gpa";
-//            arrSQLTerms[1]._strOperator  =  "=";
-//            arrSQLTerms[1]._objValue     =  new Double( 1.5 );
-//
-//            String[]strarrOperators = new String[1];
-//            strarrOperators[0] = "OR";
-//            // select * from Student where name = "John Noor" or gpa = 1.5;
-//            Iterator resultSet = dbApp.selectFromTable(arrSQLTerms , strarrOperators);
+            arrSQLTerms[1]._strTableName =  "Student";
+            arrSQLTerms[1]._strColumnName=  "gpa";
+            arrSQLTerms[1]._strOperator  =  ">";
+            arrSQLTerms[1]._objValue     =  new Double( 9.9 );
+
+            String[]strarrOperators = new String[1];
+            strarrOperators[0] = "OR";
+
+            // select * from Student where name = "John Noor" or gpa = 1.5;
+            Iterator resultSet = dbApp.selectFromTable(arrSQLTerms , strarrOperators);
+            while(resultSet.hasNext()) {
+                System.out.println(resultSet.next());
+            }
         } catch (Exception exp) {
             exp.printStackTrace();
         }
