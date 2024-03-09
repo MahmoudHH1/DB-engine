@@ -33,6 +33,7 @@ public class Page extends Vector<Record>  {
     public void save() throws IOException {
         FileCreator.storeAsObject(this , this.pagePath);
         table.save();
+        System.out.println(this.size());
     }
 
     public Table getTable() {
@@ -64,7 +65,9 @@ public class Page extends Vector<Record>  {
         int clusterKeyIdx = (int)Table.getTable(MetaData.loadAllTables(),table.getTableName()).getClusterKeyAndIndex()[1] ;
         if (searchRecord((int)rec.get(clusterKeyIdx) ,clusterKeyIdx)==null){
             this.add(rec) ;
-            sortRecords(clusterKeyIdx);}
+            sortRecords(clusterKeyIdx);
+            System.out.println(this.get(this.size()-1).get(clusterKeyIdx));
+        }
         else {
             throw new DBAppException("non unique primary key") ;
         }
@@ -155,6 +158,8 @@ public class Page extends Vector<Record>  {
     @Override
     public String toString() {
         StringBuilder pageContent = new StringBuilder();
+        //for debugging concerns
+        pageContent.append("page" + pageName + "\n") ;
         for (Record record : this /*allrecords*/) {
             pageContent.append(record.toString()).append(",").append("\n");
         }

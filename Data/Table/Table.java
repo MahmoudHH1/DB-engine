@@ -212,17 +212,24 @@ public class Table implements Serializable {
                     Comparable clusterValue = rec.get((int) (getClusterKeyAndIndex()[1]));
                     Comparable minPageVal = page.getRange()[0];
                     Comparable maxPageVal = page.getRange()[1];
-                    if (minPageVal.equals(maxPageVal) || isBetween(clusterValue, minPageVal, maxPageVal))
+                    if (minPageVal.equals(maxPageVal) ||
+                            isBetween(clusterValue, minPageVal, maxPageVal) ||
+                            isless(clusterValue,minPageVal,maxPageVal) ||
+                            (isGreater(clusterValue,minPageVal,maxPageVal)&& this.pagePaths.indexOf(pagePath)==this.pagePaths.size()-1))
                         page.insertIntoPage(rec);
                     //if the record is inserted successfully there will be no overflow
                     //if overflow insert the keep inserting and shifting all records
                     //until you reach the last page of the table
                     overFlowRec = page.overFlow();
+                    page.save();
                     //can I read the next page while I am in this page
                     //we will find out
-                    if (overFlowRec != null && this.pagePaths.indexOf(pagePath) < this.pagePaths.size() - 1)
-                        ((Page) FileCreator.readObject(this.pagePaths.get(pagePaths.indexOf(pagePath) + 1))).insertIntoPage(overFlowRec);
-                    page.save();
+                    if (overFlowRec != null && this.pagePaths.indexOf(pagePath) < this.pagePaths.size() - 1){
+                        System.out.println(this.pagePaths.get(pagePaths.indexOf(pagePath) +1));
+                        Page nextPage = ((Page) FileCreator.readObject(this.pagePaths.get(pagePaths.indexOf(pagePath) +1))) ;
+                        nextPage.insertIntoPage(overFlowRec);
+                        nextPage.save();
+                    }
                 }
                 //checking whether I reached the last page and the overflow is not inserted yet
                 //making a new page to insert the overflow
@@ -238,6 +245,14 @@ public class Table implements Serializable {
 
     public static <T extends Comparable<T>> boolean isBetween(T value, T minValue, T maxValue) {
         return value.compareTo(minValue) >= 0 && value.compareTo(maxValue) <= 0;
+    }
+
+    public static <T extends Comparable<T>> boolean isless(T value, T firstVal, T SecondVal) {
+        return value.compareTo(firstVal) < 0 && value.compareTo(SecondVal) < 0;
+    }
+
+    public static <T extends Comparable<T>> boolean isGreater(T value, T firstVal, T SecondVal) {
+        return value.compareTo(firstVal) > 0 && value.compareTo(SecondVal) > 0;
     }
 
     public void removeTable() {

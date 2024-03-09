@@ -75,12 +75,6 @@ public class DBApp {
     // htblColNameValue must include a value for the primary key
     public void insertIntoTable(String strTableName,
                                 Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
-        /*
-        Assumptions
-        when deleting I assume that the table is deleted form the arraylist containing all table
-
-         */
-        //-----------------------------------------------------------------------\\
         //checking whether the table exists or not
         boolean tableExists = false;
         for (Table table : allTables) {
@@ -91,7 +85,6 @@ public class DBApp {
         //-----------------------------------------------------------------------\\
         if (tableExists) {
             Table table = Table.getTable(this.allTables, strTableName);
-//            System.out.println(table.getAllColumns());
             table.insertIntoTable(htblColNameValue);
         } else
             throw new DBAppException("The table is not implemented yet");
@@ -193,7 +186,7 @@ public class DBApp {
 //            System.out.println(Integer.valueOf((Table.getTable(dbApp.allTables, "Student").getClusterKeyAndIndex()).toString()));
 //            System.out.println(Table.getTable(dbApp.allTables,"Student").getClusterKeyAndIndex()[1]);
 //            Table table = Table.getTable(dbApp.allTables,"Student");
-//            table.viewTable();
+////            table.viewTable();
 //            table.removeTable();
 
 
@@ -205,7 +198,7 @@ public class DBApp {
 
 //            FileRemover.removeFileFromDirectory("Student" , "Student1");
 
-//
+////
 //            Hashtable htblColNameType = new Hashtable();
 //            htblColNameType.put("name", "java.lang.String");
 //            htblColNameType.put("gpa", "java.lang.double");
@@ -240,10 +233,10 @@ public class DBApp {
 //            htblColNameValue.put("name", new String("Ahmed Noor" ) );
 //            htblColNameValue.put("gpa", new Double( 0.95 ) );
 //            dbApp.insertIntoTable( strTableName , htblColNameValue );
-
+////
 //            Hashtable htblColNameValue = new Hashtable();
 //            Random random = new Random();
-//            for (int i = 0; i < 200; i++) {
+//            for (int i = 0; i < 150; i++) {
 //                int randomNumber = random.nextInt(10000000) + 1;
 //                htblColNameValue.clear();
 //                htblColNameValue.put("id", randomNumber);
@@ -251,8 +244,8 @@ public class DBApp {
 //                htblColNameValue.put("gpa", 0.95 );
 //                dbApp.insertIntoTable(strTableName, htblColNameValue);
 //            }
-//            Table table = Table.getTable(dbApp.allTables,"Student");
-//            table.viewTable();
+            Table table = Table.getTable(dbApp.allTables,"Student");
+            table.viewTable();
 
 
 //            htblColNameValue.clear();
