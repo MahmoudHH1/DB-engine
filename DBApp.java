@@ -13,7 +13,7 @@ import java.util.*;
 
 
 public class DBApp {
-    public static  ArrayList<Table> allTables;
+    public static ArrayList<Table> allTables;
 
     public DBApp() throws IOException, ClassNotFoundException {
         init();
@@ -100,7 +100,7 @@ public class DBApp {
                             Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
         // check if htblColNameValue size  = table.allcol.size()
         Table table = Table.getTable(allTables, strTableName);
-        TupleValidator.IsValidTuple(htblColNameValue , table);
+        TupleValidator.IsValidTuple(htblColNameValue, table);
 
         Object clusterKeyVal = strClusteringKeyValue;
         Object[] clusterKeyColIndex = (table.getClusterKeyAndIndex());
@@ -156,17 +156,18 @@ public class DBApp {
 
     public Iterator selectFromTable(SQLTerm[] arrSQLTerms,
                                     String[] strarrOperators) throws DBAppException, IOException, ClassNotFoundException {
-        ArrayList<Object>validRecords = new ArrayList<>();
-        Table table = Table.getTable(allTables,arrSQLTerms[0]._strTableName);
+        ArrayList<Object> validRecords = new ArrayList<>();
+        Table table = Table.getTable(allTables, arrSQLTerms[0]._strTableName);
         for (String path : table.getPagePaths()) {
             Page page = (Page) FileCreator.readObject(path);
-            for(Record record : page){
-                if (SQLTerm.evalExp(arrSQLTerms,record,table,strarrOperators)){
-                  validRecords.add(record);
-                };
+            for (Record record : page) {
+                if (SQLTerm.evalExp(arrSQLTerms, record, table, strarrOperators)) {
+                    validRecords.add(record);
+                }
+                ;
             }
         }
-        if (validRecords.size() == 0){
+        if (validRecords.size() == 0) {
             validRecords.add("No valid results");
         }
         return validRecords.iterator();
@@ -209,7 +210,7 @@ public class DBApp {
 //            htblColNameType2.put("title", "java.lang.String");
 //            htblColNameType2.put("author", "java.lang.String");
 //            htblColNameType2.put("year", "java.lang.Integer");
-//            dbApp.createTable("Book", "year", htblColNameType2);
+//            dbApp.createTable("Book", "title", htblColNameType2);
 //            dbApp.createIndex( strTableName, "name", "nameIndex" );
 
 //            System.out.println(tabel.getAllColumns().get(2).isClusterKey());
@@ -236,17 +237,22 @@ public class DBApp {
 ////
 //            Hashtable htblColNameValue = new Hashtable();
 //            Random random = new Random();
-//            for (int i = 0; i < 5; i++) {
-//                int randomNumber = random.nextInt(10000000) + 1;
-//                htblColNameValue.clear();
-//                htblColNameValue.put("id", randomNumber);
-//                htblColNameValue.put("name", "Ahmed Noor");
-//                htblColNameValue.put("gpa", 0.95 );
-//                dbApp.insertIntoTable(strTableName, htblColNameValue);
+//            Hashtable<String, Object> htblColNameType2 = new Hashtable<>();
+//            for (int i = 0; i < 1000000; i++) {
+//                StringBuilder sb = new StringBuilder(20);
+//                for (int j = 0; j < 20; j++) {
+//                    char randomChar = (char) (random.nextInt(26) + 'a'); // Generate a random lowercase letter
+//                    sb.append(randomChar);
+//                }
+//
+//                String randomString = sb.toString();
+//            htblColNameType2.put("title", randomString);
+//            htblColNameType2.put("author", "samaloty");
+//            htblColNameType2.put("year", 1900);
+//            dbApp.insertIntoTable("Book", htblColNameType2);
 //            }
-            Table table = Table.getTable(dbApp.allTables,"Student");
+            Table table = Table.getTable(dbApp.allTables,"Book");
             table.viewTable();
-
 
 //            htblColNameValue.clear();
 

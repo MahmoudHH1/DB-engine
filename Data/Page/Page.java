@@ -63,7 +63,7 @@ public class Page extends Vector<Record>  {
     public void insertIntoPage (Record rec) throws DBAppException, IOException, ClassNotFoundException {
         //getting the clustering key index
         int clusterKeyIdx = (int)Table.getTable(MetaData.loadAllTables(),table.getTableName()).getClusterKeyAndIndex()[1] ;
-        if (searchRecord((int)rec.get(clusterKeyIdx) ,clusterKeyIdx)==null){
+        if (searchRecord(rec.get(clusterKeyIdx) ,clusterKeyIdx)==null){
             this.add(rec) ;
             sortRecords(clusterKeyIdx);
             System.out.println(this.get(this.size()-1).get(clusterKeyIdx));
