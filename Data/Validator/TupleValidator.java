@@ -14,6 +14,8 @@ public class TupleValidator {
     public static void IsValidTuple(Hashtable<String, Object> insertedTuple , Table table) throws DBAppException {
         boolean isValid = true;
         Iterator<Map.Entry<String, Object>> InsertIterator = insertedTuple.entrySet().iterator();
+        System.out.println(table.getAllColumns().size());
+        System.out.println(insertedTuple.size());
         if(insertedTuple.size() == table.getAllColumns().size()){
             for (TableColumn column : table.getAllColumns()) {
                 Map.Entry<String, Object> insertedCol = InsertIterator.next();
@@ -36,7 +38,6 @@ public class TupleValidator {
             throw new DBAppException("Check tuple values and their types");
         }
 //        return isValid;
-
     }
 
     private static boolean checkValidDataType(String dataType, Object colValue) {
