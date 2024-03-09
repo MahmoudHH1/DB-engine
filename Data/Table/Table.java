@@ -209,14 +209,19 @@ public class Table implements Serializable {
             } else {
                 for (String pagePath : this.pagePaths) {
                     Page page = (Page) FileCreator.readObject(pagePath);
-                    Comparable clusterValue = rec.get((int) (getClusterKeyAndIndex()[1]));
-                    Comparable minPageVal = page.getRange()[0];
-                    Comparable maxPageVal = page.getRange()[1];
-                    if (minPageVal.equals(maxPageVal) ||
-                            isBetween(clusterValue, minPageVal, maxPageVal) ||
-                            isless(clusterValue,minPageVal,maxPageVal) ||
-                            (isGreater(clusterValue,minPageVal,maxPageVal)&& this.pagePaths.indexOf(pagePath)==this.pagePaths.size()-1))
-                        page.insertIntoPage(rec);
+                    if (rec != null) {
+                        Comparable clusterValue = rec.get((int) (getClusterKeyAndIndex()[1]));
+                        Comparable minPageVal = page.getRange()[0];
+                        Comparable maxPageVal = page.getRange()[1];
+                        if (minPageVal.equals(maxPageVal) ||
+                                isBetween(clusterValue, minPageVal, maxPageVal) ||
+                                isless(clusterValue, minPageVal, maxPageVal) ||
+                                (isGreater(clusterValue, minPageVal, maxPageVal) && this.pagePaths.indexOf(pagePath) == this.pagePaths.size() - 1)
+                        ) {
+                            page.insertIntoPage(rec);
+                            rec = null;
+                        }
+                    }
                     //if the record is inserted successfully there will be no overflow
                     //if overflow insert the keep inserting and shifting all records
                     //until you reach the last page of the table
@@ -224,9 +229,9 @@ public class Table implements Serializable {
                     page.save();
                     //can I read the next page while I am in this page
                     //we will find out
-                    if (overFlowRec != null && this.pagePaths.indexOf(pagePath) < this.pagePaths.size() - 1){
-                        System.out.println(this.pagePaths.get(pagePaths.indexOf(pagePath) +1));
-                        Page nextPage = ((Page) FileCreator.readObject(this.pagePaths.get(pagePaths.indexOf(pagePath) +1))) ;
+                    if (overFlowRec != null && this.pagePaths.indexOf(pagePath) < this.pagePaths.size() - 1) {
+                        System.out.println(this.pagePaths.get(pagePaths.indexOf(pagePath) + 1));
+                        Page nextPage = ((Page) FileCreator.readObject(this.pagePaths.get(pagePaths.indexOf(pagePath) + 1)));
                         nextPage.insertIntoPage(overFlowRec);
                         nextPage.save();
                     }

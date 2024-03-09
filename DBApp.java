@@ -236,7 +236,7 @@ public class DBApp {
 ////
 //            Hashtable htblColNameValue = new Hashtable();
 //            Random random = new Random();
-//            for (int i = 0; i < 150; i++) {
+//            for (int i = 0; i < 5; i++) {
 //                int randomNumber = random.nextInt(10000000) + 1;
 //                htblColNameValue.clear();
 //                htblColNameValue.put("id", randomNumber);

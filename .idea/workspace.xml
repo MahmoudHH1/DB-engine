@@ -4,37 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="saeed tested mahmoud">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="insertion is done by 99.9 percent bas how meen da el tested mahmoud ya 3am enta hagebak">
+      <change afterPath="$PROJECT_DIR$/Data_Entry/Tables/Student/Student.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data_Entry/Tables/Student/Student1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data_Entry/Tables/Student/Student2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/Database-Engine.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Database-Engine/DB engine.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Database-Engine/DBApp.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Handler/FileCreator.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Handler/FileRemover.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Page/Page$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Page/Page.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Page/Record.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/MetaData.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/Table.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/TableColumn.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Validator/MetaDataValidator.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Validator/TupleValidator.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data_Entry/metadata.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Database-Engine/Exceptions/DBAppException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Database-Engine/SQLTerm.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Database-Engine/g.g4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Database-Engine/resources/DBApp.config" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/DBApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Page/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Page/Page.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/Table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Table/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data_Entry/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data_Entry/metadata.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/Database-Engine.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/DB engine.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/DBApp.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Handler/FileCreator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Handler/FileRemover.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Page/Page$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Page/Page.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Page/Record.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/MetaData.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/Table.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/TableColumn.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Validator/MetaDataValidator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Validator/TupleValidator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data_Entry/metadata.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Exceptions/DBAppException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/SQLTerm.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/g.g4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/resources/DBApp.config" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -599,12 +596,36 @@
       <option name="project" value="LOCAL" />
       <updated>1709901349178</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="insertion is done by 99.9 percent bas how meen da el tested mahmoud ya 3am enta hagebak">
+      <option name="closed" value="true" />
+      <created>1710009046664</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1710009046664</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="RECENT_FILTERS">
       <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="HEAD" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/master" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
         <entry key="User">
           <value>
             <list>
@@ -625,6 +646,13 @@
             <State>
               <option name="FILTERS">
                 <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
                   <entry key="user">
                     <value>
                       <list>
@@ -641,7 +669,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Splited the code into packages and i added alose getters and setters" />
     <MESSAGE value="modifications" />
     <MESSAGE value="Saeed Merge into master" />
     <MESSAGE value="Saeed Merge into master3" />
@@ -666,7 +693,8 @@
     <MESSAGE value="working on binary search for clusterK key" />
     <MESSAGE value="gamadannnnnnn" />
     <MESSAGE value="saeed tested validator" />
-    <option name="LAST_COMMIT_MESSAGE" value="saeed tested validator" />
+    <MESSAGE value="insertion is done by 99.9 percent bas how meen da el tested mahmoud ya 3am enta hagebak" />
+    <option name="LAST_COMMIT_MESSAGE" value="insertion is done by 99.9 percent bas how meen da el tested mahmoud ya 3am enta hagebak" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -678,7 +706,7 @@
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/DBApp.java</url>
           <line>244</line>
-          <option name="timeStamp" value="117" />
+          <option name="timeStamp" value="135" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
