@@ -8,12 +8,14 @@ import Data.Table.TableColumn;
 import Data.Validator.TupleValidator;
 import Exceptions.DBAppException;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
 
 public class DBApp {
     public static  ArrayList<Table> allTables;
+    public static  ArrayList<bplustree> allBPlusTrees =new ArrayList<>();
 
     public DBApp() throws IOException, ClassNotFoundException {
         init();
@@ -65,6 +67,12 @@ public class DBApp {
                 }
             }
             MetaData.updateOnMetaDataFile(strTableName, strColName, strIndexName);
+            int i = table.getPageNum();
+            bplustree b =new bplustree(i*200,strTableName,strColName);
+            allBPlusTrees.add(b);
+            String colBPlusTreePath= "Data_Entry" + File.separator + "Tables"+ File.separator + strTableName + File.separator+ strColName+"."+strTableName +"B+Tree";
+            FileCreator.storeAsObject(b, colBPlusTreePath);
+
         } catch (Exception e) {
             throw new DBAppException("not implemented yet");
         }
@@ -93,6 +101,20 @@ public class DBApp {
             Table table = Table.getTable(this.allTables, strTableName);
 //            System.out.println(table.getAllColumns());
             table.insertIntoTable(htblColNameValue);
+            //////////////////////////////////////////////////////////////
+            for(bplustree b : allBPlusTrees){
+                Enumeration<String> keys = htblColNameValue.keys();
+                Enumeration<Object> values = htblColNameValue.elements();
+                while (keys.hasMoreElements()){
+                    String key = keys.nextElement();
+                    Object value = values.nextElement();
+                    if(b.getTableName().equals(strTableName) && b.getColName().equals(key)){
+                        b.insert(value,value.toString());
+                        String colBPlusTreePath= "Data_Entry" + File.separator + "Tables"+ File.separator + strTableName + File.separator+ key+"."+strTableName +"B+Tree";
+                        FileCreator.storeAsObject(b, colBPlusTreePath);
+                    }
+                }
+            }
         } else
             throw new DBAppException("The table is not implemented yet");
     }
@@ -157,7 +179,19 @@ public class DBApp {
             page.save();
         }
         // table.save();
-
+        //////////////////////////////////////////////////
+        // not completed yet
+        for(bplustree b : allBPlusTrees){
+            Enumeration<String> keys = htblColNameValue.keys();
+            Enumeration<Object> values = htblColNameValue.elements();
+            while (keys.hasMoreElements()){
+                String key = keys.nextElement();
+                Object value = values.nextElement();
+                if(b.getTableName().equals(strTableName) && b.getColName().equals(key)){
+                    b.delete(value);
+                }
+            }
+        }
     }
 
 
@@ -192,8 +226,8 @@ public class DBApp {
 //            System.out.println((int)Table.getTable(dbApp.allTables,"Student").getClusterKeyAndIndex()[1]);
 //            System.out.println(Integer.valueOf((Table.getTable(dbApp.allTables, "Student").getClusterKeyAndIndex()).toString()));
 //            System.out.println(Table.getTable(dbApp.allTables,"Student").getClusterKeyAndIndex()[1]);
-            Table table = Table.getTable(dbApp.allTables,"Student");
-            table.viewTable();
+//            Table table = Table.getTable(dbApp.allTables,"Student");
+//            table.viewTable();
 //            table.removeTable();
 
 
@@ -201,14 +235,24 @@ public class DBApp {
 //            htblColNameValue.put("id", new Integer(2343432));
 //            htblColNameValue.put("name", new String("Ahmed Noor"));
 //            htblColNameValue.put("gpa", new Double(0.95));
+//            Enumeration<String> keys = htblColNameValue.keys();
+//            Enumeration<Object> values = htblColNameValue.elements();
+//            while (keys.hasMoreElements()){
+//                String key = keys.nextElement();
+//                Object value = values.nextElement();
+//                System.out.println(key);
+//                System.out.println(value);
+//            }
+
+
 
 //            FileRemover.removeFileFromDirectory("Student" , "Student1");
 
 
-//            Hashtable htblColNameType = new Hashtable();
-//            htblColNameType.put("name", "java.lang.String");
-//            htblColNameType.put("gpa", "java.lang.double");
-//            htblColNameType.put("id", "java.lang.Integer");
+            Hashtable htblColNameType = new Hashtable();
+            htblColNameType.put("name", "java.lang.String");
+            htblColNameType.put("gpa", "java.lang.double");
+            htblColNameType.put("id", "java.lang.Integer");
 //            dbApp.createTable(strTableName, "id", htblColNameType);
 
 //            Hashtable<String, String> htblColNameType2 = new Hashtable<>();
@@ -216,8 +260,8 @@ public class DBApp {
 //            htblColNameType2.put("author", "java.lang.String");
 //            htblColNameType2.put("year", "java.lang.Integer");
 //            dbApp.createTable("Book", "year", htblColNameType2);
-//            dbApp.createIndex( strTableName, "name", "nameIndex" );
-
+            dbApp.createIndex( strTableName, "name", "nameIndex" );
+//
 //            System.out.println(tabel.getAllColumns().get(2).isClusterKey());
 
 //            System.out.println(tabel.getAllColumns().get(0));
@@ -225,7 +269,7 @@ public class DBApp {
 //            System.out.println(tabel.getAllColumns().get(2));
 
 //
-//
+
 //            htblColNameValue.put("id", new Integer(2343432));
 //            htblColNameValue.put("name", new String("Ahmed Noor"));
 //            htblColNameValue.put("gpa", new Double(0.95));
@@ -292,27 +336,27 @@ public class DBApp {
 //            System.out.println(p);
 //            table.viewTable();
 
-            System.out.println("Selection Results:__________");
-            SQLTerm[] arrSQLTerms;
-            arrSQLTerms = new SQLTerm[]{new SQLTerm() , new SQLTerm()};
-            arrSQLTerms[0]._strTableName =  "Student";
-            arrSQLTerms[0]._strColumnName=  "name";
-            arrSQLTerms[0]._strOperator  =  "=";
-            arrSQLTerms[0]._objValue     =  "John Noor";
-
-            arrSQLTerms[1]._strTableName =  "Student";
-            arrSQLTerms[1]._strColumnName=  "gpa";
-            arrSQLTerms[1]._strOperator  =  ">";
-            arrSQLTerms[1]._objValue     =  new Double( 9.9 );
-
-            String[]strarrOperators = new String[1];
-            strarrOperators[0] = "OR";
+//            System.out.println("Selection Results:__________");
+//            SQLTerm[] arrSQLTerms;
+//            arrSQLTerms = new SQLTerm[]{new SQLTerm() , new SQLTerm()};
+//            arrSQLTerms[0]._strTableName =  "Student";
+//            arrSQLTerms[0]._strColumnName=  "name";
+//            arrSQLTerms[0]._strOperator  =  "=";
+//            arrSQLTerms[0]._objValue     =  "John Noor";
+//
+//            arrSQLTerms[1]._strTableName =  "Student";
+//            arrSQLTerms[1]._strColumnName=  "gpa";
+//            arrSQLTerms[1]._strOperator  =  ">";
+//            arrSQLTerms[1]._objValue     =  new Double( 9.9 );
+//
+//            String[]strarrOperators = new String[1];
+//            strarrOperators[0] = "OR";
 
             // select * from Student where name = "John Noor" or gpa = 1.5;
-            Iterator resultSet = dbApp.selectFromTable(arrSQLTerms , strarrOperators);
-            while(resultSet.hasNext()) {
-                System.out.println(resultSet.next());
-            }
+//            Iterator resultSet = dbApp.selectFromTable(arrSQLTerms , strarrOperators);
+//            while(resultSet.hasNext()) {
+//                System.out.println(resultSet.next());
+//            }
         } catch (Exception exp) {
             exp.printStackTrace();
         }
