@@ -218,7 +218,7 @@ public class DBApp {
 //            htblColNameType.put("gpa", "java.lang.double");
 //            htblColNameType.put("id", "java.lang.Integer");
 //            dbApp.createTable(strTableName, "id", htblColNameType);
-//            dbApp.createIndex( strTableName, "name", "nameIndex" );
+            dbApp.createIndex( strTableName, "id", "idIndex" );
 
 //            Hashtable<String, String> htblColNameType2 = new Hashtable<>();
 //            htblColNameType2.put("title", "java.lang.String");

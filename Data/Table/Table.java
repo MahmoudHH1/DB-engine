@@ -30,8 +30,10 @@ public class Table implements Serializable {
         this.tableName = allColumns.get(0).getTableName();
         this.tableDir = tablesDirectory + File.separator + tableName;
         this.allColumns = allColumns;
-        File f = new File(tableDir);
-        System.out.println(f.mkdir() ? "Table Created" : "Table not Created");
+        File tableFolder = new File(tableDir);
+        File indiciesFolder = new File(tableDir+File.separator+"Indices");
+        System.out.println(tableFolder.mkdir() ? "Table Created" : "Table not Created");
+        System.out.println(indiciesFolder.mkdir() ? "indexes folder Created" : "indexes folder not Created");
         MetaData.writeDataToMetaDatafile(allColumns);
         save();
     }
@@ -68,7 +70,7 @@ public class Table implements Serializable {
                 return table;
             }
         }
-        throw new DBAppException("Table not found");
+        return null;
     }
 
     public int getPageNum() {

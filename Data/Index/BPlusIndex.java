@@ -27,7 +27,11 @@ public class BPlusIndex implements Serializable {
         this.tableName=tableName;
         this.colName=colName;
         this.idxName = idxName ;
-        this.path = "Data_Entry" + File.separator + "Tables"+ File.separator + tableName + File.separator+ idxName;
+        this.path = "Data_Entry" + File.separator +
+                    "Tables"+ File.separator +
+                    tableName + File.separator+
+                    "indices"+File.separator+
+                    idxName;
     }
     public String getIndexPath(){
         return this.path ;
