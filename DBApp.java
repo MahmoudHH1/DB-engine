@@ -1,5 +1,6 @@
 import Data.Handler.FileCreator;
 import Data.Handler.FileRemover;
+import Data.Index.BPlusIndex;
 import Data.Page.Page;
 import Data.Page.Record;
 import Data.Table.MetaData;
@@ -8,25 +9,23 @@ import Data.Table.TableColumn;
 import Data.Validator.TupleValidator;
 import Exceptions.DBAppException;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
 
 public class DBApp {
     public static ArrayList<Table> allTables;
-
+    public static  ArrayList<BPlusIndex> allBPlusIndecies =new ArrayList<>();
     public DBApp() throws IOException, ClassNotFoundException {
         init();
     }
-
     // this does whatever initialization you would like
     // or leave it empty if there is no code you want to
     // execute at application startup
     public void init() throws IOException, ClassNotFoundException {
         allTables = MetaData.loadAllTables();
     }
-
-
     // following method creates one table only
     // strClusteringKeyColumn is the name of the column that will be the primary
     // key and the clustering column as well. The data type of that column will
@@ -48,8 +47,6 @@ public class DBApp {
         }
         Table table = new Table(allColumns);
     }
-
-
     // following method creates a B+tree index
     public void createIndex(String strTableName,
                             String strColName,
@@ -65,12 +62,16 @@ public class DBApp {
                 }
             }
             MetaData.updateOnMetaDataFile(strTableName, strColName, strIndexName);
+            int i = table.getPageNum();
+            BPlusIndex b =new BPlusIndex(i*200,strTableName,strColName);
+            b.save();
+            allBPlusIndecies.add(b);
+//            String colBPlusTreePath= "Data_Entry" + File.separator + "Tables"+ File.separator + strTableName + File.separator+ strIndexName;
+//            FileCreator.storeAsObject(b, colBPlusTreePath);
         } catch (Exception e) {
             throw new DBAppException("not implemented yet");
         }
     }
-
-
     // following method inserts one row only.
     // htblColNameValue must include a value for the primary key
     public void insertIntoTable(String strTableName,
@@ -86,11 +87,23 @@ public class DBApp {
         if (tableExists) {
             Table table = Table.getTable(this.allTables, strTableName);
             table.insertIntoTable(htblColNameValue);
+            //////////////////////////////////////////////////////////////
+            for(BPlusIndex b : allBPlusIndecies){
+                Enumeration<String> keys = htblColNameValue.keys();
+                Enumeration<Object> values = htblColNameValue.elements();
+                while (keys.hasMoreElements()){
+                    String key = keys.nextElement();
+                    Object value = values.nextElement();
+                    if(b.getTableName().equals(strTableName) && b.getColName().equals(key)){
+                        b.insert(value,value.toString());
+                        String colBPlusTreePath= "Data_Entry" + File.separator + "Tables"+ File.separator + strTableName +File.separator+ key+"Index";
+                        FileCreator.storeAsObject(b, colBPlusTreePath);
+                    }
+                }
+            }
         } else
             throw new DBAppException("The table is not implemented yet");
     }
-
-
     // following method updates one row only
     // htblColNameValue holds the key and new value
     // htblColNameValue will not include clustering key as column name
@@ -124,8 +137,6 @@ public class DBApp {
             }
         }
     }
-
-
     // following method could be used to delete one or more rows.
     // htblColNameValue holds the key and value. This will be used in search
     // to identify which rows/tuples to delete.
@@ -150,10 +161,20 @@ public class DBApp {
             page.save();
         }
         // table.save();
-
+        //////////////////////////////////////////////////
+        // not completed yet
+        for(BPlusIndex b : allBPlusIndecies) {
+            Enumeration<String> keys = htblColNameValue.keys();
+            Enumeration<Object> values = htblColNameValue.elements();
+            while (keys.hasMoreElements()) {
+                String key = keys.nextElement();
+                Object value = values.nextElement();
+                if (b.getTableName().equals(strTableName) && b.getColName().equals(key)) {
+                    b.delete(value);
+                }
+            }
+        }
     }
-
-
     public Iterator selectFromTable(SQLTerm[] arrSQLTerms,
                                     String[] strarrOperators) throws DBAppException, IOException, ClassNotFoundException {
         ArrayList<Object> validRecords = new ArrayList<>();
@@ -172,8 +193,6 @@ public class DBApp {
         }
         return validRecords.iterator();
     }
-
-
     public void deleteTable(String tableName) throws DBAppException {
         Table.getTable(this.allTables, tableName).removeTable();
     }
@@ -187,24 +206,18 @@ public class DBApp {
 //            System.out.println(Integer.valueOf((Table.getTable(dbApp.allTables, "Student").getClusterKeyAndIndex()).toString()));
 //            System.out.println(Table.getTable(dbApp.allTables,"Student").getClusterKeyAndIndex()[1]);
 //            Table table = Table.getTable(dbApp.allTables,"Student");
-////            table.viewTable();
+//            table.viewTable();
+//            table.viewTable();
 //            table.removeTable();
-
-
-//            Hashtable htblColNameValue = new Hashtable();
-//            dbApp.deleteTable("Student");
-//            htblColNameValue.put("id", new Integer(2343432));
-//            htblColNameValue.put("name", new String("Ahmed Noor"));
-//            htblColNameValue.put("gpa", new Double(0.95));
 
 //            FileRemover.removeFileFromDirectory("Student" , "Student1");
 
-////
-//            Hashtable htblColNameType = new Hashtable();
-//            htblColNameType.put("name", "java.lang.String");
-//            htblColNameType.put("gpa", "java.lang.double");
-//            htblColNameType.put("id", "java.lang.Integer");
-//            dbApp.createTable(strTableName, "id", htblColNameType);
+            Hashtable htblColNameType = new Hashtable();
+            htblColNameType.put("name", "java.lang.String");
+            htblColNameType.put("gpa", "java.lang.double");
+            htblColNameType.put("id", "java.lang.Integer");
+            dbApp.createTable(strTableName, "id", htblColNameType);
+//            dbApp.createIndex( strTableName, "name", "nameIndex" );
 
 //            Hashtable<String, String> htblColNameType2 = new Hashtable<>();
 //            htblColNameType2.put("title", "java.lang.String");
@@ -228,7 +241,11 @@ public class DBApp {
 //            FileRemover.removeFileFromDirectory("Student" , "Student1");
 //            Table.getTable(dbApp.allTables,"Student").viewTable();
 
-////
+//            Hashtable htblColNameValue = new Hashtable();
+//            dbApp.deleteTable("Student");
+//            htblColNameValue.put("id", new Integer(2343432));
+//            htblColNameValue.put("name", new String("Ahmed Noor"));
+//            htblColNameValue.put("gpa", new Double(0.95));
 
 //            htblColNameValue.put("id", new Integer( 12 ));
 //            htblColNameValue.put("name", new String("Ahmed Noor" ) );
@@ -245,15 +262,12 @@ public class DBApp {
 //                    sb.append(randomChar);
 //                }
 //
-//                String randomString = sb.toString();
+//            String randomString = sb.toString();
 //            htblColNameType2.put("title", randomString);
 //            htblColNameType2.put("author", "samaloty");
 //            htblColNameType2.put("year", 1900);
 //            dbApp.insertIntoTable("Book", htblColNameType2);
 //            }
-            Table table = Table.getTable(dbApp.allTables,"Book");
-            table.viewTable();
-
 //            htblColNameValue.clear();
 
 

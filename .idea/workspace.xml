@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="kolo t7t el control&#10;done on time">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Validator/TupleValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Validator/TupleValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SQLTerm.java" beforeDir="false" afterPath="$PROJECT_DIR$/SQLTerm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/DBApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Validator/TupleValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Validator/TupleValidator.class" afterDir="false" />
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="saeed and the index :&gt;">
+      <change afterPath="$PROJECT_DIR$/Data/Index/BPlusIndex.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
