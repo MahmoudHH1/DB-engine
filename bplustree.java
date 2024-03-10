@@ -1,3 +1,8 @@
+import Data.Handler.FileCreator;
+import com.sun.corba.se.impl.orbutil.ObjectWriter;
+
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,8 +14,26 @@ public class bplustree implements Serializable {
 	LeafNode firstLeaf;
 	private String tableName;
 	private String colName;
+	private String path ;
 
+	/**
+	 * Constructor
+	 * @param m: the order (fanout) of the B+ tree
+	 */
+	public bplustree(int m,String tableName,String colName) {
+		this.m = m;
+		this.root = null;
+		this.tableName=tableName;
+		this.colName=colName;
+		this.path = "Data_Entry" + File.separator + "Tables"+ File.separator + tableName + File.separator+ colName+"Index";
+	}
 
+	public String getIndexPath(){
+		return this.path ;
+	}
+	public void save() throws IOException {
+		FileCreator.storeAsObject(this, path);
+	}
 	public String getTableName(){return tableName;}
 	public String getColName(){return colName;}
 	/*~~~~~~~~~~~~~~~~ HELPER FUNCTIONS ~~~~~~~~~~~~~~~~*/
@@ -553,7 +576,15 @@ public class bplustree implements Serializable {
 	 * @param key: an integer key to be used in the dictionary pair
 	 * @param value: a floating point number to be used in the dictionary pair
 	 */
-	public void insert(Object key, String value){
+	//    B+
+	// id age
+	// 1  20
+	// 2  50
+	// insert id =3 , age=60          // B+  key:60  , value:3      node( value , refrence)
+																					// cluster
+	// btree.toString()
+
+	public void insert(Object key, Object value){
 		if (isEmpty()) {
 
 			/* Flow of execution goes here only when first insert takes place */
@@ -565,7 +596,6 @@ public class bplustree implements Serializable {
 			this.firstLeaf = ln;
 
 		} else {
-
 			// Find leaf node to insert into
 			LeafNode ln = (this.root == null) ? this.firstLeaf :
 												findLeafNode(key);
@@ -647,7 +677,7 @@ public class bplustree implements Serializable {
 	 * @param key: the key to be searched within the B+ tree
 	 * @return the floating point value associated with the key within the B+ tree
 	 */
-	public String search(Object key) {
+	public Object search(Object key) {
 
 		// If B+ tree is completely empty, simply return null
 		if (isEmpty()) { return null; }
@@ -676,10 +706,10 @@ public class bplustree implements Serializable {
 	 * @return an ArrayList<Double> that holds all values of dictionary pairs
 	 * whose keys are within the specified range
 	 */
-	public ArrayList<String> search(Object lowerBound, Object upperBound) {
+	public ArrayList<Object> search(Object lowerBound, Object upperBound) {
 
 		// Instantiate Double array to hold values
-		ArrayList<String> values = new ArrayList<String>();
+		ArrayList<Object> values = new ArrayList<Object>();
 
 		// Iterate through the doubly linked list of leaves
 		LeafNode currNode = this.firstLeaf;
@@ -709,16 +739,7 @@ public class bplustree implements Serializable {
 		return values;
 	}
 
-	/**
-	 * Constructor
-	 * @param m: the order (fanout) of the B+ tree
-	 */
-	public bplustree(int m,String tableName,String colName) {
-		this.m = m;
-		this.root = null;
-		this.tableName=tableName;
-		this.colName=colName;
-	}
+
 
 
 	/**
@@ -1025,14 +1046,14 @@ public class bplustree implements Serializable {
 	 */
 	public class DictionaryPair implements Comparable<DictionaryPair> {
 		Object key;
-		String value;
+		Object value;
 
 		/**
 		 * Constructor
 		 * @param key: the key of the key-value pair
 		 * @param value: the value of the key-value pair
 		 */
-		public DictionaryPair(Object key, String value) {
+		public DictionaryPair(Object key, Object value) {
 			this.key = key;
 			this.value = value;
 		}
@@ -1085,19 +1106,19 @@ public class bplustree implements Serializable {
 
 
 
-//			bpt.insert("Ahmed","Ahmed");
-//			bpt.insert("JJ","PlaceofJJ");
-//			System.out.println(bpt.search("Ahmed"));
-////			bpt.insert("JJ","PlaceofJJ2");
-//			bpt.delete("JJ");
-//			System.out.println(bpt.search("JJ"));
-//			bpt.insert("R","placeofR");
-//			System.out.println(bpt.search("R"));
-//			bpt.insert("Banana","PlaceofBanana");
-//			System.out.println(bpt.search("Ahmed","R"));
+			bpt.insert("Ahmed","Ahmed");
+			bpt.insert("JJ","PlaceofJJ");
+			System.out.println(bpt.search("Ahmed"));
+//			bpt.insert("JJ","PlaceofJJ2");
+			bpt.delete("JJ");
+			System.out.println(bpt.search("JJ"));
+			bpt.insert("R","placeofR");
+			System.out.println(bpt.search("R"));
+			bpt.insert("Banana","PlaceofBanana");
+			System.out.println(bpt.search("Ahmed","R"));
 
-			bpt.insert(21,"PlaceofInt");
-			System.out.println(bpt.search(21));
+//			bpt.insert(21,"PlaceofInt");
+//			System.out.println(bpt.search(21));
 //
 //			bpt.insert(2.5,"PlaceofDouble");
 //			System.out.println(bpt.search(2.5));

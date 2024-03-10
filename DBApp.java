@@ -69,8 +69,9 @@ public class DBApp {
             MetaData.updateOnMetaDataFile(strTableName, strColName, strIndexName);
             int i = table.getPageNum();
             bplustree b =new bplustree(i*200,strTableName,strColName);
+            b.save();
             allBPlusTrees.add(b);
-            String colBPlusTreePath= "Data_Entry" + File.separator + "Tables"+ File.separator + strTableName + File.separator+ strColName+"."+strTableName +"B+Tree";
+            String colBPlusTreePath= "Data_Entry" + File.separator + "Tables"+ File.separator + strTableName + File.separator+ strIndexName;
             FileCreator.storeAsObject(b, colBPlusTreePath);
 
         } catch (Exception e) {
@@ -110,7 +111,7 @@ public class DBApp {
                     Object value = values.nextElement();
                     if(b.getTableName().equals(strTableName) && b.getColName().equals(key)){
                         b.insert(value,value.toString());
-                        String colBPlusTreePath= "Data_Entry" + File.separator + "Tables"+ File.separator + strTableName + File.separator+ key+"."+strTableName +"B+Tree";
+                        String colBPlusTreePath= "Data_Entry" + File.separator + "Tables"+ File.separator + strTableName +File.separator+ key+"Index";
                         FileCreator.storeAsObject(b, colBPlusTreePath);
                     }
                 }
@@ -249,10 +250,10 @@ public class DBApp {
 //            FileRemover.removeFileFromDirectory("Student" , "Student1");
 
 
-            Hashtable htblColNameType = new Hashtable();
-            htblColNameType.put("name", "java.lang.String");
-            htblColNameType.put("gpa", "java.lang.double");
-            htblColNameType.put("id", "java.lang.Integer");
+//            Hashtable htblColNameType = new Hashtable();
+//            htblColNameType.put("name", "java.lang.String");
+//            htblColNameType.put("gpa", "java.lang.double");
+//            htblColNameType.put("id", "java.lang.Integer");
 //            dbApp.createTable(strTableName, "id", htblColNameType);
 
 //            Hashtable<String, String> htblColNameType2 = new Hashtable<>();
