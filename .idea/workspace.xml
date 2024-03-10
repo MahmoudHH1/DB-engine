@@ -4,18 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="saeed tested mahmoud">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="saeed added some flavors to the index">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/DBApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Handler/FileRemover.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Handler/FileRemover.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Page/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Page/Page.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SQLTerm.java" beforeDir="false" afterPath="$PROJECT_DIR$/SQLTerm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/DBApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/Table.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Validator/TupleValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Validator/TupleValidator.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +35,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Habiba" />
+        <entry key="$PROJECT_DIR$" value="Mr_X" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -79,27 +69,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.DBApp.executor": "Run",
-    "Application.FileRemover.executor": "Run",
-    "Application.MetaData.executor": "Run",
-    "Application.Record.executor": "Run",
-    "Application.TableColumn.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.DBApp.executor&quot;: &quot;Run&quot;,
+    &quot;Application.FileRemover.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MetaData.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Record.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TableColumn.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Coding/DataBase/Database_projects/Database_Engine Project/Database-Engine&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.DBApp">
     <configuration name="DBApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="DBApp" />
@@ -205,30 +196,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1708726737774</updated>
-    </task>
-    <task id="LOCAL-00001" summary="fixed exception when creating folder and object file">
-      <option name="closed" value="true" />
-      <created>1709118724432</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1709118724432</updated>
-    </task>
-    <task id="LOCAL-00002" summary="no progress">
-      <option name="closed" value="true" />
-      <created>1709133966882</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1709133966882</updated>
-    </task>
-    <task id="LOCAL-00003" summary="no progress">
-      <option name="closed" value="true" />
-      <created>1709133976104</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1709133976104</updated>
     </task>
     <task id="LOCAL-00004" summary="Added tableDir attribute to reference table's directory instead of tablePath which references the file with page paths.">
       <option name="closed" value="true" />
@@ -572,12 +539,76 @@
       <option name="project" value="LOCAL" />
       <updated>1709852039882</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="saeed is working on bonus">
+      <option name="closed" value="true" />
+      <created>1709901349178</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1709901349178</updated>
+    </task>
+    <task id="LOCAL-00048" summary="insertion is done by 99.9 percent bas how meen da el tested mahmoud ya 3am enta hagebak">
+      <option name="closed" value="true" />
+      <created>1710009046664</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1710009046664</updated>
+    </task>
+    <task id="LOCAL-00049" summary="kolo t7t el control&#10;done on time">
+      <option name="closed" value="true" />
+      <created>1710014456039</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1710014456039</updated>
+    </task>
+    <task id="LOCAL-00050" summary="saeed added some flavors to the index and made it understandable also added some functions in TableColumn and Table related to the B+ index">
+      <option name="closed" value="true" />
+      <created>1710034484128</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1710034484128</updated>
+    </task>
+    <task id="LOCAL-00051" summary="saeed added some flavors to the index">
+      <option name="closed" value="true" />
+      <created>1710035345583</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1710035345584</updated>
+    </task>
+    <task id="LOCAL-00052" summary="saeed added some flavors to the index">
+      <option name="closed" value="true" />
+      <created>1710061342797</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1710061342797</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="RECENT_FILTERS">
       <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="HEAD" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/master" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
         <entry key="User">
           <value>
             <list>
@@ -598,6 +629,13 @@
             <State>
               <option name="FILTERS">
                 <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
                   <entry key="user">
                     <value>
                       <list>
@@ -614,10 +652,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Splited the code into packages and i added alose getters and setters" />
-    <MESSAGE value="modifications" />
-    <MESSAGE value="Saeed Merge into master" />
-    <MESSAGE value="Saeed Merge into master3" />
     <MESSAGE value="Saeed Merge into master4" />
     <MESSAGE value="function kda f metadata w showaya kda f insert" />
     <MESSAGE value="." />
@@ -639,7 +673,11 @@
     <MESSAGE value="working on binary search for clusterK key" />
     <MESSAGE value="gamadannnnnnn" />
     <MESSAGE value="saeed tested validator" />
-    <option name="LAST_COMMIT_MESSAGE" value="saeed tested validator" />
+    <MESSAGE value="insertion is done by 99.9 percent bas how meen da el tested mahmoud ya 3am enta hagebak" />
+    <MESSAGE value="kolo t7t el control&#10;done on time" />
+    <MESSAGE value="saeed added some flavors to the index and made it understandable also added some functions in TableColumn and Table related to the B+ index" />
+    <MESSAGE value="saeed added some flavors to the index" />
+    <option name="LAST_COMMIT_MESSAGE" value="saeed added some flavors to the index" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

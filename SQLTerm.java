@@ -21,7 +21,7 @@ public class SQLTerm {
     }
 
     //binary search to reduce range of search ex:(id , age)
-    // [(1,5) ,(2,20),(3,6) ,(4,20) ,5 , 6, 7, 7, 8] ->( id < 5 )->
+    // [(1,5) ,(2,20),(3,6) ,(4,20) ,5 , 6, 7, 8, 9] ->( id < 5 )->
     // [ (1,5) ,(2,20),(3,6) ,(4,20) ] -> (age = 20)-> [(2,20) ,(4,20)]
 
     private static boolean[] evaluateSql(SQLTerm[] terms,Record r, Table t) throws DBAppException {
