@@ -67,7 +67,7 @@ public class DBApp {
                 }
             }
             MetaData.updateOnMetaDataFile(strTableName, strColName, strIndexName);
-            BPlusIndex b = IndexControler.CreateIndex(table , strColName , strIndexName);
+            BPlusIndex b = IndexControler.createIndex(table , strColName , strIndexName);
             allBPlusIndecies.add(b);
         } catch (Exception e) {
             throw new DBAppException("not implemented yet");

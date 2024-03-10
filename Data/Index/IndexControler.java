@@ -9,13 +9,13 @@ import java.io.IOException;
 
 public class IndexControler {
 
-    public  static BPlusIndex CreateIndex(Table table , String strColName , String strIndexName) throws IOException {
+    public  static BPlusIndex createIndex(Table table , String strColName , String strIndexName) throws IOException {
         int i = table.getPageNum();
         BPlusIndex b =new BPlusIndex(i*200,table.getTableName(),strColName , strIndexName);
         b.save();
         return b;
     }
-    public void InsertIntoIndex(){};
+    public void insertIntoIndex(){};
 
     public static void updateIndex(Table table ){
 
