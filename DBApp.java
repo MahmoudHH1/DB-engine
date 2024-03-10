@@ -1,6 +1,7 @@
 import Data.Handler.FileCreator;
 import Data.Handler.FileRemover;
 import Data.Index.BPlusIndex;
+import Data.Index.IndexControler;
 import Data.Page.Page;
 import Data.Page.Record;
 import Data.Table.MetaData;
@@ -35,6 +36,10 @@ public class DBApp {
     public void createTable(String strTableName,
                             String strClusteringKeyColumn,
                             Hashtable<String, String> htblColNameType) throws DBAppException, IOException {
+        Table t = Table.getTable(allTables , strTableName);
+        if(t != null){
+            throw new DBAppException("Table is already exist");
+        }
         ArrayList<TableColumn> allColumns = new ArrayList<>();
         for (String column : htblColNameType.keySet()) {
             TableColumn newColumn = new TableColumn(
@@ -62,12 +67,8 @@ public class DBApp {
                 }
             }
             MetaData.updateOnMetaDataFile(strTableName, strColName, strIndexName);
-            int i = table.getPageNum();
-            BPlusIndex b =new BPlusIndex(i*200,strTableName,strColName);
-            b.save();
+            BPlusIndex b = IndexControler.CreateIndex(table , strColName , strIndexName);
             allBPlusIndecies.add(b);
-//            String colBPlusTreePath= "Data_Entry" + File.separator + "Tables"+ File.separator + strTableName + File.separator+ strIndexName;
-//            FileCreator.storeAsObject(b, colBPlusTreePath);
         } catch (Exception e) {
             throw new DBAppException("not implemented yet");
         }
@@ -212,11 +213,11 @@ public class DBApp {
 
 //            FileRemover.removeFileFromDirectory("Student" , "Student1");
 
-            Hashtable htblColNameType = new Hashtable();
-            htblColNameType.put("name", "java.lang.String");
-            htblColNameType.put("gpa", "java.lang.double");
-            htblColNameType.put("id", "java.lang.Integer");
-            dbApp.createTable(strTableName, "id", htblColNameType);
+//            Hashtable htblColNameType = new Hashtable();
+//            htblColNameType.put("name", "java.lang.String");
+//            htblColNameType.put("gpa", "java.lang.double");
+//            htblColNameType.put("id", "java.lang.Integer");
+//            dbApp.createTable(strTableName, "id", htblColNameType);
 //            dbApp.createIndex( strTableName, "name", "nameIndex" );
 
 //            Hashtable<String, String> htblColNameType2 = new Hashtable<>();

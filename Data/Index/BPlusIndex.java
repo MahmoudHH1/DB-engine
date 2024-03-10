@@ -15,19 +15,20 @@ public class BPlusIndex implements Serializable {
     LeafNode firstLeaf;
     private String tableName;
     private String colName;
+    private String idxName ;
     private String path ;
     /**
      * Constructor
      * @param m: the order (fanout) of the B+ tree
      */
-    public BPlusIndex(int m,String tableName,String colName) {
+    public BPlusIndex(int m,String tableName,String colName , String idxName) {
         this.m = m;
         this.root = null;
         this.tableName=tableName;
         this.colName=colName;
-        this.path = "Data_Entry" + File.separator + "Tables"+ File.separator + tableName + File.separator+ colName+"Index";
+        this.idxName = idxName ;
+        this.path = "Data_Entry" + File.separator + "Tables"+ File.separator + tableName + File.separator+ idxName;
     }
-
     public String getIndexPath(){
         return this.path ;
     }
@@ -36,6 +37,7 @@ public class BPlusIndex implements Serializable {
     }
     public String getTableName(){return tableName;}
     public String getColName(){return colName;}
+    public String getIdxName(){return idxName;};
     /*~~~~~~~~~~~~~~~~ HELPER FUNCTIONS ~~~~~~~~~~~~~~~~*/
 
     /**
@@ -85,9 +87,6 @@ public class BPlusIndex implements Serializable {
             return findLeafNode((InternalNode) child, key);
         }
     }
-
-
-
     private LeafNode findLeafNode(InternalNode node, Object key) {
         // Initialize keys and index variable
         Object[] keys = node.keys;
@@ -1102,7 +1101,7 @@ public class BPlusIndex implements Serializable {
 //			boolean firstLine = true;
 
             // Create initial B+ tree
-            BPlusIndex bpt = new BPlusIndex(3,"","");
+            BPlusIndex bpt = new BPlusIndex(3,"","","");
             bpt.insert("Ahmed","Ahmed");
             bpt.insert("JJ","PlaceofJJ");
             System.out.println(bpt.search("Ahmed"));

@@ -53,6 +53,7 @@ public class TableColumn {
     public boolean isClusterKey() {
         return isClusterKey;
     }
+    public boolean isColumnBIdx(){return  indexName != null && indexType != null;};
 
     public void setClusterKey(boolean clusterKey) {
         isClusterKey = clusterKey;

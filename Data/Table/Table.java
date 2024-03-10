@@ -40,15 +40,9 @@ public class Table implements Serializable {
         tableFilePath = tableDir + File.separator + tableName;
         FileCreator.storeAsObject(this, tableFilePath);
     }
-
     public ArrayList<TableColumn> getAllColumns() {
         return allColumns;
     }
-
-    public Vector<String> getPagePaths() {
-        return pagePaths;
-    }
-
     public static String getTablesDirectory() {
         return tablesDirectory;
     }
@@ -64,36 +58,10 @@ public class Table implements Serializable {
     public String getTableName() {
         return tableName;
     }
-
-    public int getPageNum() {
-        return pageNum;
-    }
-
-    public void setPageNum(int pageNum) {
-        this.pageNum = pageNum;
-    }
-
-    public void setAllColumns(ArrayList<TableColumn> allColumns) {
-        this.allColumns = allColumns;
-    }
-
-    public void setTableName(String tableName) {
-        this.tableName = tableName;
-    }
-
-    public void removePageFromArr(String pagePath) {
-        this.pagePaths.remove(pagePath);
-    }
-
     public static String getTableFilePath(String name) {
         return tablesDirectory + File.separator +
                 name + File.separator + name;
     }
-
-    public void appendPagePath(String filePath) {
-        pagePaths.add(filePath);
-    }
-
     public static Table getTable(ArrayList<Table> allTables, String tableName) throws DBAppException {
         for (Table table : allTables) {
             if (table.tableName.equals(tableName)) {
@@ -103,6 +71,33 @@ public class Table implements Serializable {
         throw new DBAppException("Table not found");
     }
 
+    public int getPageNum() {
+        return pageNum;
+    }
+    public Vector<String> getPagePaths() {
+        return pagePaths;
+    }
+    public ArrayList<TableColumn> getAllColumnBIdxs(){
+        ArrayList<TableColumn> allColIdxs = new ArrayList<>();
+        for (TableColumn col : allColumns){
+            if(col.isColumnBIdx()){
+                allColIdxs.add(col);
+            }
+        }
+        return allColIdxs;
+    }
+    public boolean isColumnNameBIdx(String colName) throws DBAppException {
+        TableColumn col = getColumnByName(colName);
+        return col.isColumnBIdx();
+    }
+    public TableColumn getColumnByName(String colName) throws DBAppException {
+        for (TableColumn col : allColumns){
+            if(col.getColumnName().equals(colName)){
+               return col ;
+            }
+        }
+        throw new DBAppException("Column not found");
+    }
     public Object[] getClusterKeyAndIndex() throws DBAppException {
         for (int i = 0; i < allColumns.size(); i++) {
             if (allColumns.get(i).isClusterKey()) {
@@ -111,7 +106,6 @@ public class Table implements Serializable {
         }
         throw new DBAppException("No cluster Key for this Table");
     }
-
     public Hashtable<Integer, Object> getColIdxVal(Hashtable<String, Object> ht) throws DBAppException {
 
         Hashtable<Integer, Object> res = new Hashtable<>();
@@ -120,7 +114,6 @@ public class Table implements Serializable {
         }
         return res;
     }
-
     public int idxFromName(String name) throws DBAppException {
         for (int i = 0; i < getAllColumns().size(); i++) {
             if (getAllColumns().get(i).equals(name)) {
@@ -128,6 +121,21 @@ public class Table implements Serializable {
             }
         }
         throw new DBAppException("Invalid Column Name: " + name);
+    }
+    public void setAllColumns(ArrayList<TableColumn> allColumns) {
+        this.allColumns = allColumns;
+    }
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
+    }
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
+    }
+    public void removePageFromArr(String pagePath) {
+        this.pagePaths.remove(pagePath);
+    }
+    public void appendPagePath(String filePath) {
+        pagePaths.add(filePath);
     }
 
     // skeleton method for searching for records O(n)
