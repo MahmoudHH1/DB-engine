@@ -132,7 +132,7 @@ public class DBApp {
             Page page = (Page) FileCreator.readObject(path);
             Record record = page.searchRecord(clusterKeyVal, (Integer) clusterKeyColIndex[1]);
             if (record != null) {
-                record.updateRecord(colIdxVal);
+                record.updateRecord(colIdxVal , htblColNameValue ,table);
                 page.save();
                 table.save();
             }
