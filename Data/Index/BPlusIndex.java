@@ -1083,6 +1083,42 @@ public class BPlusIndex implements Serializable {
         }
     }
 
+    @Override
+    public String toString() {
+        StringBuilder treeString = new StringBuilder();
+        appendNodeToString(root, treeString, 0);
+        return treeString.toString();
+    }
+
+    private void appendNodeToString(Node node, StringBuilder treeString, int level) {
+        if (node instanceof LeafNode) {
+            appendLeafNodeToString((LeafNode) node, treeString, level);
+        } else if (node instanceof InternalNode) {
+            appendInternalNodeToString((InternalNode) node, treeString, level);
+        }
+    }
+
+    private void appendLeafNodeToString(LeafNode leafNode, StringBuilder treeString, int level) {
+        treeString.append("Leaf Node (Level ").append(level).append("): ");
+        for (int i = 0; i < leafNode.numPairs; i++) {
+            DictionaryPair pair = leafNode.dictionary[i];
+            treeString.append("(").append(pair.key).append(", ").append(pair.value).append(") ");
+        }
+        treeString.append("\n");
+    }
+
+    private void appendInternalNodeToString(InternalNode internalNode, StringBuilder treeString, int level) {
+        treeString.append("Internal Node (Level ").append(level).append("): ");
+        for (int i = 0; i < internalNode.degree - 1; i++) {
+            treeString.append(internalNode.keys[i]).append(" ");
+        }
+        treeString.append("\n");
+
+        for (int i = 0; i < internalNode.degree; i++) {
+            appendNodeToString(internalNode.childPointers[i], treeString, level + 1);
+        }
+    }
+
     public static void main(String[] args) {
 
         // Ensure correct number of arguments

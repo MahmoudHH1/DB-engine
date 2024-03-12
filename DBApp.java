@@ -1,5 +1,4 @@
 import Data.Handler.FileCreator;
-import Data.Handler.FileRemover;
 import Data.Index.BPlusIndex;
 import Data.Index.IndexControler;
 import Data.Page.Page;
@@ -14,19 +13,24 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
+import static Data.Index.IndexControler.loadAllTableIndices;
+
 
 public class DBApp {
     public static ArrayList<Table> allTables;
-    public static  ArrayList<BPlusIndex> allBPlusIndecies =new ArrayList<>();
+    public static ArrayList<BPlusIndex> allBPlusIndecies = new ArrayList<>();
+
     public DBApp() throws IOException, ClassNotFoundException {
         init();
     }
+
     // this does whatever initialization you would like
     // or leave it empty if there is no code you want to
     // execute at application startup
     public void init() throws IOException, ClassNotFoundException {
         allTables = MetaData.loadAllTables();
     }
+
     // following method creates one table only
     // strClusteringKeyColumn is the name of the column that will be the primary
     // key and the clustering column as well. The data type of that column will
@@ -36,8 +40,8 @@ public class DBApp {
     public void createTable(String strTableName,
                             String strClusteringKeyColumn,
                             Hashtable<String, String> htblColNameType) throws DBAppException, IOException {
-        Table t = Table.getTable(allTables , strTableName);
-        if(t != null){
+        Table t = Table.getTable(allTables, strTableName);
+        if (t != null) {
             throw new DBAppException("Table is already exist");
         }
         ArrayList<TableColumn> allColumns = new ArrayList<>();
@@ -52,6 +56,7 @@ public class DBApp {
         }
         Table table = new Table(allColumns);
     }
+
     // following method creates a B+tree index
     public void createIndex(String strTableName,
                             String strColName,
@@ -67,44 +72,28 @@ public class DBApp {
                 }
             }
             MetaData.updateOnMetaDataFile(strTableName, strColName, strIndexName);
-            BPlusIndex b = IndexControler.createIndex(table , strColName , strIndexName);
+            BPlusIndex b = IndexControler.createIndex(table, strColName, strIndexName);
             allBPlusIndecies.add(b);
         } catch (Exception e) {
             throw new DBAppException("not implemented yet");
         }
     }
+
     // following method inserts one row only.
     // htblColNameValue must include a value for the primary key
     public void insertIntoTable(String strTableName,
                                 Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
         //checking whether the table exists or not
         boolean tableExists = false;
-        for (Table table : allTables) {
-            if (table.getTableName().equals(strTableName)) {
+        for (Table table : allTables)
+            if (table.getTableName().equals(strTableName))
                 tableExists = true;
-            }
-        }
-        //-----------------------------------------------------------------------\\
-        if (tableExists) {
-            Table table = Table.getTable(this.allTables, strTableName);
-            table.insertIntoTable(htblColNameValue);
-            //////////////////////////////////////////////////////////////
-            for(BPlusIndex b : allBPlusIndecies){
-                Enumeration<String> keys = htblColNameValue.keys();
-                Enumeration<Object> values = htblColNameValue.elements();
-                while (keys.hasMoreElements()){
-                    String key = keys.nextElement();
-                    Object value = values.nextElement();
-                    if(b.getTableName().equals(strTableName) && b.getColName().equals(key)){
-                        b.insert(value,value.toString());
-                        String colBPlusTreePath= "Data_Entry" + File.separator + "Tables"+ File.separator + strTableName +File.separator+ key+"Index";
-                        FileCreator.storeAsObject(b, colBPlusTreePath);
-                    }
-                }
-            }
-        } else
+        if (tableExists)
+            Table.getTable(this.allTables, strTableName).insertIntoTable(htblColNameValue);
+        else
             throw new DBAppException("The table is not implemented yet");
     }
+
     // following method updates one row only
     // htblColNameValue holds the key and new value
     // htblColNameValue will not include clustering key as column name
@@ -138,6 +127,7 @@ public class DBApp {
             }
         }
     }
+
     // following method could be used to delete one or more rows.
     // htblColNameValue holds the key and value. This will be used in search
     // to identify which rows/tuples to delete.
@@ -164,7 +154,7 @@ public class DBApp {
         // table.save();
         //////////////////////////////////////////////////
         // not completed yet
-        for(BPlusIndex b : allBPlusIndecies) {
+        for (BPlusIndex b : allBPlusIndecies) {
             Enumeration<String> keys = htblColNameValue.keys();
             Enumeration<Object> values = htblColNameValue.elements();
             while (keys.hasMoreElements()) {
@@ -176,6 +166,7 @@ public class DBApp {
             }
         }
     }
+
     public Iterator selectFromTable(SQLTerm[] arrSQLTerms,
                                     String[] strarrOperators) throws DBAppException, IOException, ClassNotFoundException {
         ArrayList<Object> validRecords = new ArrayList<>();
@@ -194,31 +185,42 @@ public class DBApp {
         }
         return validRecords.iterator();
     }
+
     public void deleteTable(String tableName) throws DBAppException {
         Table.getTable(this.allTables, tableName).removeTable();
     }
 
     public static void main(String[] args) {
         try {
-
             String strTableName = "Student";
             DBApp dbApp = new DBApp();
+//            Vector<BPlusIndex> res = loadAllTableIndices("Student");
+//            System.out.println(res.size());
 //            System.out.println((int)Table.getTable(dbApp.allTables,"Student").getClusterKeyAndIndex()[1]);
 //            System.out.println(Integer.valueOf((Table.getTable(dbApp.allTables, "Student").getClusterKeyAndIndex()).toString()));
 //            System.out.println(Table.getTable(dbApp.allTables,"Student").getClusterKeyAndIndex()[1]);
 //            Table table = Table.getTable(dbApp.allTables,"Student");
-//            table.viewTable();
-//            table.viewTable();
+////            table.viewTable();
+////            table.viewTable();
 //            table.removeTable();
 
 //            FileRemover.removeFileFromDirectory("Student" , "Student1");
-
+            Random random = new Random();
+////
+            for (int i = 0; i < 100; i++) {
+                int randomNumber = random.nextInt(1000) + 1;
+                Hashtable<String, Object> htblColNameValue = new Hashtable<>();
+                htblColNameValue.put("name", "Samaloty");
+                htblColNameValue.put("gpa", 0.1);
+                htblColNameValue.put("id", randomNumber );
+                dbApp.insertIntoTable(strTableName, htblColNameValue);
+            }
 //            Hashtable htblColNameType = new Hashtable();
 //            htblColNameType.put("name", "java.lang.String");
 //            htblColNameType.put("gpa", "java.lang.double");
 //            htblColNameType.put("id", "java.lang.Integer");
 //            dbApp.createTable(strTableName, "id", htblColNameType);
-            dbApp.createIndex( strTableName, "id", "idIndex" );
+//            dbApp.createIndex(strTableName, "id", "idIndex");
 
 //            Hashtable<String, String> htblColNameType2 = new Hashtable<>();
 //            htblColNameType2.put("title", "java.lang.String");
@@ -256,7 +258,7 @@ public class DBApp {
 //            Hashtable htblColNameValue = new Hashtable();
 //            Random random = new Random();
 //            Hashtable<String, Object> htblColNameType2 = new Hashtable<>();
-//            for (int i = 0; i < 1000000; i++) {
+//            for (int i = 0; i < 1000; i++) {
 //                StringBuilder sb = new StringBuilder(20);
 //                for (int j = 0; j < 20; j++) {
 //                    char randomChar = (char) (random.nextInt(26) + 'a'); // Generate a random lowercase letter
