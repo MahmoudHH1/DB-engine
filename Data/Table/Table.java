@@ -108,6 +108,15 @@ public class Table implements Serializable {
         }
         throw new DBAppException("No cluster Key for this Table");
     }
+    public TableColumn getClusterKey() throws DBAppException {
+        for (int i = 0; i < allColumns.size(); i++) {
+            if (allColumns.get(i).isClusterKey()) {
+                return allColumns.get(i) ;
+            }
+        }
+        throw new DBAppException("No cluster Key for this Table");
+    }
+
     public Hashtable<Integer, Object> getColIdxVal(Hashtable<String, Object> ht) throws DBAppException {
 
         Hashtable<Integer, Object> res = new Hashtable<>();
