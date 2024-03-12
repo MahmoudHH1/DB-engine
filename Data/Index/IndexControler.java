@@ -11,6 +11,7 @@ import Exceptions.DBAppException;
 import javax.print.attribute.HashPrintJobAttributeSet;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Set;
 
@@ -34,13 +35,23 @@ public class IndexControler {
         String colName = keys.iterator().next();
         TableColumn col = table.getColumnByName(colName);
         BPlusIndex idx = readIndexByName(col.getIndexName() , table);
-        Object obj = idx.search(colVal.get(colName)); //key in b+ == value in colVal
+        // search for cluser key first from all retuned values (Because may have dublicates)
+        ArrayList<Object> allClusterKeys = idx.search(colVal.get(colName)); //key in b+ == value in colVal
+        Object obj = new Object() ;
+        for (Object cluserKey : allClusterKeys ){
+            if (cluserKey.equals(table.getClusterKey()) ){
+//                obj = ;
+                // get key this key from B+ (value of colVal) and send it to delete function
+                // delete -> should be modified to make it take key and value(cluserKey)
+                // to ensure that it deletes the correct key from B+
+            }
+        }
         // key already exist
         if (obj != null){
              idx.delete(obj);
-             idx.insert(colVal.get(colName) ,table.getClusterKeyAndIndex());
+             idx.insert(colVal.get(colName) ,table.getClusterKey());
         }else{ // key dne should not happen
-            idx.insert(colVal.get(colName) ,table.getClusterKeyAndIndex());
+            idx.insert(colVal.get(colName) ,table.getClusterKey());
         }
     };
 

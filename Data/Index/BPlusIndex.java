@@ -680,7 +680,7 @@ public class BPlusIndex implements Serializable {
      * @param key: the key to be searched within the B+ tree
      * @return the floating point value associated with the key within the B+ tree
      */
-    public Object search(Object key) {
+    public ArrayList<Object> search(Object key) {
 //		// If B+ tree is completely empty, simply return null
 //		if (isEmpty()) { return null; }
 //
