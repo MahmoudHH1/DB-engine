@@ -127,7 +127,6 @@ public class Table implements Serializable {
         }
         throw new DBAppException("No cluster Key for this Table");
     }
-
     public Hashtable<Integer, Object> getColIdxVal(Hashtable<String, Object> ht) throws DBAppException {
 
         Hashtable<Integer, Object> res = new Hashtable<>();
@@ -196,6 +195,10 @@ public class Table implements Serializable {
             }
         }
         return mid * 1000 + pageIdx;
+    }
+
+    public boolean hasRecords (){
+        return !pagePaths.isEmpty();
     }
 
     @Override
