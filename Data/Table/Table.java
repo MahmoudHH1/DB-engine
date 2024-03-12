@@ -119,6 +119,14 @@ public class Table implements Serializable {
         }
         throw new DBAppException("No cluster Key for this Table");
     }
+    public TableColumn getClusterKey() throws DBAppException {
+        for (int i = 0; i < allColumns.size(); i++) {
+            if (allColumns.get(i).isClusterKey()) {
+                return allColumns.get(i) ;
+            }
+        }
+        throw new DBAppException("No cluster Key for this Table");
+    }
 
     public Hashtable<Integer, Object> getColIdxVal(Hashtable<String, Object> ht) throws DBAppException {
 
@@ -128,7 +136,6 @@ public class Table implements Serializable {
         }
         return res;
     }
-
     public int idxFromName(String name) throws DBAppException {
         for (int i = 0; i < getAllColumns().size(); i++) {
             if (getAllColumns().get(i).equals(name)) {
@@ -137,23 +144,18 @@ public class Table implements Serializable {
         }
         throw new DBAppException("Invalid Column Name: " + name);
     }
-
     public void setAllColumns(ArrayList<TableColumn> allColumns) {
         this.allColumns = allColumns;
     }
-
     public void setPageNum(int pageNum) {
         this.pageNum = pageNum;
     }
-
     public void setTableName(String tableName) {
         this.tableName = tableName;
     }
-
     public void removePageFromArr(String pagePath) {
         this.pagePaths.remove(pagePath);
     }
-
     public void appendPagePath(String filePath) {
         pagePaths.add(filePath);
     }

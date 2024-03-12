@@ -680,24 +680,24 @@ public class BPlusIndex implements Serializable {
      * @param key: the key to be searched within the B+ tree
      * @return the floating point value associated with the key within the B+ tree
      */
-    public Object search(Object key) {
-
-        // If B+ tree is completely empty, simply return null
-        if (isEmpty()) { return null; }
-
-        // Find leaf node that holds the dictionary key
-        LeafNode ln = (this.root == null) ? this.firstLeaf : findLeafNode(key);
-
-        // Perform binary search to find index of key within dictionary
-        DictionaryPair[] dps = ln.dictionary;
-        int index = binarySearch(dps, ln.numPairs, key);
-
-        // If index negative, the key doesn't exist in B+ tree
-        if (index < 0) {
-            return null;
-        } else {
-            return dps[index].value;
-        }
+    public ArrayList<Object> search(Object key) {
+//		// If B+ tree is completely empty, simply return null
+//		if (isEmpty()) { return null; }
+//
+//		// Find leaf node that holds the dictionary key
+//		LeafNode ln = (this.root == null) ? this.firstLeaf : findLeafNode(key);
+//
+//		// Perform binary search to find index of key within dictionary
+//		DictionaryPair[] dps = ln.dictionary;
+//		int index = binarySearch(dps, ln.numPairs, key);
+//
+//		// If index negative, the key doesn't exist in B+ tree
+//		if (index < 0) {
+//			return null;
+//		} else {
+//			return dps[index].value;
+//		}
+        return searchinclusive(key,key);
     }
 
     /**
@@ -709,7 +709,7 @@ public class BPlusIndex implements Serializable {
      * @return an ArrayList<Double> that holds all values of dictionary pairs
      * whose keys are within the specified range
      */
-    public ArrayList<Object> search(Object lowerBound, Object upperBound) {
+    public ArrayList<Object> searchexclusive(Object lowerBound, Object upperBound) {
 
         // Instantiate Double array to hold values
         ArrayList<Object> values = new ArrayList<Object>();
@@ -728,6 +728,36 @@ public class BPlusIndex implements Serializable {
 
                 // Include value if its key fits within the provided range
                 if (((Comparable) lowerBound).compareTo(dp.key) < 0 && ((Comparable) dp.key).compareTo(upperBound) < 0) {
+                    values.add(dp.value);
+                }
+
+            }
+			/* Update the current node to be the right sibling,
+			   leaf traversal is from left to right */
+            currNode = currNode.rightSibling;
+        }
+
+        return values;
+    }
+    public ArrayList<Object> searchinclusive(Object lowerBound, Object upperBound) {
+
+        // Instantiate Double array to hold values
+        ArrayList<Object> values = new ArrayList<Object>();
+
+        // Iterate through the doubly linked list of leaves
+        LeafNode currNode = this.firstLeaf;
+        while (currNode != null) {
+
+            // Iterate through the dictionary of each node
+            DictionaryPair dps[] = currNode.dictionary;
+            for (DictionaryPair dp : dps) {
+
+				/* Stop searching the dictionary once a null value is encountered
+				   as this the indicates the end of non-null values */
+                if (dp == null) { break; }
+
+                // Include value if its key fits within the provided range
+                if (((Comparable) lowerBound).compareTo(dp.key) <= 0 && ((Comparable) dp.key).compareTo(upperBound) <= 0) {
                     values.add(dp.value);
                 }
 
@@ -1151,7 +1181,7 @@ public class BPlusIndex implements Serializable {
             bpt.insert("R","placeofR");
             System.out.println(bpt.search("R"));
             bpt.insert("Banana","PlaceofBanana");
-            System.out.println(bpt.search("Ahmed","R"));
+//            System.out.println(bpt.search("Ahmed","R"));
 
 //			bpt.insert(21,"PlaceofInt");
 //			System.out.println(bpt.search(21));
