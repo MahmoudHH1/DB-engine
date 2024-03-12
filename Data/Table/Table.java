@@ -30,8 +30,10 @@ public class Table implements Serializable {
         this.tableName = allColumns.get(0).getTableName();
         this.tableDir = tablesDirectory + File.separator + tableName;
         this.allColumns = allColumns;
-        File f = new File(tableDir);
-        System.out.println(f.mkdir() ? "Table Created" : "Table not Created");
+        File tableFolder = new File(tableDir);
+        File indiciesFolder = new File(tableDir+File.separator+"Indices");
+        System.out.println(tableFolder.mkdir() ? "Table Created" : "Table not Created");
+        System.out.println(indiciesFolder.mkdir() ? "indexes folder Created" : "indexes folder not Created");
         MetaData.writeDataToMetaDatafile(allColumns);
         save();
     }
@@ -40,15 +42,9 @@ public class Table implements Serializable {
         tableFilePath = tableDir + File.separator + tableName;
         FileCreator.storeAsObject(this, tableFilePath);
     }
-
     public ArrayList<TableColumn> getAllColumns() {
         return allColumns;
     }
-
-    public Vector<String> getPagePaths() {
-        return pagePaths;
-    }
-
     public static String getTablesDirectory() {
         return tablesDirectory;
     }
@@ -64,45 +60,46 @@ public class Table implements Serializable {
     public String getTableName() {
         return tableName;
     }
-
-    public int getPageNum() {
-        return pageNum;
-    }
-
-    public void setPageNum(int pageNum) {
-        this.pageNum = pageNum;
-    }
-
-    public void setAllColumns(ArrayList<TableColumn> allColumns) {
-        this.allColumns = allColumns;
-    }
-
-    public void setTableName(String tableName) {
-        this.tableName = tableName;
-    }
-
-    public void removePageFromArr(String pagePath) {
-        this.pagePaths.remove(pagePath);
-    }
-
     public static String getTableFilePath(String name) {
         return tablesDirectory + File.separator +
                 name + File.separator + name;
     }
-
-    public void appendPagePath(String filePath) {
-        pagePaths.add(filePath);
-    }
-
     public static Table getTable(ArrayList<Table> allTables, String tableName) throws DBAppException {
         for (Table table : allTables) {
             if (table.tableName.equals(tableName)) {
                 return table;
             }
         }
-        throw new DBAppException("Table not found");
+        return null;
     }
 
+    public int getPageNum() {
+        return pageNum;
+    }
+    public Vector<String> getPagePaths() {
+        return pagePaths;
+    }
+    public ArrayList<TableColumn> getAllColumnBIdxs(){
+        ArrayList<TableColumn> allColIdxs = new ArrayList<>();
+        for (TableColumn col : allColumns){
+            if(col.isColumnBIdx()){
+                allColIdxs.add(col);
+            }
+        }
+        return allColIdxs;
+    }
+    public boolean isColumnNameBIdx(String colName) throws DBAppException {
+        TableColumn col = getColumnByName(colName);
+        return col.isColumnBIdx();
+    }
+    public TableColumn getColumnByName(String colName) throws DBAppException {
+        for (TableColumn col : allColumns){
+            if(col.getColumnName().equals(colName)){
+               return col ;
+            }
+        }
+        throw new DBAppException("Column not found");
+    }
     public Object[] getClusterKeyAndIndex() throws DBAppException {
         for (int i = 0; i < allColumns.size(); i++) {
             if (allColumns.get(i).isClusterKey()) {
@@ -111,7 +108,6 @@ public class Table implements Serializable {
         }
         throw new DBAppException("No cluster Key for this Table");
     }
-
     public Hashtable<Integer, Object> getColIdxVal(Hashtable<String, Object> ht) throws DBAppException {
 
         Hashtable<Integer, Object> res = new Hashtable<>();
@@ -120,7 +116,6 @@ public class Table implements Serializable {
         }
         return res;
     }
-
     public int idxFromName(String name) throws DBAppException {
         for (int i = 0; i < getAllColumns().size(); i++) {
             if (getAllColumns().get(i).equals(name)) {
@@ -128,6 +123,21 @@ public class Table implements Serializable {
             }
         }
         throw new DBAppException("Invalid Column Name: " + name);
+    }
+    public void setAllColumns(ArrayList<TableColumn> allColumns) {
+        this.allColumns = allColumns;
+    }
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
+    }
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
+    }
+    public void removePageFromArr(String pagePath) {
+        this.pagePaths.remove(pagePath);
+    }
+    public void appendPagePath(String filePath) {
+        pagePaths.add(filePath);
     }
 
     // skeleton method for searching for records O(n)
@@ -197,6 +207,8 @@ public class Table implements Serializable {
         TupleValidator.IsValidTuple(insertedTuple, this);
         if (insertedTuple.size() == allColumns.size()) {
             Record rec = new Record();
+            //overflow record for shifting purposes
+            Record overFlowRec = new Record();
             rec.insertRecord(getColIdxVal(insertedTuple));
             //if it is the first record to be inserted
             if (pagePaths.isEmpty()) {
@@ -205,25 +217,57 @@ public class Table implements Serializable {
                 firstPage.add(rec);
                 firstPage.save();
             } else {
-                System.out.println(allColumns);
-                Page page = (Page) FileCreator.readObject(this.pagePaths.get(0)) ;
-                page.insertIntoPage(rec);
-                page.save();
+                for (String pagePath : this.pagePaths) {
+                    Page page = (Page) FileCreator.readObject(pagePath);
+                    if (rec != null) {
+                        Comparable clusterValue = rec.get((int) (getClusterKeyAndIndex()[1]));
+                        Comparable minPageVal = page.getRange()[0];
+                        Comparable maxPageVal = page.getRange()[1];
+                        if (minPageVal.equals(maxPageVal) ||
+                                isBetween(clusterValue, minPageVal, maxPageVal) ||
+                                isless(clusterValue, minPageVal, maxPageVal) ||
+                                (isGreater(clusterValue, minPageVal, maxPageVal) && this.pagePaths.indexOf(pagePath) == this.pagePaths.size() - 1)
+                        ) {
+                            page.insertIntoPage(rec);
+                            rec = null;
+                        }
+                    }
+                    //if the record is inserted successfully there will be no overflow
+                    //if overflow insert the keep inserting and shifting all records
+                    //until you reach the last page of the table
+                    overFlowRec = page.overFlow();
+                    page.save();
+                    //can I read the next page while I am in this page
+                    //we will find out
+                    if (overFlowRec != null && this.pagePaths.indexOf(pagePath) < this.pagePaths.size() - 1) {
+                        System.out.println(this.pagePaths.get(pagePaths.indexOf(pagePath) + 1));
+                        Page nextPage = ((Page) FileCreator.readObject(this.pagePaths.get(pagePaths.indexOf(pagePath) + 1)));
+                        nextPage.insertIntoPage(overFlowRec);
+                        nextPage.save();
+                    }
+                }
+                //checking whether I reached the last page and the overflow is not inserted yet
+                //making a new page to insert the overflow
+                if (overFlowRec != null) {
+                    Page newP = new Page(this);
+                    newP.insertIntoPage(overFlowRec);
+                    newP.save();
+                }
             }
             this.save();
         }
     }
 
-    //converting the given hashtable to a record
-    public Record convertToRecord(Hashtable<String, Object> insertedTuple) {
-        Record rec = new Record();
-        Enumeration<String> keys = insertedTuple.keys();
-        while (keys.hasMoreElements()) {
-            String key = keys.nextElement();
-            Object value = insertedTuple.get(key);
-            rec.add((Comparable) value);
-        }
-        return rec;
+    public static <T extends Comparable<T>> boolean isBetween(T value, T minValue, T maxValue) {
+        return value.compareTo(minValue) >= 0 && value.compareTo(maxValue) <= 0;
+    }
+
+    public static <T extends Comparable<T>> boolean isless(T value, T firstVal, T SecondVal) {
+        return value.compareTo(firstVal) < 0 && value.compareTo(SecondVal) < 0;
+    }
+
+    public static <T extends Comparable<T>> boolean isGreater(T value, T firstVal, T SecondVal) {
+        return value.compareTo(firstVal) > 0 && value.compareTo(SecondVal) > 0;
     }
 
     public void removeTable() {

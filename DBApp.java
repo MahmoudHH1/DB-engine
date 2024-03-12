@@ -1,5 +1,7 @@
 import Data.Handler.FileCreator;
 import Data.Handler.FileRemover;
+import Data.Index.BPlusIndex;
+import Data.Index.IndexControler;
 import Data.Page.Page;
 import Data.Page.Record;
 import Data.Table.MetaData;
@@ -8,29 +10,23 @@ import Data.Table.TableColumn;
 import Data.Validator.TupleValidator;
 import Exceptions.DBAppException;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-import gen.MySQLParser;
-import org.antlr.runtime.*;
-import org.antlr.runtime.tree.*;
-
 
 public class DBApp {
-    public static  ArrayList<Table> allTables;
-
+    public static ArrayList<Table> allTables;
+    public static  ArrayList<BPlusIndex> allBPlusIndecies =new ArrayList<>();
     public DBApp() throws IOException, ClassNotFoundException {
         init();
     }
-
     // this does whatever initialization you would like
     // or leave it empty if there is no code you want to
     // execute at application startup
     public void init() throws IOException, ClassNotFoundException {
         allTables = MetaData.loadAllTables();
     }
-
-
     // following method creates one table only
     // strClusteringKeyColumn is the name of the column that will be the primary
     // key and the clustering column as well. The data type of that column will
@@ -40,6 +36,10 @@ public class DBApp {
     public void createTable(String strTableName,
                             String strClusteringKeyColumn,
                             Hashtable<String, String> htblColNameType) throws DBAppException, IOException {
+        Table t = Table.getTable(allTables , strTableName);
+        if(t != null){
+            throw new DBAppException("Table is already exist");
+        }
         ArrayList<TableColumn> allColumns = new ArrayList<>();
         for (String column : htblColNameType.keySet()) {
             TableColumn newColumn = new TableColumn(
@@ -52,8 +52,6 @@ public class DBApp {
         }
         Table table = new Table(allColumns);
     }
-
-
     // following method creates a B+tree index
     public void createIndex(String strTableName,
                             String strColName,
@@ -69,22 +67,16 @@ public class DBApp {
                 }
             }
             MetaData.updateOnMetaDataFile(strTableName, strColName, strIndexName);
+            BPlusIndex b = IndexControler.createIndex(table , strColName , strIndexName);
+            allBPlusIndecies.add(b);
         } catch (Exception e) {
             throw new DBAppException("not implemented yet");
         }
     }
-
-
     // following method inserts one row only.
     // htblColNameValue must include a value for the primary key
     public void insertIntoTable(String strTableName,
                                 Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
-        /*
-        Assumptions
-        when deleting I assume that the table is deleted form the arraylist containing all table
-
-         */
-        //-----------------------------------------------------------------------\\
         //checking whether the table exists or not
         boolean tableExists = false;
         for (Table table : allTables) {
@@ -95,13 +87,24 @@ public class DBApp {
         //-----------------------------------------------------------------------\\
         if (tableExists) {
             Table table = Table.getTable(this.allTables, strTableName);
-//            System.out.println(table.getAllColumns());
             table.insertIntoTable(htblColNameValue);
+            //////////////////////////////////////////////////////////////
+            for(BPlusIndex b : allBPlusIndecies){
+                Enumeration<String> keys = htblColNameValue.keys();
+                Enumeration<Object> values = htblColNameValue.elements();
+                while (keys.hasMoreElements()){
+                    String key = keys.nextElement();
+                    Object value = values.nextElement();
+                    if(b.getTableName().equals(strTableName) && b.getColName().equals(key)){
+                        b.insert(value,value.toString());
+                        String colBPlusTreePath= "Data_Entry" + File.separator + "Tables"+ File.separator + strTableName +File.separator+ key+"Index";
+                        FileCreator.storeAsObject(b, colBPlusTreePath);
+                    }
+                }
+            }
         } else
             throw new DBAppException("The table is not implemented yet");
     }
-
-
     // following method updates one row only
     // htblColNameValue holds the key and new value
     // htblColNameValue will not include clustering key as column name
@@ -111,7 +114,7 @@ public class DBApp {
                             Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
         // check if htblColNameValue size  = table.allcol.size()
         Table table = Table.getTable(allTables, strTableName);
-        TupleValidator.IsValidTuple(htblColNameValue , table);
+        TupleValidator.IsValidTuple(htblColNameValue, table);
 
         Object clusterKeyVal = strClusteringKeyValue;
         Object[] clusterKeyColIndex = (table.getClusterKeyAndIndex());
@@ -135,8 +138,6 @@ public class DBApp {
             }
         }
     }
-
-
     // following method could be used to delete one or more rows.
     // htblColNameValue holds the key and value. This will be used in search
     // to identify which rows/tuples to delete.
@@ -161,52 +162,38 @@ public class DBApp {
             page.save();
         }
         // table.save();
-
-    }
-
-
-    public Iterator selectFromTable(SQLTerm[] arrSQLTerms,
-                                    String[] strarrOperators) throws DBAppException, IOException, ClassNotFoundException {
-        ArrayList<Object>validRecords = new ArrayList<>();
-        Table table = Table.getTable(allTables,arrSQLTerms[0]._strTableName);
-        for (String path : table.getPagePaths()) {
-            Page page = (Page) FileCreator.readObject(path);
-            for(Record record : page){
-                if (SQLTerm.evalExp(arrSQLTerms,record,table,strarrOperators)){
-                  validRecords.add(record);
-                };
+        //////////////////////////////////////////////////
+        // not completed yet
+        for(BPlusIndex b : allBPlusIndecies) {
+            Enumeration<String> keys = htblColNameValue.keys();
+            Enumeration<Object> values = htblColNameValue.elements();
+            while (keys.hasMoreElements()) {
+                String key = keys.nextElement();
+                Object value = values.nextElement();
+                if (b.getTableName().equals(strTableName) && b.getColName().equals(key)) {
+                    b.delete(value);
+                }
             }
         }
-        if (validRecords.size() == 0){
+    }
+    public Iterator selectFromTable(SQLTerm[] arrSQLTerms,
+                                    String[] strarrOperators) throws DBAppException, IOException, ClassNotFoundException {
+        ArrayList<Object> validRecords = new ArrayList<>();
+        Table table = Table.getTable(allTables, arrSQLTerms[0]._strTableName);
+        for (String path : table.getPagePaths()) {
+            Page page = (Page) FileCreator.readObject(path);
+            for (Record record : page) {
+                if (SQLTerm.evalExp(arrSQLTerms, record, table, strarrOperators)) {
+                    validRecords.add(record);
+                }
+                ;
+            }
+        }
+        if (validRecords.size() == 0) {
             validRecords.add("No valid results");
         }
         return validRecords.iterator();
     }
-    // below method returns Iterator with result set if passed
-    // strbufSQL is a select, otherwise returns null.
-    public Iterator parseSQL( StringBuffer strbufSQL ) throws DBAppException {
-        // Create an ANTLR input stream from your SQL statement
-        ANTLRStringStream input = new ANTLRStringStream("SELECT * FROM table_name WHERE condition");
-
-        // Create a lexer that feeds off of the input stream
-        MySQLLexer lexer = new MySQLLexer(input);
-
-        // Create a stream of tokens fed by the lexer
-        CommonTokenStream tokens = new CommonTokenStream(lexer);
-
-        // Create a parser that feeds off the token stream
-        MySQLParser parser = new MySQLParser(tokens);
-
-        // Start parsing at the compilationUnit rule
-        MySQLParser.CompilationUnitContext result = parser.compilationUnit();
-
-        // Do something with the parsed SQL statement
-        // For example, you can access the parsed tree:
-        // CommonTree tree = (CommonTree) result.getTree();
-        // Then traverse the tree to extract information about the SQL statement
-        throw new DBAppException("not implemented");
-    }
-
     public void deleteTable(String tableName) throws DBAppException {
         Table.getTable(this.allTables, tableName).removeTable();
     }
@@ -219,30 +206,25 @@ public class DBApp {
 //            System.out.println((int)Table.getTable(dbApp.allTables,"Student").getClusterKeyAndIndex()[1]);
 //            System.out.println(Integer.valueOf((Table.getTable(dbApp.allTables, "Student").getClusterKeyAndIndex()).toString()));
 //            System.out.println(Table.getTable(dbApp.allTables,"Student").getClusterKeyAndIndex()[1]);
-            Table table = Table.getTable(dbApp.allTables,"Student");
-            table.viewTable();
+//            Table table = Table.getTable(dbApp.allTables,"Student");
+//            table.viewTable();
+//            table.viewTable();
 //            table.removeTable();
 
-
-            Hashtable htblColNameValue = new Hashtable();
-//            htblColNameValue.put("id", new Integer(2343432));
-//            htblColNameValue.put("name", new String("Ahmed Noor"));
-//            htblColNameValue.put("gpa", new Double(0.95));
-
 //            FileRemover.removeFileFromDirectory("Student" , "Student1");
-
 
 //            Hashtable htblColNameType = new Hashtable();
 //            htblColNameType.put("name", "java.lang.String");
 //            htblColNameType.put("gpa", "java.lang.double");
 //            htblColNameType.put("id", "java.lang.Integer");
 //            dbApp.createTable(strTableName, "id", htblColNameType);
+            dbApp.createIndex( strTableName, "id", "idIndex" );
 
 //            Hashtable<String, String> htblColNameType2 = new Hashtable<>();
 //            htblColNameType2.put("title", "java.lang.String");
 //            htblColNameType2.put("author", "java.lang.String");
 //            htblColNameType2.put("year", "java.lang.Integer");
-//            dbApp.createTable("Book", "year", htblColNameType2);
+//            dbApp.createTable("Book", "title", htblColNameType2);
 //            dbApp.createIndex( strTableName, "name", "nameIndex" );
 
 //            System.out.println(tabel.getAllColumns().get(2).isClusterKey());
@@ -260,22 +242,32 @@ public class DBApp {
 //            FileRemover.removeFileFromDirectory("Student" , "Student1");
 //            Table.getTable(dbApp.allTables,"Student").viewTable();
 
-////
+//            Hashtable htblColNameValue = new Hashtable();
+//            dbApp.deleteTable("Student");
+//            htblColNameValue.put("id", new Integer(2343432));
+//            htblColNameValue.put("name", new String("Ahmed Noor"));
+//            htblColNameValue.put("gpa", new Double(0.95));
 
 //            htblColNameValue.put("id", new Integer( 12 ));
 //            htblColNameValue.put("name", new String("Ahmed Noor" ) );
 //            htblColNameValue.put("gpa", new Double( 0.95 ) );
 //            dbApp.insertIntoTable( strTableName , htblColNameValue );
-
+////
 //            Hashtable htblColNameValue = new Hashtable();
 //            Random random = new Random();
-//            for (int i = 0; i < 200; i++) {
-//                int randomNumber = random.nextInt(20) + 1;
-//                htblColNameValue.clear();
-//                htblColNameValue.put("id", randomNumber);
-//                htblColNameValue.put("name", "Ahmed Noor");
-//                htblColNameValue.put("gpa", 0.95 + i * 0.01);
-//                dbApp.insertIntoTable(strTableName, htblColNameValue);
+//            Hashtable<String, Object> htblColNameType2 = new Hashtable<>();
+//            for (int i = 0; i < 1000000; i++) {
+//                StringBuilder sb = new StringBuilder(20);
+//                for (int j = 0; j < 20; j++) {
+//                    char randomChar = (char) (random.nextInt(26) + 'a'); // Generate a random lowercase letter
+//                    sb.append(randomChar);
+//                }
+//
+//            String randomString = sb.toString();
+//            htblColNameType2.put("title", randomString);
+//            htblColNameType2.put("author", "samaloty");
+//            htblColNameType2.put("year", 1900);
+//            dbApp.insertIntoTable("Book", htblColNameType2);
 //            }
 //            htblColNameValue.clear();
 
@@ -319,27 +311,27 @@ public class DBApp {
 //            System.out.println(p);
 //            table.viewTable();
 
-            System.out.println("Selection Results:__________");
-            SQLTerm[] arrSQLTerms;
-            arrSQLTerms = new SQLTerm[]{new SQLTerm() , new SQLTerm()};
-            arrSQLTerms[0]._strTableName =  "Student";
-            arrSQLTerms[0]._strColumnName=  "name";
-            arrSQLTerms[0]._strOperator  =  "=";
-            arrSQLTerms[0]._objValue     =  "John Noor";
-
-            arrSQLTerms[1]._strTableName =  "Student";
-            arrSQLTerms[1]._strColumnName=  "gpa";
-            arrSQLTerms[1]._strOperator  =  ">";
-            arrSQLTerms[1]._objValue     =  new Double( 9.9 );
-
-            String[]strarrOperators = new String[1];
-            strarrOperators[0] = "OR";
+//            System.out.println("Selection Results:__________");
+//            SQLTerm[] arrSQLTerms;
+//            arrSQLTerms = new SQLTerm[]{new SQLTerm() , new SQLTerm()};
+//            arrSQLTerms[0]._strTableName =  "Student";
+//            arrSQLTerms[0]._strColumnName=  "name";
+//            arrSQLTerms[0]._strOperator  =  "=";
+//            arrSQLTerms[0]._objValue     =  "John Noor";
+//
+//            arrSQLTerms[1]._strTableName =  "Student";
+//            arrSQLTerms[1]._strColumnName=  "gpa";
+//            arrSQLTerms[1]._strOperator  =  ">";
+//            arrSQLTerms[1]._objValue     =  new Double( 9.9 );
+//
+//            String[]strarrOperators = new String[1];
+//            strarrOperators[0] = "OR";
 
             // select * from Student where name = "John Noor" or gpa = 1.5;
-            Iterator resultSet = dbApp.selectFromTable(arrSQLTerms , strarrOperators);
-            while(resultSet.hasNext()) {
-                System.out.println(resultSet.next());
-            }
+//            Iterator resultSet = dbApp.selectFromTable(arrSQLTerms , strarrOperators);
+//            while(resultSet.hasNext()) {
+//                System.out.println(resultSet.next());
+//            }
         } catch (Exception exp) {
             exp.printStackTrace();
         }
