@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="saeed added some flavors to the index">
-      <change beforePath="$PROJECT_DIR$/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/DBApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data_Entry/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data_Entry/metadata.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Index/IndexControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Index/IndexControler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Table/Table.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +37,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Mr_X" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -83,7 +84,7 @@
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Mr__X",
+    "git-widget-placeholder": "Saeed",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/Coding/DataBase/Database_projects/Database_Engine Project/Database-Engine",
     "project.structure.last.edited": "Project",
@@ -174,9 +175,9 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.DBApp" />
         <item itemvalue="Application.TableColumn" />
         <item itemvalue="Application.Table" />
+        <item itemvalue="Application.DBApp" />
         <item itemvalue="Application.MetaData" />
         <item itemvalue="Application.FileRemover" />
       </list>
@@ -687,11 +688,6 @@
           <properties class="Exceptions.DBAppException" package="Exceptions" />
           <option name="timeStamp" value="113" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/DBApp.java</url>
-          <line>215</line>
-          <option name="timeStamp" value="116" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
