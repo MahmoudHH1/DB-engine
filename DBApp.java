@@ -205,16 +205,16 @@ public class DBApp {
 //            table.removeTable();
 
 //            FileRemover.removeFileFromDirectory("Student" , "Student1");
-            Random random = new Random();
-////
-            for (int i = 0; i < 100; i++) {
-                int randomNumber = random.nextInt(1000) + 1;
-                Hashtable<String, Object> htblColNameValue = new Hashtable<>();
-                htblColNameValue.put("name", "Samaloty");
-                htblColNameValue.put("gpa", 0.1);
-                htblColNameValue.put("id", randomNumber );
-                dbApp.insertIntoTable(strTableName, htblColNameValue);
-            }
+//            Random random = new Random();
+////////
+//            for (int i = 0; i < 100; i++) {
+//                int randomNumber = random.nextInt(1000) + 1;
+//                Hashtable<String, Object> htblColNameValue = new Hashtable<>();
+//                htblColNameValue.put("name", "Samaloty");
+//                htblColNameValue.put("gpa", 0.1);
+//                htblColNameValue.put("id", randomNumber );
+//                dbApp.insertIntoTable(strTableName, htblColNameValue);
+//            }
 //            Hashtable htblColNameType = new Hashtable();
 //            htblColNameType.put("name", "java.lang.String");
 //            htblColNameType.put("gpa", "java.lang.double");
