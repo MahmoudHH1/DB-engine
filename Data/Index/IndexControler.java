@@ -19,15 +19,17 @@ import java.util.Vector;
 
 public class IndexControler {
 
-    public  static BPlusIndex createIndex(Table table , String strColName , String strIndexName) throws IOException {
+    public static BPlusIndex createIndex(Table table, String strColName, String strIndexName) throws IOException {
         int i = table.getPageNum();
-        BPlusIndex b =new BPlusIndex(i*200,table.getTableName(),strColName , strIndexName);
+        BPlusIndex b = new BPlusIndex(i * 200, table.getTableName(), strColName, strIndexName);
         b.save();
         return b;
     }
-    public void insertIntoIndex(){}
 
-    public static void updateIndex(Hashtable<String , Object>colVal , Table table) throws IOException, ClassNotFoundException, DBAppException {
+    public void insertIntoIndex() {
+    }
+
+    public static void updateIndex(Hashtable<String, Object> colVal, Table table) throws IOException, ClassNotFoundException, DBAppException {
         // get idx by idxName readIdx(name , table)
         // search for value(Key) in hashTable in this idx
         // if exist remove it
@@ -36,12 +38,12 @@ public class IndexControler {
         // get colname (only The Key) in the colVal
         String colName = keys.iterator().next();
         TableColumn col = table.getColumnByName(colName);
-        BPlusIndex idx = readIndexByName(col.getIndexName() , table);
+        BPlusIndex idx = readIndexByName(col.getIndexName(), table);
         // search for cluser key first from all retuned values (Because may have dublicates)
         ArrayList<Object> allClusterKeys = idx.search(colVal.get(colName)); //key in b+ == value in colVal
-        Object obj = new Object() ;
-        for (Object cluserKey : allClusterKeys ){
-            if (cluserKey.equals(table.getClusterKey()) ){
+        Object obj = new Object();
+        for (Object cluserKey : allClusterKeys) {
+            if (cluserKey.equals(table.getClusterKey())) {
 //                obj = ;
                 // get key this key from B+ (value of colVal) and send it to delete function
                 // delete -> should be modified to make it take key and value(cluserKey)
@@ -49,21 +51,25 @@ public class IndexControler {
             }
         }
         // key already exist
-        if (obj != null){
-             idx.delete(obj);
-             idx.insert(colVal.get(colName) ,table.getClusterKey());
-        }else{ // key dne should not happen
-            idx.insert(colVal.get(colName) ,table.getClusterKey());
+        if (obj != null) {
+            idx.delete(obj);
+            idx.insert(colVal.get(colName), table.getClusterKey());
+        } else { // key dne should not happen
+            idx.insert(colVal.get(colName), table.getClusterKey());
         }
-    };
+    }
 
-    public Object searchOnIndex(){return new Object();} // for return the cluster Key value of B+
+    ;
+
+    public Object searchOnIndex() {
+        return new Object();
+    } // for return the cluster Key value of B+
 
     public static Vector<BPlusIndex> loadAllTableIndices(String tableName) throws IOException, ClassNotFoundException {
         String directoryPath = "Data_Entry/Tables";
         String finalPath = directoryPath + File.separator + tableName + File.separator + "indices";
         File directory = new File(finalPath);
-        Vector<BPlusIndex> allIndices = new Vector<>() ;
+        Vector<BPlusIndex> allIndices = new Vector<>();
         // Check if the specified path is a directory
         if (directory.isDirectory()) {
             File[] files = directory.listFiles();
@@ -72,7 +78,7 @@ public class IndexControler {
             if (files != null) {
                 for (File file : files) {
                     //-6 de 3shan asheel .class elly ma7tota dy
-                    allIndices.add((BPlusIndex) FileCreator.readObject(file.getPath().substring(0,file.getPath().length()-6))) ;
+                    allIndices.add((BPlusIndex) FileCreator.readObject(file.getPath().substring(0, file.getPath().length() - 6)));
                 }
             } else {
                 System.out.println("No files found in the directory.");
@@ -80,20 +86,19 @@ public class IndexControler {
         } else {
             System.out.println("Specified path is not a directory.");
         }
-        return allIndices ;
+        return allIndices;
     }
 
-    public Object searchOnIndex(){return new Object();}; // for return the cluster Key value of B+
 
     public static BPlusIndex readIndexByName(String idxName, Table table) throws IOException, ClassNotFoundException {
-        String idxPath ="Data_Entry" +
+        String idxPath = "Data_Entry" +
                 File.separator +
-                "Tables"+
+                "Tables" +
                 File.separator +
                 table.getTableName() +
-                File.separator+
-                "indices"+
-                File.separator+
+                File.separator +
+                "indices" +
+                File.separator +
                 idxName;
         return (BPlusIndex) FileCreator.readObject(idxPath);
     }
