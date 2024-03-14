@@ -205,10 +205,10 @@ public class DBApp {
 //            table.removeTable();
 
 //            FileRemover.removeFileFromDirectory("Student" , "Student1");
-            Random random = new Random();
-
-//            for (int i = 0; i < 200; i++) {
-//                int randomNumber = random.nextInt(1000) + 1;
+//            Random random = new Random();
+////////////////
+//            for (int i = 0; i < 700; i++) {
+//                int randomNumber = random.nextInt(100000) + 1;
 //                Hashtable<String, Object> htblColNameValue = new Hashtable<>();
 //                htblColNameValue.put("name", "Samaloty");
 //                htblColNameValue.put("gpa", 0.1);
