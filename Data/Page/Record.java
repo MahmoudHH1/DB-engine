@@ -33,7 +33,7 @@ public class Record extends Vector<Comparable>{
         }*/
 
         Enumeration<Integer> indexKeys = ht.keys();
-        Enumeration<String> colKeys = colVal.keys();
+        Enumeration<String> colKeys = colVal.keys(); // [id , name]
         System.out.println("Size of Index value ht : "+  ht.size());
         System.out.println("Size of col value ht : "+  colVal.size());
         while (indexKeys.hasMoreElements() && colKeys.hasMoreElements()) {

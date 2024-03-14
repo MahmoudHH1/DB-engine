@@ -117,6 +117,7 @@ public class DBApp {
                 break;
         }
         Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
+        // use searchTable()
         for (String path : table.getPagePaths()) {
             Page page = (Page) FileCreator.readObject(path);
             Record record = page.searchRecord(clusterKeyVal, (Integer) clusterKeyColIndex[1]);
