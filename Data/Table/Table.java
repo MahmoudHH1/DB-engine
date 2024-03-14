@@ -186,28 +186,38 @@ public class Table implements Serializable {
 
     // binary search on cluster Key
     // in progress
-
-
-    // return idx of record
-    // page 5 , record 132 -> return 5132  moah;)
     public int search(Comparable clusterKey, int clusterIdx) throws IOException, ClassNotFoundException {
         int start = 0;
         int end = pagePaths.size() - 1;
         int mid = 0;
-        int pageIdx = 0;
-        while (start <= end) {
+        int recIdx = 0;
+        boolean checkBefore;
+        while (start <= end) { // 2 pages -> start = 0; end = 1; mid = 0  id = 250 3000
             mid = start + (end - start) / 2;
             Page page = (Page) FileCreator.readObject(pagePaths.get(mid));
+            checkBefore = false;
+            if(page.isEmpty())
+                return mid*1000;
             if (clusterKey.compareTo(page.get(0).get(clusterIdx)) < 0) {
                 end = mid - 1;
+                checkBefore = true;
             } else if (clusterKey.compareTo(page.get(page.size() - 1).get(clusterIdx)) > 0) {
                 start = mid + 1;
             } else {
-                pageIdx = page.searchRecordIdx(clusterKey, clusterIdx);
+                recIdx = page.searchRecordIdx(clusterKey, clusterIdx);
                 break;
             }
+            // 0 : min = 0 max = 39
+            // 1 : min = 40 max = 70
+            // 2 : min = 50 max = 249
+            // 3 : min = 251 max = 350
+            if(checkBefore && mid > 0) {
+                Page temp = (Page) FileCreator.readObject(pagePaths.get(mid-1));
+                if(temp.size() < 200)
+                    --mid;
+            }
         }
-        return mid * 1000 + pageIdx;
+        return mid * 1000 + recIdx; // 5000
     }
 
     public boolean hasRecords() {
