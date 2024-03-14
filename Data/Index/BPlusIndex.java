@@ -1,5 +1,6 @@
 package Data.Index;
 import Data.Handler.FileCreator;
+import org.antlr.v4.runtime.misc.Pair;
 //import com.sun.corba.se.impl.orbutil.ObjectWriter;
 
 import java.io.File;
@@ -1101,16 +1102,16 @@ public class BPlusIndex implements Serializable {
      * so that the DictionaryPair objects can be sorted later on.
      */
     public class DictionaryPair implements Comparable<DictionaryPair> {
-        Object key;
-        Object value;
+//        Object key;
+//        Object value;
+        Pair<Object , Object>kvPair  ;
         /**
          * Constructor
          * @param key: the key of the key-value pair
          * @param value: the value of the key-value pair
          */
-        public DictionaryPair(Object key, Object value) {
-            this.key = key;
-            this.value = value;
+        public DictionaryPair(Pair<Object ,Object>kvPair) {
+            this.kvPair = kvPair ;
         }
 
         /**
@@ -1121,7 +1122,7 @@ public class BPlusIndex implements Serializable {
          */
         @Override
         public int compareTo(DictionaryPair o) {
-            if (key.equals(o.key)) {
+            if (kvPair..equals(o.key)) {
                 return 0;
             } else if (key instanceof Integer && o.key instanceof Integer) {
                 return Integer.compare((Integer) key, (Integer) o.key);
