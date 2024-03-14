@@ -119,10 +119,11 @@ public class Table implements Serializable {
         }
         throw new DBAppException("No cluster Key for this Table");
     }
+
     public TableColumn getClusterKey() throws DBAppException {
         for (int i = 0; i < allColumns.size(); i++) {
             if (allColumns.get(i).isClusterKey()) {
-                return allColumns.get(i) ;
+                return allColumns.get(i);
             }
         }
         throw new DBAppException("No cluster Key for this Table");
@@ -136,6 +137,7 @@ public class Table implements Serializable {
         }
         return res;
     }
+
     public int idxFromName(String name) throws DBAppException {
         for (int i = 0; i < getAllColumns().size(); i++) {
             if (getAllColumns().get(i).equals(name)) {
@@ -144,18 +146,23 @@ public class Table implements Serializable {
         }
         throw new DBAppException("Invalid Column Name: " + name);
     }
+
     public void setAllColumns(ArrayList<TableColumn> allColumns) {
         this.allColumns = allColumns;
     }
+
     public void setPageNum(int pageNum) {
         this.pageNum = pageNum;
     }
+
     public void setTableName(String tableName) {
         this.tableName = tableName;
     }
+
     public void removePageFromArr(String pagePath) {
         this.pagePaths.remove(pagePath);
     }
+
     public void appendPagePath(String filePath) {
         pagePaths.add(filePath);
     }
@@ -227,16 +234,18 @@ public class Table implements Serializable {
         TupleValidator.IsValidTuple(insertedTuple, this);
         Record rec = new Record();
         rec.insertRecord(getColIdxVal(insertedTuple));
-        Vector<BPlusIndex> allTableIndices = IndexControler.loadAllTableIndices(this.getTableName()) ;
-        for (BPlusIndex b : allTableIndices ) {
-            Enumeration<String> keys = insertedTuple.keys();
-            Enumeration<Object> values = insertedTuple.elements();
-            while (keys.hasMoreElements()) {
-                String key = keys.nextElement();
-                Object value = values.nextElement();
-                if (b.getColName().equals(key)) {
-                    b.insert(value, rec.get((int) (getClusterKeyAndIndex()[1])));
-                    b.save();
+        Vector<BPlusIndex> allTableIndices = IndexControler.loadAllTableIndices(this.getTableName());
+        if (!allTableIndices.isEmpty()) {
+            for (BPlusIndex b : allTableIndices) {
+                Enumeration<String> keys = insertedTuple.keys();
+                Enumeration<Object> values = insertedTuple.elements();
+                while (keys.hasMoreElements()) {
+                    String key = keys.nextElement();
+                    Object value = values.nextElement();
+                    if (b.getColName().equals(key)) {
+                        b.insert(value, rec.get((int) (getClusterKeyAndIndex()[1])));
+                        b.save();
+                    }
                 }
             }
         }

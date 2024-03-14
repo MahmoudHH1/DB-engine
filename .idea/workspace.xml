@@ -4,9 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="saeed added some flavors to the index">
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="saeed bawaz el master">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/DBApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Index/BPlusIndex.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Index/BPlusIndex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Index/IndexControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Index/IndexControler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Page/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Page/Page.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Table/Table.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Validator/TupleValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Validator/TupleValidator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data_Entry/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data_Entry/metadata.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Index/BPlusIndex.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Index/BPlusIndex.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Index/IndexControler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Index/IndexControler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Page/Page$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Page/Page$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Page/Page.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Page/Page.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Table/Table.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Engine/Data/Validator/TupleValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Engine/Data/Validator/TupleValidator.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,6 +84,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.BPlusIndex.executor": "Run",
     "Application.DBApp.executor": "Run",
     "Application.FileRemover.executor": "Run",
     "Application.MetaData.executor": "Run",
@@ -92,23 +105,23 @@
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.DBApp">
-    <configuration name="DBApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="DBApp" />
+  <component name="RunManager" selected="Application.BPlusIndex">
+    <configuration name="BPlusIndex" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Data.Index.BPlusIndex" />
       <module name="Database-Engine" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Data.Index.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FileRemover" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Data.Handler.FileRemover" />
+    <configuration name="DBApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="DBApp" />
       <module name="Database-Engine" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Data.Handler.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -166,7 +179,7 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.FileRemover" />
+      <item itemvalue="Application.BPlusIndex" />
       <item itemvalue="Application.MetaData" />
       <item itemvalue="Application.DBApp" />
       <item itemvalue="Application.Table" />
@@ -174,11 +187,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.BPlusIndex" />
         <item itemvalue="Application.DBApp" />
         <item itemvalue="Application.TableColumn" />
         <item itemvalue="Application.Table" />
         <item itemvalue="Application.MetaData" />
-        <item itemvalue="Application.FileRemover" />
       </list>
     </recent_temporary>
   </component>
@@ -197,14 +210,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1708726737774</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Added tableDir attribute to reference table's directory instead of tablePath which references the file with page paths.">
-      <option name="closed" value="true" />
-      <created>1709135339551</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1709135339551</updated>
     </task>
     <task id="LOCAL-00005" summary="unversioned files">
       <option name="closed" value="true" />
@@ -588,7 +593,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710061342797</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="saeed bawaz el master">
+      <option name="closed" value="true" />
+      <created>1710236156250</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1710236156250</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -653,7 +666,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Saeed Merge into master4" />
     <MESSAGE value="function kda f metadata w showaya kda f insert" />
     <MESSAGE value="." />
     <MESSAGE value="habiba pushed this" />
@@ -678,7 +690,8 @@
     <MESSAGE value="kolo t7t el control&#10;done on time" />
     <MESSAGE value="saeed added some flavors to the index and made it understandable also added some functions in TableColumn and Table related to the B+ index" />
     <MESSAGE value="saeed added some flavors to the index" />
-    <option name="LAST_COMMIT_MESSAGE" value="saeed added some flavors to the index" />
+    <MESSAGE value="saeed bawaz el master" />
+    <option name="LAST_COMMIT_MESSAGE" value="saeed bawaz el master" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -688,9 +701,19 @@
           <option name="timeStamp" value="113" />
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Data/Index/IndexControler.java</url>
+          <line>82</line>
+          <option name="timeStamp" value="131" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Data/Handler/FileCreator.java</url>
+          <line>18</line>
+          <option name="timeStamp" value="132" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/DBApp.java</url>
-          <line>215</line>
-          <option name="timeStamp" value="116" />
+          <line>218</line>
+          <option name="timeStamp" value="133" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

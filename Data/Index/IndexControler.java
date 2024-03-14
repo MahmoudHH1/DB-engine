@@ -66,27 +66,34 @@ public class IndexControler {
     } // for return the cluster Key value of B+
 
     public static Vector<BPlusIndex> loadAllTableIndices(String tableName) throws IOException, ClassNotFoundException {
-        String directoryPath = "Data_Entry/Tables";
-        String finalPath = directoryPath + File.separator + tableName + File.separator + "indices";
-        File directory = new File(finalPath);
-        Vector<BPlusIndex> allIndices = new Vector<>();
-        // Check if the specified path is a directory
-        if (directory.isDirectory()) {
-            File[] files = directory.listFiles();
+        try {
+            String directoryPath = "Data_Entry" + File.separator + "Tables";
+            String finalPath = directoryPath + File.separator + tableName + File.separator + "Indices";
+            File directory = new File(finalPath);
+            Vector<BPlusIndex> allIndices = new Vector<>();
+            // Check if the specified path is a directory
+            if (directory.isDirectory()) {
+                File[] files = directory.listFiles();
 
-            // Check if there are any files in the directory
-            if (files != null) {
-                for (File file : files) {
-                    //-6 de 3shan asheel .class elly ma7tota dy
-                    allIndices.add((BPlusIndex) FileCreator.readObject(file.getPath().substring(0, file.getPath().length() - 6)));
+                // Check if there are any files in the directory
+                if (files != null) {
+                    for (File file : files) {
+                        //-6 de 3shan asheel .class elly ma7tota dy
+                        String idxPath = file.getPath().substring(0, file.getPath().length() - 6) ;
+                        BPlusIndex idx= (BPlusIndex) FileCreator.readObject(idxPath) ;
+                        allIndices.add(idx);
+                    }
+                } else {
+                    System.out.println("No files found in the directory.");
                 }
             } else {
-                System.out.println("No files found in the directory.");
+                System.out.println("Specified path is not a directory.");
             }
-        } else {
-            System.out.println("Specified path is not a directory.");
+            return allIndices;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return allIndices;
+        return new Vector<>() ;
     }
 
 
@@ -97,7 +104,7 @@ public class IndexControler {
                 File.separator +
                 table.getTableName() +
                 File.separator +
-                "indices" +
+                "Indices" +
                 File.separator +
                 idxName;
         return (BPlusIndex) FileCreator.readObject(idxPath);

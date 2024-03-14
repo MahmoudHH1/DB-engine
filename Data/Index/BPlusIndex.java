@@ -5,9 +5,7 @@ import Data.Handler.FileCreator;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.*;
 
 public class BPlusIndex implements Serializable {
     int m;
@@ -30,7 +28,7 @@ public class BPlusIndex implements Serializable {
         this.path = "Data_Entry" + File.separator +
                     "Tables"+ File.separator +
                     tableName + File.separator+
-                    "indices"+File.separator+
+                    "Indices"+File.separator+
                     idxName;
     }
     public String getIndexPath(){
@@ -779,7 +777,7 @@ public class BPlusIndex implements Serializable {
      * This class represents a general node within the B+ tree and serves as a
      * superclass of InternalNode and LeafNode.
      */
-    public class Node {
+    public class Node implements Serializable {
         InternalNode parent;
     }
 
@@ -788,7 +786,7 @@ public class BPlusIndex implements Serializable {
      * all search/insert/delete operations. An internal node only holds keys; it
      * does not hold dictionary pairs.
      */
-    private class InternalNode extends Node {
+    private class InternalNode extends Node implements Serializable {
         int maxDegree;
         int minDegree;
         int degree;
@@ -959,7 +957,7 @@ public class BPlusIndex implements Serializable {
      * minimum and maximum number of dictionary pairs it can hold, as specified
      * by m, the max degree of the B+ tree. The leaf nodes form a doubly linked
      * list that, i.e. each leaf node has a left and right sibling*/
-    public class LeafNode extends Node {
+    public class LeafNode extends Node implements Serializable {
         int maxNumPairs;
         int minNumPairs;
         int numPairs;
@@ -1077,7 +1075,7 @@ public class BPlusIndex implements Serializable {
      * leaf nodes of the B+ tree. The class implements the Comparable interface
      * so that the DictionaryPair objects can be sorted later on.
      */
-    public class DictionaryPair implements Comparable<DictionaryPair> {
+    public class DictionaryPair implements Comparable<DictionaryPair> , Serializable {
         Object key;
         Object value;
 
@@ -1113,41 +1111,6 @@ public class BPlusIndex implements Serializable {
         }
     }
 
-    @Override
-    public String toString() {
-        StringBuilder treeString = new StringBuilder();
-        appendNodeToString(root, treeString, 0);
-        return treeString.toString();
-    }
-
-    private void appendNodeToString(Node node, StringBuilder treeString, int level) {
-        if (node instanceof LeafNode) {
-            appendLeafNodeToString((LeafNode) node, treeString, level);
-        } else if (node instanceof InternalNode) {
-            appendInternalNodeToString((InternalNode) node, treeString, level);
-        }
-    }
-
-    private void appendLeafNodeToString(LeafNode leafNode, StringBuilder treeString, int level) {
-        treeString.append("Leaf Node (Level ").append(level).append("): ");
-        for (int i = 0; i < leafNode.numPairs; i++) {
-            DictionaryPair pair = leafNode.dictionary[i];
-            treeString.append("(").append(pair.key).append(", ").append(pair.value).append(") ");
-        }
-        treeString.append("\n");
-    }
-
-    private void appendInternalNodeToString(InternalNode internalNode, StringBuilder treeString, int level) {
-        treeString.append("Internal Node (Level ").append(level).append("): ");
-        for (int i = 0; i < internalNode.degree - 1; i++) {
-            treeString.append(internalNode.keys[i]).append(" ");
-        }
-        treeString.append("\n");
-
-        for (int i = 0; i < internalNode.degree; i++) {
-            appendNodeToString(internalNode.childPointers[i], treeString, level + 1);
-        }
-    }
 
     public static void main(String[] args) {
 
