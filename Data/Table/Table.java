@@ -277,22 +277,13 @@ public class Table implements Serializable {
             firstPage.add(rec);
             firstPage.save();
         } else {
-            int pagePathIdx = (search(rec.get((int) (getClusterKeyAndIndex()[1])), (int) getClusterKeyAndIndex()[1])) % 1000;
+            int pagePathIdx = (search(rec.get((int) (getClusterKeyAndIndex()[1])), (int) getClusterKeyAndIndex()[1])) / 1000;
             for (int i = pagePathIdx; i < pagePaths.size(); i++) {
                 String pagePath = pagePaths.get(i);
                 Page page = (Page) FileCreator.readObject(pagePath);
                 if (rec != null) {
-                    Comparable clusterValue = rec.get((int) (getClusterKeyAndIndex()[1]));
-//                    Comparable minPageVal = page.getRange()[0];
-//                    Comparable maxPageVal = page.getRange()[1];
-//                    if (minPageVal.equals(maxPageVal) ||
-//                            isBetween(clusterValue, minPageVal, maxPageVal) ||
-//                            isless(clusterValue, minPageVal, maxPageVal) ||
-//                            (isGreater(clusterValue, minPageVal, maxPageVal) && this.pagePaths.indexOf(pagePath) == this.pagePaths.size() - 1)
-//                    ) {
                     page.insertIntoPage(rec);
                     rec = null;
-//                    }
                 }
                 //if the record is inserted successfully there will be no overflow
                 //if overflow insert the keep inserting and shifting all records
