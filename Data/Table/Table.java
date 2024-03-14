@@ -219,6 +219,27 @@ public class Table implements Serializable {
         }
         return mid * 1000 + recIdx; // 5000
     }
+    public Record searchRec(Comparable clusterKey, int clusterIdx) throws IOException, ClassNotFoundException {
+        int start = 0;
+        int end = pagePaths.size() - 1;
+        int mid = 0;
+        Record rec = null;
+        while (start <= end) { // 2 pages -> start = 0; end = 1; mid = 0  id = 250 3000
+            mid = start + (end - start) / 2;
+            Page page = (Page) FileCreator.readObject(pagePaths.get(mid));
+            if(page.isEmpty())
+                return null;
+            if (clusterKey.compareTo(page.get(0).get(clusterIdx)) < 0) {
+                end = mid - 1;
+            } else if (clusterKey.compareTo(page.get(page.size() - 1).get(clusterIdx)) > 0) {
+                start = mid + 1;
+            } else {
+                rec = page.searchRecord(clusterKey, clusterIdx);
+                break;
+            }
+        }
+        return rec;
+    }
 
     public boolean hasRecords() {
         return !pagePaths.isEmpty();
