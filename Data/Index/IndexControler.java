@@ -46,38 +46,24 @@ public class IndexControler {
     }
 
     public static void updateIndex(Hashtable<String, Object> colVal, Table table) throws IOException, ClassNotFoundException, DBAppException {
-        // get idx by idxName readIdx(name , table)
-        // search for value(Key) in hashTable in this idx
-        // if exist remove it
-        // insert new value to this idx
         Set<String> keys = colVal.keySet();
-        // get colname (only The Key) in the colVal
         String colName = keys.iterator().next();
         TableColumn col = table.getColumnByName(colName);
         BPlusIndex idx = readIndexByName(col.getIndexName(), table);
-        // search for cluser key first from all retuned values (Because may have dublicates)
-        ArrayList<Object> allClusterKeys = idx.search(colVal.get(colName)); //key in b+ == value in colVal
+        ArrayList<Object> allClusterKeys = idx.search(colVal.get(colName));
         Object obj = new Object();
         for (Object cluserKey : allClusterKeys) {
             if (cluserKey.equals(table.getClusterKey())) {
-//                obj = ;
-                // get key this key from B+ (value of colVal) and send it to delete function
-                // delete -> should be modified to make it take key and value(cluserKey)
-                // to ensure that it deletes the correct key from B+
+
             }
         }
-        /* {1 : 20 , 2 : 20 , 3 : 30} */
-
-        // key already exist
         if (obj != null) {
             idx.delete(obj);
             idx.insert(colVal.get(colName), table.getClusterKey());
-        } else { // key dne should not happen
+        } else {
             idx.insert(colVal.get(colName), table.getClusterKey());
         }
     }
-
-    ;
 
     public Object searchOnIndex() {
         return new Object();
@@ -120,4 +106,5 @@ public class IndexControler {
                 idxName;
         return (BPlusIndex) FileCreator.readObject(idxPath);
     }
+
 }
