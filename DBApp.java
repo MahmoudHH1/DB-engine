@@ -117,15 +117,22 @@ public class DBApp {
                 break;
         }
         Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
-        for (String path : table.getPagePaths()) {
-            Page page = (Page) FileCreator.readObject(path);
-            Record record = page.searchRecord(clusterKeyVal, (Integer) clusterKeyColIndex[1]);
-            if (record != null) {
+        int pageIdx = table.search((Comparable) clusterKeyVal,(Integer) clusterKeyColIndex[1])/1000;
+        Record record = table.searchRec( (Comparable) clusterKeyVal,(Integer) clusterKeyColIndex[1]) ;
+        if (record != null) {
                 record.updateRecord(colIdxVal , htblColNameValue ,table);
-                page.save();
                 table.save();
             }
-        }
+
+//        for (String path : table.getPagePaths()) {
+//            Page page = (Page) FileCreator.readObject(path);
+//            Record record = page.searchRecord(clusterKeyVal, (Integer) clusterKeyColIndex[1]);
+//            if (record != null) {
+//                record.updateRecord(colIdxVal , htblColNameValue ,table);
+//                page.save();
+//                table.save();
+//            }
+//        }
     }
 
     // following method could be used to delete one or more rows.
