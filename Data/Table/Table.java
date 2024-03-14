@@ -186,6 +186,10 @@ public class Table implements Serializable {
 
     // binary search on cluster Key
     // in progress
+
+
+    // return idx of record
+    // page 5 , record 132 -> return 5132  moah;)
     public int search(Comparable clusterKey, int clusterIdx) throws IOException, ClassNotFoundException {
         int start = 0;
         int end = pagePaths.size() - 1;
