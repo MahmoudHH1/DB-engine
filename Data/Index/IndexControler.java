@@ -66,6 +66,8 @@ public class IndexControler {
                 // to ensure that it deletes the correct key from B+
             }
         }
+        /* {1 : 20 , 2 : 20 , 3 : 30} */
+
         // key already exist
         if (obj != null) {
             idx.delete(obj);
