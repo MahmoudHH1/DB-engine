@@ -119,14 +119,16 @@ public class Table implements Serializable {
         }
         throw new DBAppException("No cluster Key for this Table");
     }
+
     public TableColumn getClusterKey() throws DBAppException {
         for (int i = 0; i < allColumns.size(); i++) {
             if (allColumns.get(i).isClusterKey()) {
-                return allColumns.get(i) ;
+                return allColumns.get(i);
             }
         }
         throw new DBAppException("No cluster Key for this Table");
     }
+
     public Hashtable<Integer, Object> getColIdxVal(Hashtable<String, Object> ht) throws DBAppException {
 
         Hashtable<Integer, Object> res = new Hashtable<>();
@@ -135,6 +137,7 @@ public class Table implements Serializable {
         }
         return res;
     }
+
     public int idxFromName(String name) throws DBAppException {
         for (int i = 0; i < getAllColumns().size(); i++) {
             if (getAllColumns().get(i).equals(name)) {
@@ -143,18 +146,23 @@ public class Table implements Serializable {
         }
         throw new DBAppException("Invalid Column Name: " + name);
     }
+
     public void setAllColumns(ArrayList<TableColumn> allColumns) {
         this.allColumns = allColumns;
     }
+
     public void setPageNum(int pageNum) {
         this.pageNum = pageNum;
     }
+
     public void setTableName(String tableName) {
         this.tableName = tableName;
     }
+
     public void removePageFromArr(String pagePath) {
         this.pagePaths.remove(pagePath);
     }
+
     public void appendPagePath(String filePath) {
         pagePaths.add(filePath);
     }
@@ -178,31 +186,41 @@ public class Table implements Serializable {
 
     // binary search on cluster Key
     // in progress
-
-
-    // return idx of record
-    // page 5 , record 132 -> return 5132  moah;)
     public int search(Comparable clusterKey, int clusterIdx) throws IOException, ClassNotFoundException {
         int start = 0;
         int end = pagePaths.size() - 1;
         int mid = 0;
-        int pageIdx = 0;
-        while (start <= end) {
+        int recIdx = 0;
+        boolean checkBefore;
+        while (start <= end) { // 2 pages -> start = 0; end = 1; mid = 0  id = 250 3000
             mid = start + (end - start) / 2;
             Page page = (Page) FileCreator.readObject(pagePaths.get(mid));
+            checkBefore = false;
+            if(page.isEmpty())
+                return mid*1000;
             if (clusterKey.compareTo(page.get(0).get(clusterIdx)) < 0) {
                 end = mid - 1;
+                checkBefore = true;
             } else if (clusterKey.compareTo(page.get(page.size() - 1).get(clusterIdx)) > 0) {
                 start = mid + 1;
             } else {
-                pageIdx = page.searchRecordIdx(clusterKey, clusterIdx);
+                recIdx = page.searchRecordIdx(clusterKey, clusterIdx);
                 break;
             }
+            // 0 : min = 0 max = 39
+            // 1 : min = 40 max = 70
+            // 2 : min = 50 max = 249
+            // 3 : min = 251 max = 350
+            if(checkBefore && mid > 0) {
+                Page temp = (Page) FileCreator.readObject(pagePaths.get(mid-1));
+                if(temp.size() < 200)
+                    --mid;
+            }
         }
-        return mid * 1000 + pageIdx;
+        return mid * 1000 + recIdx; // 5000
     }
 
-    public boolean hasRecords (){
+    public boolean hasRecords() {
         return !pagePaths.isEmpty();
     }
 
@@ -235,8 +253,9 @@ public class Table implements Serializable {
         TupleValidator.IsValidTuple(insertedTuple, this);
         Record rec = new Record();
         rec.insertRecord(getColIdxVal(insertedTuple));
-        Vector<BPlusIndex> allTableIndices = IndexControler.loadAllTableIndices(this.getTableName()) ;
-        for (BPlusIndex b : allTableIndices ) {
+        //
+        Vector<BPlusIndex> allTableIndices = IndexControler.loadAllTableIndices(this.getTableName());
+        for (BPlusIndex b : allTableIndices) {
             Enumeration<String> keys = insertedTuple.keys();
             Enumeration<Object> values = insertedTuple.elements();
             while (keys.hasMoreElements()) {
@@ -258,30 +277,36 @@ public class Table implements Serializable {
             firstPage.add(rec);
             firstPage.save();
         } else {
-            for (String pagePath : this.pagePaths) {
+            int pagePathIdx = (search(rec.get((int) (getClusterKeyAndIndex()[1])), (int) getClusterKeyAndIndex()[1])) % 1000;
+            for (int i = pagePathIdx; i < pagePaths.size(); i++) {
+                String pagePath = pagePaths.get(i);
                 Page page = (Page) FileCreator.readObject(pagePath);
                 if (rec != null) {
                     Comparable clusterValue = rec.get((int) (getClusterKeyAndIndex()[1]));
-                    Comparable minPageVal = page.getRange()[0];
-                    Comparable maxPageVal = page.getRange()[1];
-                    if (minPageVal.equals(maxPageVal) ||
-                            isBetween(clusterValue, minPageVal, maxPageVal) ||
-                            isless(clusterValue, minPageVal, maxPageVal) ||
-                            (isGreater(clusterValue, minPageVal, maxPageVal) && this.pagePaths.indexOf(pagePath) == this.pagePaths.size() - 1)
-                    ) {
-                        page.insertIntoPage(rec);
-                        rec = null;
-                    }
+//                    Comparable minPageVal = page.getRange()[0];
+//                    Comparable maxPageVal = page.getRange()[1];
+//                    if (minPageVal.equals(maxPageVal) ||
+//                            isBetween(clusterValue, minPageVal, maxPageVal) ||
+//                            isless(clusterValue, minPageVal, maxPageVal) ||
+//                            (isGreater(clusterValue, minPageVal, maxPageVal) && this.pagePaths.indexOf(pagePath) == this.pagePaths.size() - 1)
+//                    ) {
+                    page.insertIntoPage(rec);
+                    rec = null;
+//                    }
                 }
                 //if the record is inserted successfully there will be no overflow
                 //if overflow insert the keep inserting and shifting all records
                 //until you reach the last page of the table
                 overFlowRec = page.overFlow();
                 page.save();
+
+                //if overflow is null after the value is inserted
+                //break out of the for loop for time complexity concerns
+                if (overFlowRec == null)
+                    break;
                 //can I read the next page while I am in this page
                 //we will find out
                 if (overFlowRec != null && this.pagePaths.indexOf(pagePath) < this.pagePaths.size() - 1) {
-                    System.out.println(this.pagePaths.get(pagePaths.indexOf(pagePath) + 1));
                     Page nextPage = ((Page) FileCreator.readObject(this.pagePaths.get(pagePaths.indexOf(pagePath) + 1)));
                     nextPage.insertIntoPage(overFlowRec);
                     nextPage.save();

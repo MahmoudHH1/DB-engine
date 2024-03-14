@@ -117,26 +117,15 @@ public class DBApp {
                 break;
         }
         Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
-        // use searchTable()
-        int idxAndPage= table.search((Comparable) clusterKeyVal , (Integer) clusterKeyColIndex[1]) ;
-        int pageIdx = idxAndPage /1000 ;
-        int recordIdx = idxAndPage %1000;
-        Page page = (Page) FileCreator.readObject(table.getPagePaths().get(pageIdx));
-        Record record = page.get(recordIdx);
-        if (record != null) {
+        for (String path : table.getPagePaths()) {
+            Page page = (Page) FileCreator.readObject(path);
+            Record record = page.searchRecord(clusterKeyVal, (Integer) clusterKeyColIndex[1]);
+            if (record != null) {
                 record.updateRecord(colIdxVal , htblColNameValue ,table);
                 page.save();
                 table.save();
+            }
         }
-//        for (String path : table.getPagePaths()) {
-//            Page page = (Page) FileCreator.readObject(path);
-//            Record record = page.searchRecord(clusterKeyVal, (Integer) clusterKeyColIndex[1]);
-//            if (record != null) {
-//                record.updateRecord(colIdxVal , htblColNameValue ,table);
-//                page.save();
-//                table.save();
-//            }
-//        }
     }
 
     // following method could be used to delete one or more rows.
@@ -188,6 +177,7 @@ public class DBApp {
                 if (SQLTerm.evalExp(arrSQLTerms, record, table, strarrOperators)) {
                     validRecords.add(record);
                 }
+                ;
             }
         }
         if (validRecords.size() == 0) {
@@ -210,21 +200,21 @@ public class DBApp {
 //            System.out.println(Integer.valueOf((Table.getTable(dbApp.allTables, "Student").getClusterKeyAndIndex()).toString()));
 //            System.out.println(Table.getTable(dbApp.allTables,"Student").getClusterKeyAndIndex()[1]);
             Table table = Table.getTable(dbApp.allTables,"Student");
-////            table.viewTable();
 //            table.viewTable();
+            table.viewTable();
 //            table.removeTable();
 
 //            FileRemover.removeFileFromDirectory("Student" , "Student1");
-//            Random random = new Random();
+            Random random = new Random();
 //////////
-//            for (int i = 0; i < 100; i++) {
-//                int randomNumber = random.nextInt(1000) + 1;
-//                Hashtable<String, Object> htblColNameValue = new Hashtable<>();
-//                htblColNameValue.put("name", "Samaloty");
-//                htblColNameValue.put("gpa", 0.1);
-//                htblColNameValue.put("id", randomNumber );
-//                dbApp.insertIntoTable(strTableName, htblColNameValue);
-//            }
+            for (int i = 0; i < 200; i++) {
+                int randomNumber = random.nextInt(1000) + 1;
+                Hashtable<String, Object> htblColNameValue = new Hashtable<>();
+                htblColNameValue.put("name", "Samaloty");
+                htblColNameValue.put("gpa", 0.1);
+                htblColNameValue.put("id", randomNumber );
+                dbApp.insertIntoTable(strTableName, htblColNameValue);
+            }
 //            Hashtable htblColNameType = new Hashtable();
 //            htblColNameType.put("name", "java.lang.String");
 //            htblColNameType.put("gpa", "java.lang.double");
@@ -254,7 +244,7 @@ public class DBApp {
 //            FileRemover.removeFileFromDirectory("Student" , "Student1");
 //            Table.getTable(dbApp.allTables,"Student").viewTable();
 
-            Hashtable htblColNameValue = new Hashtable();
+//            Hashtable htblColNameValue = new Hashtable();
 //            dbApp.deleteTable("Student");
 //            htblColNameValue.put("id", new Integer(2343432));
 //            htblColNameValue.put("name", new String("Ahmed Noor"));
@@ -313,14 +303,14 @@ public class DBApp {
 //            tabel.save();
 //            System.out.println(p);
 
-//            "0.1,Samaloty,17",
+
 //            htblColNameValue.clear();
 //            htblColNameValue.put("name" , "Mahmoud");
-////            htblColNameValue.put("gpa" , new Integer(9));
-//            dbApp.updateTable("Student", "17", htblColNameValue);
-////            System.out.println(table.getPagePaths().get(0));
+//            htblColNameValue.put("gpa" , new Integer(9));
+//            dbApp.updateTable("Student", "9", htblColNameValue);
+//            System.out.println(table.getPagePaths().get(0));
 ////            Page p = ((Page) FileCreator.readObject(table.getPagePaths().get(0)));
-////            System.out.println(p);
+//            System.out.println(p);
 //            table.viewTable();
 
 //            System.out.println("Selection Results:__________");
