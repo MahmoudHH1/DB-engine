@@ -4,6 +4,8 @@ package Data.Index;
 // this class is just mapping between the DBApp and the BPlusIndex to make the DBApp leaner
 
 import Data.Handler.FileCreator;
+import Data.Page.Page;
+import Data.Page.Record;
 import Data.Table.Table;
 import Data.Table.TableColumn;
 import Exceptions.DBAppException;
@@ -19,9 +21,23 @@ import java.util.Vector;
 
 public class IndexControler {
 
-    public static BPlusIndex createIndex(Table table, String strColName, String strIndexName) throws IOException {
+    public static BPlusIndex createIndex(Table table, String strColName, String strIndexName) throws IOException, ClassNotFoundException, DBAppException {
         int i = table.getPageNum();
         BPlusIndex b = new BPlusIndex(i * 200, table.getTableName(), strColName, strIndexName);
+        // if col has records already
+        if(table.hasRecords()){
+            // load all pages
+            // for each record
+            // get idxCol index -> getcolIdx()
+            // insert values at this index into b+ idx
+            int colIdx = table.idxFromName(strColName);
+            for (String path : table.getPagePaths()) {
+                Page page = (Page) FileCreator.readObject(path);
+                for(Record record : page){
+                    b.insert(record.get(colIdx) , table.getClusterKey());
+                }
+            }
+        }
         b.save();
         return b;
     }
@@ -50,6 +66,8 @@ public class IndexControler {
                 // to ensure that it deletes the correct key from B+
             }
         }
+        /* {1 : 20 , 2 : 20 , 3 : 30} */
+
         // key already exist
         if (obj != null) {
             idx.delete(obj);

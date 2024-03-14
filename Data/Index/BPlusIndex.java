@@ -758,15 +758,12 @@ public class BPlusIndex implements Serializable {
                 if (((Comparable) lowerBound).compareTo(dp.key) <= 0 && ((Comparable) dp.key).compareTo(upperBound) <= 0) {
                     values.add(dp.value);
                 }
-
             }
-
 			/* Update the current node to be the right sibling,
 			   leaf traversal is from left to right */
             currNode = currNode.rightSibling;
 
         }
-
         return values;
     }
 
