@@ -25,13 +25,6 @@ public class Record extends Vector<Comparable>{
         if (ht.size() != colVal.size()) {
             throw new IllegalArgumentException("Hashtable sizes do not match");
         }
-
-        // Assume Ht
-        /*{
-            id : 1
-            name : saeed
-        }*/
-
         Enumeration<Integer> indexKeys = ht.keys();
         Enumeration<String> colKeys = colVal.keys(); // [id , name]
         System.out.println("Size of Index value ht : "+  ht.size());
@@ -40,12 +33,12 @@ public class Record extends Vector<Comparable>{
             int idx = indexKeys.nextElement();
             String colKey = colKeys.nextElement();
             // check if col has B+ idx
-            if(table.isColumnNameBIdx(colKey)){
-                // create new HashTable with the onlt this key and this value  ex id : 1 only
-                Hashtable <String , Object> toUpdate = new Hashtable<>();
-                toUpdate.put(colKey , colVal.get(colKey));
-                IndexControler.updateIndex(toUpdate,table);
-            }
+//            if(table.isColumnNameBIdx(colKey)){
+//                // create new HashTable with the onlt this key and this value  ex id : 1 only
+//                Hashtable <String , Object> toUpdate = new Hashtable<>();
+//                toUpdate.put(colKey , colVal.get(colKey));
+//                IndexControler.updateIndex(toUpdate,table);
+//            }
             // Assuming this.setElementAt() method takes an index and a value to update
             this.setElementAt((Comparable) colVal.get(colKey), idx);
         }
