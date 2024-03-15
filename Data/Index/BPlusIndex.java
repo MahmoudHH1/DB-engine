@@ -706,18 +706,18 @@ public class BPlusIndex implements Serializable {
      * This method traverses the doubly linked list of the B+ tree and records
      * all values whose associated keys are within the range specified by
      * lowerBound and upperBound.
-     * @param lowerBoun: (int) the lower bound of the range
-     * @param upperBoun: (int) the upper bound of the range
+     * @param lowerBound: (int) the lower bound of the range
+     * @param upperBound: (int) the upper bound of the range
      * @return an ArrayList<Double> that holds all values of dictionary pairs
      * whose keys are within the specified range
      */
-    public Vector<Object> search(Object lowerBoun, Object upperBoun) {
+    public Vector<Object> search(Object lowerBound, Object upperBound) {
 
         // Instantiate Double array to hold values
         Vector<Object> values = new Vector<>();
 
-        Comparable<Object> lowerBound = (Comparable<Object>) lowerBoun;
-        Comparable<Object> upperBound = (Comparable<Object>) upperBoun;
+        Comparable<Object> lowerBoun = (Comparable<Object>) lowerBound;
+        Comparable<Object> upperBoun = (Comparable<Object>) upperBound;
         // Iterate through the doubly linked list of leaves
         LeafNode currNode = this.firstLeaf;
         while (currNode != null) {
@@ -731,7 +731,7 @@ public class BPlusIndex implements Serializable {
                 if (dp == null) { break; }
 
                 // Include value if its key fits within the provided range
-                if (lowerBound.compareTo(dp.key) <= 0 && upperBound.compareTo(dp.key) >= 0) {
+                if (lowerBoun.compareTo(dp.key) <= 0 && upperBoun.compareTo(dp.key) >= 0) {
                     values.addAll(dp.values);
                 }
             }
