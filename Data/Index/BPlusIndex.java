@@ -731,7 +731,7 @@ public class BPlusIndex implements Serializable {
                 if (dp == null) { break; }
 
                 // Include value if its key fits within the provided range
-                if (lowerBound.compareTo(dp.key) <= 0 && upperBound.compareTo(dp.key) >= 0) {
+                if (lowerBoun.compareTo(dp.key) <= 0 && upperBoun.compareTo(dp.key) >= 0) {
                     values.addAll(dp.values);
                 }
             }
