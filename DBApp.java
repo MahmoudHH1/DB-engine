@@ -120,7 +120,7 @@ public class DBApp {
         Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
         Pair<Page, Record> record = table.searchRec( (Comparable) clusterKeyVal,(Integer) clusterKeyColIndex[1]) ;
         if (record != null) {
-                record.y.updateRecord(colIdxVal , htblColNameValue ,table);
+                record.y.updateRecord(colIdxVal , htblColNameValue , clusterKeyVal ,table);
                 record.x.save();
                 table.save();
             }
@@ -162,17 +162,17 @@ public class DBApp {
         // table.save();
         //////////////////////////////////////////////////
         // not completed yet
-        for (BPlusIndex b : allBPlusIndecies) {
-            Enumeration<String> keys = htblColNameValue.keys();
-            Enumeration<Object> values = htblColNameValue.elements();
-            while (keys.hasMoreElements()) {
-                String key = keys.nextElement();
-                Object value = values.nextElement();
-                if (b.getTableName().equals(strTableName) && b.getColName().equals(key)) {
-                    b.delete(value);
-                }
-            }
-        }
+//        for (BPlusIndex b : allBPlusIndecies) {
+//            Enumeration<String> keys = htblColNameValue.keys();
+//            Enumeration<Object> values = htblColNameValue.elements();
+//            while (keys.hasMoreElements()) {
+//                String key = keys.nextElement();
+//                Object value = values.nextElement();
+//                if (b.getTableName().equals(strTableName) && b.getColName().equals(key)) {
+//                    b.delete(value);
+//                }
+//            }
+//        }
     }
 
     public Iterator selectFromTable(SQLTerm[] arrSQLTerms,
