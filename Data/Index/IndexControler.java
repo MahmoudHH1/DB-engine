@@ -50,7 +50,7 @@ public class IndexControler {
         String colName = keys.iterator().next();
         TableColumn col = table.getColumnByName(colName);
         BPlusIndex idx = readIndexByName(col.getIndexName(), table);
-        ArrayList<Object> allClusterKeys = idx.search(colVal.get(colName));
+        Vector<Object> allClusterKeys = idx.search(colVal.get(colName));
         Object obj = new Object();
         for (Object cluserKey : allClusterKeys) {
             if (cluserKey.equals(table.getClusterKey())) {
