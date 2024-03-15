@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="akfdhjkajsdjhj">
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="fadjklfj;ds">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/Index/BPlusIndex.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Index/BPlusIndex.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -196,14 +197,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1708726737774</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Splited the code into packages and i added alose getters and setters">
-      <option name="closed" value="true" />
-      <created>1709178152301</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1709178152301</updated>
     </task>
     <task id="LOCAL-00010" summary="modifications">
       <option name="closed" value="true" />
@@ -587,7 +580,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710531680716</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="fadjklfj;ds">
+      <option name="closed" value="true" />
+      <created>1710531718528</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1710531718528</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -652,7 +653,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="habiba pushed this" />
     <MESSAGE value="habiba pushed this from master" />
     <MESSAGE value="bb" />
     <MESSAGE value="dahroug added delete" />
@@ -677,7 +677,8 @@
     <MESSAGE value="tac tac w bta3" />
     <MESSAGE value="fdaskj;l" />
     <MESSAGE value="akfdhjkajsdjhj" />
-    <option name="LAST_COMMIT_MESSAGE" value="akfdhjkajsdjhj" />
+    <MESSAGE value="fadjklfj;ds" />
+    <option name="LAST_COMMIT_MESSAGE" value="fadjklfj;ds" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

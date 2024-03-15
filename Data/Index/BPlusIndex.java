@@ -996,13 +996,23 @@ public class BPlusIndex implements Serializable {
             }
         }
         private boolean updateKeyVal(DictionaryPair dp){
-            for (DictionaryPair dictionaryPair : dictionary) {
-                if (dictionaryPair.key.equals(dp.key)){
-                    dictionaryPair.values.add(dp.values.get(0));
-                    return true;
+            Comparator<DictionaryPair> c = new Comparator<DictionaryPair>() {
+                @Override
+                public int compare(DictionaryPair o1, DictionaryPair o2) {
+                    return o1.compareTo(o2);
                 }
-            }
-            return false;
+            };
+            int idx = Arrays.binarySearch(this.dictionary, 0, numPairs, dp, c);
+            if(idx < 0)
+                return false;
+            dictionary[idx].values.add(dp.values.get(0));
+//            for (DictionaryPair dictionaryPair : dictionary) {
+//                if (dictionaryPair.key.equals(dp.key)){
+//                    dictionaryPair.values.add(dp.values.get(0));
+//                    return true;
+//                }
+//            }
+            return true;
         }
 
         /**
@@ -1080,7 +1090,6 @@ public class BPlusIndex implements Serializable {
         Object key;
 //        Object value;
         Vector<Object> values = new Vector<>();
-//        ArrayList<Object> values;
         // 20 -----> {1, 6, 7 ,2}
         /**
          * Constructor
