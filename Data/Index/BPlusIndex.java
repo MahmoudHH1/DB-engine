@@ -452,7 +452,7 @@ public class BPlusIndex implements Serializable {
         } else {
 
             // Get leaf node and attempt to find index of key to delete
-            LeafNode ln = (this.root == null) ? this.firstLeaf : findLeafNode(key ,value);
+            LeafNode ln = (this.root == null) ? this.firstLeaf : findLeafNode(key);
             int dpIndex = binarySearch(ln.dictionary, ln.numPairs, key);
 
 
@@ -465,7 +465,7 @@ public class BPlusIndex implements Serializable {
             } else {
 
                 // Successfully delete the dictionary pair
-                ln.delete(dpIndex);
+                ln.delete(dpIndex, value);
 
                 // Check for deficiencies
                 if (ln.isDeficient()) {
@@ -684,26 +684,24 @@ public class BPlusIndex implements Serializable {
      * @param key: the key to be searched within the B+ tree
      * @return the floating point value associated with the key within the B+ tree
      */
-    public ArrayList<Object> search(Object key) {
-//		// If B+ tree is completely empty, simply return null
-//		if (isEmpty()) { return null; }
-//
-//		// Find leaf node that holds the dictionary key
-//		LeafNode ln = (this.root == null) ? this.firstLeaf : findLeafNode(key);
-//
-//		// Perform binary search to find index of key within dictionary
-//		DictionaryPair[] dps = ln.dictionary;
-//		int index = binarySearch(dps, ln.numPairs, key);
-//
-//		// If index negative, the key doesn't exist in B+ tree
-//		if (index < 0) {
-//			return null;
-//		} else {
-//			return dps[index].value;
-//		}
-        return searchinclusive(key,key);
-    }
+    public Vector<Object> search(Object key) {
+		// If B+ tree is completely empty, simply return null
+		if (isEmpty()) { return null; }
 
+		// Find leaf node that holds the dictionary key
+		LeafNode ln = (this.root == null) ? this.firstLeaf : findLeafNode(key);
+
+		// Perform binary search to find index of key within dictionary
+		DictionaryPair[] dps = ln.dictionary;
+		int index = binarySearch(dps, ln.numPairs, key);
+
+		// If index negative, the key doesn't exist in B+ tree
+		if (index < 0) {
+			return null;
+		} else {
+			return dps[index].values;
+		}
+    }
     /**
      * This method traverses the doubly linked list of the B+ tree and records
      * all values whose associated keys are within the range specified by
@@ -713,10 +711,10 @@ public class BPlusIndex implements Serializable {
      * @return an ArrayList<Double> that holds all values of dictionary pairs
      * whose keys are within the specified range
      */
-    public ArrayList<Object> searchexclusive(Object lowerBound, Object upperBound) {
+    public ArrayList<Double> search(int lowerBound, int upperBound) {
 
         // Instantiate Double array to hold values
-        ArrayList<Object> values = new ArrayList<Object>();
+        ArrayList<Double> values = new ArrayList<Double>();
 
         // Iterate through the doubly linked list of leaves
         LeafNode currNode = this.firstLeaf;
@@ -731,18 +729,49 @@ public class BPlusIndex implements Serializable {
                 if (dp == null) { break; }
 
                 // Include value if its key fits within the provided range
-                if (((Comparable) lowerBound).compareTo(dp.key) < 0 && ((Comparable) dp.key).compareTo(upperBound) < 0) {
+                if (lowerBound <= dp.key && dp.key <= upperBound) {
                     values.add(dp.value);
                 }
-
             }
+
 			/* Update the current node to be the right sibling,
 			   leaf traversal is from left to right */
             currNode = currNode.rightSibling;
+
         }
 
         return values;
     }
+//    public ArrayList<Object> searchexclusive(Object lowerBound, Object upperBound) {
+//
+//        // Instantiate Double array to hold values
+//        ArrayList<Object> values = new ArrayList<Object>();
+//
+//        // Iterate through the doubly linked list of leaves
+//        LeafNode currNode = this.firstLeaf;
+//        while (currNode != null) {
+//
+//            // Iterate through the dictionary of each node
+//            DictionaryPair dps[] = currNode.dictionary;
+//            for (DictionaryPair dp : dps) {
+//
+//				/* Stop searching the dictionary once a null value is encountered
+//				   as this the indicates the end of non-null values */
+//                if (dp == null) { break; }
+//
+//                // Include value if its key fits within the provided range
+//                if (((Comparable) lowerBound).compareTo(dp.key) < 0 && ((Comparable) dp.key).compareTo(upperBound) < 0) {
+//                    values.add(dp.value);
+//                }
+//
+//            }
+//			/* Update the current node to be the right sibling,
+//			   leaf traversal is from left to right */
+//            currNode = currNode.rightSibling;
+//        }
+//
+//        return values;
+//    }
     public ArrayList<Object> searchinclusive(Object lowerBound, Object upperBound) {
 
         // Instantiate Double array to hold values
@@ -931,7 +960,7 @@ public class BPlusIndex implements Serializable {
          * @param m: the max degree of the InternalNode
          * @param keys: the list of keys that InternalNode is initialized with
          */
-        private InternalNode(int m, Object[] keys , Object[] values) {
+        private InternalNode(int m, Object[] keys) {
             this.maxDegree = m;
             this.minDegree = (int)Math.ceil(m/2.0);
             this.degree = 0;
@@ -945,7 +974,7 @@ public class BPlusIndex implements Serializable {
          * @param keys: the list of keys that InternalNode is initialized with
          * @param pointers: the list of pointers that InternalNode is initialized with
          */
-        private InternalNode(int m, Object[] keys, Object[] values, Node[] pointers) {
+        private InternalNode(int m, Object[] keys, Node[] pointers) {
             this.maxDegree = m;
             this.minDegree = (int)Math.ceil(m/2.0);
             this.degree = linearNullSearch(pointers);
@@ -987,7 +1016,8 @@ public class BPlusIndex implements Serializable {
         }
         public void delete(int index, Object value) {
 
-            dictionary[index].values.remove(value);
+            if(!dictionary[index].values.remove(value))
+                System.err.println("Value Not Found");;
             // Delete dictionary pair from leaf
             if(dictionary[index].values.isEmpty())
                 this.dictionary[index] = null;
