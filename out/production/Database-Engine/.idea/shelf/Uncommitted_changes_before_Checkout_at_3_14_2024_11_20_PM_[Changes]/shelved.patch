@@ -1,0 +1,16 @@
+Index: out/production/Database-Engine/Data_Entry/metadata.csv
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>Table_Name,Column_Name,Column_Type,Clustering_Key,Index_Name,Index_Type\r\nStudent,gpa,java.lang.double,false,null,null\r\nStudent,name,java.lang.String,false,null,null\r\nStudent,id,java.lang.Integer,true,idIndex,B+ Tree\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/out/production/Database-Engine/Data_Entry/metadata.csv b/out/production/Database-Engine/Data_Entry/metadata.csv
+--- a/out/production/Database-Engine/Data_Entry/metadata.csv	(revision 363af96d09145271cc3bbec2b3ba343a235de44f)
++++ b/out/production/Database-Engine/Data_Entry/metadata.csv	(date 1710357222039)
+@@ -1,4 +1,4 @@
+ Table_Name,Column_Name,Column_Type,Clustering_Key,Index_Name,Index_Type
+ Student,gpa,java.lang.double,false,null,null
+ Student,name,java.lang.String,false,null,null
+-Student,id,java.lang.Integer,true,idIndex,B+ Tree
++Student,id,java.lang.Integer,true,null,null
