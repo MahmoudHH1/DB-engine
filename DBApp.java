@@ -1,4 +1,5 @@
 import Data.Handler.FileCreator;
+import Data.Handler.Pair;
 import Data.Index.BPlusIndex;
 import Data.Index.IndexControler;
 import Data.Page.Page;
@@ -117,10 +118,10 @@ public class DBApp {
                 break;
         }
         Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
-        int pageIdx = table.search((Comparable) clusterKeyVal,(Integer) clusterKeyColIndex[1])/1000;
-        Record record = table.searchRec( (Comparable) clusterKeyVal,(Integer) clusterKeyColIndex[1]) ;
+        Pair<Page, Record> record = table.searchRec( (Comparable) clusterKeyVal,(Integer) clusterKeyColIndex[1]) ;
         if (record != null) {
-                record.updateRecord(colIdxVal , htblColNameValue ,table);
+                record.y.updateRecord(colIdxVal , htblColNameValue ,table);
+                record.x.save();
                 table.save();
             }
 

@@ -1,7 +1,9 @@
 package Data.Index;
 import Data.Handler.FileCreator;
-import org.antlr.v4.runtime.misc.Pair;
+import Data.Handler.Pair;
+//import org.antlr.v4.runtime.misc.Pair;
 //import com.sun.corba.se.impl.orbutil.ObjectWriter;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -9,6 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Vector;
 
 public class BPlusIndex implements Serializable {
     int m;
@@ -71,10 +74,9 @@ public class BPlusIndex implements Serializable {
      * @param key: the unique key that lies within the dictionary of a LeafNode object
      * @return the LeafNode object that contains the key within its dictionary
      */
-    private LeafNode findLeafNode(Object key , Object value) {
+    private LeafNode findLeafNode(Object key) {
         // Initialize keys and index variable
         Object[] keys = this.root.keys;
-        Object[] values = this.root.values ;
         int i;
 
         // Find next node on path to appropriate leaf node
@@ -363,16 +365,14 @@ public class BPlusIndex implements Serializable {
         // Split keys and pointers in half
         int midpoint = getMidpoint();
         Object newParentKey = in.keys[midpoint];
-        Object newParentValue = in.values[midpoint];
         Object[] halfKeys = splitKeys(in.keys, midpoint);
-        Object[] halfValues = splitValues(in.values , midpoint);
         Node[] halfPointers = splitChildPointers(in, midpoint);
 
         // Change degree of original InternalNode in
         in.degree = linearNullSearch(in.childPointers);
 
         // Create new sibling internal node and add half of keys and pointers
-        InternalNode sibling = new InternalNode(this.m, halfKeys,halfValues,halfPointers);
+        InternalNode sibling = new InternalNode(this.m, halfKeys, halfPointers);
         for (Node pointer : halfPointers) {
             if (pointer != null) {
                 pointer.parent = sibling;
@@ -434,22 +434,6 @@ public class BPlusIndex implements Serializable {
 
         return halfKeys;
     }
-    private Object[] splitValues(Object[] values, int split) {
-        Object[] halfValues = new Object[this.m];
-
-        // Remove split-indexed value from keys
-        values[split] = null;
-
-        // Copy half of the values into halfKeys while updating original keys
-        for (int i = split + 1; i < values.length; i++) {
-            halfValues[i - split - 1] = values[i];
-            values[i] = null;
-        }
-
-        return halfValues;
-    }
-
-
     /*~~~~~~~~~~~~~~~~ API: DELETE, INSERT, SEARCH ~~~~~~~~~~~~~~~~*/
 
     /**
@@ -812,7 +796,6 @@ public class BPlusIndex implements Serializable {
         InternalNode leftSibling;
         InternalNode rightSibling;
         Object[] keys;
-        Object[] values;
         Node[] childPointers;
 
         /**
@@ -918,7 +901,7 @@ public class BPlusIndex implements Serializable {
          * parent of a merging, deficient LeafNode.
          * @param index: the location within keys to be set to null
          */
-        private void removeKey(int index) { this.keys[index] = null; this.values[index] =null;}
+        private void removeKey(int index) { this.keys[index] = null;}
 
         /**
          * This method sets childPointers[index] to null and additionally
@@ -953,7 +936,6 @@ public class BPlusIndex implements Serializable {
             this.minDegree = (int)Math.ceil(m/2.0);
             this.degree = 0;
             this.keys = keys;
-            this.values = values ;
             this.childPointers = new Node[this.maxDegree+1];
         }
 
@@ -968,7 +950,6 @@ public class BPlusIndex implements Serializable {
             this.minDegree = (int)Math.ceil(m/2.0);
             this.degree = linearNullSearch(pointers);
             this.keys = keys;
-            this.values = values ;
             this.childPointers = pointers;
         }
     }
@@ -997,9 +978,19 @@ public class BPlusIndex implements Serializable {
          * @param index: the location within the dictionary to be set to null
          */
         public void delete(int index) {
-
             // Delete dictionary pair from leaf
-            this.dictionary[index] = null;
+            if(dictionary[index].values.isEmpty())
+                this.dictionary[index] = null;
+
+            // Decrement numPairs
+            numPairs--;
+        }
+        public void delete(int index, Object value) {
+
+            dictionary[index].values.remove(value);
+            // Delete dictionary pair from leaf
+            if(dictionary[index].values.isEmpty())
+                this.dictionary[index] = null;
 
             // Decrement numPairs
             numPairs--;
@@ -1013,6 +1004,7 @@ public class BPlusIndex implements Serializable {
          * @param dp: the dictionary pair to be inserted
          * @return a boolean indicating whether or not the insert was successful
          */
+        ////////////// revisesssssssssssssssssssssssssssssss
         public boolean insert(DictionaryPair dp) {
             if (this.isFull()) {
 
@@ -1022,12 +1014,25 @@ public class BPlusIndex implements Serializable {
             } else {
 
                 // Insert dictionary pair, increment numPairs, sort dictionary
+                if(updateKeyVal(dp))
+                    return true;
+
                 this.dictionary[numPairs] = dp;
                 numPairs++;
                 Arrays.sort(this.dictionary, 0, numPairs);
 
                 return true;
+
             }
+        }
+        private boolean updateKeyVal(DictionaryPair dp){
+            for (DictionaryPair dictionaryPair : dictionary) {
+                if (dictionaryPair.key.equals(dp.key)){
+                    dictionaryPair.values.add(dp.values.get(0));
+                    return true;
+                }
+            }
+            return false;
         }
 
         /**
@@ -1102,16 +1107,19 @@ public class BPlusIndex implements Serializable {
      * so that the DictionaryPair objects can be sorted later on.
      */
     public class DictionaryPair implements Comparable<DictionaryPair> {
-//        Object key;
+        Object key;
 //        Object value;
-        Pair<Object , Object>kvPair  ;
+        Vector<Object> values = new Vector<>();
+//        ArrayList<Object> values;
+        // 20 -----> {1, 6, 7 ,2}
         /**
          * Constructor
          * @param key: the key of the key-value pair
          * @param value: the value of the key-value pair
          */
-        public DictionaryPair(Pair<Object ,Object>kvPair) {
-            this.kvPair = kvPair ;
+        public DictionaryPair(Object key, Object value) {
+            this.key = key;
+            values.add(value);
         }
 
         /**
@@ -1122,7 +1130,7 @@ public class BPlusIndex implements Serializable {
          */
         @Override
         public int compareTo(DictionaryPair o) {
-            if (kvPair..equals(o.key)) {
+            if (key.equals(o.key)) {
                 return 0;
             } else if (key instanceof Integer && o.key instanceof Integer) {
                 return Integer.compare((Integer) key, (Integer) o.key);
