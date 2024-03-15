@@ -1,0 +1,111 @@
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_18\" default=\"true\" project-jdk-name=\"1.8\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	
++++ b/.idea/misc.xml	
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_18" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: DBApp.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\n\r\n\r\nimport Data.Table;\r\nimport Data.TableColumn;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.Iterator;\r\nimport java.util.Hashtable;\r\n\r\n\r\npublic class DBApp {\r\n\r\n\r\n\r\n\tpublic DBApp( ){\r\n\t\t\r\n\t}\r\n\r\n\t// this does whatever initialization you would like\r\n\t// or leave it empty if there is no code you want to \r\n\t// execute at application startup \r\n\tpublic void init( ){\r\n\t\t\r\n\t\t\r\n\t}\r\n\r\n\r\n\t// following method creates one table only\r\n\t// strClusteringKeyColumn is the name of the column that will be the primary\r\n\t// key and the clustering column as well. The data type of that column will\r\n\t// be passed in htblColNameType\r\n\t// htblColNameValue will have the column name as key and the data \r\n\t// type as value\r\n\tpublic void createTable(String strTableName, \r\n\t\t\t\t\t\t\tString strClusteringKeyColumn,  \r\n\t\t\t\t\t\t\tHashtable<String,String> htblColNameType) throws DBAppException{\r\n\t\tArrayList<TableColumn> allColumns = new ArrayList<>();\r\n\r\n\t\tfor( String column : htblColNameType.keySet()){\r\n\t\t\tTableColumn newColumn = new TableColumn(\r\n\t\t\t\t\tstrTableName ,\r\n\t\t\t\t\tcolumn ,\r\n\t\t\t\t\thtblColNameType.get(column) ,\r\n\t\t\t\t\tcolumn.equals(strClusteringKeyColumn) ,\r\n\t\t\t\t\tnull ,\r\n\t\t\t\t\tnull\r\n\t\t\t);\r\n\t\t\tallColumns.add(newColumn);\r\n\t\t}\r\n\t\tTable table = new Table(allColumns);\r\n\t}\r\n\r\n\r\n\t// following method creates a B+tree index \r\n\tpublic void createIndex(String   strTableName,\r\n\t\t\t\t\t\t\tString   strColName,\r\n\t\t\t\t\t\t\tString   strIndexName) throws DBAppException{\r\n\t\t\r\n\t\tthrow new DBAppException(\"not implemented yet\");\r\n\t}\r\n\r\n\r\n\t// following method inserts one row only. \r\n\t// htblColNameValue must include a value for the primary key\r\n\tpublic void insertIntoTable(String strTableName, \r\n\t\t\t\t\t\t\t\tHashtable<String,Object>  htblColNameValue) throws DBAppException{\r\n\t\r\n\t\tthrow new DBAppException(\"not implemented yet\");\r\n\t}\r\n\r\n\r\n\t// following method updates one row only\r\n\t// htblColNameValue holds the key and new value \r\n\t// htblColNameValue will not include clustering key as column name\r\n\t// strClusteringKeyValue is the value to look for to find the row to update.\r\n\tpublic void updateTable(String strTableName, \r\n\t\t\t\t\t\t\tString strClusteringKeyValue,\r\n\t\t\t\t\t\t\tHashtable<String,Object> htblColNameValue   )  throws DBAppException{\r\n\t\r\n\t\tthrow new DBAppException(\"not implemented yet\");\r\n\t}\r\n\r\n\r\n\t// following method could be used to delete one or more rows.\r\n\t// htblColNameValue holds the key and value. This will be used in search \r\n\t// to identify which rows/tuples to delete. \t\r\n\t// htblColNameValue enteries are ANDED together\r\n\tpublic void deleteFromTable(String strTableName, \r\n\t\t\t\t\t\t\t\tHashtable<String,Object> htblColNameValue) throws DBAppException{\r\n\t\r\n\t\tthrow new DBAppException(\"not implemented yet\");\r\n\t}\r\n\r\n\r\n\tpublic Iterator selectFromTable(SQLTerm[] arrSQLTerms, \r\n\t\t\t\t\t\t\t\t\tString[]  strarrOperators) throws DBAppException{\r\n\t\t\t\t\t\t\t\t\t\t\r\n\t\treturn null;\r\n\t}\r\n\r\n\r\n\tpublic static void main( String[] args ){\r\n\ttry{\r\n\t\t\tString strTableName = \"Teatchers\";\r\n\t\t\tDBApp dbApp = new DBApp( );\r\n\t\t\t\r\n\t\t\tHashtable htblColNameType = new Hashtable( );\r\n\t\t\thtblColNameType.put(\"id\", \"java.lang.Integer\");\r\n\t\t\thtblColNameType.put(\"name\", \"java.lang.String\");\r\n\t\t\thtblColNameType.put(\"gpa\", \"java.lang.double\");\r\n\t\t\tdbApp.createTable( strTableName, \"id\", htblColNameType );\r\n//\t\t\tdbApp.createIndex( strTableName, \"gpa\", \"gpaIndex\" );\r\n\r\n//\t\t\tHashtable htblColNameValue = new Hashtable( );\r\n//\t\t\thtblColNameValue.put(\"id\", new Integer( 2343432 ));\r\n//\t\t\thtblColNameValue.put(\"name\", new String(\"Ahmed Noor\" ) );\r\n//\t\t\thtblColNameValue.put(\"gpa\", new Double( 0.95 ) );\r\n//\t\t\tdbApp.insertIntoTable( strTableName , htblColNameValue );\r\n//\r\n//\t\t\thtblColNameValue.clear( );\r\n//\t\t\thtblColNameValue.put(\"id\", new Integer( 453455 ));\r\n//\t\t\thtblColNameValue.put(\"name\", new String(\"Ahmed Noor\" ) );\r\n//\t\t\thtblColNameValue.put(\"gpa\", new Double( 0.95 ) );\r\n//\t\t\tdbApp.insertIntoTable( strTableName , htblColNameValue );\r\n//\r\n//\t\t\thtblColNameValue.clear( );\r\n//\t\t\thtblColNameValue.put(\"id\", new Integer( 5674567 ));\r\n//\t\t\thtblColNameValue.put(\"name\", new String(\"Dalia Noor\" ) );\r\n//\t\t\thtblColNameValue.put(\"gpa\", new Double( 1.25 ) );\r\n//\t\t\tdbApp.insertIntoTable( strTableName , htblColNameValue );\r\n//\r\n//\t\t\thtblColNameValue.clear( );\r\n//\t\t\thtblColNameValue.put(\"id\", new Integer( 23498 ));\r\n//\t\t\thtblColNameValue.put(\"name\", new String(\"John Noor\" ) );\r\n//\t\t\thtblColNameValue.put(\"gpa\", new Double( 1.5 ) );\r\n//\t\t\tdbApp.insertIntoTable( strTableName , htblColNameValue );\r\n//\r\n//\t\t\thtblColNameValue.clear( );\r\n//\t\t\thtblColNameValue.put(\"id\", new Integer( 78452 ));\r\n//\t\t\thtblColNameValue.put(\"name\", new String(\"Zaky Noor\" ) );\r\n//\t\t\thtblColNameValue.put(\"gpa\", new Double( 0.88 ) );\r\n//\t\t\tdbApp.insertIntoTable( strTableName , htblColNameValue );\r\n//\r\n//\r\n//\t\t\tSQLTerm[] arrSQLTerms;\r\n//\t\t\tarrSQLTerms = new SQLTerm[2];\r\n//\t\t\tarrSQLTerms[0]._strTableName =  \"Student\";\r\n//\t\t\tarrSQLTerms[0]._strColumnName=  \"name\";\r\n//\t\t\tarrSQLTerms[0]._strOperator  =  \"=\";\r\n//\t\t\tarrSQLTerms[0]._objValue     =  \"John Noor\";\r\n//\r\n//\t\t\tarrSQLTerms[1]._strTableName =  \"Student\";\r\n//\t\t\tarrSQLTerms[1]._strColumnName=  \"gpa\";\r\n//\t\t\tarrSQLTerms[1]._strOperator  =  \"=\";\r\n//\t\t\tarrSQLTerms[1]._objValue     =  new Double( 1.5 );\r\n//\r\n//\t\t\tString[]strarrOperators = new String[1];\r\n//\t\t\tstrarrOperators[0] = \"OR\";\r\n//\t\t\t// select * from Student where name = \"John Noor\" or gpa = 1.5;\r\n//\t\t\tIterator resultSet = dbApp.selectFromTable(arrSQLTerms , strarrOperators);\r\n\t\t}\r\n\t\tcatch(Exception exp){\r\n\t\t\texp.printStackTrace( );\r\n\t\t}\r\n\t}\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/DBApp.java b/DBApp.java
+--- a/DBApp.java	
++++ b/DBApp.java	
+@@ -36,7 +36,7 @@
+ 							String strClusteringKeyColumn,  
+ 							Hashtable<String,String> htblColNameType) throws DBAppException{
+ 		ArrayList<TableColumn> allColumns = new ArrayList<>();
+-
++		//looping through the given hashtable to add each column to the table
+ 		for( String column : htblColNameType.keySet()){
+ 			TableColumn newColumn = new TableColumn(
+ 					strTableName ,
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"fb42b14b-88c4-43e5-8ff2-f6f11ff08115\" name=\"Changes\" comment=\"Saeed added\">\r\n      <change afterPath=\"$PROJECT_DIR$/Data/FileCreator.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/misc.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"master\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;mahmoudahroug&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">\r\n    <option name=\"selectedUrlAndAccountId\">\r\n      <UrlAndAccount>\r\n        <option name=\"accountId\" value=\"9403fae9-535c-428d-8ea0-d4e46f1dad2e\" />\r\n        <option name=\"url\" value=\"https://github.com/MahmoudHH1/DB-engine.git\" />\r\n      </UrlAndAccount>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 2\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2cmpio4uBf7MEI7A8VcnQRrZ0E8\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"Application.DBApp.executor\": \"Run\",\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"git-widget-placeholder\": \"M.dahroug\",\r\n    \"project.structure.last.edited\": \"Modules\",\r\n    \"project.structure.proportion\": \"0.0\",\r\n    \"project.structure.side.proportion\": \"0.0\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RunManager\" selected=\"Application.DBApp\">\r\n    <configuration name=\"DBApp\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"DBApp\" />\r\n      <module name=\"Database-Engine\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Page\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"Data.Page\" />\r\n      <module name=\"Database-Engine\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"Data.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Record\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"Data.Record\" />\r\n      <module name=\"Database-Engine\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Table\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"Data.Table\" />\r\n      <module name=\"Database-Engine\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"Data.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"TableColumn\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"Data.TableColumn\" />\r\n      <module name=\"Database-Engine\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"Data.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"JetRunConfigurationType\">\r\n      <module name=\"DB-engine\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"KotlinStandaloneScriptRunConfigurationType\">\r\n      <module name=\"DB-engine\" />\r\n      <option name=\"filePath\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.TableColumn\" />\r\n        <item itemvalue=\"Application.Table\" />\r\n        <item itemvalue=\"Application.Record\" />\r\n        <item itemvalue=\"Application.Page\" />\r\n        <item itemvalue=\"Application.DBApp\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"fb42b14b-88c4-43e5-8ff2-f6f11ff08115\" name=\"Changes\" comment=\"\" />\r\n      <created>1708726737774</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1708726737774</updated>\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"added method storePage to store page in .class file-- to be modified later -- Will probably be used in insert tuple method\" />\r\n    <MESSAGE value=\"Saeed added\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Saeed added\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -5,9 +5,11 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Saeed added">
+-      <change afterPath="$PROJECT_DIR$/Data/FileCreator.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/DBApp.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Data/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Page.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Data/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Table.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -57,7 +59,7 @@
+     "Application.DBApp.executor": "Run",
+     "RunOnceActivity.OpenProjectViewOnStart": "true",
+     "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "git-widget-placeholder": "M.dahroug",
++    "git-widget-placeholder": "master",
+     "project.structure.last.edited": "Modules",
+     "project.structure.proportion": "0.0",
+     "project.structure.side.proportion": "0.0"
+Index: Data/Page.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Data;\r\n\r\nimport java.io.Serializable;\r\nimport java.util.Vector;\r\npublic class Page implements Serializable {\r\n\r\n    String pageName ;\r\n    private Vector<Record>allRecords;\r\n\r\n    public Page ( String pageName){\r\n        this.pageName = pageName ;\r\n        allRecords = new Vector<>();\r\n    }\r\n\r\n    public void addRecord(Record record){\r\n        allRecords.add(record);\r\n    }\r\n\r\n    public int getPageSize(){\r\n        return allRecords.size();\r\n    }\r\n\r\n    @Override\r\n    public String toString() {\r\n        StringBuilder pageContent = new StringBuilder();\r\n        for (Record record : allRecords) {\r\n            pageContent.append(record.toString()).append(\",\").append(\"\\n\");\r\n        }\r\n        return pageContent.toString();\r\n    }\r\n\r\n//    public static void main(String[] args) {\r\n//        Page page = new Page() ;\r\n//\r\n//        Record r1 = new Record() ;\r\n//        r1.add(\"ID\");\r\n//        r1.add(\"Name\");\r\n//        r1.add(\"Age\");\r\n//        r1.add(\"Gender\");\r\n//        page.addRecord(r1);\r\n//        Record r2 = new Record() ;\r\n//        r2.add(\"1\");\r\n//        r2.add(\"Mohamed\");\r\n//        r2.add(\"12\");\r\n//        r2.add(\"male\");\r\n//        page.addRecord(r2);\r\n//        Record r3 = new Record() ;\r\n//        r3.add(1);\r\n//        r3.add(\"Dahroug\");\r\n//        r3.add(\"13\");\r\n//        r3.add(\"male\");\r\n//        page.addRecord(r3);\r\n//        System.out.println(page.getPageSize());\r\n//        System.out.println(page.toString());\r\n//    }\r\n\r\n}\r\n
+===================================================================
+diff --git a/Data/Page.java b/Data/Page.java
+--- a/Data/Page.java	
++++ b/Data/Page.java	
+@@ -1,6 +1,7 @@
+ package Data;
+ 
+ import java.io.Serializable;
++import java.util.ArrayList;
+ import java.util.Vector;
+ public class Page implements Serializable {
+ 
+@@ -10,6 +11,8 @@
+     public Page ( String pageName){
+         this.pageName = pageName ;
+         allRecords = new Vector<>();
++
++
+     }
+ 
+     public void addRecord(Record record){
+Index: Data/Table.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Data;\r\n\r\nimport java.io.*;\r\nimport java.util.ArrayList;\r\n\r\nimport java.io.IOException;\r\n\r\npublic class Table implements Serializable {\r\n    ArrayList<String> pagesPathes ;\r\n    ArrayList<TableColumn>allColumns;\r\n    String tableDirectory  = \"Data_Entry/Tables\";\r\n    String tablePath ;\r\n    String tableName ;\r\n\r\n\r\n    public Table(ArrayList<TableColumn> allColumns) {\r\n        this.allColumns = allColumns;\r\n        MetaData.writeDataToMetaDatafile(allColumns);\r\n        tableName = allColumns.get(0).tableName ;\r\n        tablePath = tableDirectory+'/'+tableName;\r\n        File f = new File(tablePath);\r\n        System.out.println(f.mkdir());\r\n    }\r\n\r\n\r\n\r\n    public void createPage(Page p) throws IOException {\r\n        String path = tablePath+pagesPathes.size() +\".class\"; // need to know number of page to put\r\n        pagesPathes.add(path);                              // and tableName should belong to Table class not column\r\n        FileOutputStream fileOut = new FileOutputStream(path);\r\n        ObjectOutputStream out = new ObjectOutputStream(fileOut);\r\n        out.writeObject(p);\r\n        out.close();\r\n        fileOut.close();\r\n    }\r\n    public static void main(String[] args) {\r\n\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/Data/Table.java b/Data/Table.java
+--- a/Data/Table.java	
++++ b/Data/Table.java	
+@@ -6,6 +6,7 @@
+ import java.io.IOException;
+ 
+ public class Table implements Serializable {
++   
+     ArrayList<String> pagesPathes ;
+     ArrayList<TableColumn>allColumns;
+     String tableDirectory  = "Data_Entry/Tables";

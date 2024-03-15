@@ -20,6 +20,7 @@ public class Record extends Vector<Comparable>{
     public void updateRecord(
             Hashtable<Integer, Object> ht,
             Hashtable<String, Object> colVal ,
+            Object clusterKeyVal ,
             Table table
         ) throws DBAppException, IOException, ClassNotFoundException {
         if (ht.size() != colVal.size()) {
@@ -32,13 +33,13 @@ public class Record extends Vector<Comparable>{
         while (indexKeys.hasMoreElements() && colKeys.hasMoreElements()) {
             int idx = indexKeys.nextElement();
             String colKey = colKeys.nextElement();
-            // check if col has B+ idx
-//            if(table.isColumnNameBIdx(colKey)){
-//                // create new HashTable with the onlt this key and this value  ex id : 1 only
-//                Hashtable <String , Object> toUpdate = new Hashtable<>();
-//                toUpdate.put(colKey , colVal.get(colKey));
-//                IndexControler.updateIndex(toUpdate,table);
-//            }
+//             check if col has B+ idx
+            if(table.isColumnNameBIdx(colKey)){
+                // create new HashTable with the onlt this key and this value  ex id : 1 only
+                Hashtable <String , Object> toUpdate = new Hashtable<>();
+                toUpdate.put(colKey , colVal.get(colKey));
+                IndexControler.updateIndex(toUpdate, clusterKeyVal,table);
+            }
             // Assuming this.setElementAt() method takes an index and a value to update
             this.setElementAt((Comparable) colVal.get(colKey), idx);
         }

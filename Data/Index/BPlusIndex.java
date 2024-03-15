@@ -935,7 +935,7 @@ public class BPlusIndex implements Serializable {
         int numPairs;
         LeafNode leftSibling;
         LeafNode rightSibling;
-        DictionaryPair[] dictionary;
+        DictionaryPair[] dictionary ;
 
 
         // 2,3,5,1,7 -> // 1,2,3,5,7
@@ -984,8 +984,11 @@ public class BPlusIndex implements Serializable {
             } else {
 
                 // Insert dictionary pair, increment numPairs, sort dictionary
-                if(updateKeyVal(dp))
-                    return true;
+                // dictionary array at the begging is empty
+                if (numPairs != 0){
+                    if(updateKeyVal(dp))
+                        return true;
+                }
 
                 this.dictionary[numPairs] = dp;
                 numPairs++;
@@ -996,7 +999,9 @@ public class BPlusIndex implements Serializable {
             }
         }
         private boolean updateKeyVal(DictionaryPair dp){
+            System.out.println(dictionary[0]);
             for (DictionaryPair dictionaryPair : dictionary) {
+                System.out.println(dictionaryPair.key);
                 if (dictionaryPair.key.equals(dp.key)){
                     dictionaryPair.values.add(dp.values.get(0));
                     return true;
@@ -1050,7 +1055,7 @@ public class BPlusIndex implements Serializable {
             this.maxNumPairs = m - 1;
             this.minNumPairs = (int)(Math.ceil(m/2) - 1);
             this.dictionary = new DictionaryPair[m];
-            this.numPairs = 0;
+            this.numPairs = 0 ;
             this.insert(dp);
         }
 
@@ -1174,14 +1179,14 @@ public class BPlusIndex implements Serializable {
             // Create initial B+ tree
             BPlusIndex bpt = new BPlusIndex(3,"","","");
             bpt.insert("Ahmed","Ahmed");
-            bpt.insert("JJ","PlaceofJJ");
-            System.out.println(bpt.search("Ahmed"));
-//			bpt.insert("JJ","PlaceofJJ2");
-//            bpt.delete("JJ");
-            System.out.println(bpt.search("JJ"));
-            bpt.insert("R","placeofR");
-            System.out.println(bpt.search("R"));
-            bpt.insert("Banana","PlaceofBanana");
+//            bpt.insert("JJ","PlaceofJJ");
+//            System.out.println(bpt.search("Ahmed"));
+////			bpt.insert("JJ","PlaceofJJ2");
+////            bpt.delete("JJ");
+//            System.out.println(bpt.search("JJ"));
+//            bpt.insert("R","placeofR");
+//            System.out.println(bpt.search("R"));
+//            bpt.insert("Banana","PlaceofBanana");
 //            System.out.println(bpt.search("Ahmed","R"));
 
 //			bpt.insert(21,"PlaceofInt");

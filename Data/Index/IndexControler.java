@@ -45,24 +45,35 @@ public class IndexControler {
     public void insertIntoIndex() {
     }
 
-    public static void updateIndex(Hashtable<String, Object> colVal, Table table) throws IOException, ClassNotFoundException, DBAppException {
-        Set<String> keys = colVal.keySet();
-        String colName = keys.iterator().next();
-        TableColumn col = table.getColumnByName(colName);
-        BPlusIndex idx = readIndexByName(col.getIndexName(), table);
-        Vector<Object> allClusterKeys = idx.search(colVal.get(colName));
-        Object obj = new Object();
-        for (Object cluserKey : allClusterKeys) {
-            if (cluserKey.equals(table.getClusterKey())) {
+    /*
+        update({id : 1 , age : 20},{id : 2 , age :30},{id : 3 , age :20})
+        [1,3] [2]     // values
+    *   [20]  [30]   // keys
+    *   searchIdx(key = 20)-> return  [1,3]
+    *   delete (20 ,1 )
+    *   [3] [2]     // values
+    *   [20]  [30]   // keys
+    *
+    *
+    * */
 
-            }
-        }
-        if (obj != null) {
-            idx.delete(obj);
-            idx.insert(colVal.get(colName), table.getClusterKey());
-        } else {
-            idx.insert(colVal.get(colName), table.getClusterKey());
-        }
+
+
+    public static void updateIndex(Hashtable<String, Object> colVal, Object clusterKeyVal ,Table table) throws IOException, ClassNotFoundException, DBAppException {
+//        Set<String> keys = colVal.keySet();
+//        String colName = keys.iterator().next();
+//        TableColumn col = table.getColumnByName(colName);
+//        BPlusIndex idx = readIndexByName(col.getIndexName(), table);
+//        Vector<Object> allClusterKeys = idx.search(colVal.get(colName));
+//        // get record
+//        idx.delete(colVal.get(colName) , clusterKeyVal);
+//        idx.insert();
+//        if (obj != null) {
+//            idx.delete(obj);
+//            idx.insert(colVal.get(colName), table.getClusterKey());
+//        } else {
+//            idx.insert(colVal.get(colName), table.getClusterKey());
+//        }
     }
 
     public Object searchOnIndex() {
