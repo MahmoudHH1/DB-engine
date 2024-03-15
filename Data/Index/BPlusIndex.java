@@ -392,7 +392,7 @@ public class BPlusIndex implements Serializable {
             Object[] keys = new Object[this.m];
             Object[] values = new Object[this.m] ;
             keys[0] = newParentKey;
-            InternalNode newRoot = new InternalNode(this.m, keys ,values);
+            InternalNode newRoot = new InternalNode(this.m, keys);
             newRoot.appendChildPointer(in);
             newRoot.appendChildPointer(sibling);
             this.root = newRoot;
@@ -1133,7 +1133,7 @@ public class BPlusIndex implements Serializable {
         treeString.append("Leaf Node (Level ").append(level).append("): ");
         for (int i = 0; i < leafNode.numPairs; i++) {
             DictionaryPair pair = leafNode.dictionary[i];
-            treeString.append("(").append(pair.key).append(", ").append(pair.value).append(") ");
+            treeString.append("(").append(pair.key).append(", ").append(pair.values).append(") ");
         }
         treeString.append("\n");
     }
