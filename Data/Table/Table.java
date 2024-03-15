@@ -2,6 +2,7 @@ package Data.Table;
 
 import Data.Handler.FileCreator;
 import Data.Handler.FileRemover;
+import Data.Handler.Pair;
 import Data.Index.BPlusIndex;
 import Data.Index.IndexControler;
 import Data.Page.Page;
@@ -186,7 +187,7 @@ public class Table implements Serializable {
 
     // binary search on cluster Key
     // in progress
-    public int search(Comparable clusterKey, int clusterIdx) throws IOException, ClassNotFoundException {
+    public Pair<Integer, Integer> search(Comparable clusterKey, int clusterIdx) throws IOException, ClassNotFoundException {
         int start = 0;
         int end = pagePaths.size() - 1;
         int mid = 0;
@@ -197,7 +198,7 @@ public class Table implements Serializable {
             Page page = (Page) FileCreator.readObject(pagePaths.get(mid));
             checkBefore = false;
             if(page.isEmpty())
-                return mid*1000;
+                return new Pair<>(mid,0);
             if (clusterKey.compareTo(page.get(0).get(clusterIdx)) < 0) {
                 end = mid - 1;
                 checkBefore = true;
@@ -217,16 +218,17 @@ public class Table implements Serializable {
                     --mid;
             }
         }
-        return mid * 1000 + recIdx; // 5000
+        return new Pair<>(mid, recIdx); // 5000
     }
-    public Record searchRec(Comparable clusterKey, int clusterIdx) throws IOException, ClassNotFoundException {
+    public Pair<Page, Record> searchRec(Comparable clusterKey, int clusterIdx) throws IOException, ClassNotFoundException {
         int start = 0;
         int end = pagePaths.size() - 1;
         int mid = 0;
         Record rec = null;
+        Page page = null;
         while (start <= end) { // 2 pages -> start = 0; end = 1; mid = 0  id = 250 3000
             mid = start + (end - start) / 2;
-            Page page = (Page) FileCreator.readObject(pagePaths.get(mid));
+            page = (Page) FileCreator.readObject(pagePaths.get(mid));
             if(page.isEmpty())
                 return null;
             if (clusterKey.compareTo(page.get(0).get(clusterIdx)) < 0) {
@@ -238,7 +240,7 @@ public class Table implements Serializable {
                 break;
             }
         }
-        return rec;
+        return rec == null? null : new Pair<>(page, rec);
     }
 
     public boolean hasRecords() {
@@ -298,7 +300,8 @@ public class Table implements Serializable {
             firstPage.add(rec);
             firstPage.save();
         } else {
-            int pagePathIdx = (search(rec.get((int) (getClusterKeyAndIndex()[1])), (int) getClusterKeyAndIndex()[1])) / 1000;
+            // search returns x = pageIdx and y = record idx
+            int pagePathIdx = (search(rec.get((int) (getClusterKeyAndIndex()[1])), (int) getClusterKeyAndIndex()[1])).x;
             for (int i = pagePathIdx; i < pagePaths.size(); i++) {
                 String pagePath = pagePaths.get(i);
                 Page page = (Page) FileCreator.readObject(pagePath);
