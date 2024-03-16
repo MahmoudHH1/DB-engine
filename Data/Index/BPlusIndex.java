@@ -1,14 +1,10 @@
 package Data.Index;
 import Data.Handler.FileCreator;
-import Data.Handler.Pair;
-//import org.antlr.v4.runtime.misc.Pair;
-//import com.sun.corba.se.impl.orbutil.ObjectWriter;
 
 
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Vector;
@@ -17,10 +13,10 @@ public class BPlusIndex implements Serializable {
     int m;
     InternalNode root;
     LeafNode firstLeaf;
-    private String tableName;
-    private String colName;
-    private String idxName ;
-    private String path ;
+    private final String tableName;
+    private final String colName;
+    private final String idxName ;
+    private final String path ;
     /**
      * Constructor
      * @param m: the order (fanout) of the B+ tree
@@ -45,7 +41,7 @@ public class BPlusIndex implements Serializable {
     }
     public String getTableName(){return tableName;}
     public String getColName(){return colName;}
-    public String getIdxName(){return idxName;};
+    public String getIdxName(){return idxName;}
     /*~~~~~~~~~~~~~~~~ HELPER FUNCTIONS ~~~~~~~~~~~~~~~~*/
 
     /**
@@ -58,7 +54,7 @@ public class BPlusIndex implements Serializable {
      * @return index of the target value if found, else a negative value
      */
     private int binarySearch(DictionaryPair[] dps, int numPairs, Object t) {
-        Comparator<DictionaryPair> c = new Comparator<DictionaryPair>() {
+        Comparator<DictionaryPair> c = new Comparator<>() {
             @Override
             public int compare(DictionaryPair o1, DictionaryPair o2) {
                 return o1.compareTo(o2);
@@ -197,7 +193,7 @@ public class BPlusIndex implements Serializable {
             shiftDown(in.childPointers, 1);
         }
 
-        // Merge:
+        // Merge: mafihash haga leh?????????
         else if (in.leftSibling != null && in.leftSibling.isMergeable()) {
 
         } else if (in.rightSibling != null && in.rightSibling.isMergeable()) {
