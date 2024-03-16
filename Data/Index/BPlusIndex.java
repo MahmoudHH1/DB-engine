@@ -706,18 +706,18 @@ public class BPlusIndex implements Serializable {
      * This method traverses the doubly linked list of the B+ tree and records
      * all values whose associated keys are within the range specified by
      * lowerBound and upperBound.
-     * @param lowerBoun: (int) the lower bound of the range
-     * @param upperBoun: (int) the upper bound of the range
+     * @param lowerBound: (int) the lower bound of the range
+     * @param upperBound: (int) the upper bound of the range
      * @return an ArrayList<Double> that holds all values of dictionary pairs
      * whose keys are within the specified range
      */
-    public Vector<Object> search(Object lowerBoun, Object upperBoun) {
+    public Vector<Object> search(Object lowerBound, Object upperBound) {
 
         // Instantiate Double array to hold values
         Vector<Object> values = new Vector<>();
 
-        Comparable<Object> lowerBound = (Comparable<Object>) lowerBoun;
-        Comparable<Object> upperBound = (Comparable<Object>) upperBoun;
+        Comparable<Object> lowerBoun = (Comparable<Object>) lowerBound;
+        Comparable<Object> upperBoun = (Comparable<Object>) upperBound;
         // Iterate through the doubly linked list of leaves
         LeafNode currNode = this.firstLeaf;
         while (currNode != null) {
@@ -731,7 +731,7 @@ public class BPlusIndex implements Serializable {
                 if (dp == null) { break; }
 
                 // Include value if its key fits within the provided range
-                if (lowerBound.compareTo(dp.key) <= 0 && upperBound.compareTo(dp.key) >= 0) {
+                if (lowerBoun.compareTo(dp.key) <= 0 && upperBoun.compareTo(dp.key) >= 0) {
                     values.addAll(dp.values);
                 }
             }
@@ -935,7 +935,7 @@ public class BPlusIndex implements Serializable {
         int numPairs;
         LeafNode leftSibling;
         LeafNode rightSibling;
-        DictionaryPair[] dictionary ;
+        DictionaryPair[] dictionary;
 
 
         // 2,3,5,1,7 -> // 1,2,3,5,7
@@ -984,11 +984,8 @@ public class BPlusIndex implements Serializable {
             } else {
 
                 // Insert dictionary pair, increment numPairs, sort dictionary
-                // dictionary array at the begging is empty
-                if (numPairs != 0){
-                    if(updateKeyVal(dp))
-                        return true;
-                }
+                if(updateKeyVal(dp))
+                    return true;
 
                 this.dictionary[numPairs] = dp;
                 numPairs++;
@@ -999,15 +996,23 @@ public class BPlusIndex implements Serializable {
             }
         }
         private boolean updateKeyVal(DictionaryPair dp){
-            System.out.println(dictionary[0]);
-            for (DictionaryPair dictionaryPair : dictionary) {
-                System.out.println(dictionaryPair.key);
-                if (dictionaryPair.key.equals(dp.key)){
-                    dictionaryPair.values.add(dp.values.get(0));
-                    return true;
+            Comparator<DictionaryPair> c = new Comparator<DictionaryPair>() {
+                @Override
+                public int compare(DictionaryPair o1, DictionaryPair o2) {
+                    return o1.compareTo(o2);
                 }
-            }
-            return false;
+            };
+            int idx = Arrays.binarySearch(this.dictionary, 0, numPairs, dp, c);
+            if(idx < 0)
+                return false;
+            dictionary[idx].values.add(dp.values.get(0));
+//            for (DictionaryPair dictionaryPair : dictionary) {
+//                if (dictionaryPair.key.equals(dp.key)){
+//                    dictionaryPair.values.add(dp.values.get(0));
+//                    return true;
+//                }
+//            }
+            return true;
         }
 
         /**
@@ -1055,7 +1060,7 @@ public class BPlusIndex implements Serializable {
             this.maxNumPairs = m - 1;
             this.minNumPairs = (int)(Math.ceil(m/2) - 1);
             this.dictionary = new DictionaryPair[m];
-            this.numPairs = 0 ;
+            this.numPairs = 0;
             this.insert(dp);
         }
 
@@ -1085,7 +1090,6 @@ public class BPlusIndex implements Serializable {
         Object key;
 //        Object value;
         Vector<Object> values = new Vector<>();
-//        ArrayList<Object> values;
         // 20 -----> {1, 6, 7 ,2}
         /**
          * Constructor
@@ -1179,14 +1183,14 @@ public class BPlusIndex implements Serializable {
             // Create initial B+ tree
             BPlusIndex bpt = new BPlusIndex(3,"","","");
             bpt.insert("Ahmed","Ahmed");
-//            bpt.insert("JJ","PlaceofJJ");
-//            System.out.println(bpt.search("Ahmed"));
-////			bpt.insert("JJ","PlaceofJJ2");
-////            bpt.delete("JJ");
-//            System.out.println(bpt.search("JJ"));
-//            bpt.insert("R","placeofR");
-//            System.out.println(bpt.search("R"));
-//            bpt.insert("Banana","PlaceofBanana");
+            bpt.insert("JJ","PlaceofJJ");
+            System.out.println(bpt.search("Ahmed"));
+//			bpt.insert("JJ","PlaceofJJ2");
+//            bpt.delete("JJ");
+            System.out.println(bpt.search("JJ"));
+            bpt.insert("R","placeofR");
+            System.out.println(bpt.search("R"));
+            bpt.insert("Banana","PlaceofBanana");
 //            System.out.println(bpt.search("Ahmed","R"));
 
 //			bpt.insert(21,"PlaceofInt");
