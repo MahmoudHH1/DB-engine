@@ -716,8 +716,8 @@ public class BPlusIndex implements Serializable {
         // Instantiate Double array to hold values
         Vector<Object> values = new Vector<>();
 
-        Comparable<Object> lowerBoun = (Comparable<Object>) lowerBound;
-        Comparable<Object> upperBoun = (Comparable<Object>) upperBound;
+        Comparable<Object> lower = (Comparable<Object>) lowerBound;
+        Comparable<Object> upper = (Comparable<Object>) upperBound;
         // Iterate through the doubly linked list of leaves
         LeafNode currNode = this.firstLeaf;
         while (currNode != null) {
@@ -731,7 +731,7 @@ public class BPlusIndex implements Serializable {
                 if (dp == null) { break; }
 
                 // Include value if its key fits within the provided range
-                if (lowerBoun.compareTo(dp.key) <= 0 && upperBoun.compareTo(dp.key) >= 0) {
+                if (lower.compareTo(dp.key) <= 0 && upper.compareTo(dp.key) >= 0) {
                     values.addAll(dp.values);
                 }
             }
