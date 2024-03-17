@@ -946,6 +946,10 @@ public class BPlusIndex implements Serializable {
             this.keys = keys;
             this.childPointers = pointers;
         }
+        @Override
+        public String toString(){
+            return Arrays.toString(keys);
+        }
     }
 
     /**
@@ -1104,6 +1108,10 @@ public class BPlusIndex implements Serializable {
             this.numPairs = linearNullSearch(dps);
             this.parent = parent;
         }
+        @Override
+        public String toString(){
+            return Arrays.toString(dictionary) + "->";
+        }
     }
 
     /**
@@ -1145,6 +1153,10 @@ public class BPlusIndex implements Serializable {
             } else {
                 throw new IllegalArgumentException("Keys must be of the same type and comparable");
             }
+        }
+        @Override
+        public String toString(){
+            return key.toString() + "-> " + values.toString();
         }
     }
 
@@ -1209,6 +1221,7 @@ public class BPlusIndex implements Serializable {
             bpt.insert("R","placeofR");
             System.out.println(bpt.search("R"));
             bpt.insert("Banana","PlaceofBanana");
+            System.out.println(bpt);
 //            System.out.println(bpt.search("Ahmed","R"));
 
 //			bpt.insert(21,"PlaceofInt");

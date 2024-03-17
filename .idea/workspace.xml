@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="">
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="put toString() and traverse in BPlusIndex not dictionary pair">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/Index/BPlusIndex.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Index/BPlusIndex.java" afterDir="false" />
     </list>
@@ -92,23 +92,23 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.DBApp">
-    <configuration name="DBApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="DBApp" />
+  <component name="RunManager" selected="Application.BPlusIndex">
+    <configuration name="BPlusIndex" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Data.Index.BPlusIndex" />
       <module name="Database-Engine" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Data.Index.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FileRemover" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Data.Handler.FileRemover" />
+    <configuration name="DBApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="DBApp" />
       <module name="Database-Engine" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Data.Handler.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -166,7 +166,7 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.FileRemover" />
+      <item itemvalue="Application.BPlusIndex" />
       <item itemvalue="Application.MetaData" />
       <item itemvalue="Application.DBApp" />
       <item itemvalue="Application.Table" />
@@ -174,11 +174,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.BPlusIndex" />
         <item itemvalue="Application.DBApp" />
         <item itemvalue="Application.TableColumn" />
         <item itemvalue="Application.Table" />
         <item itemvalue="Application.MetaData" />
-        <item itemvalue="Application.FileRemover" />
       </list>
     </recent_temporary>
   </component>
@@ -197,14 +197,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1708726737774</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Saeed Merge into master4">
-      <option name="closed" value="true" />
-      <created>1709275178465</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1709275178465</updated>
     </task>
     <task id="LOCAL-00017" summary="Saeed Merge into master4">
       <option name="closed" value="true" />
@@ -588,7 +580,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710691109790</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="put toString() and traverse in BPlusIndex not dictionary pair">
+      <option name="closed" value="true" />
+      <created>1710706046558</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1710706046558</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -653,7 +653,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="matching method" />
     <MESSAGE value="shwayet basics delet keda" />
     <MESSAGE value="table search method in progress not complete" />
     <MESSAGE value="saeed playing on master" />
@@ -678,7 +677,8 @@
     <MESSAGE value="yalla toString" />
     <MESSAGE value="khalsana keda ta2riban fadel el toString() beta3et el nodes" />
     <MESSAGE value="takmela" />
-    <option name="LAST_COMMIT_MESSAGE" value="takmela" />
+    <MESSAGE value="put toString() and traverse in BPlusIndex not dictionary pair" />
+    <option name="LAST_COMMIT_MESSAGE" value="put toString() and traverse in BPlusIndex not dictionary pair" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
