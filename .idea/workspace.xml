@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="yalla toString">
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/Index/BPlusIndex.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Index/BPlusIndex.java" afterDir="false" />
     </list>
@@ -197,22 +197,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1708726737774</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Saeed Merge into master">
-      <option name="closed" value="true" />
-      <created>1709272036968</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1709272036968</updated>
-    </task>
-    <task id="LOCAL-00015" summary="Saeed Merge into master3">
-      <option name="closed" value="true" />
-      <created>1709273676793</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1709273676793</updated>
     </task>
     <task id="LOCAL-00016" summary="Saeed Merge into master4">
       <option name="closed" value="true" />
@@ -588,7 +572,23 @@
       <option name="project" value="LOCAL" />
       <updated>1710690558563</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="khalsana keda ta2riban fadel el toString() beta3et el nodes">
+      <option name="closed" value="true" />
+      <created>1710691090934</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1710691090934</updated>
+    </task>
+    <task id="LOCAL-00064" summary="takmela">
+      <option name="closed" value="true" />
+      <created>1710691109790</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1710691109790</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -653,8 +653,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="saeed playing" />
-    <MESSAGE value="table idxFromName&#10;and DBApp deleteFromTable" />
     <MESSAGE value="matching method" />
     <MESSAGE value="shwayet basics delet keda" />
     <MESSAGE value="table search method in progress not complete" />
@@ -678,7 +676,9 @@
     <MESSAGE value="naming cleanup" />
     <MESSAGE value="warnings" />
     <MESSAGE value="yalla toString" />
-    <option name="LAST_COMMIT_MESSAGE" value="yalla toString" />
+    <MESSAGE value="khalsana keda ta2riban fadel el toString() beta3et el nodes" />
+    <MESSAGE value="takmela" />
+    <option name="LAST_COMMIT_MESSAGE" value="takmela" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

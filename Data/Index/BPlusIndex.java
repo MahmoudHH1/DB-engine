@@ -41,6 +41,37 @@ public class BPlusIndex implements Serializable {
     public String getColName(){return colName;}
     public String getIdxName(){return idxName;}
     /*~~~~~~~~~~~~~~~~ HELPER FUNCTIONS ~~~~~~~~~~~~~~~~*/
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        traverse(sb);
+        return sb.toString();
+    }
+
+    /**
+     * this method traverses a tree breadth first
+     * and appends the nodes onto a stringBuilder
+     * @param sb the stringBuilder on which all the nodes are appended
+     */
+    private void traverse(StringBuilder sb){
+        Queue<Node> qu = new LinkedList<>();
+        qu.add(root);
+        // each iteration of while is one level
+        while(!qu.isEmpty()){
+            int size = qu.size(); // size of current level of tree
+            // entire for loop for one level
+            for(int i = 0; i < size; i++){
+                Node curr = qu.remove();
+                // if internal node meaning it has children then put children
+                if(curr instanceof InternalNode node){
+                    for(int j = 0; j < node.degree; j++)
+                        qu.add(node.childPointers[j]);
+                }
+                sb.append(curr.toString()).append(" ");
+            }
+            sb.append('\n');
+        }
+    }
 
     /**
      * This method performs a standard binary search on a sorted
@@ -1114,32 +1145,6 @@ public class BPlusIndex implements Serializable {
             } else {
                 throw new IllegalArgumentException("Keys must be of the same type and comparable");
             }
-        }
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder treeString = new StringBuilder();
-        appendNodeToString(root, treeString, 0);
-        return treeString.toString();
-    }
-    public void traverse(StringBuilder sb){
-        Queue<Node> qu = new LinkedList<>();
-        qu.add(root);
-        // each iteration of while is one level
-        while(!qu.isEmpty()){
-            int size = qu.size(); // size of current level of tree
-            // entire for loop for one level
-            for(int i = 0; i < size; i++){
-                Node curr = qu.remove();
-                // if internal node meaning it has children then put children
-                if(curr instanceof InternalNode node){
-                    for(int j = 0; j < node.degree; j++)
-                        qu.add(node.childPointers[j]);
-                }
-                sb.append(curr.toString()).append(" ");
-            }
-            sb.append('\n');
         }
     }
 
