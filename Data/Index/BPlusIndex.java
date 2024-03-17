@@ -5,9 +5,7 @@ import Data.Handler.FileCreator;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Vector;
+import java.util.*;
 
 public class BPlusIndex implements Serializable {
     int m;
@@ -1124,6 +1122,17 @@ public class BPlusIndex implements Serializable {
         StringBuilder treeString = new StringBuilder();
         appendNodeToString(root, treeString, 0);
         return treeString.toString();
+    }
+    public void traverse(StringBuilder sb){
+        Queue<InternalNode> qu = new LinkedList<>();
+        qu.add(root);
+        while(!qu.isEmpty()){
+            int size = qu.size(); // size of current level of tree
+            for(int i = 0; i < size; i++){
+                sb.append(curr.toString()).append(" ");
+            }
+            sb.append('\n');
+        }
     }
 
     private void appendNodeToString(Node node, StringBuilder treeString, int level) {
