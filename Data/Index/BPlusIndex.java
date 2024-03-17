@@ -1124,11 +1124,19 @@ public class BPlusIndex implements Serializable {
         return treeString.toString();
     }
     public void traverse(StringBuilder sb){
-        Queue<InternalNode> qu = new LinkedList<>();
+        Queue<Node> qu = new LinkedList<>();
         qu.add(root);
+        // each iteration of while is one level
         while(!qu.isEmpty()){
             int size = qu.size(); // size of current level of tree
+            // entire for loop for one level
             for(int i = 0; i < size; i++){
+                Node curr = qu.remove();
+                // if internal node meaning it has children then put children
+                if(curr instanceof InternalNode node){
+                    for(int j = 0; j < node.degree; j++)
+                        qu.add(node.childPointers[j]);
+                }
                 sb.append(curr.toString()).append(" ");
             }
             sb.append('\n');
