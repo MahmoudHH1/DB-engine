@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="akfdhjkajsdjhj">
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="put toString() and traverse in BPlusIndex not dictionary pair">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/DBApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/Index/BPlusIndex.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Index/BPlusIndex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Index/IndexControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Index/IndexControler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Page/Record.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Page/Record.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,29 +70,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.BPlusIndex.executor": "Run",
-    "Application.DBApp.executor": "Run",
-    "Application.FileRemover.executor": "Run",
-    "Application.MetaData.executor": "Run",
-    "Application.Record.executor": "Run",
-    "Application.TableColumn.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Saeed",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Coding/DataBase/Database_projects/Database_Engine Project/Database-Engine",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.DBApp.executor&quot;: &quot;Run&quot;,
+    &quot;Application.FileRemover.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MetaData.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Record.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TableColumn.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Coding/DataBase/Database_projects/Database_Engine Project/Database-Engine&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.BPlusIndex">
     <configuration name="BPlusIndex" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Data.Index.BPlusIndex" />
@@ -201,86 +197,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1708726737774</updated>
-    </task>
-    <task id="LOCAL-00007" summary="solved creation error">
-      <option name="closed" value="true" />
-      <created>1709159248989</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1709159248989</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Splited the code into packages and i added alose getters and setters">
-      <option name="closed" value="true" />
-      <created>1709178140889</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1709178140889</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Splited the code into packages and i added alose getters and setters">
-      <option name="closed" value="true" />
-      <created>1709178152301</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1709178152301</updated>
-    </task>
-    <task id="LOCAL-00010" summary="modifications">
-      <option name="closed" value="true" />
-      <created>1709179713674</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1709179713674</updated>
-    </task>
-    <task id="LOCAL-00011" summary="modifications">
-      <option name="closed" value="true" />
-      <created>1709180033323</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1709180033323</updated>
-    </task>
-    <task id="LOCAL-00012" summary="modifications">
-      <option name="closed" value="true" />
-      <created>1709228576040</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1709228576040</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Saeed Merge into master">
-      <option name="closed" value="true" />
-      <created>1709272024839</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1709272024839</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Saeed Merge into master">
-      <option name="closed" value="true" />
-      <created>1709272036968</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1709272036968</updated>
-    </task>
-    <task id="LOCAL-00015" summary="Saeed Merge into master3">
-      <option name="closed" value="true" />
-      <created>1709273676793</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1709273676793</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Saeed Merge into master4">
-      <option name="closed" value="true" />
-      <created>1709275178465</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1709275178465</updated>
     </task>
     <task id="LOCAL-00017" summary="Saeed Merge into master4">
       <option name="closed" value="true" />
@@ -592,7 +508,87 @@
       <option name="project" value="LOCAL" />
       <updated>1710530949094</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="akfdhjkajsdjhj">
+      <option name="closed" value="true" />
+      <created>1710531417077</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1710531417077</updated>
+    </task>
+    <task id="LOCAL-00057" summary="akfdhjkajsdjhj">
+      <option name="closed" value="true" />
+      <created>1710531680716</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1710531680716</updated>
+    </task>
+    <task id="LOCAL-00058" summary="fadjklfj;ds">
+      <option name="closed" value="true" />
+      <created>1710531718528</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1710531718528</updated>
+    </task>
+    <task id="LOCAL-00059" summary="fadjklfj;ds">
+      <option name="closed" value="true" />
+      <created>1710540843123</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1710540843123</updated>
+    </task>
+    <task id="LOCAL-00060" summary="naming cleanup">
+      <option name="closed" value="true" />
+      <created>1710602640942</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1710602640942</updated>
+    </task>
+    <task id="LOCAL-00061" summary="warnings">
+      <option name="closed" value="true" />
+      <created>1710602995174</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1710602995174</updated>
+    </task>
+    <task id="LOCAL-00062" summary="yalla toString">
+      <option name="closed" value="true" />
+      <created>1710690558563</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1710690558563</updated>
+    </task>
+    <task id="LOCAL-00063" summary="khalsana keda ta2riban fadel el toString() beta3et el nodes">
+      <option name="closed" value="true" />
+      <created>1710691090934</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1710691090934</updated>
+    </task>
+    <task id="LOCAL-00064" summary="takmela">
+      <option name="closed" value="true" />
+      <created>1710691109790</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1710691109790</updated>
+    </task>
+    <task id="LOCAL-00065" summary="put toString() and traverse in BPlusIndex not dictionary pair">
+      <option name="closed" value="true" />
+      <created>1710706046558</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1710706046558</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -657,13 +653,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="habiba pushed this" />
-    <MESSAGE value="habiba pushed this from master" />
-    <MESSAGE value="bb" />
-    <MESSAGE value="dahroug added delete" />
-    <MESSAGE value="saeed playing" />
-    <MESSAGE value="table idxFromName&#10;and DBApp deleteFromTable" />
-    <MESSAGE value="matching method" />
     <MESSAGE value="shwayet basics delet keda" />
     <MESSAGE value="table search method in progress not complete" />
     <MESSAGE value="saeed playing on master" />
@@ -682,7 +671,14 @@
     <MESSAGE value="tac tac w bta3" />
     <MESSAGE value="fdaskj;l" />
     <MESSAGE value="akfdhjkajsdjhj" />
-    <option name="LAST_COMMIT_MESSAGE" value="akfdhjkajsdjhj" />
+    <MESSAGE value="fadjklfj;ds" />
+    <MESSAGE value="naming cleanup" />
+    <MESSAGE value="warnings" />
+    <MESSAGE value="yalla toString" />
+    <MESSAGE value="khalsana keda ta2riban fadel el toString() beta3et el nodes" />
+    <MESSAGE value="takmela" />
+    <MESSAGE value="put toString() and traverse in BPlusIndex not dictionary pair" />
+    <option name="LAST_COMMIT_MESSAGE" value="put toString() and traverse in BPlusIndex not dictionary pair" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -695,47 +691,6 @@
           <url>file://$PROJECT_DIR$/Data/Table/Table.java</url>
           <line>281</line>
           <option name="timeStamp" value="135" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Index/BPlusIndex.java</url>
-          <line>599</line>
-          <option name="timeStamp" value="143" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/Data/Index/BPlusIndex.java</url>
-          <line>593</line>
-          <properties class="Data.Index.BPlusIndex" method="insert">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="140" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/Data/Index/BPlusIndex.java</url>
-          <line>977</line>
-          <properties class="Data.Index.BPlusIndex.LeafNode" method="insert">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="141" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/Data/Index/BPlusIndex.java</url>
-          <line>1001</line>
-          <properties class="Data.Index.BPlusIndex.LeafNode" method="updateKeyVal">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="142" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/Data/Index/BPlusIndex.java</url>
-          <line>1054</line>
-          <properties class="Data.Index.BPlusIndex.LeafNode" method="&lt;init&gt;">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="144" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

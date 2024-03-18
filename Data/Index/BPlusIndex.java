@@ -1,26 +1,20 @@
 package Data.Index;
 import Data.Handler.FileCreator;
-import Data.Handler.Pair;
-//import org.antlr.v4.runtime.misc.Pair;
-//import com.sun.corba.se.impl.orbutil.ObjectWriter;
 
 
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Vector;
+import java.util.*;
 
 public class BPlusIndex implements Serializable {
     int m;
     InternalNode root;
     LeafNode firstLeaf;
-    private String tableName;
-    private String colName;
-    private String idxName ;
-    private String path ;
+    private final String tableName;
+    private final String colName;
+    private final String idxName ;
+    private final String path ;
     /**
      * Constructor
      * @param m: the order (fanout) of the B+ tree
@@ -45,8 +39,39 @@ public class BPlusIndex implements Serializable {
     }
     public String getTableName(){return tableName;}
     public String getColName(){return colName;}
-    public String getIdxName(){return idxName;};
+    public String getIdxName(){return idxName;}
     /*~~~~~~~~~~~~~~~~ HELPER FUNCTIONS ~~~~~~~~~~~~~~~~*/
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        traverse(sb);
+        return sb.toString();
+    }
+
+    /**
+     * this method traverses a tree breadth first
+     * and appends the nodes onto a stringBuilder
+     * @param sb the stringBuilder on which all the nodes are appended
+     */
+    private void traverse(StringBuilder sb){
+        Queue<Node> qu = new LinkedList<>();
+        qu.add(root);
+        // each iteration of while is one level
+        while(!qu.isEmpty()){
+            int size = qu.size(); // size of current level of tree
+            // entire for loop for one level
+            for(int i = 0; i < size; i++){
+                Node curr = qu.remove();
+                // if internal node meaning it has children then put children
+                if(curr instanceof InternalNode node){
+                    for(int j = 0; j < node.degree; j++)
+                        qu.add(node.childPointers[j]);
+                }
+                sb.append(curr.toString()).append(" ");
+            }
+            sb.append('\n');
+        }
+    }
 
     /**
      * This method performs a standard binary search on a sorted
@@ -58,7 +83,7 @@ public class BPlusIndex implements Serializable {
      * @return index of the target value if found, else a negative value
      */
     private int binarySearch(DictionaryPair[] dps, int numPairs, Object t) {
-        Comparator<DictionaryPair> c = new Comparator<DictionaryPair>() {
+        Comparator<DictionaryPair> c = new Comparator<>() {
             @Override
             public int compare(DictionaryPair o1, DictionaryPair o2) {
                 return o1.compareTo(o2);
@@ -197,7 +222,7 @@ public class BPlusIndex implements Serializable {
             shiftDown(in.childPointers, 1);
         }
 
-        // Merge:
+        // Merge: mafihash haga leh?????????
         else if (in.leftSibling != null && in.leftSibling.isMergeable()) {
 
         } else if (in.rightSibling != null && in.rightSibling.isMergeable()) {
@@ -716,8 +741,8 @@ public class BPlusIndex implements Serializable {
         // Instantiate Double array to hold values
         Vector<Object> values = new Vector<>();
 
-        Comparable<Object> lowerBoun = (Comparable<Object>) lowerBound;
-        Comparable<Object> upperBoun = (Comparable<Object>) upperBound;
+        Comparable<Object> lower = (Comparable<Object>) lowerBound;
+        Comparable<Object> upper = (Comparable<Object>) upperBound;
         // Iterate through the doubly linked list of leaves
         LeafNode currNode = this.firstLeaf;
         while (currNode != null) {
@@ -731,7 +756,7 @@ public class BPlusIndex implements Serializable {
                 if (dp == null) { break; }
 
                 // Include value if its key fits within the provided range
-                if (lowerBoun.compareTo(dp.key) <= 0 && upperBoun.compareTo(dp.key) >= 0) {
+                if (lower.compareTo(dp.key) <= 0 && upper.compareTo(dp.key) >= 0) {
                     values.addAll(dp.values);
                 }
             }
@@ -921,6 +946,10 @@ public class BPlusIndex implements Serializable {
             this.keys = keys;
             this.childPointers = pointers;
         }
+        @Override
+        public String toString(){
+            return Arrays.toString(keys);
+        }
     }
 
     /**
@@ -935,7 +964,7 @@ public class BPlusIndex implements Serializable {
         int numPairs;
         LeafNode leftSibling;
         LeafNode rightSibling;
-        DictionaryPair[] dictionary ;
+        DictionaryPair[] dictionary;
 
 
         // 2,3,5,1,7 -> // 1,2,3,5,7
@@ -984,11 +1013,8 @@ public class BPlusIndex implements Serializable {
             } else {
 
                 // Insert dictionary pair, increment numPairs, sort dictionary
-                // dictionary array at the begging is empty
-                if (numPairs != 0){
-                    if(updateKeyVal(dp))
-                        return true;
-                }
+                if(updateKeyVal(dp))
+                    return true;
 
                 this.dictionary[numPairs] = dp;
                 numPairs++;
@@ -999,15 +1025,23 @@ public class BPlusIndex implements Serializable {
             }
         }
         private boolean updateKeyVal(DictionaryPair dp){
-            System.out.println(dictionary[0]);
-            for (DictionaryPair dictionaryPair : dictionary) {
-                System.out.println(dictionaryPair.key);
-                if (dictionaryPair.key.equals(dp.key)){
-                    dictionaryPair.values.add(dp.values.get(0));
-                    return true;
+            Comparator<DictionaryPair> c = new Comparator<DictionaryPair>() {
+                @Override
+                public int compare(DictionaryPair o1, DictionaryPair o2) {
+                    return o1.compareTo(o2);
                 }
-            }
-            return false;
+            };
+            int idx = Arrays.binarySearch(this.dictionary, 0, numPairs, dp, c);
+            if(idx < 0)
+                return false;
+            dictionary[idx].values.add(dp.values.get(0));
+//            for (DictionaryPair dictionaryPair : dictionary) {
+//                if (dictionaryPair.key.equals(dp.key)){
+//                    dictionaryPair.values.add(dp.values.get(0));
+//                    return true;
+//                }
+//            }
+            return true;
         }
 
         /**
@@ -1055,7 +1089,7 @@ public class BPlusIndex implements Serializable {
             this.maxNumPairs = m - 1;
             this.minNumPairs = (int)(Math.ceil(m/2) - 1);
             this.dictionary = new DictionaryPair[m];
-            this.numPairs = 0 ;
+            this.numPairs = 0;
             this.insert(dp);
         }
 
@@ -1074,6 +1108,10 @@ public class BPlusIndex implements Serializable {
             this.numPairs = linearNullSearch(dps);
             this.parent = parent;
         }
+        @Override
+        public String toString(){
+            return Arrays.toString(dictionary) + "->";
+        }
     }
 
     /**
@@ -1085,7 +1123,6 @@ public class BPlusIndex implements Serializable {
         Object key;
 //        Object value;
         Vector<Object> values = new Vector<>();
-//        ArrayList<Object> values;
         // 20 -----> {1, 6, 7 ,2}
         /**
          * Constructor
@@ -1117,13 +1154,10 @@ public class BPlusIndex implements Serializable {
                 throw new IllegalArgumentException("Keys must be of the same type and comparable");
             }
         }
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder treeString = new StringBuilder();
-        appendNodeToString(root, treeString, 0);
-        return treeString.toString();
+        @Override
+        public String toString(){
+            return key.toString() + "-> " + values.toString();
+        }
     }
 
     private void appendNodeToString(Node node, StringBuilder treeString, int level) {
@@ -1179,14 +1213,15 @@ public class BPlusIndex implements Serializable {
             // Create initial B+ tree
             BPlusIndex bpt = new BPlusIndex(3,"","","");
             bpt.insert("Ahmed","Ahmed");
-//            bpt.insert("JJ","PlaceofJJ");
-//            System.out.println(bpt.search("Ahmed"));
-////			bpt.insert("JJ","PlaceofJJ2");
-////            bpt.delete("JJ");
-//            System.out.println(bpt.search("JJ"));
-//            bpt.insert("R","placeofR");
-//            System.out.println(bpt.search("R"));
-//            bpt.insert("Banana","PlaceofBanana");
+            bpt.insert("JJ","PlaceofJJ");
+            System.out.println(bpt.search("Ahmed"));
+//			bpt.insert("JJ","PlaceofJJ2");
+//            bpt.delete("JJ");
+            System.out.println(bpt.search("JJ"));
+            bpt.insert("R","placeofR");
+            System.out.println(bpt.search("R"));
+            bpt.insert("Banana","PlaceofBanana");
+            System.out.println(bpt);
 //            System.out.println(bpt.search("Ahmed","R"));
 
 //			bpt.insert(21,"PlaceofInt");
