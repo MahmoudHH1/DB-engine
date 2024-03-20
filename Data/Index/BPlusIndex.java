@@ -5,6 +5,7 @@ import Data.Handler.FileCreator;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.security.SecureRandomParameters;
 import java.util.*;
 
 public class BPlusIndex implements Serializable {
@@ -783,7 +784,7 @@ public class BPlusIndex implements Serializable {
      * all search/insert/delete operations. An internal node only holds keys; it
      * does not hold dictionary pairs.
      */
-    private class InternalNode extends Node {
+    private class InternalNode extends Node implements Serializable {
         int maxDegree;
         int minDegree;
         int degree;
@@ -958,7 +959,7 @@ public class BPlusIndex implements Serializable {
      * minimum and maximum number of dictionary pairs it can hold, as specified
      * by m, the max degree of the B+ tree. The leaf nodes form a doubly linked
      * list that, i.e. each leaf node has a left and right sibling*/
-    public class LeafNode extends Node {
+    public class LeafNode extends Node implements Serializable {
         int maxNumPairs;
         int minNumPairs;
         int numPairs;
@@ -1119,7 +1120,7 @@ public class BPlusIndex implements Serializable {
      * leaf nodes of the B+ tree. The class implements the Comparable interface
      * so that the DictionaryPair objects can be sorted later on.
      */
-    public class DictionaryPair implements Comparable<DictionaryPair> {
+    public class DictionaryPair implements Comparable<DictionaryPair> ,  Serializable{
         Object key;
 //        Object value;
         Vector<Object> values = new Vector<>();
