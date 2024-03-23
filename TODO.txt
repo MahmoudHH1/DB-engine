@@ -1,0 +1,5 @@
+Select:
+    1- make intersection, union and XOR for results of indices
+Other:
+    1- use general variable maxPageSize where needed
+    2-
