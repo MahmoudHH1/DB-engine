@@ -1,6 +1,7 @@
 package Data.Table;
 
 import Data.Handler.FileCreator;
+import Data.Handler.Pair;
 import Data.Table.TableColumn;
 import java.io.*;
 import java.io.FileWriter;
@@ -15,6 +16,16 @@ import static java.nio.file.Path.*;
 public class MetaData {
 
     private static final String metaPath = "Data_Entry/metadata.csv";
+    private static final String configPath = "resources/DBApp.config";
+    public static int loadPageSize() throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(configPath));
+        String line = br.readLine();
+        if(line != null){
+            String[] s = line.split(" = ");
+            return Integer.parseInt(s[1]);
+        }
+        return 200;
+    }
     public static void writeDataToMetaDatafile( ArrayList<TableColumn> allColumns)
     {
         try {
@@ -143,7 +154,6 @@ public class MetaData {
 //        htblColNameValue.put("name", new String("Ahmed Noor" ) );
 //        htblColNameValue.put("gpa", new Double( 0.95 ) );
 //        System.out.println(IsValidTuple("Student" , htblColNameValue)) ;
-//
     }
 
 

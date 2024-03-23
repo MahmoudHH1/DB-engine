@@ -4,9 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="maven aho 3ashan mayez3aloosh">
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/Student/Student.class" beforeDir="false" afterPath="$PROJECT_DIR$/Data_Entry/Tables/Student/Student.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/Student/Student1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Data_Entry/Tables/Student/Student1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/Student/Student2.class" beforeDir="false" afterPath="$PROJECT_DIR$/Data_Entry/Tables/Student/Student2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data_Entry/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data_Entry/metadata.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Table/MetaData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Table/MetaData.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,35 +75,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.DBApp.executor": "Run",
-    "Application.FileRemover.executor": "Run",
-    "Application.MetaData.executor": "Run",
-    "Application.Record.executor": "Run",
-    "Application.TableColumn.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Coding/DataBase/Database_projects/Database_Engine Project/Database-Engine",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.DBApp.executor&quot;: &quot;Run&quot;,
+    &quot;Application.FileRemover.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MetaData.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Record.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TableColumn.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Coding/DataBase/Database_projects/Database_Engine Project/Database-Engine&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\java projects\DB-engine\src\main\java" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.DBApp">
+  <component name="RunManager" selected="Application.MetaData">
     <configuration name="BPlusIndex" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Data.Index.BPlusIndex" />
       <module name="Database-Engine" />
@@ -180,11 +185,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.MetaData" />
         <item itemvalue="Application.DBApp" />
         <item itemvalue="Application.BPlusIndex" />
         <item itemvalue="Application.TableColumn" />
         <item itemvalue="Application.Table" />
-        <item itemvalue="Application.MetaData" />
       </list>
     </recent_temporary>
   </component>
@@ -203,14 +208,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1708726737774</updated>
-    </task>
-    <task id="LOCAL-00019" summary=".">
-      <option name="closed" value="true" />
-      <created>1709355795543</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1709355795543</updated>
     </task>
     <task id="LOCAL-00020" summary="habiba pushed this">
       <created>1709364200815</created>
@@ -594,7 +591,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711208819888</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="dependencies and plugins in pom.xml">
+      <option name="closed" value="true" />
+      <created>1711209218960</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1711209218960</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -659,7 +664,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="saeed playing on master" />
     <MESSAGE value="saeed playing on master and he requesting for the Khalas beacause of Khalas (samaloty yaba el hag)" />
     <MESSAGE value="saeed made check for his function" />
     <MESSAGE value="Raed did this" />
@@ -684,7 +688,8 @@
     <MESSAGE value="put toString() and traverse in BPlusIndex not dictionary pair" />
     <MESSAGE value="toString() kolo" />
     <MESSAGE value="maven aho 3ashan mayez3aloosh" />
-    <option name="LAST_COMMIT_MESSAGE" value="maven aho 3ashan mayez3aloosh" />
+    <MESSAGE value="dependencies and plugins in pom.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="dependencies and plugins in pom.xml" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

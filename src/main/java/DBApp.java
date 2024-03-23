@@ -20,6 +20,7 @@ import static Data.Index.IndexControler.loadAllTableIndices;
 public class DBApp {
     public static ArrayList<Table> allTables;
     public static ArrayList<BPlusIndex> allBPlusIndecies = new ArrayList<>();
+    public static int maxPageSize;
 
     public DBApp() throws IOException, ClassNotFoundException {
         init();
@@ -30,6 +31,7 @@ public class DBApp {
     // execute at application startup
     public void init() throws IOException, ClassNotFoundException {
         allTables = MetaData.loadAllTables();
+        maxPageSize = MetaData.loadPageSize();
     }
 
     // following method creates one table only
