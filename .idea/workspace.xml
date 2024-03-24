@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Reading maxPageSize from config file. Still need to refactor and use variable" />
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="TODO.txt to not forget what to do">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -170,10 +172,10 @@
     </configuration>
     <list>
       <item itemvalue="Application.BPlusIndex" />
-      <item itemvalue="Application.MetaData" />
       <item itemvalue="Application.DBApp" />
-      <item itemvalue="Application.Table" />
+      <item itemvalue="Application.MetaData" />
       <item itemvalue="Application.TableColumn" />
+      <item itemvalue="Application.Table" />
     </list>
     <recent_temporary>
       <list>
@@ -214,14 +216,6 @@
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
       <updated>1709364507752</updated>
-    </task>
-    <task id="LOCAL-00024" summary="dahroug added delete">
-      <option name="closed" value="true" />
-      <created>1709374220710</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1709374220710</updated>
     </task>
     <task id="LOCAL-00025" summary="saeed playing">
       <option name="closed" value="true" />
@@ -591,7 +585,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711209810663</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="TODO.txt to not forget what to do">
+      <option name="closed" value="true" />
+      <created>1711210124691</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1711210124691</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -656,7 +658,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="saeed made check for his function" />
     <MESSAGE value="Raed did this" />
     <MESSAGE value="Comparable" />
     <MESSAGE value="Made page extend vector&lt;Record&gt; to comply with grading scheme in description and refactored code" />
@@ -681,7 +682,8 @@
     <MESSAGE value="maven aho 3ashan mayez3aloosh" />
     <MESSAGE value="dependencies and plugins in pom.xml" />
     <MESSAGE value="Reading maxPageSize from config file. Still need to refactor and use variable" />
-    <option name="LAST_COMMIT_MESSAGE" value="Reading maxPageSize from config file. Still need to refactor and use variable" />
+    <MESSAGE value="TODO.txt to not forget what to do" />
+    <option name="LAST_COMMIT_MESSAGE" value="TODO.txt to not forget what to do" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
