@@ -5,7 +5,6 @@ import Data.Handler.FileCreator;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.security.SecureRandomParameters;
 import java.util.*;
 
 public class BPlusIndex implements Serializable {
@@ -416,7 +415,6 @@ public class BPlusIndex implements Serializable {
         if (parent == null) {
             // Create new root node and add midpoint key and pointers
             Object[] keys = new Object[this.m];
-            Object[] values = new Object[this.m] ;
             keys[0] = newParentKey;
             InternalNode newRoot = new InternalNode(this.m, keys);
             newRoot.appendChildPointer(in);
@@ -623,10 +621,9 @@ public class BPlusIndex implements Serializable {
             /* Flow of execution goes here only when first insert takes place */
 
             // Create leaf node as first node in B plus tree (root is null)
-            LeafNode ln = new LeafNode(this.m, new DictionaryPair(key, value));
 
             // Set as first leaf node (can be used later for in-order leaf traversal)
-            this.firstLeaf = ln;
+            this.firstLeaf = new LeafNode(this.m, new DictionaryPair(key, value));
 
         } else {
             // Find leaf node to insert into
@@ -732,15 +729,16 @@ public class BPlusIndex implements Serializable {
      * This method traverses the doubly linked list of the B+ tree and records
      * all values whose associated keys are within the range specified by
      * lowerBound and upperBound.
+     *
      * @param lowerBound: (int) the lower bound of the range
      * @param upperBound: (int) the upper bound of the range
      * @return an ArrayList<Double> that holds all values of dictionary pairs
      * whose keys are within the specified range
      */
-    public Vector<Object> search(Object lowerBound, Object upperBound) {
+    public Vector<Comparable> search(Object lowerBound, Object upperBound) {
 
         // Instantiate Double array to hold values
-        Vector<Object> values = new Vector<>();
+        Vector<Comparable> values = new Vector<>();
 
         Comparable<Object> lower = (Comparable<Object>) lowerBound;
         Comparable<Object> upper = (Comparable<Object>) upperBound;
@@ -767,7 +765,7 @@ public class BPlusIndex implements Serializable {
             currNode = currNode.rightSibling;
 
         }
-
+        values.sort(Comparable::compareTo);
         return values;
     }
 
@@ -1078,7 +1076,7 @@ public class BPlusIndex implements Serializable {
          */
         public LeafNode(int m, DictionaryPair dp) {
             this.maxNumPairs = m - 1;
-            this.minNumPairs = (int)(Math.ceil(m/2) - 1);
+            this.minNumPairs = (int)(Math.ceil((double) m /2) - 1);
             this.dictionary = new DictionaryPair[m];
             this.numPairs = 0;
             this.insert(dp);
@@ -1094,7 +1092,7 @@ public class BPlusIndex implements Serializable {
          */
         public LeafNode(int m, DictionaryPair[] dps, InternalNode parent) {
             this.maxNumPairs = m - 1;
-            this.minNumPairs = (int)(Math.ceil(m/2) - 1);
+            this.minNumPairs = (int)(Math.ceil((double) m /2) - 1);
             this.dictionary = dps;
             this.numPairs = linearNullSearch(dps);
             this.parent = parent;
