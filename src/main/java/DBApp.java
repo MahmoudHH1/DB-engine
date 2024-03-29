@@ -65,6 +65,9 @@ public class DBApp {
                             String strColName,
                             String strIndexName) throws DBAppException, IOException {
         try {
+            // check if column is clusterKey
+            // if clusterKey values in B+tree should be Pair(pageIdx, recordIdx)
+            // otherwise values should be primary key
             Table table = Table.getTable(allTables, strTableName);
             for (TableColumn col : table.getAllColumns()) {
                 if (col.getColumnName().equals(strColName)) {
@@ -194,6 +197,12 @@ public class DBApp {
             validRecords.add("No valid results");
         }
         return validRecords.iterator();
+    }
+    // below method returns Iterator with result set if passed
+    // strbufSQL is a select, otherwise returns null.
+    public Iterator parseSQL( StringBuffer strbufSQL ) throws
+            DBAppException{
+        return null;
     }
 
     public void deleteTable(String tableName) throws DBAppException {
