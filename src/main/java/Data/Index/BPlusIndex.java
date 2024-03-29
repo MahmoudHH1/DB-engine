@@ -710,7 +710,7 @@ public class BPlusIndex implements Serializable {
      * @param key: the key to be searched within the B+ tree
      * @return the floating point value associated with the key within the B+ tree
      */
-    public Vector<Object> search(Object key) {
+    public Vector<Comparable> search(Object key) {
 		// If B+ tree is completely empty, simply return null
 		if (isEmpty()) { return null; }
 
@@ -986,7 +986,7 @@ public class BPlusIndex implements Serializable {
         }
         public void delete(int index, Object value) {
 
-            if(!dictionary[index].values.remove(value))
+            if(!dictionary[index].values.remove((Comparable) value))
                 System.err.println("Value Not Found");;
             // Delete dictionary pair from leaf
             if(dictionary[index].values.isEmpty())
@@ -1012,10 +1012,10 @@ public class BPlusIndex implements Serializable {
 
                 return false;
             } else {
-
-                // Insert dictionary pair, increment numPairs, sort dictionary
+                // if duplicate dictionary pair then insert into existing
                 if(updateKeyVal(dp))
                     return true;
+                // Insert dictionary pair, increment numPairs, sort dictionary
 
                 this.dictionary[numPairs] = dp;
                 numPairs++;
@@ -1026,22 +1026,12 @@ public class BPlusIndex implements Serializable {
             }
         }
         private boolean updateKeyVal(DictionaryPair dp){
-            Comparator<DictionaryPair> c = new Comparator<DictionaryPair>() {
-                @Override
-                public int compare(DictionaryPair o1, DictionaryPair o2) {
-                    return o1.compareTo(o2);
-                }
-            };
+            Comparator<DictionaryPair> c = DictionaryPair::compareTo;
             int idx = Arrays.binarySearch(this.dictionary, 0, numPairs, dp, c);
             if(idx < 0)
                 return false;
             dictionary[idx].values.add(dp.values.get(0));
-//            for (DictionaryPair dictionaryPair : dictionary) {
-//                if (dictionaryPair.key.equals(dp.key)){
-//                    dictionaryPair.values.add(dp.values.get(0));
-//                    return true;
-//                }
-//            }
+            dictionary[idx].values.sort(Comparable::compareTo);
             return true;
         }
 
@@ -1122,8 +1112,8 @@ public class BPlusIndex implements Serializable {
      */
     public class DictionaryPair implements Comparable<DictionaryPair> ,  Serializable{
         Object key;
-//        Object value;
-        Vector<Object> values = new Vector<>();
+        // vector is sorted
+        Vector<Comparable> values = new Vector<>();
         // 20 -----> {1, 6, 7 ,2}
         /**
          * Constructor
@@ -1132,7 +1122,7 @@ public class BPlusIndex implements Serializable {
          */
         public DictionaryPair(Object key, Object value) {
             this.key = key;
-            values.add(value);
+            values.add((Comparable) value);
         }
 
         /**
