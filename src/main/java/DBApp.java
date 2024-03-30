@@ -18,7 +18,7 @@ import static Data.Index.IndexControler.loadAllTableIndices;
 
 
 public class DBApp {
-    public static ArrayList<Table> allTables;
+    public ArrayList<Table> allTables;
     public static ArrayList<BPlusIndex> allBPlusIndecies = new ArrayList<>();
     public static int maxPageSize;
 
@@ -206,7 +206,7 @@ public class DBApp {
     }
 
     public void deleteTable(String tableName) throws DBAppException {
-        Table.getTable(this.allTables, tableName).removeTable();
+        Table.getTable(allTables, tableName).removeTable();
     }
 
     public static void main(String[] args) {

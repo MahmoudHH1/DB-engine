@@ -19,11 +19,11 @@ public class BPlusIndex implements Serializable {
      * Constructor
      * @param m: the order (fanout) of the B+ tree
      */
-    public BPlusIndex(int m,String tableName,String colName , String idxName) {
+    public BPlusIndex(int m, String tableName, String colName, String idxName) {
         this.m = m;
         this.root = null;
-        this.tableName=tableName;
-        this.colName=colName;
+        this.tableName = tableName;
+        this.colName = colName;
         this.idxName = idxName ;
         this.path = "Data_Entry" + File.separator +
                     "Tables"+ File.separator +
