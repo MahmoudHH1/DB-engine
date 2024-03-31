@@ -3,3 +3,4 @@
 2- use general variable maxPageSize where needed
 3- make different index if columns is clustered or not
 4- all indices stuff
+5- add attribute to table to store all its indicies instead of load all indices
