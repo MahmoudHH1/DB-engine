@@ -22,8 +22,8 @@ import java.util.Vector;
 public class IndexControler {
 
     public static BPlusIndex createIndex(Table table, String strColName, String strIndexName) throws IOException, ClassNotFoundException, DBAppException {
-        int i = table.getPageNum();
-        BPlusIndex b = new BPlusIndex(i * 200, table.getTableName(), strColName, strIndexName);
+
+        BPlusIndex b = new BPlusIndex(10, table.getTableName(), strColName, strIndexName);
         // if col has records already
         if(table.hasRecords()){
             // load all pages
