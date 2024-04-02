@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="akfdhjkajsdjhj">
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Pointer class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Index/BPlusIndex.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Index/BPlusIndex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Index/IndexControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Index/IndexControler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Index/BPlusIndex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Index/BPlusIndex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Index/Pointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Index/Pointer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,8 +51,8 @@
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
-        <option name="accountId" value="8c5aaf22-1b37-4541-be87-188d8703f940" />
-        <option name="url" value="https://github.com/MahmoudHH1/DB-engine.git" />
+        <option name="accountId" value="9403fae9-535c-428d-8ea0-d4e46f1dad2e" />
+        <option name="url" value="https://github.com/MahmoudHH1/DB-engine" />
       </UrlAndAccount>
     </option>
   </component>
@@ -84,32 +84,39 @@
     &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Coding/DataBase/Database_projects/Database_Engine Project/Database-Engine&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Mahmoud/Downloads/antlr-intellij-plugin-v4-1.23.1.zip&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.DBApp">
-    <configuration name="DBApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="DBApp" />
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\java projects\DB-engine\src\main\java\Grammars" />
+      <recent name="D:\java projects\DB-engine\src\main\java" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.MetaData">
+    <configuration name="BPlusIndex" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Data.Index.BPlusIndex" />
       <module name="Database-Engine" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Data.Index.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FileRemover" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Data.Handler.FileRemover" />
+    <configuration name="DBApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="DBApp" />
       <module name="Database-Engine" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Data.Handler.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -167,19 +174,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.FileRemover" />
-      <item itemvalue="Application.MetaData" />
+      <item itemvalue="Application.BPlusIndex" />
       <item itemvalue="Application.DBApp" />
-      <item itemvalue="Application.Table" />
+      <item itemvalue="Application.MetaData" />
       <item itemvalue="Application.TableColumn" />
+      <item itemvalue="Application.Table" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.MetaData" />
         <item itemvalue="Application.DBApp" />
+        <item itemvalue="Application.BPlusIndex" />
         <item itemvalue="Application.TableColumn" />
         <item itemvalue="Application.Table" />
-        <item itemvalue="Application.MetaData" />
-        <item itemvalue="Application.FileRemover" />
       </list>
     </recent_temporary>
   </component>
@@ -199,110 +206,6 @@
       <option name="presentableId" value="Default" />
       <updated>1708726737774</updated>
     </task>
-    <task id="LOCAL-00007" summary="solved creation error">
-      <option name="closed" value="true" />
-      <created>1709159248989</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1709159248989</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Splited the code into packages and i added alose getters and setters">
-      <option name="closed" value="true" />
-      <created>1709178140889</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1709178140889</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Splited the code into packages and i added alose getters and setters">
-      <option name="closed" value="true" />
-      <created>1709178152301</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1709178152301</updated>
-    </task>
-    <task id="LOCAL-00010" summary="modifications">
-      <option name="closed" value="true" />
-      <created>1709179713674</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1709179713674</updated>
-    </task>
-    <task id="LOCAL-00011" summary="modifications">
-      <option name="closed" value="true" />
-      <created>1709180033323</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1709180033323</updated>
-    </task>
-    <task id="LOCAL-00012" summary="modifications">
-      <option name="closed" value="true" />
-      <created>1709228576040</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1709228576040</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Saeed Merge into master">
-      <option name="closed" value="true" />
-      <created>1709272024839</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1709272024839</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Saeed Merge into master">
-      <option name="closed" value="true" />
-      <created>1709272036968</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1709272036968</updated>
-    </task>
-    <task id="LOCAL-00015" summary="Saeed Merge into master3">
-      <option name="closed" value="true" />
-      <created>1709273676793</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1709273676793</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Saeed Merge into master4">
-      <option name="closed" value="true" />
-      <created>1709275178465</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1709275178465</updated>
-    </task>
-    <task id="LOCAL-00017" summary="Saeed Merge into master4">
-      <option name="closed" value="true" />
-      <created>1709277618041</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1709277618041</updated>
-    </task>
-    <task id="LOCAL-00018" summary="function kda f metadata w showaya kda f insert">
-      <option name="closed" value="true" />
-      <created>1709297590066</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1709297590066</updated>
-    </task>
-    <task id="LOCAL-00019" summary=".">
-      <option name="closed" value="true" />
-      <created>1709355795543</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1709355795543</updated>
-    </task>
     <task id="LOCAL-00020" summary="habiba pushed this">
       <created>1709364200815</created>
       <option name="number" value="00020" />
@@ -316,110 +219,6 @@
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
       <updated>1709364507752</updated>
-    </task>
-    <task id="LOCAL-00022" summary="bb">
-      <option name="closed" value="true" />
-      <created>1709373510730</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1709373510730</updated>
-    </task>
-    <task id="LOCAL-00023" summary="dahroug added delete">
-      <option name="closed" value="true" />
-      <created>1709374066241</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1709374066242</updated>
-    </task>
-    <task id="LOCAL-00024" summary="dahroug added delete">
-      <option name="closed" value="true" />
-      <created>1709374220710</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1709374220710</updated>
-    </task>
-    <task id="LOCAL-00025" summary="saeed playing">
-      <option name="closed" value="true" />
-      <created>1709374512375</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1709374512375</updated>
-    </task>
-    <task id="LOCAL-00026" summary="saeed playing on master">
-      <option name="closed" value="true" />
-      <created>1709378108349</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1709378108349</updated>
-    </task>
-    <task id="LOCAL-00027" summary="saeed playing on master">
-      <option name="closed" value="true" />
-      <created>1709378579992</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1709378579992</updated>
-    </task>
-    <task id="LOCAL-00028" summary="saeed playing on master">
-      <option name="closed" value="true" />
-      <created>1709379046250</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1709379046250</updated>
-    </task>
-    <task id="LOCAL-00029" summary="table idxFromName&#10;and DBApp deleteFromTable">
-      <option name="closed" value="true" />
-      <created>1709380006106</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1709380006106</updated>
-    </task>
-    <task id="LOCAL-00030" summary="matching method">
-      <option name="closed" value="true" />
-      <created>1709380801382</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1709380801382</updated>
-    </task>
-    <task id="LOCAL-00031" summary="shwayet basics delet keda">
-      <option name="closed" value="true" />
-      <created>1709381515998</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1709381515998</updated>
-    </task>
-    <task id="LOCAL-00032" summary="table search method in progress not complete">
-      <option name="closed" value="true" />
-      <created>1709385464231</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1709385464231</updated>
-    </task>
-    <task id="LOCAL-00033" summary="saeed playing on master">
-      <option name="closed" value="true" />
-      <created>1709420514594</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1709420514594</updated>
-    </task>
-    <task id="LOCAL-00034" summary="saeed playing on master and he requesting for the Khalas beacause of Khalas (samaloty yaba el hag)">
-      <option name="closed" value="true" />
-      <created>1709526638214</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1709526638214</updated>
     </task>
     <task id="LOCAL-00035" summary="saeed made check for his function">
       <option name="closed" value="true" />
@@ -589,7 +388,215 @@
       <option name="project" value="LOCAL" />
       <updated>1710530949094</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="akfdhjkajsdjhj">
+      <option name="closed" value="true" />
+      <created>1710531417077</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1710531417077</updated>
+    </task>
+    <task id="LOCAL-00057" summary="akfdhjkajsdjhj">
+      <option name="closed" value="true" />
+      <created>1710531680716</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1710531680716</updated>
+    </task>
+    <task id="LOCAL-00058" summary="fadjklfj;ds">
+      <option name="closed" value="true" />
+      <created>1710531718528</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1710531718528</updated>
+    </task>
+    <task id="LOCAL-00059" summary="fadjklfj;ds">
+      <option name="closed" value="true" />
+      <created>1710540843123</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1710540843123</updated>
+    </task>
+    <task id="LOCAL-00060" summary="naming cleanup">
+      <option name="closed" value="true" />
+      <created>1710602640942</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1710602640942</updated>
+    </task>
+    <task id="LOCAL-00061" summary="warnings">
+      <option name="closed" value="true" />
+      <created>1710602995174</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1710602995174</updated>
+    </task>
+    <task id="LOCAL-00062" summary="yalla toString">
+      <option name="closed" value="true" />
+      <created>1710690558563</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1710690558563</updated>
+    </task>
+    <task id="LOCAL-00063" summary="khalsana keda ta2riban fadel el toString() beta3et el nodes">
+      <option name="closed" value="true" />
+      <created>1710691090934</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1710691090934</updated>
+    </task>
+    <task id="LOCAL-00064" summary="takmela">
+      <option name="closed" value="true" />
+      <created>1710691109790</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1710691109790</updated>
+    </task>
+    <task id="LOCAL-00065" summary="put toString() and traverse in BPlusIndex not dictionary pair">
+      <option name="closed" value="true" />
+      <created>1710706046558</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1710706046558</updated>
+    </task>
+    <task id="LOCAL-00066" summary="toString() kolo">
+      <option name="closed" value="true" />
+      <created>1710706749770</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1710706749770</updated>
+    </task>
+    <task id="LOCAL-00067" summary="maven aho 3ashan mayez3aloosh">
+      <option name="closed" value="true" />
+      <created>1711208819888</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1711208819888</updated>
+    </task>
+    <task id="LOCAL-00068" summary="dependencies and plugins in pom.xml">
+      <option name="closed" value="true" />
+      <created>1711209218960</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1711209218960</updated>
+    </task>
+    <task id="LOCAL-00069" summary="Reading maxPageSize from config file. Still need to refactor and use variable">
+      <option name="closed" value="true" />
+      <created>1711209799958</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1711209799958</updated>
+    </task>
+    <task id="LOCAL-00070" summary="Reading maxPageSize from config file. Still need to refactor and use variable">
+      <option name="closed" value="true" />
+      <created>1711209810663</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1711209810663</updated>
+    </task>
+    <task id="LOCAL-00071" summary="TODO.txt to not forget what to do">
+      <option name="closed" value="true" />
+      <created>1711210124691</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1711210124691</updated>
+    </task>
+    <task id="LOCAL-00072" summary="TODO.txt to not forget what to do">
+      <option name="closed" value="true" />
+      <created>1711321180972</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1711321180973</updated>
+    </task>
+    <task id="LOCAL-00073" summary="Gama3hom fe package">
+      <option name="closed" value="true" />
+      <created>1711394875793</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1711394875793</updated>
+    </task>
+    <task id="LOCAL-00074" summary="Akhiraaaaaaaaan aaaaaaaahhhhh antlr zabat ma3 maven we 3amal el lexer wel parser🥳🥳🥳🥳🎈🎉🎊🪅">
+      <option name="closed" value="true" />
+      <created>1711446197794</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1711446197794</updated>
+    </task>
+    <task id="LOCAL-00075" summary="aflkdjasjkf">
+      <option name="closed" value="true" />
+      <created>1711725292131</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1711725292132</updated>
+    </task>
+    <task id="LOCAL-00076" summary="primary keys within bplustree is now sorted for later use">
+      <option name="closed" value="true" />
+      <created>1711726960104</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1711726960105</updated>
+    </task>
+    <task id="LOCAL-00077" summary=";aflabfdj">
+      <option name="closed" value="true" />
+      <created>1711746382003</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1711746382004</updated>
+    </task>
+    <task id="LOCAL-00078" summary=";aflabfdj">
+      <option name="closed" value="true" />
+      <created>1711801201425</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1711801201425</updated>
+    </task>
+    <task id="LOCAL-00079" summary=";aflabfdj">
+      <option name="closed" value="true" />
+      <created>1711845118514</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1711845118514</updated>
+    </task>
+    <task id="LOCAL-00080" summary="create index kanet betkhali kol el keys fe leaf wahda">
+      <option name="closed" value="true" />
+      <created>1711845249351</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1711845249351</updated>
+    </task>
+    <task id="LOCAL-00081" summary="Pointer class">
+      <option name="closed" value="true" />
+      <created>1712092842222</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1712092842222</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -654,32 +661,32 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="habiba pushed this" />
-    <MESSAGE value="habiba pushed this from master" />
-    <MESSAGE value="bb" />
-    <MESSAGE value="dahroug added delete" />
-    <MESSAGE value="saeed playing" />
-    <MESSAGE value="table idxFromName&#10;and DBApp deleteFromTable" />
-    <MESSAGE value="matching method" />
-    <MESSAGE value="shwayet basics delet keda" />
-    <MESSAGE value="table search method in progress not complete" />
-    <MESSAGE value="saeed playing on master" />
-    <MESSAGE value="saeed playing on master and he requesting for the Khalas beacause of Khalas (samaloty yaba el hag)" />
-    <MESSAGE value="saeed made check for his function" />
-    <MESSAGE value="Raed did this" />
-    <MESSAGE value="Comparable" />
-    <MESSAGE value="Made page extend vector&lt;Record&gt; to comply with grading scheme in description and refactored code" />
-    <MESSAGE value="working on binary search for clusterK key" />
-    <MESSAGE value="gamadannnnnnn" />
-    <MESSAGE value="saeed tested validator" />
-    <MESSAGE value="insertion is done by 99.9 percent bas how meen da el tested mahmoud ya 3am enta hagebak" />
-    <MESSAGE value="kolo t7t el control&#10;done on time" />
     <MESSAGE value="saeed added some flavors to the index and made it understandable also added some functions in TableColumn and Table related to the B+ index" />
     <MESSAGE value="saeed added some flavors to the index" />
     <MESSAGE value="tac tac w bta3" />
     <MESSAGE value="fdaskj;l" />
     <MESSAGE value="akfdhjkajsdjhj" />
-    <option name="LAST_COMMIT_MESSAGE" value="akfdhjkajsdjhj" />
+    <MESSAGE value="fadjklfj;ds" />
+    <MESSAGE value="naming cleanup" />
+    <MESSAGE value="warnings" />
+    <MESSAGE value="yalla toString" />
+    <MESSAGE value="khalsana keda ta2riban fadel el toString() beta3et el nodes" />
+    <MESSAGE value="takmela" />
+    <MESSAGE value="put toString() and traverse in BPlusIndex not dictionary pair" />
+    <MESSAGE value="toString() kolo" />
+    <MESSAGE value="maven aho 3ashan mayez3aloosh" />
+    <MESSAGE value="dependencies and plugins in pom.xml" />
+    <MESSAGE value="Reading maxPageSize from config file. Still need to refactor and use variable" />
+    <MESSAGE value="TODO.txt to not forget what to do" />
+    <MESSAGE value="Gama3hom fe package" />
+    <MESSAGE value="generated antlr recognizer" />
+    <MESSAGE value="Akhiraaaaaaaaan aaaaaaaahhhhh antlr zabat ma3 maven we 3amal el lexer wel parser" />
+    <MESSAGE value="aflkdjasjkf" />
+    <MESSAGE value="primary keys within bplustree is now sorted for later use" />
+    <MESSAGE value=";aflabfdj" />
+    <MESSAGE value="create index kanet betkhali kol el keys fe leaf wahda" />
+    <MESSAGE value="Pointer class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Pointer class" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -689,7 +696,7 @@
           <option name="timeStamp" value="113" />
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Data/Table/Table.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/Data/Table/Table.java</url>
           <line>281</line>
           <option name="timeStamp" value="135" />
         </line-breakpoint>
