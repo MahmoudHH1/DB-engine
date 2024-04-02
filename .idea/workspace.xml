@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Pointer class">
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="good now">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Data/Index/BPlusIndex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Index/BPlusIndex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Index/Pointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Index/Pointer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Table/Table.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -219,38 +220,6 @@
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
       <updated>1709364507752</updated>
-    </task>
-    <task id="LOCAL-00035" summary="saeed made check for his function">
-      <option name="closed" value="true" />
-      <created>1709529504847</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1709529504847</updated>
-    </task>
-    <task id="LOCAL-00036" summary="saeed made check for his function">
-      <option name="closed" value="true" />
-      <created>1709529516678</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1709529516678</updated>
-    </task>
-    <task id="LOCAL-00037" summary="saeed made check for his function">
-      <option name="closed" value="true" />
-      <created>1709529526173</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1709529526173</updated>
-    </task>
-    <task id="LOCAL-00038" summary="saeed made check for his function">
-      <option name="closed" value="true" />
-      <created>1709578398493</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1709578398493</updated>
     </task>
     <task id="LOCAL-00039" summary="saeed made check for his function">
       <option name="closed" value="true" />
@@ -596,7 +565,39 @@
       <option name="project" value="LOCAL" />
       <updated>1712092842222</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="Pointer in bplus tree">
+      <option name="closed" value="true" />
+      <created>1712094762418</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1712094762418</updated>
+    </task>
+    <task id="LOCAL-00083" summary="delete&#10;and Table hasIndex method">
+      <option name="closed" value="true" />
+      <created>1712096507012</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1712096507012</updated>
+    </task>
+    <task id="LOCAL-00084" summary="delete&#10;and Table hasIndex method">
+      <option name="closed" value="true" />
+      <created>1712096609641</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1712096609641</updated>
+    </task>
+    <task id="LOCAL-00085" summary="good now">
+      <option name="closed" value="true" />
+      <created>1712096835478</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1712096835478</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -661,9 +662,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="saeed added some flavors to the index and made it understandable also added some functions in TableColumn and Table related to the B+ index" />
-    <MESSAGE value="saeed added some flavors to the index" />
-    <MESSAGE value="tac tac w bta3" />
     <MESSAGE value="fdaskj;l" />
     <MESSAGE value="akfdhjkajsdjhj" />
     <MESSAGE value="fadjklfj;ds" />
@@ -686,7 +684,10 @@
     <MESSAGE value=";aflabfdj" />
     <MESSAGE value="create index kanet betkhali kol el keys fe leaf wahda" />
     <MESSAGE value="Pointer class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Pointer class" />
+    <MESSAGE value="Pointer in bplus tree" />
+    <MESSAGE value="delete&#10;and Table hasIndex method" />
+    <MESSAGE value="good now" />
+    <option name="LAST_COMMIT_MESSAGE" value="good now" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -695,11 +696,6 @@
           <properties class="Exceptions.DBAppException" package="Exceptions" />
           <option name="timeStamp" value="113" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Data/Table/Table.java</url>
-          <line>281</line>
-          <option name="timeStamp" value="135" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

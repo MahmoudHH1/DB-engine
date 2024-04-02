@@ -152,6 +152,11 @@ public class DBApp {
 
         // map column name to idx
         Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
+        for(int i : colIdxVal.keySet()){
+            if(table.hasIndex(i)){
+                allBPlusIndecies.
+            }
+        }
         for (String path : table.getPagePaths()) {
             // still need to adjust for index
             Page page = (Page) FileCreator.readObject(path);
@@ -164,7 +169,8 @@ public class DBApp {
             page.removeAll(toRemove);
             page.save();
         }
-        // table.save();
+        table.save();
+
         //////////////////////////////////////////////////
         // not completed yet
 //        for (BPlusIndex b : allBPlusIndecies) {
