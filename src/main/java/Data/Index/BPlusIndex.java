@@ -16,6 +16,7 @@ public class BPlusIndex implements Serializable {
     private final String colName;
     private final String idxName ;
     private final String path ;
+
     /**
      * Constructor
      * @param m: the order (fanout) of the B+ tree

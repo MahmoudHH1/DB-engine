@@ -102,7 +102,7 @@ public class Table implements Serializable {
         TableColumn col = getColumnByName(colName);
         return col.isColumnBIdx();
     }
-    public boolean isColumnNameBIdx(int colIdx) throws DBAppException {
+    public boolean hasIndex(int colIdx) throws DBAppException {
         return allColumns.get(colIdx).isColumnBIdx();
     }
 
