@@ -149,7 +149,9 @@ public class Table implements Serializable {
         int i = idxFromName(name);
         return allColumns.get(i).isColumnBIdx();
     }
-
+    public boolean hasIndex(int i){
+        return allColumns.get(i).isColumnBIdx();
+    }
 
     public void setAllColumns(ArrayList<TableColumn> allColumns) {
         this.allColumns = allColumns;
