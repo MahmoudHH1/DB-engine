@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="adighkgkra">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Data/Index/Operations.java" afterDir="false" />
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Operations">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Index/Pointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Index/Pointer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Index/Operations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Index/Operations.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -220,14 +218,6 @@
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
       <updated>1709364507752</updated>
-    </task>
-    <task id="LOCAL-00040" summary="saeed made check for his function">
-      <option name="closed" value="true" />
-      <created>1709589247615</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1709589247615</updated>
     </task>
     <task id="LOCAL-00041" summary="Habiba modified">
       <option name="closed" value="true" />
@@ -597,7 +587,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712097222252</updated>
     </task>
-    <option name="localTasksCounter" value="87" />
+    <task id="LOCAL-00087" summary="Operations">
+      <option name="closed" value="true" />
+      <created>1712098614608</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1712098614608</updated>
+    </task>
+    <option name="localTasksCounter" value="88" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -662,7 +660,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="akfdhjkajsdjhj" />
     <MESSAGE value="fadjklfj;ds" />
     <MESSAGE value="naming cleanup" />
     <MESSAGE value="warnings" />
@@ -687,7 +684,8 @@
     <MESSAGE value="delete&#10;and Table hasIndex method" />
     <MESSAGE value="good now" />
     <MESSAGE value="adighkgkra" />
-    <option name="LAST_COMMIT_MESSAGE" value="adighkgkra" />
+    <MESSAGE value="Operations" />
+    <option name="LAST_COMMIT_MESSAGE" value="Operations" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

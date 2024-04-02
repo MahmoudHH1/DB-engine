@@ -15,4 +15,12 @@ public class Operations {
         set.addAll(b);
         return new Vector<>(set);
     }
+    public static Vector<Pointer> xor(Vector<Pointer> a, Vector<Pointer> b){
+        Set<Pointer> set = new HashSet<>();
+        set.addAll(a);
+        set.addAll(b);
+        a.retainAll(b);
+        a.forEach(set::remove);
+        return new Vector<>(set);
+    }
 }
