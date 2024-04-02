@@ -6,29 +6,13 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
 diff --git a/.idea/workspace.xml b/.idea/workspace.xml
---- a/.idea/workspace.xml	(revision 720ed8ab59265c1f47b333e69b6020b0e9a39bd2)
-+++ b/.idea/workspace.xml	(date 1710531416443)
-@@ -4,10 +4,7 @@
-     <option name="autoReloadType" value="SELECTIVE" />
-   </component>
+--- a/.idea/workspace.xml	(revision 1baca728a76daecb99a0bb41f5b56ee22d04c85b)
++++ b/.idea/workspace.xml	(date 1710531434611)
+@@ -6,7 +6,6 @@
    <component name="ChangeListManager">
--    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="">
--      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+     <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
 -      <change beforePath="$PROJECT_DIR$/Data/Index/BPlusIndex.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Index/BPlusIndex.java" afterDir="false" />
--    </list>
-+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="" />
+     </list>
      <option name="SHOW_DIALOG" value="false" />
      <option name="HIGHLIGHT_CONFLICTS" value="true" />
-     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
-@@ -687,11 +684,6 @@
-           <properties class="Exceptions.DBAppException" package="Exceptions" />
-           <option name="timeStamp" value="113" />
-         </breakpoint>
--        <line-breakpoint enabled="true" type="java-line">
--          <url>file://$PROJECT_DIR$/Data/Table/Table.java</url>
--          <line>281</line>
--          <option name="timeStamp" value="135" />
--        </line-breakpoint>
-       </breakpoints>
-     </breakpoint-manager>
-   </component>
