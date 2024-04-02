@@ -2,6 +2,8 @@ import Data.Handler.FileCreator;
 import Data.Handler.Pair;
 import Data.Index.BPlusIndex;
 import Data.Index.IndexControler;
+import Data.Index.Operations;
+import Data.Index.Pointer;
 import Data.Page.Page;
 import Data.Page.Record;
 import Data.Table.MetaData;
@@ -152,14 +154,21 @@ public class DBApp {
 
         // map column name to idx
         Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
-        for(int i : colIdxVal.keySet()){
-            if(table.hasIndex(i)){
-                TableColumn col = table.getAllColumns().get(i);
-                BPlusIndex bplus = IndexControler.readIndexByName(col.getIndexName(), table);
-
-
-            }
+        // will hold pointers to matching records
+        Vector<Pointer> idxRemove = null;
+        // hold index of columns with b plus tree
+        ArrayList<Integer> colIdxOfBplus = table.colIdxWBPlus();
+        for(int i : colIdxOfBplus){
+            TableColumn col = table.getAllColumns().get(i);
+            BPlusIndex bplus = IndexControler.readIndexByName(col.getIndexName(), table);
+            Vector<Pointer> pointers = bplus.search(colIdxVal.get(i));
+            if(idxRemove == null)
+                idxRemove = pointers;
+            else
+                Operations.intersect(idxRemove, pointers);
         }
+        colIdxOfBplus.forEach(colIdxVal.keySet()::remove);
+
         for (String path : table.getPagePaths()) {
             // still need to adjust for index
             Page page = (Page) FileCreator.readObject(path);
