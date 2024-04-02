@@ -140,13 +140,16 @@ public class Table implements Serializable {
     }
 
     public int idxFromName(String name) throws DBAppException {
-        for (int i = 0; i < getAllColumns().size(); i++) {
-            if (getAllColumns().get(i).equals(name)) {
+        for (int i = 0; i < allColumns.size(); i++)
+            if (allColumns.get(i).getColumnName().equals(name))
                 return i;
-            }
-        }
         throw new DBAppException("Invalid Column Name: " + name);
     }
+    public boolean hasIndex(String name) throws DBAppException {
+        int i = idxFromName(name);
+        return allColumns.get(i).isColumnBIdx();
+    }
+
 
     public void setAllColumns(ArrayList<TableColumn> allColumns) {
         this.allColumns = allColumns;

@@ -164,7 +164,8 @@ public class DBApp {
             page.removeAll(toRemove);
             page.save();
         }
-        // table.save();
+        table.save();
+        
         //////////////////////////////////////////////////
         // not completed yet
 //        for (BPlusIndex b : allBPlusIndecies) {
