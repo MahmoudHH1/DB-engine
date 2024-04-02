@@ -1,5 +1,6 @@
 package Data.Index;
 import Data.Handler.FileCreator;
+import Data.Handler.Pair;
 
 
 import java.io.File;
@@ -83,13 +84,8 @@ public class BPlusIndex implements Serializable {
      * @return index of the target value if found, else a negative value
      */
     private int binarySearch(DictionaryPair[] dps, int numPairs, Object t) {
-        Comparator<DictionaryPair> c = new Comparator<>() {
-            @Override
-            public int compare(DictionaryPair o1, DictionaryPair o2) {
-                return o1.compareTo(o2);
-            }
-        };
-        return Arrays.binarySearch(dps, 0, numPairs, new DictionaryPair(t, ""), c);
+        Comparator<DictionaryPair> c = DictionaryPair::compareTo;
+        return Arrays.binarySearch(dps, 0, numPairs, new DictionaryPair(t, null), c);
     }
 
     /**
@@ -442,7 +438,7 @@ public class BPlusIndex implements Serializable {
      * This method is used when splitting an InternalNode object.
      * @param keys: a list of Integer objects
      * @param split: the index where the split is to occur
-     * @return Integer[] of removed keys
+     * @return Object[] of removed keys
      */
     private Object[] splitKeys(Object[] keys, int split) {
         Object[] halfKeys = new Object[this.m];
@@ -466,7 +462,7 @@ public class BPlusIndex implements Serializable {
      * @param key: an integer key that corresponds with an existing dictionary
      *             pair
      */
-    public void delete(Object key , Object value) {
+    public void delete(Object key , Pointer value) {
         if (isEmpty()) {
 
             /* Flow of execution goes here when B+ tree has no dictionary pairs */
@@ -615,7 +611,7 @@ public class BPlusIndex implements Serializable {
     // cluster
     // btree.toString()
 
-    public void insert(Object key, Object value){
+    public void insert(Object key, Pointer value){
         if (isEmpty()) {
 
             /* Flow of execution goes here only when first insert takes place */
@@ -705,9 +701,9 @@ public class BPlusIndex implements Serializable {
      * Given a key, this method returns the value associated with the key
      * within a dictionary pair that exists inside the B+ tree.
      * @param key: the key to be searched within the B+ tree
-     * @return the floating point value associated with the key within the B+ tree
+     * @return the sorted vector<Pointer> associated with the key within the B+ tree
      */
-    public Vector<Comparable> search(Object key) {
+    public Vector<Pointer> search(Object key) {
 		// If B+ tree is completely empty, simply return null
 		if (isEmpty()) { return null; }
 
@@ -732,13 +728,13 @@ public class BPlusIndex implements Serializable {
      *
      * @param lowerBound: (int) the lower bound of the range
      * @param upperBound: (int) the upper bound of the range
-     * @return an ArrayList<Double> that holds all values of dictionary pairs
+     * @return an unsorted Vector<Pointer> that holds all values of dictionary pairs
      * whose keys are within the specified range
      */
-    public Vector<Comparable> search(Object lowerBound, Object upperBound) {
+    public Vector<Pointer> search(Object lowerBound, Object upperBound) {
 
         // Instantiate Double array to hold values
-        Vector<Comparable> values = new Vector<>();
+        Vector<Pointer> values = new Vector<>();
 
         Comparable<Object> lower = (Comparable<Object>) lowerBound;
         Comparable<Object> upper = (Comparable<Object>) upperBound;
@@ -747,7 +743,7 @@ public class BPlusIndex implements Serializable {
         while (currNode != null) {
 
             // Iterate through the dictionary of each node
-            DictionaryPair dps[] = currNode.dictionary;
+            DictionaryPair[] dps = currNode.dictionary;
             for (DictionaryPair dp : dps) {
 
 				/* Stop searching the dictionary once a null value is encountered
@@ -982,9 +978,9 @@ public class BPlusIndex implements Serializable {
             // Decrement numPairs
             numPairs--;
         }
-        public void delete(int index, Object value) {
+        public void delete(int index, Pointer value) {
 
-            if(!dictionary[index].values.remove((Comparable) value))
+            if(!dictionary[index].values.remove(value))
                 System.err.println("Value Not Found");;
             // Delete dictionary pair from leaf
             if(dictionary[index].values.isEmpty())
@@ -1029,7 +1025,7 @@ public class BPlusIndex implements Serializable {
             if(idx < 0)
                 return false;
             dictionary[idx].values.add(dp.values.get(0));
-            dictionary[idx].values.sort(Comparable::compareTo);
+            dictionary[idx].values.sort(Pointer::compareTo);
             return true;
         }
 
@@ -1111,16 +1107,16 @@ public class BPlusIndex implements Serializable {
     public class DictionaryPair implements Comparable<DictionaryPair> ,  Serializable{
         Object key;
         // vector is sorted
-        Vector<Comparable> values = new Vector<>();
+        Vector<Pointer> values = new Vector<>();
         // 20 -----> {1, 6, 7 ,2}
         /**
          * Constructor
          * @param key: the key of the key-value pair
          * @param value: the value of the key-value pair
          */
-        public DictionaryPair(Object key, Object value) {
+        public DictionaryPair(Object key, Pointer value) {
             this.key = key;
-            values.add((Comparable) value);
+            values.add(value);
         }
 
         /**
@@ -1201,15 +1197,15 @@ public class BPlusIndex implements Serializable {
 
             // Create initial B+ tree
             BPlusIndex bpt = new BPlusIndex(3,"","","");
-            bpt.insert("Ahmed","Ahmed");
-            bpt.insert("JJ","PlaceofJJ");
+//            bpt.insert("Ahmed","Ahmed");
+//            bpt.insert("JJ","PlaceofJJ");
             System.out.println(bpt.search("Ahmed"));
 //			bpt.insert("JJ","PlaceofJJ2");
 //            bpt.delete("JJ");
             System.out.println(bpt.search("JJ"));
-            bpt.insert("R","placeofR");
+//            bpt.insert("R","placeofR");
             System.out.println(bpt.search("R"));
-            bpt.insert("Banana","PlaceofBanana");
+//            bpt.insert("Banana","PlaceofBanana");
             System.out.println(bpt);
 //            System.out.println(bpt.search("Ahmed","R"));
 

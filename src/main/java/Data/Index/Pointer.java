@@ -1,13 +1,16 @@
 package Data.Index;
 
-public class Pointer {
+public class Pointer implements Comparable{
     int pageIdx;
-    Object key;
-    public Pointer(){
-    }
+    Comparable key;
 
     public Pointer(int pageIdx, Object key) {
         this.pageIdx = pageIdx;
-        this.key = key;
+        this.key = (Comparable) key;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return this.key.compareTo(((Pointer)o).key);
     }
 }
