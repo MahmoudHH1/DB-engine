@@ -102,6 +102,9 @@ public class Table implements Serializable {
         TableColumn col = getColumnByName(colName);
         return col.isColumnBIdx();
     }
+    public boolean isColumnNameBIdx(int colIdx) throws DBAppException {
+        return allColumns.get(colIdx).isColumnBIdx();
+    }
 
     public TableColumn getColumnByName(String colName) throws DBAppException {
         for (TableColumn col : allColumns) {
@@ -144,13 +147,6 @@ public class Table implements Serializable {
             if (allColumns.get(i).getColumnName().equals(name))
                 return i;
         throw new DBAppException("Invalid Column Name: " + name);
-    }
-    public boolean hasIndex(String name) throws DBAppException {
-        int i = idxFromName(name);
-        return allColumns.get(i).isColumnBIdx();
-    }
-    public boolean hasIndex(int i){
-        return allColumns.get(i).isColumnBIdx();
     }
 
     public void setAllColumns(ArrayList<TableColumn> allColumns) {
