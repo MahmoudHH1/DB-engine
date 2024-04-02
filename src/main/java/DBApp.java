@@ -154,7 +154,10 @@ public class DBApp {
         Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
         for(int i : colIdxVal.keySet()){
             if(table.hasIndex(i)){
-                allBPlusIndecies.
+                TableColumn col = table.getAllColumns().get(i);
+                BPlusIndex bplus = IndexControler.readIndexByName(col.getIndexName(), table);
+
+
             }
         }
         for (String path : table.getPagePaths()) {

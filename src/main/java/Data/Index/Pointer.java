@@ -13,4 +13,9 @@ public class Pointer implements Comparable{
     public int compareTo(Object o) {
         return this.key.compareTo(((Pointer)o).key);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return compareTo(obj) == 0;
+    }
 }
