@@ -292,64 +292,69 @@ public class Table implements Serializable {
         }
     }
 
-    public void insertIntoTable(Hashtable<String, Object> insertedTuple) throws DBAppException, IOException, ClassNotFoundException {
-        TupleValidator.IsValidTuple(insertedTuple, this);
-        Record rec = new Record();
-        rec.insertRecord(getColIdxVal(insertedTuple));
-        //
-        //overflow record for shifting purposes
-        Record overFlowRec = new Record();
-        //if it is the first record to be inserted
-        if (pagePaths.isEmpty()) {
-            //creating a new page
-            Page firstPage = new Page(this);
-            firstPage.add(rec);
-            IndexControler.insertIntoIndex(rec , 0 , this,insertedTuple);
-            //remember to insert the values in the existing indices
-            firstPage.save();
-        } else {
-            // search returns x = pageIdx and y = record idx
-            int pagePathIdx = (search(rec.get((int) (getClusterKeyAndIndex()[1])), (int) getClusterKeyAndIndex()[1])).x;
-            for (int i = pagePathIdx; i < pagePaths.size(); i++) {
-                String pagePath = pagePaths.get(i);
-                Page page = (Page) FileCreator.readObject(pagePath);
-                if (rec != null) {
-                    page.insertIntoPage(rec);
-                    //remember to insert the record into the existing indices
-                    IndexControler.insertIntoIndex(rec,pagePathIdx,this,insertedTuple);
-                    rec = null;
-                }
-                //if the record is inserted successfully there will be no overflow
-                //if overflow insert the keep inserting and shifting all records
-                //until you reach the last page of the table
-                overFlowRec = page.overFlow();
-                page.save();
+    public void insertIntoTable(
+            Hashtable<String, Object> insertedTuple
+        )throws DBAppException, IOException, ClassNotFoundException {
+        try{
+            TupleValidator.IsValidTuple(insertedTuple, this);
+            Record rec = new Record();
+            rec.insertRecord(getColIdxVal(insertedTuple));
+            //
+            //overflow record for shifting purposes
+            Record overFlowRec = new Record();
+            //if it is the first record to be inserted
+            if (pagePaths.isEmpty()) {
+                //creating a new page
+                Page firstPage = new Page(this);
+                firstPage.add(rec);
+                IndexControler.insertIntoIndex(rec , 0 , this,insertedTuple);
+                //remember to insert the values in the existing indices
+                firstPage.save();
+            } else {
+                // search returns x = pageIdx and y = record idx
+                int pagePathIdx = (search(rec.get((int) (getClusterKeyAndIndex()[1])), (int) getClusterKeyAndIndex()[1])).x;
+                for (int i = pagePathIdx; i < pagePaths.size(); i++) {
+                    String pagePath = pagePaths.get(i);
+                    Page page = (Page) FileCreator.readObject(pagePath);
+                    if (rec != null) {
+                        page.insertIntoPage(rec);
+                        //remember to insert the record into the existing indices
+                        IndexControler.insertIntoIndex(rec,pagePathIdx,this,insertedTuple);
+                        rec = null;
+                    }
+                    //if the record is inserted successfully there will be no overflow
+                    //if overflow insert the keep inserting and shifting all records
+                    //until you reach the last page of the table
+                    overFlowRec = page.overFlow();
+                    page.save();
 
-                //if overflow is null after the value is inserted
-                //break out of the for loop for time complexity concerns
-                if (overFlowRec == null)
-                    break;
-                //can I read the next page while I am in this page
-                //we will find out
-                if (this.pagePaths.indexOf(pagePath) < this.pagePaths.size() - 1) {
-                    //inserting the overflow in the next page
-                    Page nextPage = ((Page) FileCreator.readObject(this.pagePaths.get(pagePaths.indexOf(pagePath) + 1)));
-                    nextPage.insertIntoPage(overFlowRec);
+                    //if overflow is null after the value is inserted
+                    //break out of the for loop for time complexity concerns
+                    if (overFlowRec == null)
+                        break;
+                    //can I read the next page while I am in this page
+                    //we will find out
+                    if (this.pagePaths.indexOf(pagePath) < this.pagePaths.size() - 1) {
+                        //inserting the overflow in the next page
+                        Page nextPage = ((Page) FileCreator.readObject(this.pagePaths.get(pagePaths.indexOf(pagePath) + 1)));
+                        nextPage.insertIntoPage(overFlowRec);
+                        IndexControler.updatePageIdxOverflow(overFlowRec,this,insertedTuple);
+                        nextPage.save();
+                    }
+                }
+                //checking whether I reached the last page and the overflow is not inserted yet
+                //making a new page to insert the overflow
+                if (overFlowRec != null) {
+                    Page newP = new Page(this);
+                    newP.insertIntoPage(overFlowRec);
                     IndexControler.updatePageIdxOverflow(overFlowRec,this,insertedTuple);
-                    nextPage.save();
+                    newP.save();
                 }
             }
-            //checking whether I reached the last page and the overflow is not inserted yet
-            //making a new page to insert the overflow
-            if (overFlowRec != null) {
-                Page newP = new Page(this);
-                newP.insertIntoPage(overFlowRec);
-                IndexControler.updatePageIdxOverflow(overFlowRec,this,insertedTuple);
-                newP.save();
-            }
+            this.save();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
         }
-        this.save();
-
     }
 
     public static <T extends Comparable<T>> boolean isBetween(T value, T minValue, T maxValue) {

@@ -286,7 +286,7 @@ public class DBApp {
     public static void main(String[] args) {
         try {
             DBApp dbApp = new DBApp();
-            // Student table
+//----------------------------------------Students Table-------------------------------------------------------
             String strTableName = "Student";
 //            Hashtable htblColNameType = new Hashtable();
 //            htblColNameType.put("name", "java.lang.String");
@@ -295,7 +295,29 @@ public class DBApp {
 //            dbApp.createTable(strTableName, "id", htblColNameType);
 //            dbApp.createIndex(strTableName, "id", "idIndex");
 //            dbApp.createIndex(strTableName, "gpa", "gpaIndex");
-            // TAs table
+
+//            Table table = Table.getTable(dbApp.allTables,"Student");
+//            table.reset();
+
+//            Random random = new Random();
+//            for (int i = 0; i < 24; i++) {
+//                String alpha = "abcdefghijklmnopqrstuvwxyz";
+//                int randomNumber = random.nextInt(100000) + 1;
+//                double randGpa = random.nextDouble(5);
+//                int randAlpha = random.nextInt(26);
+//                String name = "";
+//                for(int j = 0; j<4; j++){
+//                    randAlpha = random.nextInt(26);
+//                    name += alpha.charAt(randAlpha);
+//                }
+//                Hashtable<String, Object> htblColNameValue = new Hashtable<>();
+//                htblColNameValue.put("name", name);
+//                htblColNameValue.put("gpa", randGpa);
+//                htblColNameValue.put("id", randomNumber);
+//                dbApp.insertIntoTable(strTableName, htblColNameValue);
+//            }
+
+//-----------------------------------------TAs Table-------------------------------------------------------
 //            String strTableName = "TAs";
 //            Hashtable htblColNameType = new Hashtable();
 //            htblColNameType.put("name", "java.lang.String");
@@ -305,14 +327,11 @@ public class DBApp {
 //            dbApp.createIndex(strTableName, "id", "idIndex");
 //            dbApp.createIndex(strTableName, "salary", "salaryIndex");
 
-            Table table = Table.getTable(dbApp.allTables,"Student");
-            table.reset();
-
             Random random = new Random();
-            for (int i = 0; i < 398; i++) {
+            for (int i = 0; i < 24; i++) {
                 String alpha = "abcdefghijklmnopqrstuvwxyz";
-                int randomNumber = random.nextInt(100000) + 1;
-                double randGpa = random.nextDouble(5);
+                int randomid = random.nextInt(100000) + 1;
+                double randSalary = random.nextInt(5000);
                 int randAlpha = random.nextInt(26);
                 String name = "";
                 for(int j = 0; j<4; j++){
@@ -320,13 +339,14 @@ public class DBApp {
                     name += alpha.charAt(randAlpha);
                 }
                 Hashtable<String, Object> htblColNameValue = new Hashtable<>();
+                htblColNameValue.put("salary", randSalary);
                 htblColNameValue.put("name", name);
-                htblColNameValue.put("gpa", randGpa);
-                htblColNameValue.put("id", randomNumber);
+                htblColNameValue.put("id", randomid);
                 dbApp.insertIntoTable(strTableName, htblColNameValue);
             }
-            System.out.println(MetaData.maxPageSize);
-            table.viewTable();
+//--------------------------------------------------------------------------------------------------------
+//            System.out.println(MetaData.maxPageSize);
+//            table.viewTable();
 
 //            Vector<BPlusIndex> res = loadAllTableIndices("Student");
 //            System.out.println(res.size());
