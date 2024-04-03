@@ -977,8 +977,8 @@ public class BPlusIndex implements Serializable {
          */
         public void delete(int index) {
             // Delete dictionary pair from leaf
-            if(dictionary[index].values.isEmpty())
-                this.dictionary[index] = null;
+//            if(dictionary[index].values.isEmpty())
+            this.dictionary[index] = null;
 
             // Decrement numPairs
             numPairs--;
@@ -1100,7 +1100,7 @@ public class BPlusIndex implements Serializable {
         }
         @Override
         public String toString(){
-            return Arrays.toString(dictionary) + "->";
+            return Arrays.toString(Arrays.copyOfRange(dictionary, 0, numPairs)) + "->";
         }
     }
 
@@ -1201,26 +1201,20 @@ public class BPlusIndex implements Serializable {
 //			boolean firstLine = true;
 
             // Create initial B+ tree
-            BPlusIndex bpt = new BPlusIndex(2,"","","");
-            bpt.insert("ahmed",new Pointer(99,90));
-            System.out.println(bpt);
-            bpt.insert("nora",new Pointer(99,90));
-            System.out.println(bpt);
-            bpt.insert("hoda",new Pointer(99,90));
-            System.out.println(bpt);
+            BPlusIndex bpt = new BPlusIndex(3,"","","");
+            bpt.insert("ahmed",new Pointer(1,2));
+            bpt.insert("nora",new Pointer(99,3));
+            bpt.insert("hoda",new Pointer(99,40));
 
-            bpt.insert("hussein",new Pointer(99,90));
-            System.out.println(bpt);
+            bpt.insert("hussein",new Pointer(99,5));
 
-            bpt.insert("peter",new Pointer(99,90));
-            System.out.println(bpt);
+            bpt.insert("peter",new Pointer(99,6));
 
-            bpt.insert("john",new Pointer(99,90));
-            System.out.println(bpt);
+            bpt.insert("john",new Pointer(99,7));
 
-            bpt.insert("kareem",new Pointer(99,90));
+            bpt.insert("kareem",new Pointer(99,8));
 
-            System.out.println(bpt.toString());
+            System.out.println(bpt.search("kareem"));
 
 //
 //            System.out.println(bpt.search("Ahmed"));
