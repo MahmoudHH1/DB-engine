@@ -34,10 +34,13 @@ public class Table implements Serializable {
         this.tableName = allColumns.get(0).getTableName();
         this.tableDir = tablesDirectory + File.separator + tableName;
         this.allColumns = allColumns;
+
         File tableFolder = new File(tableDir);
         File indiciesFolder = new File(tableDir + File.separator + "Indices");
+
         System.out.println(tableFolder.mkdir() ? "Table Created" : "Table not Created");
         System.out.println(indiciesFolder.mkdir() ? "indexes folder Created" : "indexes folder not Created");
+
         MetaData.writeDataToMetaDatafile(allColumns);
         save();
     }
@@ -79,6 +82,9 @@ public class Table implements Serializable {
             }
         }
         return null;
+    }
+    public void reset(){
+        pagePaths = new Vector<>();
     }
 
     public int getPageNum() {

@@ -60,6 +60,7 @@ public class DBApp {
             allColumns.add(newColumn);
         }
         Table table = new Table(allColumns);
+        allTables.add(table);
     }
 
     // following method creates a B+tree index
@@ -284,40 +285,60 @@ public class DBApp {
 
     public static void main(String[] args) {
         try {
-            String strTableName = "Student";
             DBApp dbApp = new DBApp();
-            Hashtable htblColNameType = new Hashtable();
-            htblColNameType.put("name", "java.lang.String");
-            htblColNameType.put("gpa", "java.lang.double");
-            htblColNameType.put("id", "java.lang.Integer");
-            dbApp.createTable(strTableName, "id", htblColNameType);
-            dbApp.createIndex(strTableName, "id", "idIndex");
-            dbApp.createIndex(strTableName, "gpa", "gpaIndex");
+            // Student table
+            String strTableName = "Student";
+//            Hashtable htblColNameType = new Hashtable();
+//            htblColNameType.put("name", "java.lang.String");
+//            htblColNameType.put("gpa", "java.lang.double");
+//            htblColNameType.put("id", "java.lang.Integer");
+//            dbApp.createTable(strTableName, "id", htblColNameType);
+//            dbApp.createIndex(strTableName, "id", "idIndex");
+//            dbApp.createIndex(strTableName, "gpa", "gpaIndex");
+            // TAs table
+//            String strTableName = "TAs";
+//            Hashtable htblColNameType = new Hashtable();
+//            htblColNameType.put("name", "java.lang.String");
+//            htblColNameType.put("salary", "java.lang.double");
+//            htblColNameType.put("id", "java.lang.Integer");
+//            dbApp.createTable(strTableName, "id", htblColNameType);
+//            dbApp.createIndex(strTableName, "id", "idIndex");
+//            dbApp.createIndex(strTableName, "salary", "salaryIndex");
 
+            Table table = Table.getTable(dbApp.allTables,"Student");
+            table.reset();
+
+            Random random = new Random();
+            for (int i = 0; i < 398; i++) {
+                String alpha = "abcdefghijklmnopqrstuvwxyz";
+                int randomNumber = random.nextInt(100000) + 1;
+                double randGpa = random.nextDouble(5);
+                int randAlpha = random.nextInt(26);
+                String name = "";
+                for(int j = 0; j<4; j++){
+                    randAlpha = random.nextInt(26);
+                    name += alpha.charAt(randAlpha);
+                }
+                Hashtable<String, Object> htblColNameValue = new Hashtable<>();
+                htblColNameValue.put("name", name);
+                htblColNameValue.put("gpa", randGpa);
+                htblColNameValue.put("id", randomNumber);
+                dbApp.insertIntoTable(strTableName, htblColNameValue);
+            }
+            System.out.println(MetaData.maxPageSize);
+            table.viewTable();
 
 //            Vector<BPlusIndex> res = loadAllTableIndices("Student");
 //            System.out.println(res.size());
 //            System.out.println((int)Table.getTable(dbApp.allTables,"Student").getClusterKeyAndIndex()[1]);
 //            System.out.println(Integer.valueOf((Table.getTable(dbApp.allTables, "Student").getClusterKeyAndIndex()).toString()));
 //            System.out.println(Table.getTable(dbApp.allTables,"Student").getClusterKeyAndIndex()[1]);
-            Table table = Table.getTable(dbApp.allTables,"Student");
-////            table.viewTable();
-            table.viewTable();
+//            table.viewTable();
 ////            table.removeTable();
 //
 //            System.out.println(FileCreator.readObject("E:\\DB 2 proj\\DB engine\\Data_Entry\\Tables\\Student\\Indices\\gpaIndex"));
 //            System.out.println(FileCreator.readObject("E:\\DB 2 proj\\DB engine\\Data_Entry\\Tables\\Student\\Indices\\idIndex"));
 //            FileRemover.removeFileFromDirectory("Student" , "Student1");
-//            Random random = new Random();
-////////////////////////////////////
-//            for (int i = 0; i < 20; i++) {
-//                int randomNumber = random.nextInt(100000) + 1;
-//                Hashtable<String, Object> htblColNameValue = new Hashtable<>();
-//                htblColNameValue.put("name", "Samaloty");
-//                htblColNameValue.put("gpa", 0.1);
-//                htblColNameValue.put("id", randomNumber );
-//                dbApp.insertIntoTable(strTableName, htblColNameValue);
-//            }
 //            System.out.println(MetaData.maxPageSize);
 //            Hashtable htblColNameType = new Hashtable();
 //            htblColNameType.put("name", "java.lang.String");

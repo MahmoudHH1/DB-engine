@@ -1,1 +1,7 @@
 Table_Name,Column_Name,Column_Type,Clustering_Key,Index_Name,Index_Type
+Student,gpa,java.lang.double,false,gpaIndex,B+ Tree
+Student,name,java.lang.String,false,null,null
+Student,id,java.lang.Integer,true,idIndex,B+ Tree
+TAs,name,java.lang.String,false,null,null
+TAs,salary,java.lang.double,false,null,null
+TAs,id,java.lang.Integer,true,null,null
