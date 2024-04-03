@@ -8,6 +8,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/Database-Engine.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Database-Engine.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_26_2024_4_53_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_26_2024_4_53_PM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_26_2024_9_13_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_26_2024_9_13_PM__Changes_.xml" afterDir="false" />
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="added search with start location">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/Student/Student.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/Student/Student1.class" beforeDir="false" />
@@ -18,6 +19,7 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/Data/Index/IndexControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Index/IndexControler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Data/Page/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Page/Page.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Data/Table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Table/Table.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBApp.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -229,86 +231,6 @@
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
       <updated>1709364507752</updated>
-    </task>
-    <task id="LOCAL-00035" summary="saeed made check for his function">
-      <option name="closed" value="true" />
-      <created>1709529504847</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1709529504847</updated>
-    </task>
-    <task id="LOCAL-00036" summary="saeed made check for his function">
-      <option name="closed" value="true" />
-      <created>1709529516678</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1709529516678</updated>
-    </task>
-    <task id="LOCAL-00037" summary="saeed made check for his function">
-      <option name="closed" value="true" />
-      <created>1709529526173</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1709529526173</updated>
-    </task>
-    <task id="LOCAL-00038" summary="saeed made check for his function">
-      <option name="closed" value="true" />
-      <created>1709578398493</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1709578398493</updated>
-    </task>
-    <task id="LOCAL-00039" summary="saeed made check for his function">
-      <option name="closed" value="true" />
-      <created>1709589240124</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1709589240124</updated>
-    </task>
-    <task id="LOCAL-00040" summary="saeed made check for his function">
-      <option name="closed" value="true" />
-      <created>1709589247615</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1709589247615</updated>
-    </task>
-    <task id="LOCAL-00041" summary="Habiba modified">
-      <option name="closed" value="true" />
-      <created>1709591157305</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1709591157305</updated>
-    </task>
-    <task id="LOCAL-00042" summary="Comparable">
-      <option name="closed" value="true" />
-      <created>1709726318333</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1709726318333</updated>
-    </task>
-    <task id="LOCAL-00043" summary="Made page extend vector&lt;Record&gt; to comply with grading scheme in description and refactored code">
-      <option name="closed" value="true" />
-      <created>1709739801548</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1709739801548</updated>
-    </task>
-    <task id="LOCAL-00044" summary="working on binary search for clusterK key">
-      <option name="closed" value="true" />
-      <created>1709741176536</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1709741176536</updated>
     </task>
     <task id="LOCAL-00045" summary="gamadannnnnnn">
       <option name="closed" value="true" />
@@ -606,7 +528,87 @@
       <option name="project" value="LOCAL" />
       <updated>1712092842222</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="Pointer in bplus tree">
+      <option name="closed" value="true" />
+      <created>1712094762418</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1712094762418</updated>
+    </task>
+    <task id="LOCAL-00083" summary="delete&#10;and Table hasIndex method">
+      <option name="closed" value="true" />
+      <created>1712096507012</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1712096507012</updated>
+    </task>
+    <task id="LOCAL-00084" summary="delete&#10;and Table hasIndex method">
+      <option name="closed" value="true" />
+      <created>1712096609641</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1712096609641</updated>
+    </task>
+    <task id="LOCAL-00085" summary="good now">
+      <option name="closed" value="true" />
+      <created>1712096835478</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1712096835478</updated>
+    </task>
+    <task id="LOCAL-00086" summary="adighkgkra">
+      <option name="closed" value="true" />
+      <created>1712097222252</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1712097222252</updated>
+    </task>
+    <task id="LOCAL-00087" summary="Operations">
+      <option name="closed" value="true" />
+      <created>1712098614608</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1712098614608</updated>
+    </task>
+    <task id="LOCAL-00088" summary="Operations xor">
+      <option name="closed" value="true" />
+      <created>1712099211812</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1712099211812</updated>
+    </task>
+    <task id="LOCAL-00089" summary="got intersection of pointers in delete">
+      <option name="closed" value="true" />
+      <created>1712100335405</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1712100335406</updated>
+    </task>
+    <task id="LOCAL-00090" summary="dbapp delete and page">
+      <option name="closed" value="true" />
+      <created>1712105101918</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1712105101918</updated>
+    </task>
+    <task id="LOCAL-00091" summary="added search with start location">
+      <option name="closed" value="true" />
+      <created>1712105547423</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1712105547423</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -671,15 +673,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="saeed added some flavors to the index and made it understandable also added some functions in TableColumn and Table related to the B+ index" />
-    <MESSAGE value="saeed added some flavors to the index" />
-    <MESSAGE value="tac tac w bta3" />
-    <MESSAGE value="fdaskj;l" />
-    <MESSAGE value="akfdhjkajsdjhj" />
-    <MESSAGE value="fadjklfj;ds" />
-    <MESSAGE value="naming cleanup" />
-    <MESSAGE value="warnings" />
-    <MESSAGE value="yalla toString" />
     <MESSAGE value="khalsana keda ta2riban fadel el toString() beta3et el nodes" />
     <MESSAGE value="takmela" />
     <MESSAGE value="put toString() and traverse in BPlusIndex not dictionary pair" />
@@ -696,7 +689,16 @@
     <MESSAGE value=";aflabfdj" />
     <MESSAGE value="create index kanet betkhali kol el keys fe leaf wahda" />
     <MESSAGE value="Pointer class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Pointer class" />
+    <MESSAGE value="Pointer in bplus tree" />
+    <MESSAGE value="delete&#10;and Table hasIndex method" />
+    <MESSAGE value="good now" />
+    <MESSAGE value="adighkgkra" />
+    <MESSAGE value="Operations" />
+    <MESSAGE value="Operations xor" />
+    <MESSAGE value="got intersection of pointers in delete" />
+    <MESSAGE value="dbapp delete and page" />
+    <MESSAGE value="added search with start location" />
+    <option name="LAST_COMMIT_MESSAGE" value="added search with start location" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

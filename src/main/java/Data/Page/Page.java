@@ -101,8 +101,10 @@ public class Page extends Vector<Record>  {
     }
 
     public Record searchRecord(Object clusterVal1, int clusterIdx){
+        return searchRecord(clusterVal1, clusterIdx, 0);
+    }
+    public Record searchRecord(Object clusterVal1, int clusterIdx, int start){
         Comparable clusterVal =(Comparable) clusterVal1 ;
-        int start = 0;
         int end = this.size()-1;
         int mid = 0;
         while(start<=end){

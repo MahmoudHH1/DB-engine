@@ -12,6 +12,7 @@ import Exceptions.DBAppException;
 
 import javax.print.attribute.HashPrintJobAttributeSet;
 import java.awt.*;
+import javax.swing.*;
 import java.io.File;
 import java.io.File;
 import java.io.IOException;
@@ -90,23 +91,33 @@ public class IndexControler {
     *
     * */
 
+    public static void updateIndex(
+            Hashtable<String, Object> newColNameVal, // name in old and new is same
+            Hashtable<String, Object> oldColNameVal,
+            Object clusterKeyVal ,
+            int pageIdx ,
+            Table table
+        ) throws IOException, ClassNotFoundException, DBAppException {
 
 
-    public static void updateIndex(Hashtable<String, Object> colVal, Object clusterKeyVal ,Table table) throws IOException, ClassNotFoundException, DBAppException {
-//        Set<String> keys = colVal.keySet();
-//        String colName = keys.iterator().next();
-//        TableColumn col = table.getColumnByName(colName);
-//        BPlusIndex idx = readIndexByName(col.getIndexName(), table);
-//        Vector<Object> allClusterKeys = idx.search(colVal.get(colName));
-//        // get record
-//        idx.delete(colVal.get(colName) , clusterKeyVal);
-//        idx.insert();
-//        if (obj != null) {
-//            idx.delete(obj);
-//            idx.insert(colVal.get(colName), table.getClusterKey());
-//        } else {
-//            idx.insert(colVal.get(colName), table.getClusterKey());
-//        }
+        String colName = oldColNameVal.keySet().iterator().next();
+        TableColumn col = table.getColumnByName(colName);
+        BPlusIndex idx = readIndexByName(col.getIndexName(), table);
+
+        Object oldValue = oldColNameVal.get(colName) ;
+        Vector<Pointer> pageIdxsAndClusterKeysValues = idx.search(oldValue); // [{0 , clusterKeyval1 } ,{1 ,clusterKeyval2}]
+        Pointer oldPointer = null ;
+        for(Pointer pointer : pageIdxsAndClusterKeysValues){
+            if(pointer.clusterKeyValue.compareTo(clusterKeyVal) == 0){
+                oldPointer =pointer ;
+            }
+        }
+        if (oldPointer != null) {
+            idx.delete(oldColNameVal.get(colName) , oldPointer);
+            idx.insert(newColNameVal.get(colName),new Pointer( pageIdx , clusterKeyVal) ); // insert new Pointer (pageIdx , cluter Keyval)
+        }else{
+            throw new DBAppException("This column has no B+ index");
+        }
     }
 
     public Object searchOnIndex() {
