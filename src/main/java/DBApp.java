@@ -268,17 +268,17 @@ public class DBApp {
 //            System.out.println((int)Table.getTable(dbApp.allTables,"Student").getClusterKeyAndIndex()[1]);
 //            System.out.println(Integer.valueOf((Table.getTable(dbApp.allTables, "Student").getClusterKeyAndIndex()).toString()));
 //            System.out.println(Table.getTable(dbApp.allTables,"Student").getClusterKeyAndIndex()[1]);
-//            Table table = Table.getTable(dbApp.allTables,"Student");
-//////            table.viewTable();
-//            table.viewTable();
-//            table.removeTable();
-
+            Table table = Table.getTable(dbApp.allTables,"Student");
+////            table.viewTable();
+            table.viewTable();
+////            table.removeTable();
+//
             System.out.println(FileCreator.readObject("E:\\DB 2 proj\\DB engine\\Data_Entry\\Tables\\Student\\Indices\\gpaIndex"));
             System.out.println(FileCreator.readObject("E:\\DB 2 proj\\DB engine\\Data_Entry\\Tables\\Student\\Indices\\idIndex"));
 //            FileRemover.removeFileFromDirectory("Student" , "Student1");
 //            Random random = new Random();
-////////////////////////////
-//            for (int i = 0; i < 700; i++) {
+////////////////////////////////////
+//            for (int i = 0; i < 20; i++) {
 //                int randomNumber = random.nextInt(100000) + 1;
 //                Hashtable<String, Object> htblColNameValue = new Hashtable<>();
 //                htblColNameValue.put("name", "Samaloty");
