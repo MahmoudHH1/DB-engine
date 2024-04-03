@@ -99,7 +99,6 @@ public class IndexControler {
             Table table
         ) throws IOException, ClassNotFoundException, DBAppException {
 
-
         String colName = oldColNameVal.keySet().iterator().next();
         TableColumn col = table.getColumnByName(colName);
         BPlusIndex idx = readIndexByName(col.getIndexName(), table);
@@ -115,9 +114,11 @@ public class IndexControler {
         if (oldPointer != null) {
             idx.delete(oldColNameVal.get(colName) , oldPointer);
             idx.insert(newColNameVal.get(colName),new Pointer( pageIdx , clusterKeyVal) ); // insert new Pointer (pageIdx , cluter Keyval)
+            idx.save();
         }else{
-            throw new DBAppException("This column has no B+ index");
+            throw new DBAppException("This column has no B+ index to update it");
         }
+
     }
 
     public Object searchOnIndex() {
