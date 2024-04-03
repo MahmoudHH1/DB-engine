@@ -282,6 +282,7 @@ public class DBApp {
 
     public void deleteTable(String tableName) throws DBAppException {
         Table.getTable(allTables, tableName).removeTable();
+
     }
 
     public static void main(String[] args) {
