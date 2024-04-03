@@ -67,9 +67,6 @@ public class DBApp {
                             String strColName,
                             String strIndexName) throws DBAppException, IOException {
         try {
-            // check if column is clusterKey
-            // if clusterKey values in B+tree should be Pair(pageIdx, recordIdx)
-            // otherwise values should be primary key
             Table table = Table.getTable(allTables, strTableName);
             for (TableColumn col : table.getAllColumns()) {
                 if (col.getColumnName().equals(strColName)) {
@@ -83,7 +80,7 @@ public class DBApp {
             BPlusIndex b = IndexControler.createIndex(table, strColName, strIndexName);
             allBPlusIndecies.add(b);
         } catch (Exception e) {
-            throw new DBAppException("not implemented yet");
+            System.out.println(e.getMessage());
         }
     }
 
@@ -289,6 +286,15 @@ public class DBApp {
         try {
             String strTableName = "Student";
             DBApp dbApp = new DBApp();
+            Hashtable htblColNameType = new Hashtable();
+            htblColNameType.put("name", "java.lang.String");
+            htblColNameType.put("gpa", "java.lang.double");
+            htblColNameType.put("id", "java.lang.Integer");
+            dbApp.createTable(strTableName, "id", htblColNameType);
+            dbApp.createIndex(strTableName, "id", "idIndex");
+            dbApp.createIndex(strTableName, "gpa", "gpaIndex");
+
+
 //            Vector<BPlusIndex> res = loadAllTableIndices("Student");
 //            System.out.println(res.size());
 //            System.out.println((int)Table.getTable(dbApp.allTables,"Student").getClusterKeyAndIndex()[1]);
@@ -299,8 +305,8 @@ public class DBApp {
             table.viewTable();
 ////            table.removeTable();
 //
-            System.out.println(FileCreator.readObject("E:\\DB 2 proj\\DB engine\\Data_Entry\\Tables\\Student\\Indices\\gpaIndex"));
-            System.out.println(FileCreator.readObject("E:\\DB 2 proj\\DB engine\\Data_Entry\\Tables\\Student\\Indices\\idIndex"));
+//            System.out.println(FileCreator.readObject("E:\\DB 2 proj\\DB engine\\Data_Entry\\Tables\\Student\\Indices\\gpaIndex"));
+//            System.out.println(FileCreator.readObject("E:\\DB 2 proj\\DB engine\\Data_Entry\\Tables\\Student\\Indices\\idIndex"));
 //            FileRemover.removeFileFromDirectory("Student" , "Student1");
 //            Random random = new Random();
 ////////////////////////////////////
