@@ -196,9 +196,7 @@ public class Table implements Serializable {
     }
 
     // binary search on cluster Key
-    // in progress
-    public Pair<Integer, Integer> search(Comparable clusterKey, int clusterIdx) throws IOException, ClassNotFoundException {
-        int start = 0;
+    public Pair<Integer, Integer> search(Comparable clusterKey, int clusterIdx, int start) throws IOException, ClassNotFoundException {
         int end = pagePaths.size() - 1;
         int mid = 0;
         int recIdx = 0;
@@ -230,8 +228,10 @@ public class Table implements Serializable {
         }
         return new Pair<>(mid, recIdx); // 5000
     }
-    public Pair<Page, Record> searchRec(Comparable clusterKey, int clusterIdx) throws IOException, ClassNotFoundException {
-        int start = 0;
+    public Pair<Integer, Integer> search(Comparable clusterKey, int clusterIdx) throws IOException, ClassNotFoundException {
+        return search(clusterKey, clusterIdx, 0); // 5000
+    }
+    public Pair<Page, Record> searchRec(Comparable clusterKey, int clusterIdx, int start) throws IOException, ClassNotFoundException {
         int end = pagePaths.size() - 1;
         int mid = 0;
         Record rec = null;
@@ -251,6 +251,9 @@ public class Table implements Serializable {
             }
         }
         return rec == null? null : new Pair<>(page, rec);
+    }
+    public Pair<Page, Record> searchRec(Comparable clusterKey, int clusterIdx) throws IOException, ClassNotFoundException {
+        return searchRec(clusterKey, clusterIdx, 0);
     }
 
     public boolean hasRecords() {
