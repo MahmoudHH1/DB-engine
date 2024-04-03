@@ -16,7 +16,7 @@ public class SQLTerm {
     // select * from Student where name = "John Noor" or gpa = 1.5 ;
 
     public  static boolean evalExp(SQLTerm[] terms,Record r, Table t , String[]ops) throws DBAppException {
-       boolean[]evaluatedSqlTerm =  evaluateSql(terms,r,t);
+       boolean[] evaluatedSqlTerm =  evaluateSql(terms,r,t);
        return foldBool(evaluatedSqlTerm , ops);
     }
 
