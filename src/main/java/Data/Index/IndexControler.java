@@ -68,7 +68,7 @@ public class IndexControler {
                 if (b.getColName().equals(key)) {
                     Vector<Pointer> pointers =   b.search(value);
                     for (Pointer p :pointers)
-                        if (p.key==rec.get((int)table.getClusterKeyAndIndex()[1]))
+                        if (p.clusterKeyValue==rec.get((int)table.getClusterKeyAndIndex()[1]))
                             ++p.pageIdx ;
                     b.save();
                 }
