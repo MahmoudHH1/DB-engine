@@ -55,30 +55,79 @@ public class BPlusIndex implements Serializable {
      * and appends the nodes onto a stringBuilder
      * @param sb the stringBuilder on which all the nodes are appended
      */
-    private void traverse(StringBuilder sb){
-        if (root==null) {
-            sb.append(firstLeaf) ;
-            return ;
+//    private void traverse(StringBuilder sb){
+//        if (root==null) {
+//            sb.append(firstLeaf) ;
+//            return ;
+//        }
+//        Queue<Node> qu = new LinkedList<>();
+//        qu.add(root);
+//        // each iteration of while is one level
+//        while(!qu.isEmpty()){
+//            int size = qu.size(); // size of current level of tree
+//            // entire for loop for one level
+//            for(int i = 0; i < size; i++){
+//                Node curr = qu.remove();
+//                // if internal node meaning it has children then put children
+//                if(curr instanceof InternalNode node){
+//                    for(int j = 0; j < node.degree; j++)
+//                        qu.add(node.childPointers[j]);
+//                }
+//                sb.append(curr.toString()).append(" ");
+//            }
+//            sb.append('\n');
+//        }
+//    }
+    private void traverse(StringBuilder sb) {
+        if (root == null) {
+            sb.append("[Empty Tree]");
+            return;
         }
-        Queue<Node> qu = new LinkedList<>();
-        qu.add(root);
-        // each iteration of while is one level
-        while(!qu.isEmpty()){
-            int size = qu.size(); // size of current level of tree
-            // entire for loop for one level
-            for(int i = 0; i < size; i++){
-                Node curr = qu.remove();
-                // if internal node meaning it has children then put children
-                if(curr instanceof InternalNode node){
-                    for(int j = 0; j < node.degree; j++)
-                        qu.add(node.childPointers[j]);
+
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            int levelSize = queue.size();
+
+            for (int i = 0; i < levelSize; i++) {
+                Node node = queue.poll();
+
+                if (node instanceof InternalNode) {
+                    InternalNode internalNode = (InternalNode) node;
+                    sb.append("Internal Node: [");
+                    for (int j = 0; j < internalNode.degree - 1; j++) {
+                        if (j > 0) {
+                            sb.append(", ");
+                        }
+                        sb.append(internalNode.keys[j]);
+                    }
+                    sb.append("]\t");
+                    for (int j = 0; j < internalNode.degree; j++) {
+                        if (internalNode.childPointers[j] != null) {
+                            queue.add(internalNode.childPointers[j]);
+                        }
+                    }
+                } else if (node instanceof LeafNode) {
+                    LeafNode leafNode = (LeafNode) node;
+                    sb.append("Leaf Node: [");
+                    for (int j = 0; j < leafNode.numPairs; j++) {
+                        if (j > 0) {
+                            sb.append(", ");
+                        }
+                        sb.append(leafNode.dictionary[j].values);
+                    }
+                    sb.append("]");
+                    if (leafNode.rightSibling != null) {
+                        sb.append(" -> ");
+                    }
+                    queue.add(leafNode.rightSibling);
                 }
-                sb.append(curr.toString()).append(" ");
             }
-            sb.append('\n');
+
+            sb.append("\n");
         }
     }
-
     /**
      * This method performs a standard binary search on a sorted
      * DictionaryPair[] and returns the index of the dictionary pair
@@ -1203,7 +1252,6 @@ public class BPlusIndex implements Serializable {
             // Create initial B+ tree
             BPlusIndex bpt = new BPlusIndex(3,"","","");
             bpt.insert("Ahmed",new Pointer(99,90));
-
             System.out.println(bpt);
 
 //
