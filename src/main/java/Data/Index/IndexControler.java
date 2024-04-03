@@ -77,7 +77,7 @@ public class IndexControler {
         Vector<Pointer> pageIdxsAndClusterKeysValues = idx.search(oldValue); // [{0 , clusterKeyval1 } ,{1 ,clusterKeyval2}]
         Pointer oldPointer = null ;
         for(Pointer pointer : pageIdxsAndClusterKeysValues){
-            if(pointer.key.compareTo(clusterKeyVal) == 0){
+            if(pointer.clusterKeyValue.compareTo(clusterKeyVal) == 0){
                 oldPointer =pointer ;
             }
         }

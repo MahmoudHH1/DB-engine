@@ -2,16 +2,16 @@ package Data.Index;
 
 public class Pointer implements Comparable{
     public int pageIdx;
-    public Comparable clusterKey;
+    public Comparable clusterKeyValue;
 
     public Pointer(int pageIdx, Object key) {
         this.pageIdx = pageIdx;
-        this.clusterKey = (Comparable) key;
+        this.clusterKeyValue = (Comparable) key;
     }
 
     @Override
     public int compareTo(Object o) {
-        return this.clusterKey.compareTo(((Pointer)o).clusterKey);
+        return this.clusterKeyValue.compareTo(((Pointer)o).clusterKeyValue);
     }
 
     @Override
