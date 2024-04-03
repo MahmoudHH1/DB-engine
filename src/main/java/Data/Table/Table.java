@@ -19,7 +19,7 @@ import java.io.IOException;
 
 public class Table implements Serializable {
 
-    //    private static final long serialVersionUID = -9043778273416338053L;
+    private static final long serialVersionUID = -9043778273416338053L;
     private Vector<String> pagePaths; // page paths
     private transient ArrayList<TableColumn> allColumns;
     static String tablesDirectory = "Data_Entry" + File.separator + "Tables";
@@ -83,8 +83,10 @@ public class Table implements Serializable {
         }
         return null;
     }
-    public void reset(){
+    public void reset() throws IOException {
         pagePaths = new Vector<>();
+        pageNum = 1;
+        save();
     }
 
     public int getPageNum() {
@@ -295,7 +297,6 @@ public class Table implements Serializable {
     public void insertIntoTable(
             Hashtable<String, Object> insertedTuple
         )throws DBAppException, IOException, ClassNotFoundException {
-        try{
             TupleValidator.IsValidTuple(insertedTuple, this);
             Record rec = new Record();
             rec.insertRecord(getColIdxVal(insertedTuple));
@@ -352,9 +353,6 @@ public class Table implements Serializable {
                 }
             }
             this.save();
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }
     }
 
     public static <T extends Comparable<T>> boolean isBetween(T value, T minValue, T maxValue) {

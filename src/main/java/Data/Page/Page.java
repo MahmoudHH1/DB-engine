@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Vector;
 public class Page extends Vector<Record>  {
+    private static final long serialVersionUID = -9043778273416338053L;
     private Table table ;
     private String pageName ; // unnecessary attribute?
     private String pagePath ;

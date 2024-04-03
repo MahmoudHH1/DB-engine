@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.*;
 
 public class BPlusIndex implements Serializable {
+    private static final long serialVersionUID = -9043778273416338053L;
     int m;
     InternalNode root;
     LeafNode firstLeaf;
