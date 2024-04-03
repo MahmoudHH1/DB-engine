@@ -2,6 +2,8 @@ import Data.Handler.FileCreator;
 import Data.Handler.Pair;
 import Data.Index.BPlusIndex;
 import Data.Index.IndexControler;
+import Data.Index.Operations;
+import Data.Index.Pointer;
 import Data.Page.Page;
 import Data.Page.Record;
 import Data.Table.MetaData;
@@ -11,6 +13,7 @@ import Data.Validator.TupleValidator;
 import Exceptions.DBAppException;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
@@ -146,8 +149,36 @@ public class DBApp {
         for(int i : colIdxVal.keySet()){
             if(table.hasIndex(i)){
 //                allBPlusIndecies.
-            }
+        // will hold pointers to matching records
+        Vector<Pointer> idxRemove = null;
+        // hold index of columns with b plus tree
+        ArrayList<Integer> colIdxOfBplus = table.colIdxWBPlus();
+        for(int i : colIdxOfBplus){
+            TableColumn col = table.getAllColumns().get(i);
+            BPlusIndex bplus = IndexControler.readIndexByName(col.getIndexName(), table);
+            Vector<Pointer> pointers = bplus.search(colIdxVal.get(i));
+            if(idxRemove == null)
+                idxRemove = pointers;
+            else
+                Operations.intersect(idxRemove, pointers);
         }
+        colIdxOfBplus.forEach(colIdxVal.keySet()::remove);
+//        colIdxVal.keySet().removeAll(colIdxOfBplus);
+        // if found index
+        if(idxRemove != null){
+            idxRemove.sort(Pointer::compareTo);
+            Page page = null;
+            for(int i = 0; i<idxRemove.size(); i++){
+                if(page == null || !idxRemove.get(i-1).clusterKey.equals(idxRemove.get(i).clusterKey))
+                    page = (Page) FileCreator.readObject(table.getPagePaths().get(i));
+                Record record = page.searchRecord(idxRemove.get(i).clusterKey, (int)table.getClusterKeyAndIndex()[1]);
+                if(record.isMatching(colIdxVal))
+
+
+            }
+
+        }
+
         for (String path : table.getPagePaths()) {
             // still need to adjust for index
             Page page = (Page) FileCreator.readObject(path);

@@ -97,6 +97,15 @@ public class Table implements Serializable {
         }
         return allColIdxs;
     }
+    public ArrayList<Integer> colIdxWBPlus() {
+        ArrayList<Integer> allColIdxs = new ArrayList<>();
+        for (int i = 0; i<allColumns.size(); i++) {
+            if (allColumns.get(i).isColumnBIdx()) {
+                allColIdxs.add(i);
+            }
+        }
+        return allColIdxs;
+    }
 
     public boolean isColumnNameBIdx(String colName) throws DBAppException {
         TableColumn col = getColumnByName(colName);
