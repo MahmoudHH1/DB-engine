@@ -5,6 +5,7 @@ import Data.Handler.FileRemover;
 import Data.Handler.Pair;
 import Data.Index.BPlusIndex;
 import Data.Index.IndexControler;
+import Data.Index.Pointer;
 import Data.Page.Page;
 import Data.Page.Record;
 import Data.Validator.TupleValidator;
@@ -26,6 +27,7 @@ public class Table implements Serializable {
     private String tableDir;
     private String tableName;
     private int pageNum = 1;
+    public static int maxPageSize;
 
 
     public Table(ArrayList<TableColumn> allColumns) throws IOException {
@@ -33,6 +35,7 @@ public class Table implements Serializable {
         this.tableName = allColumns.get(0).getTableName();
         this.tableDir = tablesDirectory + File.separator + tableName;
         this.allColumns = allColumns;
+        maxPageSize = MetaData.loadPageSize();
         File tableFolder = new File(tableDir);
         File indiciesFolder = new File(tableDir + File.separator + "Indices");
         System.out.println(tableFolder.mkdir() ? "Table Created" : "Table not Created");
@@ -277,20 +280,6 @@ public class Table implements Serializable {
         Record rec = new Record();
         rec.insertRecord(getColIdxVal(insertedTuple));
         //
-        Vector<BPlusIndex> allTableIndices = IndexControler.loadAllTableIndices(this.getTableName());
-        for (BPlusIndex b : allTableIndices) {
-            Enumeration<String> keys = insertedTuple.keys();
-            Enumeration<Object> values = insertedTuple.elements();
-            while (keys.hasMoreElements()) {
-                String key = keys.nextElement();
-                Object value = values.nextElement();
-                if (b.getColName().equals(key)) {
-                    b.insert(value, rec.get((int) (getClusterKeyAndIndex()[1])));
-                    b.save();
-                }
-            }
-        }
-
         //overflow record for shifting purposes
         Record overFlowRec = new Record();
         //if it is the first record to be inserted
@@ -298,6 +287,8 @@ public class Table implements Serializable {
             //creating a new page
             Page firstPage = new Page(this);
             firstPage.add(rec);
+            IndexControler.insertIntoIndex(rec , 0 , this,insertedTuple);
+            //remember to insert the values in the existing indices
             firstPage.save();
         } else {
             // search returns x = pageIdx and y = record idx
@@ -307,6 +298,8 @@ public class Table implements Serializable {
                 Page page = (Page) FileCreator.readObject(pagePath);
                 if (rec != null) {
                     page.insertIntoPage(rec);
+                    //remember to insert the record into the existing indices
+                    IndexControler.insertIntoIndex(rec,pagePathIdx,this,insertedTuple);
                     rec = null;
                 }
                 //if the record is inserted successfully there will be no overflow
@@ -321,9 +314,11 @@ public class Table implements Serializable {
                     break;
                 //can I read the next page while I am in this page
                 //we will find out
-                if (overFlowRec != null && this.pagePaths.indexOf(pagePath) < this.pagePaths.size() - 1) {
+                if (this.pagePaths.indexOf(pagePath) < this.pagePaths.size() - 1) {
+                    //inserting the overflow in the next page
                     Page nextPage = ((Page) FileCreator.readObject(this.pagePaths.get(pagePaths.indexOf(pagePath) + 1)));
                     nextPage.insertIntoPage(overFlowRec);
+                    IndexControler.updatePageIdxOverflow(overFlowRec,this,insertedTuple);
                     nextPage.save();
                 }
             }
@@ -332,6 +327,7 @@ public class Table implements Serializable {
             if (overFlowRec != null) {
                 Page newP = new Page(this);
                 newP.insertIntoPage(overFlowRec);
+                IndexControler.updatePageIdxOverflow(overFlowRec,this,insertedTuple);
                 newP.save();
             }
         }

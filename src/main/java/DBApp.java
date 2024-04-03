@@ -14,13 +14,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-import static Data.Index.IndexControler.loadAllTableIndices;
 
 
 public class DBApp {
     public ArrayList<Table> allTables;
     public static ArrayList<BPlusIndex> allBPlusIndecies = new ArrayList<>();
-    public static int maxPageSize;
+
 
     public DBApp() throws IOException, ClassNotFoundException {
         init();
@@ -31,7 +30,6 @@ public class DBApp {
     // execute at application startup
     public void init() throws IOException, ClassNotFoundException {
         allTables = MetaData.loadAllTables();
-        maxPageSize = MetaData.loadPageSize();
     }
 
     // following method creates one table only
@@ -219,21 +217,21 @@ public class DBApp {
 //            System.out.println(Integer.valueOf((Table.getTable(dbApp.allTables, "Student").getClusterKeyAndIndex()).toString()));
 //            System.out.println(Table.getTable(dbApp.allTables,"Student").getClusterKeyAndIndex()[1]);
 //            Table table = Table.getTable(dbApp.allTables,"Student");
-////            table.viewTable();
-////            table.viewTable();
+//////            table.viewTable();
+//            table.viewTable();
 //            table.removeTable();
 
 //            FileRemover.removeFileFromDirectory("Student" , "Student1");
-            Random random = new Random();
+//            Random random = new Random();
 //////////////////
-            for (int i = 0; i < 700; i++) {
-                int randomNumber = random.nextInt(100000) + 1;
-                Hashtable<String, Object> htblColNameValue = new Hashtable<>();
-                htblColNameValue.put("name", "Samaloty");
-                htblColNameValue.put("gpa", 0.1);
-                htblColNameValue.put("id", randomNumber );
-                dbApp.insertIntoTable(strTableName, htblColNameValue);
-            }
+//            for (int i = 0; i < 700; i++) {
+//                int randomNumber = random.nextInt(100000) + 1;
+//                Hashtable<String, Object> htblColNameValue = new Hashtable<>();
+//                htblColNameValue.put("name", "Samaloty");
+//                htblColNameValue.put("gpa", 0.1);
+//                htblColNameValue.put("id", randomNumber );
+//                dbApp.insertIntoTable(strTableName, htblColNameValue);
+//            }
 //            Hashtable htblColNameType = new Hashtable();
 //            htblColNameType.put("name", "java.lang.String");
 //            htblColNameType.put("gpa", "java.lang.double");

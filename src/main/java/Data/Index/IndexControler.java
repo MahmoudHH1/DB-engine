@@ -11,13 +11,11 @@ import Data.Table.TableColumn;
 import Exceptions.DBAppException;
 
 import javax.print.attribute.HashPrintJobAttributeSet;
+import java.awt.*;
 import java.io.File;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Set;
-import java.util.Vector;
+import java.util.*;
 
 public class IndexControler {
 
@@ -31,10 +29,10 @@ public class IndexControler {
             // get idxCol index -> getcolIdx()
             // insert values at this index into b+ idx
             int colIdx = table.idxFromName(strColName);
-            for (String path : table.getPagePaths()) {
-                Page page = (Page) FileCreator.readObject(path);
+            for (int i = 0 ; i <table.getPagePaths().size(); i++) {
+                Page page = (Page) FileCreator.readObject(table.getPagePaths().get(i));
                 for(Record record : page){
-                    b.insert(record.get(colIdx) , table.getClusterKey());
+                    b.insert(record.get(colIdx) , new Pointer(i,record.get((int)table.getClusterKeyAndIndex()[1])));
                 }
             }
         }
@@ -42,8 +40,43 @@ public class IndexControler {
         return b;
     }
 
-    public void insertIntoIndex() {
+    public static void insertIntoIndex(Record rec , int pageIdx , Table table , Hashtable<String, Object> insertedTuple) throws IOException, ClassNotFoundException, DBAppException {
+        Vector<BPlusIndex> allTableIndices = IndexControler.loadAllTableIndices(table.getTableName());
+        for (BPlusIndex b : allTableIndices) {
+            Enumeration<String> keys = insertedTuple.keys();
+            Enumeration<Object> values = insertedTuple.elements();
+            while (keys.hasMoreElements()) {
+                String key = keys.nextElement();
+                Object value = values.nextElement();
+                if (b.getColName().equals(key)) {
+                    b.insert(value, new Pointer(pageIdx , rec.get((int)table.getClusterKeyAndIndex()[1])));
+                    b.save();
+                }
+            }
+        }
     }
+
+    public static void updatePageIdxOverflow(Record rec , Table table , Hashtable<String, Object> insertedTuple) throws IOException, ClassNotFoundException, DBAppException {
+        Vector<BPlusIndex> allTableIndices = IndexControler.loadAllTableIndices(table.getTableName());
+        for (BPlusIndex b : allTableIndices) {
+            Enumeration<String> keys = insertedTuple.keys();
+            Enumeration<Object> values = insertedTuple.elements();
+            while (keys.hasMoreElements()) {
+                String key = keys.nextElement();
+                Object value = values.nextElement();
+                if (b.getColName().equals(key)) {
+                    Vector<Pointer> pointers =   b.search(value);
+                    for (Pointer p :pointers)
+                        if (p.key==rec.get((int)table.getClusterKeyAndIndex()[1]))
+                            ++p.pageIdx ;
+                    b.save();
+                }
+            }
+        }
+    }
+
+
+
 
     /*
         update({id : 1 , age : 20},{id : 2 , age :30},{id : 3 , age :20})
