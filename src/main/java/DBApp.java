@@ -126,22 +126,13 @@ public class DBApp {
                 break;
         }
         Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
-        Pair<Page, Record> record = table.searchRec( (Comparable) clusterKeyVal,(Integer) clusterKeyColIndex[1]) ;
-        if (record != null) {
-                record.y.updateRecord(colIdxVal , htblColNameValue , clusterKeyVal ,table);
-                record.x.save();
+        Pair<Page, Record> pageAndRecord = table.searchRec( (Comparable) clusterKeyVal,(Integer) clusterKeyColIndex[1]) ;
+        if (pageAndRecord != null) {
+            int pageIndex = table.getPagePaths().indexOf(pageAndRecord.x.getPagePath()) ;
+            pageAndRecord.y.updateRecord(colIdxVal , htblColNameValue , clusterKeyVal ,pageIndex,table);
+            pageAndRecord.x.save();
                 table.save();
-            }
-
-//        for (String path : table.getPagePaths()) {
-//            Page page = (Page) FileCreator.readObject(path);
-//            Record record = page.searchRecord(clusterKeyVal, (Integer) clusterKeyColIndex[1]);
-//            if (record != null) {
-//                record.updateRecord(colIdxVal , htblColNameValue ,table);
-//                page.save();
-//                table.save();
-//            }
-//        }
+        }
     }
 
     // following method could be used to delete one or more rows.
@@ -155,52 +146,55 @@ public class DBApp {
 
         // map column name to idx
         Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
-        // will hold pointers to matching records
-        Vector<Pointer> idxRemove = null;
-        // hold index of columns with b plus tree
-        ArrayList<Integer> colIdxOfBplus = table.colIdxWBPlus();
-        for(int i : colIdxOfBplus){
-            TableColumn col = table.getAllColumns().get(i);
-            BPlusIndex bplus = IndexControler.readIndexByName(col.getIndexName(), table);
-            Vector<Pointer> pointers = bplus.search(colIdxVal.get(i));
-            if(idxRemove == null)
-                idxRemove = pointers;
-            else
-                Operations.intersect(idxRemove, pointers);
-        }
-        colIdxOfBplus.forEach(colIdxVal.keySet()::remove);
+        for(int i : colIdxVal.keySet()) {
+            if (table.hasIndex(i)) {
+//                allBPlusIndecies.
+                // will hold pointers to matching records
+                Vector<Pointer> idxRemove = null;
+                // hold index of columns with b plus tree
+                ArrayList<Integer> colIdxOfBplus = table.colIdxWBPlus();
+                for (int i : colIdxOfBplus) {
+                    TableColumn col = table.getAllColumns().get(i);
+                    BPlusIndex bplus = IndexControler.readIndexByName(col.getIndexName(), table);
+                    Vector<Pointer> pointers = bplus.search(colIdxVal.get(i));
+                    if (idxRemove == null)
+                        idxRemove = pointers;
+                    else
+                        Operations.intersect(idxRemove, pointers);
+                }
+                colIdxOfBplus.forEach(colIdxVal.keySet()::remove);
 //        colIdxVal.keySet().removeAll(colIdxOfBplus);
-        // if found index
-        if(idxRemove != null){
-            idxRemove.sort(Pointer::compareTo);
-            Page page = null;
-            for(int i = 0; i<idxRemove.size(); i++){
-                if(page == null || !idxRemove.get(i-1).clusterKey.equals(idxRemove.get(i).clusterKey))
-                    page = (Page) FileCreator.readObject(table.getPagePaths().get(i));
-                Record record = page.searchRecord(idxRemove.get(i).clusterKey, (int)table.getClusterKeyAndIndex()[1]);
-                if(record.isMatching(colIdxVal))
+                // if found index
+                if (idxRemove != null) {
+                    idxRemove.sort(Pointer::compareTo);
+                    Page page = null;
+                    for (int i = 0; i < idxRemove.size(); i++) {
+                        if (page == null || !idxRemove.get(i - 1).clusterKeyValue.equals(idxRemove.get(i).clusterKeyValue))
+                            page = (Page) FileCreator.readObject(table.getPagePaths().get(i));
+                        Record record = page.searchRecord(idxRemove.get(i).clusterKeyValue, (int) table.getClusterKeyAndIndex()[1]);
+                        if (record.isMatching(colIdxVal))
 
 
-            }
+                    }
 
-        }
+                }
 
-        for (String path : table.getPagePaths()) {
-            // still need to adjust for index
-            Page page = (Page) FileCreator.readObject(path);
-            ArrayList<Record> toRemove = new ArrayList<>();
-            for (Record record : page) {
-                boolean matching = record.isMatching(colIdxVal);
-                if (matching)
-                    toRemove.add(record);
-            }
-            page.removeAll(toRemove);
-            page.save();
-        }
-        table.save();
+                for (String path : table.getPagePaths()) {
+                    // still need to adjust for index
+                    Page page = (Page) FileCreator.readObject(path);
+                    ArrayList<Record> toRemove = new ArrayList<>();
+                    for (Record record : page) {
+                        boolean matching = record.isMatching(colIdxVal);
+                        if (matching)
+                            toRemove.add(record);
+                    }
+                    page.removeAll(toRemove);
+                    page.save();
+                }
+                table.save();
 
-        //////////////////////////////////////////////////
-        // not completed yet
+                //////////////////////////////////////////////////
+                // not completed yet
 //        for (BPlusIndex b : allBPlusIndecies) {
 //            Enumeration<String> keys = htblColNameValue.keys();
 //            Enumeration<Object> values = htblColNameValue.elements();
@@ -212,7 +206,11 @@ public class DBApp {
 //                }
 //            }
 //        }
+            }
+        }
     }
+}
+
 
     public Iterator selectFromTable(SQLTerm[] arrSQLTerms,
                                     String[] strarrOperators) throws DBAppException, IOException, ClassNotFoundException {
