@@ -58,8 +58,6 @@ public class IndexControler {
     *
     * */
 
-
-
     public static void updateIndex(
             Hashtable<String, Object> newColNameVal, // name in old and new is same
             Hashtable<String, Object> oldColNameVal,
