@@ -27,7 +27,6 @@ public class Table implements Serializable {
     private String tableDir;
     private String tableName;
     private int pageNum = 1;
-    public static int maxPageSize;
 
 
     public Table(ArrayList<TableColumn> allColumns) throws IOException {
@@ -35,7 +34,6 @@ public class Table implements Serializable {
         this.tableName = allColumns.get(0).getTableName();
         this.tableDir = tablesDirectory + File.separator + tableName;
         this.allColumns = allColumns;
-        maxPageSize = MetaData.loadPageSize();
         File tableFolder = new File(tableDir);
         File indiciesFolder = new File(tableDir + File.separator + "Indices");
         System.out.println(tableFolder.mkdir() ? "Table Created" : "Table not Created");
@@ -369,6 +367,5 @@ public class Table implements Serializable {
     //----------------------------------------------------------------------------------------------
 
     public static void main(String[] args) throws IOException, DBAppException {
-
     }
 }

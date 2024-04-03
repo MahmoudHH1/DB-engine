@@ -80,9 +80,9 @@ public class Page extends Vector<Record>  {
     //record and remove it from the page
     /* THIS METHOD GET EXECUTED AFTER SORTING EL PAGE
     * 3SHAN MNLBSSH FEL 7ETA  */
-    public Record overFlow (){
-        if (this.size()>Table.maxPageSize)
-            return this.remove(Table.maxPageSize) ;
+    public Record overFlow () throws IOException {
+        if (this.size()>MetaData.maxPageSize)
+            return this.remove(MetaData.maxPageSize) ;
         return null ;
     }
     public void sortRecords(int sortIndex) {

@@ -33,6 +33,7 @@ public class DBApp {
     // execute at application startup
     public void init() throws IOException, ClassNotFoundException {
         allTables = MetaData.loadAllTables();
+        MetaData.loadPageSize();
     }
 
     // following method creates one table only
@@ -256,9 +257,11 @@ public class DBApp {
 //            table.viewTable();
 //            table.removeTable();
 
+            System.out.println(FileCreator.readObject("E:\\DB 2 proj\\DB engine\\Data_Entry\\Tables\\Student\\Indices\\gpaIndex"));
+            System.out.println(FileCreator.readObject("E:\\DB 2 proj\\DB engine\\Data_Entry\\Tables\\Student\\Indices\\idIndex"));
 //            FileRemover.removeFileFromDirectory("Student" , "Student1");
 //            Random random = new Random();
-//////////////////
+////////////////////////////
 //            for (int i = 0; i < 700; i++) {
 //                int randomNumber = random.nextInt(100000) + 1;
 //                Hashtable<String, Object> htblColNameValue = new Hashtable<>();
@@ -267,12 +270,14 @@ public class DBApp {
 //                htblColNameValue.put("id", randomNumber );
 //                dbApp.insertIntoTable(strTableName, htblColNameValue);
 //            }
+//            System.out.println(MetaData.maxPageSize);
 //            Hashtable htblColNameType = new Hashtable();
 //            htblColNameType.put("name", "java.lang.String");
 //            htblColNameType.put("gpa", "java.lang.double");
 //            htblColNameType.put("id", "java.lang.Integer");
 //            dbApp.createTable(strTableName, "id", htblColNameType);
 //            dbApp.createIndex(strTableName, "id", "idIndex");
+//            dbApp.createIndex(strTableName, "gpa", "gpaIndex");
 
 //            Hashtable<String, String> htblColNameType2 = new Hashtable<>();
 //            htblColNameType2.put("title", "java.lang.String");

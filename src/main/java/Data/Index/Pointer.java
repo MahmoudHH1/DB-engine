@@ -1,6 +1,8 @@
 package Data.Index;
 
-public class Pointer implements Comparable{
+import java.io.Serializable;
+
+public class Pointer implements Comparable , Serializable {
     public int pageIdx;
     public Comparable clusterKeyValue;
 

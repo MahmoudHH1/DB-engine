@@ -56,6 +56,10 @@ public class BPlusIndex implements Serializable {
      * @param sb the stringBuilder on which all the nodes are appended
      */
     private void traverse(StringBuilder sb){
+        if (root==null) {
+            sb.append(firstLeaf) ;
+            return ;
+        }
         Queue<Node> qu = new LinkedList<>();
         qu.add(root);
         // each iteration of while is one level
@@ -770,7 +774,7 @@ public class BPlusIndex implements Serializable {
      * This class represents a general node within the B+ tree and serves as a
      * superclass of InternalNode and LeafNode.
      */
-    public class Node {
+    public class Node implements Serializable {
         InternalNode parent;
     }
 
@@ -1198,16 +1202,19 @@ public class BPlusIndex implements Serializable {
 
             // Create initial B+ tree
             BPlusIndex bpt = new BPlusIndex(3,"","","");
-//            bpt.insert("Ahmed","Ahmed");
-//            bpt.insert("JJ","PlaceofJJ");
-            System.out.println(bpt.search("Ahmed"));
-//			bpt.insert("JJ","PlaceofJJ2");
-//            bpt.delete("JJ");
-            System.out.println(bpt.search("JJ"));
-//            bpt.insert("R","placeofR");
-            System.out.println(bpt.search("R"));
-//            bpt.insert("Banana","PlaceofBanana");
+            bpt.insert("Ahmed",new Pointer(99,90));
+
             System.out.println(bpt);
+
+//
+//            System.out.println(bpt.search("Ahmed"));
+////			bpt.insert("JJ","PlaceofJJ2");
+////            bpt.delete("JJ");
+//            System.out.println(bpt.search("JJ"));
+////            bpt.insert("R","placeofR");
+//            System.out.println(bpt.search("R"));
+////            bpt.insert("Banana","PlaceofBanana");
+//            System.out.println(bpt);
 //            System.out.println(bpt.search("Ahmed","R"));
 
 //			bpt.insert(21,"PlaceofInt");

@@ -17,14 +17,17 @@ public class MetaData {
 
     private static final String metaPath = "Data_Entry/metadata.csv";
     private static final String configPath = "resources/DBApp.config";
-    public static int loadPageSize() throws IOException {
+
+    public static int maxPageSize;
+
+    public static void loadPageSize() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(configPath));
         String line = br.readLine();
         if(line != null){
             String[] s = line.split(" = ");
-            return Integer.parseInt(s[1]);
+            maxPageSize =  Integer.parseInt(s[1]);
         }
-        return 200;
+        maxPageSize=  200;
     }
     public static void writeDataToMetaDatafile( ArrayList<TableColumn> allColumns)
     {
