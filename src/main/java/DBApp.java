@@ -224,7 +224,6 @@ public class DBApp {
                 if (SQLTerm.evalExp(arrSQLTerms, record, table, strarrOperators)) {
                     validRecords.add(record);
                 }
-                ;
             }
         }
         if (validRecords.size() == 0) {
