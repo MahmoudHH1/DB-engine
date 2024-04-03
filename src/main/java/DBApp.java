@@ -123,22 +123,13 @@ public class DBApp {
                 break;
         }
         Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
-        Pair<Page, Record> record = table.searchRec( (Comparable) clusterKeyVal,(Integer) clusterKeyColIndex[1]) ;
-        if (record != null) {
-                record.y.updateRecord(colIdxVal , htblColNameValue , clusterKeyVal ,table);
-                record.x.save();
+        Pair<Page, Record> pageAndRecord = table.searchRec( (Comparable) clusterKeyVal,(Integer) clusterKeyColIndex[1]) ;
+        if (pageAndRecord != null) {
+            int pageIndex = table.getPagePaths().indexOf(pageAndRecord.x.getPagePath()) ;
+            pageAndRecord.y.updateRecord(colIdxVal , htblColNameValue , clusterKeyVal ,pageIndex,table);
+            pageAndRecord.x.save();
                 table.save();
-            }
-
-//        for (String path : table.getPagePaths()) {
-//            Page page = (Page) FileCreator.readObject(path);
-//            Record record = page.searchRecord(clusterKeyVal, (Integer) clusterKeyColIndex[1]);
-//            if (record != null) {
-//                record.updateRecord(colIdxVal , htblColNameValue ,table);
-//                page.save();
-//                table.save();
-//            }
-//        }
+        }
     }
 
     // following method could be used to delete one or more rows.
@@ -154,7 +145,7 @@ public class DBApp {
         Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
         for(int i : colIdxVal.keySet()){
             if(table.hasIndex(i)){
-                allBPlusIndecies.
+//                allBPlusIndecies.
             }
         }
         for (String path : table.getPagePaths()) {

@@ -2,7 +2,7 @@ package Data.Index;
 
 public class Pointer implements Comparable{
     int pageIdx;
-    Comparable key;
+    Comparable key; // clusterKey
 
     public Pointer(int pageIdx, Object key) {
         this.pageIdx = pageIdx;

@@ -286,7 +286,7 @@ public class Table implements Serializable {
                 String key = keys.nextElement();
                 Object value = values.nextElement();
                 if (b.getColName().equals(key)) {
-                    b.insert(value, rec.get((int) (getClusterKeyAndIndex()[1])));
+//                    b.insert(value, rec.get((int) (getClusterKeyAndIndex()[1])));
                     b.save();
                 }
             }
