@@ -78,6 +78,56 @@ public class BPlusIndex implements Serializable {
 //            sb.append('\n');
 //        }
 //    }
+//    private void traverse(StringBuilder sb) {
+//        if (root == null) {
+//            sb.append(firstLeaf);
+//            return;
+//        }
+//        Queue<Node> queue = new LinkedList<>();
+//        queue.add(root);
+//
+//        while (!queue.isEmpty()) {
+//            int levelSize = queue.size();
+//
+//            for (int i = 0; i < levelSize; i++) {
+//                Node node = queue.poll();
+//
+//                if (node instanceof InternalNode) {
+//                    InternalNode internalNode = (InternalNode) node;
+//                    sb.append("Internal Node: [");
+//                    for (int j = 0; j < internalNode.degree - 1; j++) {
+//                        if (j > 0) {
+//                            sb.append(", ");
+//                        }
+//                        sb.append(internalNode.keys[j]);
+//                    }
+//                    sb.append("]\t");
+//                    for (int j = 0; j < internalNode.degree; j++) {
+//                        if (internalNode.childPointers[j] != null) {
+//                            queue.add(internalNode.childPointers[j]);
+//                        }
+//                    }
+//                } else if (node instanceof LeafNode) {
+//                    LeafNode leafNode = (LeafNode) node;
+//                    sb.append("Leaf Node: [");
+//                    for (int j = 0; j < leafNode.numPairs; j++) {
+//                        if (j > 0) {
+//                            sb.append(", ");
+//                        }
+//                        sb.append(leafNode.dictionary[j].values);
+//                    }
+//                    sb.append("]");
+//                    if (leafNode.rightSibling != null) {
+//                        sb.append(" -> ");
+//                    }
+//                    queue.add(leafNode.rightSibling);
+//                }
+//            }
+//
+//            sb.append("\n");
+//        }
+//    }
+    // ,,,,,
     private void traverse(StringBuilder sb) {
         if (root == null) {
             sb.append("[Empty Tree]");
@@ -95,6 +145,7 @@ public class BPlusIndex implements Serializable {
 
                 if (node instanceof InternalNode) {
                     InternalNode internalNode = (InternalNode) node;
+                    sb.append(getIndentation(internalNode.getLevel()));
                     sb.append("Internal Node: [");
                     for (int j = 0; j < internalNode.degree - 1; j++) {
                         if (j > 0) {
@@ -102,7 +153,8 @@ public class BPlusIndex implements Serializable {
                         }
                         sb.append(internalNode.keys[j]);
                     }
-                    sb.append("]\t");
+                    sb.append("]\n");
+
                     for (int j = 0; j < internalNode.degree; j++) {
                         if (internalNode.childPointers[j] != null) {
                             queue.add(internalNode.childPointers[j]);
@@ -110,6 +162,7 @@ public class BPlusIndex implements Serializable {
                     }
                 } else if (node instanceof LeafNode) {
                     LeafNode leafNode = (LeafNode) node;
+                    sb.append(getIndentation(leafNode.getLevel()));
                     sb.append("Leaf Node: [");
                     for (int j = 0; j < leafNode.numPairs; j++) {
                         if (j > 0) {
@@ -128,6 +181,15 @@ public class BPlusIndex implements Serializable {
             sb.append("\n");
         }
     }
+
+    private String getIndentation(int level) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < level; i++) {
+            sb.append(" ,,,"); // Two spaces for each level
+        }
+        return sb.toString();
+    }
+
     /**
      * This method performs a standard binary search on a sorted
      * DictionaryPair[] and returns the index of the dictionary pair
@@ -825,6 +887,7 @@ public class BPlusIndex implements Serializable {
      */
     public class Node implements Serializable {
         InternalNode parent;
+        protected int level;
     }
 
     /**
@@ -840,6 +903,10 @@ public class BPlusIndex implements Serializable {
         InternalNode rightSibling;
         Object[] keys;
         Node[] childPointers;
+
+        public int getLevel() {
+            return level;
+        }
 
         /**
          * This method appends 'pointer' to the end of the childPointers
@@ -1014,7 +1081,9 @@ public class BPlusIndex implements Serializable {
         LeafNode leftSibling;
         LeafNode rightSibling;
         DictionaryPair[] dictionary;
-
+        public int getLevel() {
+            return level;
+        }
 
         // 2,3,5,1,7 -> // 1,2,3,5,7
         // 1,2,3,4,5 -> // 1,2,3,4,5
@@ -1252,6 +1321,8 @@ public class BPlusIndex implements Serializable {
             // Create initial B+ tree
             BPlusIndex bpt = new BPlusIndex(3,"","","");
             bpt.insert("Ahmed",new Pointer(99,90));
+            bpt.insert("Mo",new Pointer(20,40));
+            bpt.insert("Do",new Pointer(100,50));
             System.out.println(bpt);
 
 //

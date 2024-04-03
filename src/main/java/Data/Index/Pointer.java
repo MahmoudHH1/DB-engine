@@ -20,4 +20,12 @@ public class Pointer implements Comparable , Serializable {
     public boolean equals(Object obj) {
         return compareTo(obj) == 0;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "pageIdx=" + pageIdx +
+                ", clusterKeyValue=" + clusterKeyValue +
+                '}';
+    }
 }
