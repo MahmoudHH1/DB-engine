@@ -146,48 +146,73 @@ public class DBApp {
         // map column name to idx
         Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
         // will hold pointers to matching records
-        Vector<Pointer> idxRemove = null;
+        Vector<Pointer> bplusFilter = null;
         // hold index of columns with b plus tree
         ArrayList<Integer> colIdxWBplus = table.colIdxWBPlus();
+        // hold all bplusaffected
         ArrayList<BPlusIndex> affectedBPlus = new ArrayList<>(colIdxWBplus.size());
         for (int i : colIdxWBplus) {
             TableColumn col = table.getAllColumns().get(i);
             BPlusIndex bplus = IndexControler.readIndexByName(col.getIndexName(), table);
             affectedBPlus.add(bplus);
+            // search for queried value
             Vector<Pointer> pointers = bplus.search(colIdxVal.get(i));
-            if (idxRemove == null)
-                idxRemove = pointers;
+            if (bplusFilter == null)
+                bplusFilter = pointers;
             else
-                Operations.intersect(idxRemove, pointers);
+                Operations.intersect(bplusFilter, pointers);
         }
+        // remove columns with bplus
         colIdxWBplus.forEach(colIdxVal.keySet()::remove);
 //        colIdxVal.keySet().removeAll(colIdxWBplus);
         // if found index
-        /* to be optimized further*/
-        if (idxRemove != null) {
-            idxRemove.sort(Pointer::compareTo);
+        /* to be optimized further if cluster key is provided*/
+        if (bplusFilter != null) {
+            bplusFilter.sort(Pointer::compareTo);
             Page page = null;
+            // records to remove
             ArrayList<Record> toRemove = new ArrayList<>();
-            for (int i = 0; i < idxRemove.size(); i++) {
+            // their pointers
+            ArrayList<Pointer> ptrsToRemove = new ArrayList<>();
+            for (int i = 0; i < bplusFilter.size(); i++) {
                 // if no page loaded or need new page then load new page
-                if (page == null || !idxRemove.get(i - 1).clusterKeyValue.equals(idxRemove.get(i).clusterKeyValue)){
-                    if(page != null)
+                if (page == null ||
+                        !bplusFilter.get(i - 1).clusterKeyValue.equals(bplusFilter.get(i).clusterKeyValue)){
+                    if(page != null){
                         // remove records first
                         page.removeAll(toRemove);
+                        for(int currCol : colIdxWBplus){
+                            // bplus tree of current column
+                            BPlusIndex currBplus = affectedBPlus.get(currCol);
+                            for(int j = 0; j < toRemove.size(); j++){
+                                Object key = toRemove.get(j).get(currCol);
+                                Pointer p = ptrsToRemove.get(j);
+                                currBplus.delete(key, p);
+                            }
+                        }
+                        page.save();
+                    }
                     page = (Page) FileCreator.readObject(table.getPagePaths().get(i));
                 }
-                Record record = page.searchRecord(idxRemove.get(i).clusterKeyValue, (int) table.getClusterKeyAndIndex()[1]);
+
+                Record record = page.searchRecord(
+                        bplusFilter.get(i).clusterKeyValue,
+                        (int) table.getClusterKeyAndIndex()[1]);
+
                 if(record.isMatching(colIdxVal)){
                     toRemove.add(record);
+                    ptrsToRemove.add(bplusFilter.get(i));
                     rowsAffected++;
                 }
-                page.save();
             }
             System.out.println(rowsAffected);
+            for(BPlusIndex bp : affectedBPlus)
+                bp.save();
             table.save();
             return;
         }
-
+        // check whether hashtable has cluster key
+        // if so binary search then check if matching -------- to be implemented s------------
         for (String path : table.getPagePaths()) {
             // still need to adjust for index
             Page page = (Page) FileCreator.readObject(path);
@@ -257,6 +282,7 @@ public class DBApp {
 
     public void deleteTable(String tableName) throws DBAppException {
         Table.getTable(allTables, tableName).removeTable();
+
     }
 
     public static void main(String[] args) {
