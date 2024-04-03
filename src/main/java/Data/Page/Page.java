@@ -33,7 +33,6 @@ public class Page extends Vector<Record>  {
     public void save() throws IOException {
         FileCreator.storeAsObject(this , this.pagePath);
         table.save();
-        System.out.println(this.size());
     }
 
     public Table getTable() {
@@ -82,8 +81,8 @@ public class Page extends Vector<Record>  {
     /* THIS METHOD GET EXECUTED AFTER SORTING EL PAGE
     * 3SHAN MNLBSSH FEL 7ETA  */
     public Record overFlow (){
-        if (this.size()>200)
-            return this.remove(200) ;
+        if (this.size()>Table.maxPageSize)
+            return this.remove(Table.maxPageSize) ;
         return null ;
     }
     public void sortRecords(int sortIndex) {

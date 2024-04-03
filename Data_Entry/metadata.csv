@@ -1,1 +1,4 @@
 Table_Name,Column_Name,Column_Type,Clustering_Key,Index_Name,Index_Type
+Student,gpa,java.lang.double,false,null,null
+Student,name,java.lang.String,false,null,null
+Student,id,java.lang.Integer,true,null,null
