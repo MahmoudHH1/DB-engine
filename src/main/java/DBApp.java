@@ -148,18 +148,20 @@ public class DBApp {
         // will hold pointers to matching records
         Vector<Pointer> idxRemove = null;
         // hold index of columns with b plus tree
-        ArrayList<Integer> colIdxOfBplus = table.colIdxWBPlus();
-        for (int i : colIdxOfBplus) {
+        ArrayList<Integer> colIdxWBplus = table.colIdxWBPlus();
+        ArrayList<BPlusIndex> affectedBPlus = new ArrayList<>(colIdxWBplus.size());
+        for (int i : colIdxWBplus) {
             TableColumn col = table.getAllColumns().get(i);
             BPlusIndex bplus = IndexControler.readIndexByName(col.getIndexName(), table);
+            affectedBPlus.add(bplus);
             Vector<Pointer> pointers = bplus.search(colIdxVal.get(i));
             if (idxRemove == null)
                 idxRemove = pointers;
             else
                 Operations.intersect(idxRemove, pointers);
         }
-        colIdxOfBplus.forEach(colIdxVal.keySet()::remove);
-//        colIdxVal.keySet().removeAll(colIdxOfBplus);
+        colIdxWBplus.forEach(colIdxVal.keySet()::remove);
+//        colIdxVal.keySet().removeAll(colIdxWBplus);
         // if found index
         /* to be optimized further*/
         if (idxRemove != null) {
@@ -170,7 +172,7 @@ public class DBApp {
                 // if no page loaded or need new page then load new page
                 if (page == null || !idxRemove.get(i - 1).clusterKeyValue.equals(idxRemove.get(i).clusterKeyValue)){
                     if(page != null)
-                        // remove first records
+                        // remove records first
                         page.removeAll(toRemove);
                     page = (Page) FileCreator.readObject(table.getPagePaths().get(i));
                 }
@@ -198,6 +200,7 @@ public class DBApp {
             page.removeAll(toRemove);
             page.save();
         }
+        System.out.println(rowsAffected);
         table.save();
 
                 //////////////////////////////////////////////////
@@ -214,11 +217,24 @@ public class DBApp {
 //            }
 //        }
     }
-
+    // age = 20 , gpa = 3.4, name = ahmed
+    // {pointers} and gpa = 3.4 or {pointers}
+    // {pointers} or {pointers}
     public Iterator selectFromTable(SQLTerm[] arrSQLTerms,
                                     String[] strarrOperators) throws DBAppException, IOException, ClassNotFoundException {
         ArrayList<Object> validRecords = new ArrayList<>();
         Table table = Table.getTable(allTables, arrSQLTerms[0]._strTableName);
+        ArrayList<Vector<Pointer>> converted = new ArrayList<>();
+        for(int i = 0; i<arrSQLTerms.length; i++){
+            TableColumn col = table.getColumnByName(arrSQLTerms[i]._strColumnName);
+            if(col.isColumnBIdx()){
+                converted.add(IndexControler.search(table, col.getColumnName(), arrSQLTerms[i]._objValue));
+                arrSQLTerms[i] = null;
+            }
+            else
+                converted.add(null);
+        }
+
         for (String path : table.getPagePaths()) {
             Page page = (Page) FileCreator.readObject(path);
             for (Record record : page) {

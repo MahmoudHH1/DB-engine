@@ -168,5 +168,9 @@ public class IndexControler {
                 idxName;
         return (BPlusIndex) FileCreator.readObject(idxPath);
     }
+    public static Vector<Pointer> search(Table table, String colName, Object value) throws DBAppException, IOException, ClassNotFoundException {
+        BPlusIndex bplus = readIndexByName(table.getColumnByName(colName).getIndexName(), table);
+        return bplus.search(value);
+    }
 
 }

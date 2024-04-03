@@ -234,7 +234,7 @@ public class Table implements Serializable {
     }
     public Pair<Page, Record> searchRec(Comparable clusterKey, int clusterIdx, int start) throws IOException, ClassNotFoundException {
         int end = pagePaths.size() - 1;
-        int mid = 0;
+        int mid ;
         Record rec = null;
         Page page = null;
         while (start <= end) { // 2 pages -> start = 0; end = 1; mid = 0  id = 250 3000
