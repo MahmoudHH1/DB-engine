@@ -13,6 +13,7 @@ import Data.Validator.TupleValidator;
 import Exceptions.DBAppException;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
@@ -168,6 +169,21 @@ public class DBApp {
                 Operations.intersect(idxRemove, pointers);
         }
         colIdxOfBplus.forEach(colIdxVal.keySet()::remove);
+//        colIdxVal.keySet().removeAll(colIdxOfBplus);
+        // if found index
+        if(idxRemove != null){
+            idxRemove.sort(Pointer::compareTo);
+            Page page = null;
+            for(int i = 0; i<idxRemove.size(); i++){
+                if(page == null || !idxRemove.get(i-1).clusterKey.equals(idxRemove.get(i).clusterKey))
+                    page = (Page) FileCreator.readObject(table.getPagePaths().get(i));
+                Record record = page.searchRecord(idxRemove.get(i).clusterKey, (int)table.getClusterKeyAndIndex()[1]);
+                if(record.isMatching(colIdxVal))
+
+
+            }
+
+        }
 
         for (String path : table.getPagePaths()) {
             // still need to adjust for index

@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Operations xor">
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="got intersection of pointers in delete">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Table/Table.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Index/Pointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Index/Pointer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -219,14 +219,6 @@
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
       <updated>1709364507752</updated>
-    </task>
-    <task id="LOCAL-00042" summary="Comparable">
-      <option name="closed" value="true" />
-      <created>1709726318333</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1709726318333</updated>
     </task>
     <task id="LOCAL-00043" summary="Made page extend vector&lt;Record&gt; to comply with grading scheme in description and refactored code">
       <option name="closed" value="true" />
@@ -596,7 +588,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712099211812</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="got intersection of pointers in delete">
+      <option name="closed" value="true" />
+      <created>1712100335405</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1712100335406</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -661,7 +661,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="naming cleanup" />
     <MESSAGE value="warnings" />
     <MESSAGE value="yalla toString" />
     <MESSAGE value="khalsana keda ta2riban fadel el toString() beta3et el nodes" />
@@ -686,7 +685,8 @@
     <MESSAGE value="adighkgkra" />
     <MESSAGE value="Operations" />
     <MESSAGE value="Operations xor" />
-    <option name="LAST_COMMIT_MESSAGE" value="Operations xor" />
+    <MESSAGE value="got intersection of pointers in delete" />
+    <option name="LAST_COMMIT_MESSAGE" value="got intersection of pointers in delete" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
