@@ -176,11 +176,15 @@ public class DBApp {
                     page = (Page) FileCreator.readObject(table.getPagePaths().get(i));
                 }
                 Record record = page.searchRecord(idxRemove.get(i).clusterKeyValue, (int) table.getClusterKeyAndIndex()[1]);
-                if(record.isMatching(colIdxVal))
+                if(record.isMatching(colIdxVal)){
                     toRemove.add(record);
+                    rowsAffected++;
+                }
                 page.save();
             }
+            System.out.println(rowsAffected);
             table.save();
+            return;
         }
 
         for (String path : table.getPagePaths()) {
