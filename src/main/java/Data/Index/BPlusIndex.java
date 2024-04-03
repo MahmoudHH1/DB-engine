@@ -1201,10 +1201,26 @@ public class BPlusIndex implements Serializable {
 //			boolean firstLine = true;
 
             // Create initial B+ tree
-            BPlusIndex bpt = new BPlusIndex(3,"","","");
-            bpt.insert("Ahmed",new Pointer(99,90));
-
+            BPlusIndex bpt = new BPlusIndex(2,"","","");
+            bpt.insert("ahmed",new Pointer(99,90));
             System.out.println(bpt);
+            bpt.insert("nora",new Pointer(99,90));
+            System.out.println(bpt);
+            bpt.insert("hoda",new Pointer(99,90));
+            System.out.println(bpt);
+
+            bpt.insert("hussein",new Pointer(99,90));
+            System.out.println(bpt);
+
+            bpt.insert("peter",new Pointer(99,90));
+            System.out.println(bpt);
+
+            bpt.insert("john",new Pointer(99,90));
+            System.out.println(bpt);
+
+            bpt.insert("kareem",new Pointer(99,90));
+
+            System.out.println(bpt.toString());
 
 //
 //            System.out.println(bpt.search("Ahmed"));
