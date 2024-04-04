@@ -91,17 +91,13 @@ public class DBApp {
                                 Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
         //checking whether the table exists or not
         boolean tableExists = false;
-        try{
-            for (Table table : allTables)
-                if (table.getTableName().equals(strTableName))
-                    tableExists = true;
-            if (tableExists)
-                Table.getTable(this.allTables, strTableName).insertIntoTable(htblColNameValue);
-            else
-                throw new DBAppException("The table is not implemented yet");
-        } catch (Exception e){
-            System.out.println(e.getClass() + ": " + e.getMessage());
-        }
+        for (Table table : allTables)
+            if (table.getTableName().equals(strTableName))
+                tableExists = true;
+        if (tableExists)
+            Table.getTable(this.allTables, strTableName).insertIntoTable(htblColNameValue);
+        else
+            throw new DBAppException("The table is not implemented yet");
     }
 
     // following method updates one row only
@@ -145,6 +141,7 @@ public class DBApp {
     public void deleteFromTable(String strTableName,
                                 Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
         Table table = Table.getTable(allTables, strTableName);
+        TupleValidator.IsValidTuple(htblColNameValue, table);
         int rowsAffected = 0;
 
         // map column name to idx
@@ -319,7 +316,7 @@ public class DBApp {
 //            dbApp.createIndex(strTableName, "id", "idIndex");
 //            dbApp.createIndex(strTableName, "gpa", "gpaIndex");
 
-//            Table table = Table.getTable(dbApp.allTables,"Student");
+            Table table = Table.getTable(dbApp.allTables,"Student");
 //            table.viewTable();
 //            System.out.println(FileCreator.readObject("E:\\DB 2 proj\\DB engine\\Data_Entry\\Tables\\Student\\Indices\\gpaIndex"));
 //            System.out.println(FileCreator.readObject("E:\\DB 2 proj\\DB engine\\Data_Entry\\Tables\\Student\\Indices\\idIndex"));
@@ -342,6 +339,9 @@ public class DBApp {
 //                htblColNameValue.put("id", randomNumber);
 //                dbApp.insertIntoTable(strTableName, htblColNameValue);
 //            }
+            System.out.println(IndexControler.testIndexTable(table));
+            table.viewTable();
+
 
 //            Hashtable<String, Object> htblColNameValue = new Hashtable<>();
 //                htblColNameValue.put("name", "aaa");
@@ -354,7 +354,7 @@ public class DBApp {
 //            dbApp.updateTable("Student", "60269", htblColNameValue);
 //            System.out.println(IndexControler.readIndexByName("idIndex", table));
 //            System.out.println("😂😂😂😂😂");
-//            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
+            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
 //            table.viewTable();
 //-----------------------------------------TAs Table-------------------------------------------------------
 //            String strTableName = "TAs";

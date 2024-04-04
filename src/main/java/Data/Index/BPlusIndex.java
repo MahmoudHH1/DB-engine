@@ -1075,6 +1075,8 @@ public class BPlusIndex implements Serializable {
             }
         }
         private boolean updateKeyVal(DictionaryPair dp){
+            if(numPairs == 0)
+                return false;
             Comparator<DictionaryPair> c = DictionaryPair::compareTo;
             int idx = Arrays.binarySearch(this.dictionary, 0, numPairs, dp, c);
             if(idx < 0)

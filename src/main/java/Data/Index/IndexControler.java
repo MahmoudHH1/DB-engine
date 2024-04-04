@@ -116,7 +116,7 @@ public class IndexControler {
         }
     }
 
-    /*
+    /**
         update({id : 1 , age : 20},{id : 2 , age :30},{id : 3 , age :20})
         [1,3] [2]     // values
     *   [20]  [30]   // keys
@@ -127,7 +127,6 @@ public class IndexControler {
     *
     *
     * */
-
     public static void updateIndex(
             Hashtable<String, Object> newColNameVal, // name in old and new is same
             Hashtable<String, Object> oldColNameVal,
@@ -234,5 +233,29 @@ public class IndexControler {
         }
 
     }
+    public static boolean testIndexTable(Table table) throws IOException, ClassNotFoundException, DBAppException {
+        Vector<BPlusIndex> allBp = loadAllTableIndices(table.getTableName());
+        int clusterIdx =(int) table.getClusterKeyAndIndex()[1];
+        ArrayList<TableColumn> cols = table.getAllColumnBIdxs();
+        for(int i = 0; i< table.getPagePaths().size(); i++){
+            Page page = (Page) FileCreator.readObject(table.getPagePaths().get(i));
+            for(Record record : page){
+                for(TableColumn col : cols){
+                    BPlusIndex currBP = readIndexByName(col.getIndexName(), table);
+                    Object key = record.get(table.idxFromName(col.getColumnName()));
+                    Vector<Pointer> ptrs = currBP.search(key);
+                    int check = ptrs.indexOf(new Pointer(i, record.get(clusterIdx)));
+                    if(ptrs.get(check).pageIdx != i){
+                        System.out.println("incorrect pageIdx in bplus for key: " + record.get(clusterIdx));
+                        System.out.println("supposed to be: " + i + "but found " + ptrs.get(check).pageIdx);
+                        return false;
+                    }
+
+                }
+            }
+        }
+        return true;
+    }
+
 
 }
