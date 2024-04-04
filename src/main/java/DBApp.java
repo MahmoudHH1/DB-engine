@@ -301,25 +301,26 @@ public class DBApp {
 //            dbApp.createIndex(strTableName, "gpa", "gpaIndex");
 
             Table table = Table.getTable(dbApp.allTables,"Student");
+//            table.viewTable();
 //            table.reset();
 
-//            Random random = new Random();
-//            for (int i = 0; i < 24; i++) {
-//                String alpha = "abcdefghijklmnopqrstuvwxyz";
-//                int randomNumber = random.nextInt(100000) + 1;
-//                double randGpa = random.nextDouble(5);
-//                int randAlpha;
-//                String name = "";
-//                for(int j = 0; j<4; j++){
-//                    randAlpha = random.nextInt(26);
-//                    name += alpha.charAt(randAlpha);
-//                }
-//                Hashtable<String, Object> htblColNameValue = new Hashtable<>();
-//                htblColNameValue.put("name", name);
-//                htblColNameValue.put("gpa", randGpa);
-//                htblColNameValue.put("id", randomNumber);
-//                dbApp.insertIntoTable(strTableName, htblColNameValue);
-//            }
+            Random random = new Random();
+            for (int i = 0; i < 24; i++) {
+                String alpha = "abcdefghijklmnopqrstuvwxyz";
+                int randomNumber = random.nextInt(100000) + 1;
+                double randGpa = random.nextDouble(5);
+                int randAlpha;
+                String name = "";
+                for(int j = 0; j<4; j++){
+                    randAlpha = random.nextInt(26);
+                    name += alpha.charAt(randAlpha);
+                }
+                Hashtable<String, Object> htblColNameValue = new Hashtable<>();
+                htblColNameValue.put("name", name);
+                htblColNameValue.put("gpa", randGpa);
+                htblColNameValue.put("id", randomNumber);
+                dbApp.insertIntoTable(strTableName, htblColNameValue);
+            }
 //            Hashtable<String, Object> htblColNameValue = new Hashtable<>();
 //            htblColNameValue.put("name" , "Mahmoud");
 //            htblColNameValue.put("gpa" , 4.3);
@@ -327,7 +328,7 @@ public class DBApp {
 //            System.out.println(IndexControler.readIndexByName("idIndex", table));
 //            System.out.println("😂😂😂😂😂");
 //            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
-            table.viewTable();
+//            table.viewTable();
 //-----------------------------------------TAs Table-------------------------------------------------------
 //            String strTableName = "TAs";
 //            Hashtable htblColNameType = new Hashtable();
@@ -374,8 +375,8 @@ public class DBApp {
 //            table.viewTable();
 ////            table.removeTable();
 //
-            System.out.println(FileCreator.readObject("E:\\DB 2 proj\\DB engine\\Data_Entry\\Tables\\Student\\Indices\\gpaIndex"));
-            System.out.println(FileCreator.readObject("E:\\DB 2 proj\\DB engine\\Data_Entry\\Tables\\Student\\Indices\\idIndex"));
+//            System.out.println(FileCreator.readObject("E:\\DB 2 proj\\DB engine\\Data_Entry\\Tables\\Student\\Indices\\gpaIndex"));
+//            System.out.println(FileCreator.readObject("E:\\DB 2 proj\\DB engine\\Data_Entry\\Tables\\Student\\Indices\\idIndex"));
 //            FileRemover.removeFileFromDirectory("Student" , "Student1");
 //            System.out.println(MetaData.maxPageSize);
 //            Hashtable htblColNameType = new Hashtable();
