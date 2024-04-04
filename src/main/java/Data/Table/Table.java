@@ -106,6 +106,15 @@ public class Table implements Serializable {
         }
         return allColIdxs;
     }
+    public ArrayList<String> getAllColumnBIdxsNames() {
+        ArrayList<String> allColIdxs = new ArrayList<>();
+        for (TableColumn col : allColumns) {
+            if (col.isColumnBIdx()) {
+                allColIdxs.add(col.getIndexName());
+            }
+        }
+        return allColIdxs;
+    }
     public ArrayList<Integer> colIdxWBPlus() {
         ArrayList<Integer> allColIdxs = new ArrayList<>();
         for (int i = 0; i<allColumns.size(); i++) {

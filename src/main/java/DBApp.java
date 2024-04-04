@@ -66,23 +66,25 @@ public class DBApp {
     // following method creates a B+tree index
     public void createIndex(String strTableName,
                             String strColName,
-                            String strIndexName) throws DBAppException, IOException {
-        try {
-            Table table = Table.getTable(allTables, strTableName);
-            for (TableColumn col : table.getAllColumns()) {
-                if (col.getColumnName().equals(strColName)) {
-                    col.setIndexName(strIndexName);
-                    col.setIndexType("B+ Tree");
-                    table.save();
-                    break;
-                }
+                            String strIndexName) throws DBAppException, IOException, ClassNotFoundException {
+        Table table = Table.getTable(allTables, strTableName);
+
+        if(table.getColumnByName(strColName).isColumnBIdx())
+            throw new DBAppException("There is already an index on that column");
+        if(table.getAllColumnBIdxsNames().contains(strIndexName))
+            throw new DBAppException("There is already an index by that name");
+
+        for (TableColumn col : table.getAllColumns()) {
+            if (col.getColumnName().equals(strColName)) {
+                col.setIndexName(strIndexName);
+                col.setIndexType("B+ Tree");
+                table.save();
+                break;
             }
-            MetaData.updateOnMetaDataFile(strTableName, strColName, strIndexName);
-            BPlusIndex b = IndexControler.createIndex(table, strColName, strIndexName);
-            allBPlusIndecies.add(b);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
         }
+        MetaData.updateOnMetaDataFile(strTableName, strColName, strIndexName);
+        BPlusIndex b = IndexControler.createIndex(table, strColName, strIndexName);
+        allBPlusIndecies.add(b);
     }
 
     // following method inserts one row only.
@@ -339,7 +341,7 @@ public class DBApp {
 //                htblColNameValue.put("id", randomNumber);
 //                dbApp.insertIntoTable(strTableName, htblColNameValue);
 //            }
-            System.out.println(IndexControler.testIndexTable(table));
+//            System.out.println(IndexControler.testIndexTable(table));
             table.viewTable();
 
 
@@ -348,14 +350,20 @@ public class DBApp {
 //                htblColNameValue.put("gpa", 1.4);
 //                htblColNameValue.put("id", 10000);
 //                dbApp.insertIntoTable(strTableName, htblColNameValue);
-//            Hashtable<String, Object> htblColNameValue = new Hashtable<>();
-//            htblColNameValue.put("name" , "Mahmoud");
-//            htblColNameValue.put("gpa" , 4.3);
-//            dbApp.updateTable("Student", "60269", htblColNameValue);
+            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
+
+            Hashtable<String, Object> htblColNameValue = new Hashtable<>();
+            htblColNameValue.put("name" , "Mahmoud");
+            htblColNameValue.put("gpa" , 4.3);
+            dbApp.updateTable("Student", "9694", htblColNameValue);
+            dbApp.updateTable("Student", "43407", htblColNameValue);
+            dbApp.updateTable("Student", "83522", htblColNameValue);
+            dbApp.updateTable("Student", "58979", htblColNameValue);
+            dbApp.updateTable("Student", "87189", htblColNameValue);
 //            System.out.println(IndexControler.readIndexByName("idIndex", table));
 //            System.out.println("😂😂😂😂😂");
             System.out.println(IndexControler.readIndexByName("gpaIndex", table));
-//            table.viewTable();
+            table.viewTable();
 //-----------------------------------------TAs Table-------------------------------------------------------
 //            String strTableName = "TAs";
 //            Hashtable htblColNameType = new Hashtable();
