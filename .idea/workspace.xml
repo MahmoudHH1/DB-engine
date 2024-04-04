@@ -6,23 +6,27 @@
   <component name="ChangeListManager">
     <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="quick">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/Student/Indices/gpaIndex.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/Student/Indices/idIndex.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/Student/Student.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/Student/Student1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/Student/Student2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/Student/Student3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/Student/Student4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/Student/Student5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/TAs/Indices/idIndex.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/TAs/Indices/salaryIndex.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/TAs/TAs.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/TAs/TAs1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/TAs/TAs2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/TAs/TAs3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/TAs/TAs4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/TAs/TAs5.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Data_Entry/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data_Entry/metadata.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Index/BPlusIndex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Index/BPlusIndex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Page/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Page/Page.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Table/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Validator/TupleValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Validator/TupleValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Index/IndexControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Index/IndexControler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DBApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$DictionaryPair.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$DictionaryPair.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$InternalNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$InternalNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$LeafNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$LeafNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$Node.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Page/Page$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Page/Page$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Page/Page.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Page/Page.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Table/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Table/Table.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Validator/TupleValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Validator/TupleValidator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/IndexControler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/IndexControler.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

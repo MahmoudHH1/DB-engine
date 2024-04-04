@@ -67,10 +67,16 @@ public class IndexControler {
                 Object value = values.nextElement();
                 if (b.getColName().equals(key)) {
                     Vector<Pointer> pointers =   b.search(value);
-                    for (Pointer p :pointers)
-                        if (p.clusterKeyValue==rec.get((int)table.getClusterKeyAndIndex()[1]))
-                            p= new Pointer(p.pageIdx+1, p.clusterKeyValue) ;
-                    b.save();
+                    for (Pointer p :pointers){
+                        if (p.clusterKeyValue==rec.get((int)table.getClusterKeyAndIndex()[1])){
+                            Hashtable ht = new Hashtable<>() ;
+                            ht.put(key,value) ;
+                            updateIndex(ht,
+                                    ht,rec.get((int)table.getClusterKeyAndIndex()[1])
+                                    ,p.pageIdx+1,table);
+                            b.save();
+                        }
+                    }
                 }
             }
         }

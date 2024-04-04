@@ -291,7 +291,7 @@ public class DBApp {
         try {
             DBApp dbApp = new DBApp();
 //----------------------------------------Students Table-------------------------------------------------------
-//            String strTableName = "Student";
+            String strTableName = "Student";
 //            Hashtable htblColNameType = new Hashtable();
 //            htblColNameType.put("name", "java.lang.String");
 //            htblColNameType.put("gpa", "java.lang.double");
@@ -320,16 +320,16 @@ public class DBApp {
 //                htblColNameValue.put("id", randomNumber);
 //                dbApp.insertIntoTable(strTableName, htblColNameValue);
 //            }
-            Hashtable<String, Object> htblColNameValue = new Hashtable<>();
+//            Hashtable<String, Object> htblColNameValue = new Hashtable<>();
 //            htblColNameValue.put("name" , "Mahmoud");
 //            htblColNameValue.put("gpa" , 4.3);
-            dbApp.updateTable("Student", "32643", htblColNameValue);
-            System.out.println(IndexControler.readIndexByName("idIndex", table));
-            System.out.println("😂😂😂😂😂");
-            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
+//            dbApp.updateTable("Student", "32643", htblColNameValue);
+//            System.out.println(IndexControler.readIndexByName("idIndex", table));
+//            System.out.println("😂😂😂😂😂");
+//            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
             table.viewTable();
 //-----------------------------------------TAs Table-------------------------------------------------------
-            String strTableName = "TAs";
+//            String strTableName = "TAs";
 //            Hashtable htblColNameType = new Hashtable();
 //            htblColNameType.put("name", "java.lang.String");
 //            htblColNameType.put("salary", "java.lang.double");
@@ -374,8 +374,8 @@ public class DBApp {
 //            table.viewTable();
 ////            table.removeTable();
 //
-//            System.out.println(FileCreator.readObject("E:\\DB 2 proj\\DB engine\\Data_Entry\\Tables\\Student\\Indices\\gpaIndex"));
-//            System.out.println(FileCreator.readObject("E:\\DB 2 proj\\DB engine\\Data_Entry\\Tables\\Student\\Indices\\idIndex"));
+            System.out.println(FileCreator.readObject("E:\\DB 2 proj\\DB engine\\Data_Entry\\Tables\\Student\\Indices\\gpaIndex"));
+            System.out.println(FileCreator.readObject("E:\\DB 2 proj\\DB engine\\Data_Entry\\Tables\\Student\\Indices\\idIndex"));
 //            FileRemover.removeFileFromDirectory("Student" , "Student1");
 //            System.out.println(MetaData.maxPageSize);
 //            Hashtable htblColNameType = new Hashtable();
