@@ -23,6 +23,8 @@ public class TableColumn {
         this.columnName = columnName;
         this.columnType = columnType;
         this.isClusterKey = isClusterKey;
+        this.indexName = "null";
+        this.indexType = "null";
     }
 
 
@@ -53,7 +55,7 @@ public class TableColumn {
     public boolean isClusterKey() {
         return isClusterKey;
     }
-    public boolean isColumnBIdx(){return  indexName != null && indexType != null;};
+    public boolean isColumnBIdx(){return  ! indexName.equals("null") && ! indexType.equals("null");}
 
     public void setClusterKey(boolean clusterKey) {
         isClusterKey = clusterKey;
@@ -97,10 +99,10 @@ public class TableColumn {
     }
 
     public static void main(String[] args) {
-        TableColumn c = new TableColumn("Student" , "ID",
-                "java.lang.String" , true , null , null  );
-
-        System.out.println(c);
+//        TableColumn c = new TableColumn("Student" , "ID",
+//                "java.lang.String" , true , null , null  );
+//
+//        System.out.println(c);
     }
 }
 

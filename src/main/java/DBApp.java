@@ -130,6 +130,8 @@ public class DBApp {
             pageAndRecord.y.updateRecord(colIdxVal , htblColNameValue , clusterKeyVal ,pageIndex,table);
             pageAndRecord.x.save();
             table.save();
+        }else{
+            throw new DBAppException("The cluster Key :"+ clusterKeyVal +" Dosen't exist");
         }
 
     }
@@ -280,7 +282,7 @@ public class DBApp {
         try {
             DBApp dbApp = new DBApp();
 //----------------------------------------Students Table-------------------------------------------------------
-//            String strTableName = "Student";
+            String strTableName = "Student";
 //            Hashtable htblColNameType = new Hashtable();
 //            htblColNameType.put("name", "java.lang.String");
 //            htblColNameType.put("gpa", "java.lang.double");
@@ -291,6 +293,11 @@ public class DBApp {
 
             Table table = Table.getTable(dbApp.allTables,"Student");
 //            table.reset();
+
+            System.out.println("😂😂😂😂😂View Before");
+            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
+            table.viewTable();
+
 
 //            Random random = new Random();
 //            for (int i = 0; i < 24; i++) {
@@ -309,17 +316,17 @@ public class DBApp {
 //                htblColNameValue.put("id", randomNumber);
 //                dbApp.insertIntoTable(strTableName, htblColNameValue);
 //            }
-            table.viewTable();
+//
             Hashtable<String, Object> htblColNameValue = new Hashtable<>();
-            htblColNameValue.put("name" , "Mahmoud");
-            htblColNameValue.put("gpa" , 2.0);
-            dbApp.updateTable("Student", "77366", htblColNameValue);
-//            System.out.println(IndexControler.readIndexByName("idIndex", table));
-//            System.out.println("😂😂😂😂😂");
-            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
-            table.viewTable();
+            htblColNameValue.put("name" , "donga");
+            htblColNameValue.put("gpa" , 350.01);
+            dbApp.updateTable("Student", "28639", htblColNameValue);
 
-//            table.viewTable();
+            System.out.println("😂😂😂😂😂View After");
+
+            table.viewTable();
+            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
+
 //-----------------------------------------TAs Table-------------------------------------------------------
 //            String strTableName = "TAs";
 //            Hashtable htblColNameType = new Hashtable();

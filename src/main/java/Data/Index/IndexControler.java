@@ -115,11 +115,17 @@ public class IndexControler {
 
         String colName = oldColNameVal.keySet().iterator().next();
         TableColumn col = table.getColumnByName(colName);
+        if(col.getIndexName().equals("null")){
+            throw  new DBAppException("There is no index for : "+col.getColumnName()+" column");
+        }
         BPlusIndex idx = readIndexByName(col.getIndexName(), table);
 
         Object oldValue = oldColNameVal.get(colName) ;
         Vector<Pointer> pageIdxsAndClusterKeysValues = idx.search(oldValue); // [{0 , clusterKeyval1 } ,{1 ,clusterKeyval2}]
         Pointer oldPointer = null ;
+        if(pageIdxsAndClusterKeysValues == null ){
+            throw new DBAppException("Old value : "+oldValue+ " to be updated not found in the index") ;
+        }
         for(Pointer pointer : pageIdxsAndClusterKeysValues){
             if(pointer.clusterKeyValue.compareTo(clusterKeyVal) == 0){
                 oldPointer =pointer ;
