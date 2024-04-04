@@ -320,6 +320,7 @@ public class Table implements Serializable {
                     if (rec != null) {
                         page.insertIntoPage(rec);
                         //remember to insert the record into the existing indices
+                        int pageIdx = pagePathIdx ;
                         IndexControler.insertIntoIndex(rec,pagePathIdx,this,insertedTuple);
                         rec = null;
                     }
@@ -339,7 +340,7 @@ public class Table implements Serializable {
                         //inserting the overflow in the next page
                         Page nextPage = ((Page) FileCreator.readObject(this.pagePaths.get(pagePaths.indexOf(pagePath) + 1)));
                         nextPage.insertIntoPage(overFlowRec);
-                        IndexControler.updatePageIdxOverflow(overFlowRec,this,insertedTuple);
+                        IndexControler.updatePageIdxOverflow(overFlowRec,this);
                         nextPage.save();
                     }
                 }
@@ -348,7 +349,7 @@ public class Table implements Serializable {
                 if (overFlowRec != null) {
                     Page newP = new Page(this);
                     newP.insertIntoPage(overFlowRec);
-                    IndexControler.updatePageIdxOverflow(overFlowRec,this,insertedTuple);
+                    IndexControler.updatePageIdxOverflow(overFlowRec,this);
                     newP.save();
                 }
             }
