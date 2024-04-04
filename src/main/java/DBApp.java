@@ -179,7 +179,9 @@ public class DBApp {
             for (int i = 0; i < bplusFilter.size(); i++) {
                 // if no page loaded or need new page then load new page
                 if(page == null)
-                    page = (Page) FileCreator.readObject(table.getPagePaths().get(i));
+                    // ------------------------------------------ karsa dih
+                    page = (Page) FileCreator.readObject(table.getPagePaths().get(i)); /////////////////////////
+                /// pageIdx not clusterKeyValue
                 else if (!bplusFilter.get(i - 1).clusterKeyValue.equals(bplusFilter.get(i).clusterKeyValue)){
                     // remove records first
                     page.removeAll(toRemove);
@@ -238,32 +240,49 @@ public class DBApp {
     // age = 20 , gpa = 3.4, name = ahmed
     // {pointers} and gpa = 3.4 or {pointers}
     // {pointers} or {pointers}
+    // select * from student where age = 20 and name = ahmed
+    // select * from student where age = 20 or name = ahmed
+    // select * from student where age = 20 xor name = ahmed
     public Iterator selectFromTable(SQLTerm[] arrSQLTerms,
                                     String[] strarrOperators) throws DBAppException, IOException, ClassNotFoundException {
         ArrayList<Object> validRecords = new ArrayList<>();
+        // check whether arrSQLTerms is empty???
         Table table = Table.getTable(allTables, arrSQLTerms[0]._strTableName);
-        ArrayList<Vector<Pointer>> converted = new ArrayList<>();
-        for(int i = 0; i<arrSQLTerms.length; i++){
-            TableColumn col = table.getColumnByName(arrSQLTerms[i]._strColumnName);
-            if(col.isColumnBIdx()){
-                converted.add(IndexControler.search(table, col.getColumnName(), arrSQLTerms[i]._objValue));
+        ArrayList<Vector<Pointer>> converted = new ArrayList<>(arrSQLTerms.length);
+
+        if(SQLTerm.allColummnsBplus(table, arrSQLTerms, strarrOperators)){
+            for(int i = 0; i<arrSQLTerms.length; i++){
+                TableColumn col = table.getColumnByName(arrSQLTerms[i]._strColumnName);
+                converted.add(IndexControler.search(table, col.getColumnName(), arrSQLTerms[i]._objValue, arrSQLTerms[i]._strOperator));
                 arrSQLTerms[i] = null;
             }
-            else
-                converted.add(null);
-        }
-
-        for (String path : table.getPagePaths()) {
-            Page page = (Page) FileCreator.readObject(path);
-            for (Record record : page) {
-                if (SQLTerm.evalExp(arrSQLTerms, record, table, strarrOperators)) {
-                    validRecords.add(record);
-                }
+            ArrayList<Pointer> result = SQLTerm.evalPtrs(converted, strarrOperators);
+            result.sort(Pointer::compareTo);
+            Page page = null;
+            for(int i = 0; i<result.size(); i++){
+                Pointer currPtr = result.get(i);
+                if(page == null || result.get(i-1).pageIdx != result.get(i).pageIdx)
+                    page = (Page) FileCreator.readObject(table.getPagePaths().get(currPtr.pageIdx));
+                Record record = page.searchRecord(result.get(i).clusterKeyValue,
+                        (int) table.getClusterKeyAndIndex()[1]);
+                validRecords.add(record);
             }
         }
-        if (validRecords.size() == 0) {
-            validRecords.add("No valid results");
+        else {
+            for (String path : table.getPagePaths()) {
+                Page page = (Page) FileCreator.readObject(path);
+                for (Record record : page) {
+                    if (SQLTerm.evalExp(arrSQLTerms, record, table, strarrOperators)) {
+                        validRecords.add(record);
+                    }
+                }
+            }
+            if (validRecords.size() == 0) {
+                validRecords.add("No valid results");
+            }
         }
+
+
         return validRecords.iterator();
     }
     // below method returns Iterator with result set if passed

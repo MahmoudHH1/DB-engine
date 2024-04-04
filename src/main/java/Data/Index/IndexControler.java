@@ -189,9 +189,25 @@ public class IndexControler {
                 idxName;
         return (BPlusIndex) FileCreator.readObject(idxPath);
     }
-    public static Vector<Pointer> search(Table table, String colName, Object value) throws DBAppException, IOException, ClassNotFoundException {
+    public static Vector<Pointer> search(Table table, String colName, Object value, String operator) throws DBAppException, IOException, ClassNotFoundException {
         BPlusIndex bplus = readIndexByName(table.getColumnByName(colName).getIndexName(), table);
-        return bplus.search(value);
+        switch (operator){
+            case "=" :
+                return bplus.search(value);
+            case "!=" :
+                return Operations.union(bplus.searchExclusive(value, true), bplus.searchExclusive(value,false ));
+            case ">" :
+                return bplus.searchExclusive(value, false);
+            case ">=" :
+                return bplus.searchInclusive(value, false);
+            case "<" :
+                return bplus.searchExclusive(value, true);
+            case "<=" :
+                return bplus.searchInclusive(value, true);
+
+            default :throw new DBAppException("Unsupported operator");
+        }
+
     }
 
 }

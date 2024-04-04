@@ -732,18 +732,16 @@ public class BPlusIndex implements Serializable {
      * all values whose associated keys are within the range specified by
      * lowerBound and upperBound.
      *
-     * @param lowerBound: (int) the lower bound of the range
-     * @param upperBound: (int) the upper bound of the range
+     * @param bound: (int) the bound of the range
      * @return an unsorted Vector<Pointer> that holds all values of dictionary pairs
      * whose keys are within the specified range
      */
-    public Vector<Pointer> search(Object lowerBound, Object upperBound) {
+    public Vector<Pointer> searchInclusive(Object bound, boolean lessThan) {
 
         // Instantiate Double array to hold values
         Vector<Pointer> values = new Vector<>();
 
-        Comparable<Object> lower = (Comparable<Object>) lowerBound;
-        Comparable<Object> upper = (Comparable<Object>) upperBound;
+        Comparable<Object> bound1 = (Comparable<Object>) bound;
         // Iterate through the doubly linked list of leaves
         LeafNode currNode = this.firstLeaf;
         while (currNode != null) {
@@ -757,8 +755,59 @@ public class BPlusIndex implements Serializable {
                 if (dp == null) { break; }
 
                 // Include value if its key fits within the provided range
-                if (lower.compareTo(dp.key) <= 0 && upper.compareTo(dp.key) >= 0) {
-                    values.addAll(dp.values);
+                if(lessThan){
+                    if (bound1.compareTo(dp.key) <= 0)
+                        values.addAll(dp.values);
+                }
+                else {
+                    if(bound1.compareTo(dp.key) >= 0)
+                        values.addAll(dp.values);
+                }
+            }
+
+			/* Update the current node to be the right sibling,
+			   leaf traversal is from left to right */
+            currNode = currNode.rightSibling;
+
+        }
+        values.sort(Comparable::compareTo);
+        return values;
+    }
+    /**
+     * This method traverses the doubly linked list of the B+ tree and records
+     * all values whose associated keys are within the range specified by
+     * lowerBound and upperBound.
+     *
+     * @param bound: (Object) the bound of the range
+     * @return an unsorted Vector<Pointer> that holds all values of dictionary pairs
+     * whose keys are within the specified range
+     */
+    public Vector<Pointer> searchExclusive(Object bound, boolean lessThan) {
+
+        // Instantiate Double array to hold values
+        Vector<Pointer> values = new Vector<>();
+
+        Comparable<Object> bound1 = (Comparable<Object>) bound;
+        // Iterate through the doubly linked list of leaves
+        LeafNode currNode = this.firstLeaf;
+        while (currNode != null) {
+
+            // Iterate through the dictionary of each node
+            DictionaryPair[] dps = currNode.dictionary;
+            for (DictionaryPair dp : dps) {
+
+				/* Stop searching the dictionary once a null value is encountered
+				   as this the indicates the end of non-null values */
+                if (dp == null) { break; }
+
+                // Include value if its key fits within the provided range
+                if(lessThan){
+                    if (bound1.compareTo(dp.key) < 0)
+                        values.addAll(dp.values);
+                }
+                else {
+                    if(bound1.compareTo(dp.key) > 0)
+                        values.addAll(dp.values);
                 }
             }
 
