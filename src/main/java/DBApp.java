@@ -177,21 +177,24 @@ public class DBApp {
             // their pointers
             ArrayList<Pointer> ptrsToRemove = new ArrayList<>();
             for (int i = 0; i < bplusFilter.size(); i++) {
+                Pointer currPtr = bplusFilter.get(i);
                 // if no page loaded or need new page then load new page
                 if(page == null)
-                    // ------------------------------------------ karsa dih
-                    page = (Page) FileCreator.readObject(table.getPagePaths().get(i)); /////////////////////////
-                /// pageIdx not clusterKeyValue
-                else if (!bplusFilter.get(i - 1).clusterKeyValue.equals(bplusFilter.get(i).clusterKeyValue)){
-                    // remove records first
+                    page = (Page) FileCreator.readObject(table.getPagePaths().get(currPtr.pageIdx));
+                else if (bplusFilter.get(i - 1).pageIdx != currPtr.pageIdx){
+                    // remove records first from page
                     page.removeAll(toRemove);
+                    // remove from all indicies
                     IndexControler.deleteFromIndex(colIdxWBplus, affectedBPlus, toRemove, ptrsToRemove);
                     page.save();
-                    page = (Page) FileCreator.readObject(table.getPagePaths().get(i));
+                    page = (Page) FileCreator.readObject(table.getPagePaths().get(currPtr.pageIdx));
+                    // reset arraylists
+                    toRemove = new ArrayList<>();
+                    ptrsToRemove = new ArrayList<>();
                 }
 
                 Record record = page.searchRecord(
-                        bplusFilter.get(i).clusterKeyValue,
+                        currPtr.clusterKeyValue,
                         (int) table.getClusterKeyAndIndex()[1]);
 
                 if(record.isMatching(colIdxVal)){
@@ -199,6 +202,12 @@ public class DBApp {
                     ptrsToRemove.add(bplusFilter.get(i));
                     rowsAffected++;
                 }
+            }
+            // in case remains records
+            if(!toRemove.isEmpty()){
+                page.removeAll(toRemove);
+                IndexControler.deleteFromIndex(colIdxWBplus, affectedBPlus, toRemove, ptrsToRemove);
+                page.save();
             }
             System.out.println(rowsAffected);
             for(BPlusIndex bp : affectedBPlus)
@@ -261,9 +270,9 @@ public class DBApp {
             Page page = null;
             for(int i = 0; i<result.size(); i++){
                 Pointer currPtr = result.get(i);
-                if(page == null || result.get(i-1).pageIdx != result.get(i).pageIdx)
+                if(page == null || result.get(i-1).pageIdx != currPtr.pageIdx)
                     page = (Page) FileCreator.readObject(table.getPagePaths().get(currPtr.pageIdx));
-                Record record = page.searchRecord(result.get(i).clusterKeyValue,
+                Record record = page.searchRecord(currPtr.clusterKeyValue,
                         (int) table.getClusterKeyAndIndex()[1]);
                 validRecords.add(record);
             }
