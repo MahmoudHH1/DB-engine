@@ -234,8 +234,8 @@ public class DBApp {
         System.out.println(rowsAffected);
         table.save();
 
-                //////////////////////////////////////////////////
-                // not completed yet
+        //////////////////////////////////////////////////
+        // not completed yet
 //        for (BPlusIndex b : allBPlusIndecies) {
 //            Enumeration<String> keys = htblColNameValue.keys();
 //            Enumeration<Object> values = htblColNameValue.elements();
