@@ -47,7 +47,7 @@ public class DBApp {
                             Hashtable<String, String> htblColNameType) throws DBAppException, IOException {
         Table t = Table.getTable(allTables, strTableName);
         if (t != null) {
-            throw new DBAppException("Table is already exist");
+            throw new DBAppException("Table already exists");
         }
         ArrayList<TableColumn> allColumns = new ArrayList<>();
         for (String column : htblColNameType.keySet()) {
@@ -363,7 +363,7 @@ public class DBApp {
 //            System.out.println(IndexControler.readIndexByName("idIndex", table));
 //            System.out.println("😂😂😂😂😂");
 //            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
-            table.viewTable();
+//            table.viewTable();
 //-----------------------------------------TAs Table-------------------------------------------------------
 //            String strTableName = "TAs";
 //            Hashtable htblColNameType = new Hashtable();
