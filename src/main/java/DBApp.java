@@ -317,10 +317,10 @@ public class DBApp {
 //                dbApp.insertIntoTable(strTableName, htblColNameValue);
 //            }
 //
-            Hashtable<String, Object> htblColNameValue = new Hashtable<>();
-            htblColNameValue.put("name" , "donga");
-            htblColNameValue.put("gpa" , 350.01);
-            dbApp.updateTable("Student", "28639", htblColNameValue);
+//            Hashtable<String, Object> htblColNameValue = new Hashtable<>();
+//            htblColNameValue.put("name" , "donga");
+//            htblColNameValue.put("gpa" , 350.01);
+//            dbApp.updateTable("Student", "28639", htblColNameValue);
 
             System.out.println("😂😂😂😂😂View After");
 
