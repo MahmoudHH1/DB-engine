@@ -37,7 +37,7 @@ public class Record extends Vector<Comparable>{
                 // create new HashTable with the onlt this key and this value  ex id : 1 only
                 Hashtable <String , Object> toBeUpdated = new Hashtable<>();
                 Hashtable <String , Object> newUpdate = new Hashtable<>();
-                toBeUpdated.put(colKey , this.get(idx)); // old value
+                toBeUpdated.put(colKey , this.get(table.idxFromName(colKey))); // old value
                 newUpdate.put(colKey , colNameVal.get(colKey)) ; // new value
                 IndexControler.updateIndex(newUpdate, toBeUpdated, clusterKeyVal,pageIdx ,table);
             }

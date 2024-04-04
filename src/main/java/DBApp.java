@@ -91,17 +91,13 @@ public class DBApp {
                                 Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
         //checking whether the table exists or not
         boolean tableExists = false;
-        try{
-            for (Table table : allTables)
-                if (table.getTableName().equals(strTableName))
-                    tableExists = true;
-            if (tableExists)
-                Table.getTable(this.allTables, strTableName).insertIntoTable(htblColNameValue);
-            else
-                throw new DBAppException("The table is not implemented yet");
-        } catch (Exception e){
-            System.out.println(e.getClass() + ": " + e.getMessage());
-        }
+        for (Table table : allTables)
+            if (table.getTableName().equals(strTableName))
+                tableExists = true;
+        if (tableExists)
+            Table.getTable(this.allTables, strTableName).insertIntoTable(htblColNameValue);
+        else
+            throw new DBAppException("The table is not implemented yet");
     }
 
     // following method updates one row only
@@ -111,6 +107,7 @@ public class DBApp {
     public void updateTable(String strTableName,
                             String strClusteringKeyValue,
                             Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
+
         // check if htblColNameValue size  = table.allcol.size()
         Table table = Table.getTable(allTables, strTableName);
         TupleValidator.IsValidTuple(htblColNameValue, table);
@@ -134,6 +131,7 @@ public class DBApp {
             pageAndRecord.x.save();
             table.save();
         }
+
     }
 
     // following method could be used to delete one or more rows.
@@ -282,7 +280,7 @@ public class DBApp {
         try {
             DBApp dbApp = new DBApp();
 //----------------------------------------Students Table-------------------------------------------------------
-            String strTableName = "Student";
+//            String strTableName = "Student";
 //            Hashtable htblColNameType = new Hashtable();
 //            htblColNameType.put("name", "java.lang.String");
 //            htblColNameType.put("gpa", "java.lang.double");
@@ -292,33 +290,35 @@ public class DBApp {
 //            dbApp.createIndex(strTableName, "gpa", "gpaIndex");
 
             Table table = Table.getTable(dbApp.allTables,"Student");
-//            table.viewTable();
 //            table.reset();
 
-            Random random = new Random();
-            for (int i = 0; i < 24; i++) {
-                String alpha = "abcdefghijklmnopqrstuvwxyz";
-                int randomNumber = random.nextInt(100000) + 1;
-                double randGpa = random.nextDouble(5);
-                int randAlpha;
-                String name = "";
-                for(int j = 0; j<4; j++){
-                    randAlpha = random.nextInt(26);
-                    name += alpha.charAt(randAlpha);
-                }
-                Hashtable<String, Object> htblColNameValue = new Hashtable<>();
-                htblColNameValue.put("name", name);
-                htblColNameValue.put("gpa", randGpa);
-                htblColNameValue.put("id", randomNumber);
-                dbApp.insertIntoTable(strTableName, htblColNameValue);
-            }
-//            Hashtable<String, Object> htblColNameValue = new Hashtable<>();
-//            htblColNameValue.put("name" , "Mahmoud");
-//            htblColNameValue.put("gpa" , 4.3);
-//            dbApp.updateTable("Student", "32643", htblColNameValue);
+//            Random random = new Random();
+//            for (int i = 0; i < 24; i++) {
+//                String alpha = "abcdefghijklmnopqrstuvwxyz";
+//                int randomNumber = random.nextInt(100000) + 1;
+//                double randGpa = random.nextDouble(5);
+//                int randAlpha;
+//                String name = "";
+//                for(int j = 0; j<4; j++){
+//                    randAlpha = random.nextInt(26);
+//                    name += alpha.charAt(randAlpha);
+//                }
+//                Hashtable<String, Object> htblColNameValue = new Hashtable<>();
+//                htblColNameValue.put("name", name);
+//                htblColNameValue.put("gpa", randGpa);
+//                htblColNameValue.put("id", randomNumber);
+//                dbApp.insertIntoTable(strTableName, htblColNameValue);
+//            }
+            table.viewTable();
+            Hashtable<String, Object> htblColNameValue = new Hashtable<>();
+            htblColNameValue.put("name" , "Mahmoud");
+            htblColNameValue.put("gpa" , 2.0);
+            dbApp.updateTable("Student", "77366", htblColNameValue);
 //            System.out.println(IndexControler.readIndexByName("idIndex", table));
 //            System.out.println("😂😂😂😂😂");
-//            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
+            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
+            table.viewTable();
+
 //            table.viewTable();
 //-----------------------------------------TAs Table-------------------------------------------------------
 //            String strTableName = "TAs";
@@ -491,6 +491,7 @@ public class DBApp {
 //                System.out.println(resultSet.next());
 //            }
         } catch (Exception exp) {
+            System.out.println(exp.getClass() + ": " + exp.getMessage());
             exp.printStackTrace();
         }
     }

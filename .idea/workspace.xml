@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="quick">
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="tawzi3">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data_Entry/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data_Entry/metadata.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Page/Record.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Page/Record.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DBApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/IndexControler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/IndexControler.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,31 +74,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.BPlusIndex.executor": "Run",
-    "Application.DBApp.executor": "Debug",
-    "Application.FileRemover.executor": "Run",
-    "Application.MetaData.executor": "Run",
-    "Application.Record.executor": "Run",
-    "Application.Table.executor": "Run",
-    "Application.TableColumn.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Mahmoud/Downloads/antlr-intellij-plugin-v4-1.23.1.zip",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "Errors"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.BPlusIndex.executor&quot;: &quot;Run&quot;,
+    &quot;Application.DBApp.executor&quot;: &quot;Debug&quot;,
+    &quot;Application.FileRemover.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MetaData.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Record.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Table.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TableColumn.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Mahmoud/Downloads/antlr-intellij-plugin-v4-1.23.1.zip&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\java projects\DB-engine\src\main\java\Grammars" />
@@ -215,14 +217,6 @@
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
       <updated>1709364507752</updated>
-    </task>
-    <task id="LOCAL-00049" summary="kolo t7t el control&#10;done on time">
-      <option name="closed" value="true" />
-      <created>1710014456039</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1710014456039</updated>
     </task>
     <task id="LOCAL-00050" summary="saeed added some flavors to the index and made it understandable also added some functions in TableColumn and Table related to the B+ index">
       <option name="closed" value="true" />
@@ -592,7 +586,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712180556482</updated>
     </task>
-    <option name="localTasksCounter" value="96" />
+    <task id="LOCAL-00096" summary="tawzi3">
+      <option name="closed" value="true" />
+      <created>1712191876395</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1712191876396</updated>
+    </task>
+    <option name="localTasksCounter" value="97" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -667,7 +669,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="dependencies and plugins in pom.xml" />
     <MESSAGE value="Reading maxPageSize from config file. Still need to refactor and use variable" />
     <MESSAGE value="TODO.txt to not forget what to do" />
     <MESSAGE value="Gama3hom fe package" />
@@ -692,7 +693,8 @@
     <MESSAGE value="select and IndexControler" />
     <MESSAGE value="nezbot now" />
     <MESSAGE value="quick" />
-    <option name="LAST_COMMIT_MESSAGE" value="quick" />
+    <MESSAGE value="tawzi3" />
+    <option name="LAST_COMMIT_MESSAGE" value="tawzi3" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -705,6 +707,16 @@
           <url>file://$PROJECT_DIR$/src/main/java/Data/Index/BPlusIndex.java</url>
           <line>620</line>
           <option name="timeStamp" value="115" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Data/Index/IndexControler.java</url>
+          <line>117</line>
+          <option name="timeStamp" value="118" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Data/Page/Record.java</url>
+          <line>33</line>
+          <option name="timeStamp" value="119" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
