@@ -81,9 +81,17 @@ public class IndexControler {
             }
         }
     }
-
-
-
+    public static void deleteFromIndex(ArrayList<Integer> colIdxWBplus, ArrayList<BPlusIndex> affectedBPlus, ArrayList<Record> toRemove, ArrayList<Pointer> ptrsToRemove){
+        for(int currCol : colIdxWBplus){
+            // bplus tree of current column
+            BPlusIndex currBplus = affectedBPlus.get(currCol);
+            for(int j = 0; j < toRemove.size(); j++){
+                Object key = toRemove.get(j).get(currCol);
+                Pointer p = ptrsToRemove.get(j);
+                currBplus.delete(key, p);
+            }
+        }
+    }
 
     /*
         update({id : 1 , age : 20},{id : 2 , age :30},{id : 3 , age :20})

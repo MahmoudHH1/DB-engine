@@ -178,22 +178,13 @@ public class DBApp {
             ArrayList<Pointer> ptrsToRemove = new ArrayList<>();
             for (int i = 0; i < bplusFilter.size(); i++) {
                 // if no page loaded or need new page then load new page
-                if (page == null ||
-                        !bplusFilter.get(i - 1).clusterKeyValue.equals(bplusFilter.get(i).clusterKeyValue)){
-                    if(page != null){
-                        // remove records first
-                        page.removeAll(toRemove);
-                        for(int currCol : colIdxWBplus){
-                            // bplus tree of current column
-                            BPlusIndex currBplus = affectedBPlus.get(currCol);
-                            for(int j = 0; j < toRemove.size(); j++){
-                                Object key = toRemove.get(j).get(currCol);
-                                Pointer p = ptrsToRemove.get(j);
-                                currBplus.delete(key, p);
-                            }
-                        }
-                        page.save();
-                    }
+                if(page == null)
+                    page = (Page) FileCreator.readObject(table.getPagePaths().get(i));
+                else if (!bplusFilter.get(i - 1).clusterKeyValue.equals(bplusFilter.get(i).clusterKeyValue)){
+                    // remove records first
+                    page.removeAll(toRemove);
+                    IndexControler.deleteFromIndex(colIdxWBplus, affectedBPlus, toRemove, ptrsToRemove);
+                    page.save();
                     page = (Page) FileCreator.readObject(table.getPagePaths().get(i));
                 }
 
