@@ -143,6 +143,11 @@ public class Page extends Vector<Record>  {
     @Override
     public boolean removeAll(Collection<?> c) {
         boolean changed = super.removeAll(c);
+        try {
+            this.save();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         if(this.isEmpty()){
             FileRemover.removeFileFromDirectory(table ,pagePath);
             File myObj = new File(this.pagePath + ".class");

@@ -34,13 +34,14 @@ public class FileRemover {
         //looping through the given table only not all directories in the tables directory
 //        String path = tablesDirectory + File.separator + tableName ;
 //        fileName = fileName + ".class" ;
-        Path filePath = Paths.get(pagePath);
+        Path filePath = Paths.get(pagePath + ".class");
         try {
             if (Files.exists(filePath)) {
                 Files.delete(filePath);
-                System.out.println("File removed: " + pagePath);
+                System.out.println("File removed: " + pagePath + ".class");
                 //remove the page from page paths
-                table.removePageFromArr(pagePath); ;
+                table.removePageFromArr(pagePath);
+                table.save();
             } else {
                 System.out.println("File does not exist.");
             }
