@@ -322,13 +322,14 @@ public class DBApp {
         try {
             DBApp dbApp = new DBApp();
 //----------------------------------------Students Table-------------------------------------------------------
+            // **** Create ****
             String strTableName = "Student";
             Hashtable htblColNameType = new Hashtable();
             htblColNameType.put("name", "java.lang.String");
             htblColNameType.put("gpa", "java.lang.double");
             htblColNameType.put("id", "java.lang.Integer");
             dbApp.createTable(strTableName, "id", htblColNameType);
-            dbApp.createIndex(strTableName, "id", "idIndex");
+//            dbApp.createIndex(strTableName, "id", "idIndex");
             dbApp.createIndex(strTableName, "gpa", "gpaIndex");
 
             Table table = Table.getTable(dbApp.allTables,"Student");
@@ -336,58 +337,61 @@ public class DBApp {
 //            System.out.println(FileCreator.readObject("E:\\DB 2 proj\\DB engine\\Data_Entry\\Tables\\Student\\Indices\\gpaIndex"));
 //            System.out.println(FileCreator.readObject("E:\\DB 2 proj\\DB engine\\Data_Entry\\Tables\\Student\\Indices\\idIndex"));
 //            table.reset();
-////
-            Random random = new Random();
-            double[] gpas = {1.54, 1.72, 2.74, 6.0, 3.63, 5.3, 2.12, 3.5, 4.63, 2.63};
-            int[] ids = {6031, 69541, 419, 65923, 28168, 74689, 11511, 30474, 39062, 62232};
-            try {
-                for (int i = 0; i < 20; i++) {
-                    String alpha = "abcdefghijklmnopqrstuvwxyz";
-                int randomNumber = random.nextInt(100000) + 1;
-//                    int randomNumber = ids[i];
-                double randGpa = random.nextDouble(5);
-//                    double randGpa = gpas[i];
-                    int randAlpha;
-                    String name = "";
-                    for (int j = 0; j < 4; j++) {
-                        randAlpha = random.nextInt(26);
-                        name += alpha.charAt(randAlpha);
-                    }
-                    Hashtable<String, Object> htblColNameValue = new Hashtable<>();
-                    htblColNameValue.put("name", name);
-                    htblColNameValue.put("gpa", randGpa);
-                    htblColNameValue.put("id", randomNumber);
-                    dbApp.insertIntoTable(strTableName, htblColNameValue);
-                    System.out.println(IndexControler.readIndexByName("gpaIndex", table));
-                }
-            }catch (Exception exp){
-                System.out.println(exp.getClass() + ": " + exp.getMessage() + " because " + exp.getCause() );
-                table.viewTable();
-                System.out.println(IndexControler.readIndexByName("gpaIndex", table));
-                exp.printStackTrace();
-            }
-//            table.viewTable();
-            System.out.println(IndexControler.testIndexTable(table));
-
-
-//            Hashtable<String, Object> htblColNameValue = new Hashtable<>();
-//                htblColNameValue.put("name", "aaa");
-//                htblColNameValue.put("gpa", 1.4);
-//                htblColNameValue.put("id", 10000);
+            // **** insert ****
+//            Random random = new Random();
+//            double[] gpas = {1.8707343572991275, 4.794898718343688, 4.248665186144998, 3.17081958974137, 0.09320194237640356, 0.9725099510902641, 4.089370321938262, 1.6642600553325182, 1.3182128065760583, 4.998746444195267};
+//            int[] ids = {60140, 66455, 53268, 43418, 49819, 3715, 93972, 18801, 41104, 40187};
+//            for (int i = 0; i < 10; i++) {
+//                String alpha = "abcdefghijklmnopqrstuvwxyz";
+////            int randomNumber = random.nextInt(100000) + 1;
+//                int randomNumber = ids[i];
+////            double randGpa = random.nextDouble(5);
+//                double randGpa = gpas[i];
+//                int randAlpha;
+//                String name = "";
+//                for (int j = 0; j < 4; j++) {
+//                    randAlpha = random.nextInt(26);
+//                    name += alpha.charAt(randAlpha);
+//                }
+//                Hashtable<String, Object> htblColNameValue = new Hashtable<>();
+//                htblColNameValue.put("name", name);
+//                htblColNameValue.put("gpa", randGpa);
+//                htblColNameValue.put("id", randomNumber);
 //                dbApp.insertIntoTable(strTableName, htblColNameValue);
-
-//            Hashtable<String, Object> htblColNameValue = new Hashtable<>();
-//            htblColNameValue.put("name" , "Mahmoud");
-//            htblColNameValue.put("gpa" , 4.3);
-//            dbApp.updateTable("Student", "9694", htblColNameValue);
-//            dbApp.updateTable("Student", "43407", htblColNameValue);
-//            dbApp.updateTable("Student", "83522", htblColNameValue);
-//            dbApp.updateTable("Student", "58979", htblColNameValue);
-//            dbApp.updateTable("Student", "87189", htblColNameValue);
-//            System.out.println(IndexControler.readIndexByName("idIndex", table));
-//            System.out.println("😂😂😂😂😂");
-//            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
+//            }
+//            System.out.println(Arrays.toString(ids));
+//            System.out.println(Arrays.toString(gpas));
 //            table.viewTable();
+//            System.out.println(IndexControler.testIndexTable(table));
+//            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
+
+            // **** update ****
+//            Hashtable<String, Object> htblColNameValue = new Hashtable<>();
+//            htblColNameValue.put("name", "aaa");
+//            htblColNameValue.put("gpa", 1.4);
+//            htblColNameValue.put("id", 10000);
+//            dbApp.insertIntoTable(strTableName, htblColNameValue);
+
+            Hashtable<String, Object> htblColNameValue = new Hashtable<>();
+            htblColNameValue.put("name" , "Mahmoud");
+            htblColNameValue.put("gpa" , 4.3);
+//            dbApp.updateTable("Student", "3715", htblColNameValue);
+//            dbApp.updateTable("Student", "93972", htblColNameValue);
+//            dbApp.updateTable("Student", "49819", htblColNameValue);
+//            dbApp.updateTable("Student", "40187", htblColNameValue);
+//            dbApp.updateTable("Student", "60140", htblColNameValue);
+//////            System.out.println(IndexControler.readIndexByName("idIndex", table));
+            System.out.println("😂😂😂😂😂");
+            table.viewTable();
+            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
+            System.out.println(IndexControler.testIndexTable(table));
+//            // **** delete ****
+            dbApp.deleteFromTable("Student", htblColNameValue);
+
+            System.out.println("😂😂😂😂😂");
+            table.viewTable();
+            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
+            System.out.println(IndexControler.testIndexTable(table));
 //-----------------------------------------TAs Table-------------------------------------------------------
 //            String strTableName = "TAs";
 //            Hashtable htblColNameType = new Hashtable();

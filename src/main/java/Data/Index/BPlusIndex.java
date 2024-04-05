@@ -5,6 +5,7 @@ import Data.Handler.Pair;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PipedInputStream;
 import java.io.Serializable;
 import java.util.*;
 
@@ -556,6 +557,7 @@ public class BPlusIndex implements Serializable {
 
                         // Update sibling pointer
                         sibling.rightSibling = ln.rightSibling;
+                        sibling.mergeDict(ln.dictionary);
 
                         // Check for deficiencies in parent
                         if (parent.isDeficient()) {
@@ -575,6 +577,8 @@ public class BPlusIndex implements Serializable {
 
                         // Update sibling pointer
                         sibling.leftSibling = ln.leftSibling;
+                        sibling.mergeDict(ln.dictionary);
+
                         if (sibling.leftSibling == null) {
                             firstLeaf = sibling;
                         }
@@ -724,7 +728,7 @@ public class BPlusIndex implements Serializable {
 		if (index < 0) {
 			return null;
 		} else {
-			return dps[index].values;
+			return new Vector<>(dps[index].values);
 		}
     }
     /**
@@ -1036,7 +1040,7 @@ public class BPlusIndex implements Serializable {
         private void delete(int index, Pointer value) {
 
             if(!dictionary[index].values.remove(value))
-                System.err.println("Value Not Found");;
+                System.err.println("Value Not Found");
 
             // Delete dictionary pair from leaf
             if(dictionary[index].values.isEmpty()){
@@ -1097,6 +1101,19 @@ public class BPlusIndex implements Serializable {
             return true;
         }
 
+        /**
+         * this method merges a dictionary with this
+         * leafnode's dictionary
+         * @param dps the dictionary to be merged with
+         */
+        public void mergeDict(DictionaryPair[] dps){
+            for(int i =0 ; i<dps.length && dps[i]!=null; i++){
+                this.dictionary[numPairs] = dps[i];
+                numPairs++;
+//                insert(dps[i]);
+            }
+            Arrays.sort(this.dictionary, 0, numPairs);
+        }
         /**
          * This simple method determines if the LeafNode is deficient, i.e.
          * the numPairs within the LeafNode object is below minNumPairs.
@@ -1210,35 +1227,6 @@ public class BPlusIndex implements Serializable {
         @Override
         public String toString(){
             return key.toString() + "-> " + values.toString();
-        }
-    }
-
-    private void appendNodeToString(Node node, StringBuilder treeString, int level) {
-        if (node instanceof LeafNode) {
-            appendLeafNodeToString((LeafNode) node, treeString, level);
-        } else if (node instanceof InternalNode) {
-            appendInternalNodeToString((InternalNode) node, treeString, level);
-        }
-    }
-
-    private void appendLeafNodeToString(LeafNode leafNode, StringBuilder treeString, int level) {
-        treeString.append("Leaf Node (Level ").append(level).append("): ");
-        for (int i = 0; i < leafNode.numPairs; i++) {
-            DictionaryPair pair = leafNode.dictionary[i];
-            treeString.append("(").append(pair.key).append(", ").append(pair.values).append(") ");
-        }
-        treeString.append("\n");
-    }
-
-    private void appendInternalNodeToString(InternalNode internalNode, StringBuilder treeString, int level) {
-        treeString.append("Internal Node (Level ").append(level).append("): ");
-        for (int i = 0; i < internalNode.degree - 1; i++) {
-            treeString.append(internalNode.keys[i]).append(" ");
-        }
-        treeString.append("\n");
-
-        for (int i = 0; i < internalNode.degree; i++) {
-            appendNodeToString(internalNode.childPointers[i], treeString, level + 1);
         }
     }
 

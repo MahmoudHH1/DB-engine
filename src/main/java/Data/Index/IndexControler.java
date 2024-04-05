@@ -234,8 +234,10 @@ public class IndexControler {
         Vector<BPlusIndex> allBp = loadAllTableIndices(table.getTableName());
         int clusterIdx =(int) table.getClusterKeyAndIndex()[1];
         ArrayList<TableColumn> cols = table.getAllColumnBIdxs();
+
         for(int i = 0; i< table.getPagePaths().size(); i++){
             Page page = (Page) FileCreator.readObject(table.getPagePaths().get(i));
+
             for(Record record : page){
                 for(TableColumn col : cols){
                     BPlusIndex currBP = readIndexByName(col.getIndexName(), table);
