@@ -16,19 +16,12 @@ public class SQLBonus {
     public static void main(String[] args){
         String query = "SELECT * FROM Student Where gpa = 3.4 AND name = 'mahmoud';";
 
-//        CharStream charStream = CharStreams.fromString(query);
-//        SqlLexer lexer = new SqlLexer(charStream);
-//        CommonTokenStream tokens = new CommonTokenStream(lexer);
-//        SqlParser parser = new SqlParser(tokens);
-//        SqlParser.ParseContext tree = parser.parse();
-//        System.out.println(tree);
-        File myObj = new File("Data_Entry/Tables/Student/Student4.class");
-        if (myObj.delete()) {
-            System.out.println("Deleted the folder: " + myObj.getName());
-        } else {
-            System.out.println("Failed to delete the folder.");
-        }
-
+        CharStream charStream = CharStreams.fromString(query);
+        SqlLexer lexer = new SqlLexer(charStream);
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        SqlParser parser = new SqlParser(tokens);
+        SqlParser.ParseContext tree = parser.parse();
+        System.out.println(tree);
     }
 
 }
