@@ -231,7 +231,6 @@ public class IndexControler {
 
     }
     public static boolean testIndexTable(Table table) throws IOException, ClassNotFoundException, DBAppException {
-        Vector<BPlusIndex> allBp = loadAllTableIndices(table.getTableName());
         int clusterIdx =(int) table.getClusterKeyAndIndex()[1];
         ArrayList<TableColumn> cols = table.getAllColumnBIdxs();
 
@@ -246,7 +245,7 @@ public class IndexControler {
                     int check = ptrs.indexOf(new Pointer(i, record.get(clusterIdx)));
                     if(ptrs.get(check).pageIdx != i){
                         System.out.println("incorrect pageIdx in bplus for key: " + record.get(clusterIdx));
-                        System.out.println("supposed to be: " + i + "but found " + ptrs.get(check).pageIdx);
+                        System.out.println("supposed to be: " + i + " but found " + ptrs.get(check).pageIdx);
                         return false;
                     }
 
@@ -254,6 +253,20 @@ public class IndexControler {
             }
         }
         return true;
+    }
+    public static void updatePageDeletion(Table table, ArrayList<BPlusIndex> bPlusIndices, int deletedIdx) throws IOException, ClassNotFoundException {
+        for(BPlusIndex bplus: bPlusIndices) {
+            BPlusIndex.LeafNode curr = bplus.firstLeaf;
+            while (curr != null) {
+                for (BPlusIndex.DictionaryPair dp : curr.dictionary) {
+                    if (dp == null) break;
+                    for (Pointer p : dp.values)
+                        if (p.pageIdx >= deletedIdx)
+                            p.pageIdx--;
+                }
+                curr = curr.rightSibling;
+            }
+        }
     }
 
 

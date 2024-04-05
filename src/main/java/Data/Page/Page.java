@@ -4,6 +4,7 @@ package Data.Page;
 
 import Data.Handler.FileCreator;
 import Data.Handler.FileRemover;
+import Data.Index.IndexControler;
 import Data.Table.MetaData;
 import Data.Table.Table;
 import Exceptions.DBAppException;
@@ -150,12 +151,6 @@ public class Page extends Vector<Record>  {
         }
         if(this.isEmpty()){
             FileRemover.removeFileFromDirectory(table ,pagePath);
-            File myObj = new File(this.pagePath + ".class");
-            if (myObj.delete()) {
-                System.out.println("Deleted the file: " + myObj.getName());
-            } else {
-                System.out.println("Failed to delete the file.");
-            }
         }
         return changed;
     }
