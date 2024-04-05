@@ -30,8 +30,8 @@
  */
 grammar Sql;
 
-parse
- : ( sql_stmt_list | error )* EOF
+parse:
+ ( sql_stmt_list | error )* EOF
  ;
 
 error
