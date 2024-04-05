@@ -1043,7 +1043,7 @@ public class BPlusIndex implements Serializable {
 //                this.dictionary[index] = null;
                 //shift all
                 for(int i = index; i<numPairs; i++)
-                    this.dictionary[index] = this.dictionary[index+1];
+                    this.dictionary[i] = this.dictionary[i+1];
                 // Decrement numPairs
                 numPairs--;
             }

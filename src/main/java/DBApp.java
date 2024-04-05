@@ -343,10 +343,10 @@ public class DBApp {
             try {
                 for (int i = 0; i < 10; i++) {
                     String alpha = "abcdefghijklmnopqrstuvwxyz";
-//                int randomNumber = random.nextInt(100000) + 1;
-                    int randomNumber = ids[i];
-//                double randGpa = random.nextDouble(5);
-                    double randGpa = gpas[i];
+                int randomNumber = random.nextInt(100000) + 1;
+//                    int randomNumber = ids[i];
+                double randGpa = random.nextDouble(5);
+//                    double randGpa = gpas[i];
                     System.out.println("🪪: " + randomNumber + " 🎓: " + randGpa);
                     int randAlpha;
                     String name = "";
@@ -368,7 +368,7 @@ public class DBApp {
                 exp.printStackTrace();
             }
 //            table.viewTable();
-//            System.out.println(IndexControler.testIndexTable(table));
+            System.out.println(IndexControler.testIndexTable(table));
 
 
 //            Hashtable<String, Object> htblColNameValue = new Hashtable<>();
