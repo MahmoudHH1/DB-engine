@@ -341,13 +341,12 @@ public class DBApp {
             double[] gpas = {1.54, 1.72, 2.74, 6.0, 3.63, 5.3, 2.12, 3.5, 4.63, 2.63};
             int[] ids = {6031, 69541, 419, 65923, 28168, 74689, 11511, 30474, 39062, 62232};
             try {
-                for (int i = 0; i < 10; i++) {
+                for (int i = 0; i < 20; i++) {
                     String alpha = "abcdefghijklmnopqrstuvwxyz";
                 int randomNumber = random.nextInt(100000) + 1;
 //                    int randomNumber = ids[i];
                 double randGpa = random.nextDouble(5);
 //                    double randGpa = gpas[i];
-                    System.out.println("🪪: " + randomNumber + " 🎓: " + randGpa);
                     int randAlpha;
                     String name = "";
                     for (int j = 0; j < 4; j++) {

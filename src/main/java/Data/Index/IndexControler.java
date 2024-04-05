@@ -64,7 +64,6 @@ public class IndexControler {
             Comparable clusteringKey = rec.get((int)table.getClusterKeyAndIndex()[1]) ;
             //getting all the pointers to the value of the coulumn
             Vector<Pointer> pointers = b.search(rec.get(i)) ;
-            System.out.println(rec.get(i) + " 🪪⚠️: " + clusteringKey);
             for (Pointer p : pointers){
                 if (p.clusterKeyValue.equals(clusteringKey)){
                     b.delete(rec.get(i),p);
