@@ -1025,7 +1025,7 @@ public class BPlusIndex implements Serializable {
          * within the dictionary to null.
          * @param index: the location within the dictionary to be set to null
          */
-        public void delete(int index) {
+        private void delete(int index) {
             // Delete dictionary pair from leaf
 //            if(dictionary[index].values.isEmpty())
             this.dictionary[index] = null;
@@ -1033,16 +1033,21 @@ public class BPlusIndex implements Serializable {
             // Decrement numPairs
             numPairs--;
         }
-        public void delete(int index, Pointer value) {
+        private void delete(int index, Pointer value) {
 
             if(!dictionary[index].values.remove(value))
                 System.err.println("Value Not Found");;
-            // Delete dictionary pair from leaf
-            if(dictionary[index].values.isEmpty())
-                this.dictionary[index] = null;
 
-            // Decrement numPairs
-            numPairs--;
+            // Delete dictionary pair from leaf
+            if(dictionary[index].values.isEmpty()){
+//                this.dictionary[index] = null;
+                //shift all
+                for(int i = index; i<numPairs; i++)
+                    this.dictionary[index] = this.dictionary[index+1];
+                // Decrement numPairs
+                numPairs--;
+            }
+
         }
 
         /**
@@ -1061,6 +1066,9 @@ public class BPlusIndex implements Serializable {
 
                 return false;
             } else {
+//                System.out.println("dp 🖲️" + dp);
+//                System.out.println("leaf Node🌿🍀: " + Arrays.toString(Arrays.copyOfRange(dictionary, 0, numPairs)));
+//                System.out.println("NumPairs: " + numPairs);
                 // if duplicate dictionary pair then insert into existing
                 if(updateKeyVal(dp))
                     return true;
@@ -1068,6 +1076,8 @@ public class BPlusIndex implements Serializable {
 
                 this.dictionary[numPairs] = dp;
                 numPairs++;
+//                System.out.println(numPairs + " inserted dp💾: " + Arrays.toString(Arrays.copyOfRange(dictionary, 0, numPairs)));
+//                System.out.println();
                 Arrays.sort(this.dictionary, 0, numPairs);
 
                 return true;
@@ -1075,8 +1085,9 @@ public class BPlusIndex implements Serializable {
             }
         }
         private boolean updateKeyVal(DictionaryPair dp){
-            if(numPairs == 0)
+            if(numPairs == 0 || this.dictionary[0] == null)
                 return false;
+
             Comparator<DictionaryPair> c = DictionaryPair::compareTo;
             int idx = Arrays.binarySearch(this.dictionary, 0, numPairs, dp, c);
             if(idx < 0)

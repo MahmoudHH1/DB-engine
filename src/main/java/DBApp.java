@@ -11,6 +11,12 @@ import Data.Table.Table;
 import Data.Table.TableColumn;
 import Data.Validator.TupleValidator;
 import Exceptions.DBAppException;
+import Grammars.gen.Grammars.SqlLexer;
+import Grammars.gen.Grammars.SqlParser;
+import org.antlr.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
 
 import java.io.File;
 import java.io.FileReader;
@@ -297,6 +303,13 @@ public class DBApp {
     // strbufSQL is a select, otherwise returns null.
     public Iterator parseSQL( StringBuffer strbufSQL ) throws
             DBAppException{
+        CharStream SQLin = CharStreams.fromString(strbufSQL.toString());
+
+        SqlLexer lexer = new SqlLexer(SQLin);
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        SqlParser parser = new SqlParser(tokens);
+        SqlParser.ParseContext tree = parser.parse();
+
         return null;
     }
 
@@ -322,7 +335,7 @@ public class DBApp {
 //            table.viewTable();
 //            System.out.println(FileCreator.readObject("E:\\DB 2 proj\\DB engine\\Data_Entry\\Tables\\Student\\Indices\\gpaIndex"));
 //            System.out.println(FileCreator.readObject("E:\\DB 2 proj\\DB engine\\Data_Entry\\Tables\\Student\\Indices\\idIndex"));
-////            table.reset();
+//            table.reset();
 ////
             Random random = new Random();
             for (int i = 0; i < 10; i++) {
@@ -534,7 +547,7 @@ public class DBApp {
 //                System.out.println(resultSet.next());
 //            }
         } catch (Exception exp) {
-            System.out.println(exp.getClass() + ": " + exp.getMessage());
+            System.out.println(exp.getClass() + ": " + exp.getMessage() + " because " + exp.getCause() );
             exp.printStackTrace();
         }
     }

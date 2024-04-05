@@ -60,19 +60,16 @@ public class IndexControler {
     public static void updatePageIdxOverflow(Record rec, Table table) throws IOException, ClassNotFoundException, DBAppException {
         Vector<BPlusIndex> allTableIndices = IndexControler.loadAllTableIndices(table.getTableName());
         for (BPlusIndex b : allTableIndices) {
-            for (int i = 0; i < rec.size(); i++) {
-                if (i == table.idxFromName(b.getColName())) {
-                    Comparable clusteringKey = rec.get((int)table.getClusterKeyAndIndex()[1]) ;
-                    //getting all the pointers to the value of the coulumn
-                    Vector<Pointer> pointers = b.search(rec.get(i)) ;
-                    for (Pointer p : pointers){
-                        if (p.clusterKeyValue.equals(clusteringKey)){
-                            b.delete(rec.get(i),p);
-                            b.insert(rec.get(i),new Pointer(p.pageIdx+1,clusteringKey));
-                            //break l 3yon ConcurrentModificationException
-                            break ;
-                        }
-                    }
+            int i = table.idxFromName(b.getColName());
+            Comparable clusteringKey = rec.get((int)table.getClusterKeyAndIndex()[1]) ;
+            //getting all the pointers to the value of the coulumn
+            Vector<Pointer> pointers = b.search(rec.get(i)) ;
+            for (Pointer p : pointers){
+                if (p.clusterKeyValue.equals(clusteringKey)){
+                    b.delete(rec.get(i),p);
+                    b.insert(rec.get(i),new Pointer(p.pageIdx+1,clusteringKey));
+                    //break l 3yon ConcurrentModificationException
+                    break ;
                 }
             }
             b.save();
