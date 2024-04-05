@@ -403,17 +403,17 @@ public class DBApp {
 //            dbApp.updateTable("Student", "40187", htblColNameValue);
 //            dbApp.updateTable("Student", "60140", htblColNameValue);
 ////////            System.out.println(IndexControler.readIndexByName("idIndex", table));
-            System.out.println("😂😂😂Updated😂😂");
-            table.viewTable();
-            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
-            System.out.println(IndexControler.testIndexTable(table));
-//            // **** delete ****
-            dbApp.deleteFromTable("Student", htblColNameValue);
-//
-            System.out.println("👻💀Deleted💀👻");
-            table.viewTable();
-            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
-            System.out.println(IndexControler.testIndexTable(table));
+//            System.out.println("😂😂😂Updated😂😂");
+//            table.viewTable();
+//            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
+//            System.out.println(IndexControler.testIndexTable(table));
+////            // **** delete ****
+//            dbApp.deleteFromTable("Student", htblColNameValue);
+////
+//            System.out.println("👻💀Deleted💀👻");
+//            table.viewTable();
+//            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
+//            System.out.println(IndexControler.testIndexTable(table));
 //-----------------------------------------TAs Table-------------------------------------------------------
 //            String strTableName = "TAs";
 //            Hashtable htblColNameType = new Hashtable();
@@ -563,29 +563,29 @@ public class DBApp {
 //            table.viewTable();
 //            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
 //            table.viewTable();
-//            System.out.println("Selection Results:__________");
-//            SQLTerm[] arrSQLTerms;
-//            arrSQLTerms = new SQLTerm[1];
-//            arrSQLTerms[0]=new SQLTerm();
-////            arrSQLTerms[1]=new SQLTerm();
+            System.out.println("Selection Results:__________");
+            SQLTerm[] arrSQLTerms;
+            arrSQLTerms = new SQLTerm[1];
+            arrSQLTerms[0]=new SQLTerm();
+//            arrSQLTerms[1]=new SQLTerm();
 ////            arrSQLTerms[0]._strTableName =  "Student";
 ////            arrSQLTerms[0]._strColumnName=  "name";
 ////            arrSQLTerms[0]._strOperator  =  "=";
 ////            arrSQLTerms[0]._objValue     =  "ytsl";
 //
-//            arrSQLTerms[0]._strTableName =  "Student";
-//            arrSQLTerms[0]._strColumnName=  "gpa";
-//            arrSQLTerms[0]._strOperator  =  ">";
-//            arrSQLTerms[0]._objValue     =   4.1;
+            arrSQLTerms[0]._strTableName =  "Student";
+            arrSQLTerms[0]._strColumnName=  "gpa";
+            arrSQLTerms[0]._strOperator  =  ">";
+            arrSQLTerms[0]._objValue     =   3.1;
 //
-//            String[]strarrOperators = new String[0];
-////            strarrOperators[0] = "AND";
+            String[]strarrOperators = new String[0];
+//            strarrOperators[0] = "AND";
 //
-//            // select * from Student where name = "John Noor" or gpa = 1.5;
-//            Iterator resultSet = dbApp.selectFromTable(arrSQLTerms , strarrOperators);
-//            while(resultSet.hasNext()) {
-//                System.out.println(resultSet.next());
-//            }
+            // select * from Student where name = "John Noor" or gpa = 1.5;
+            Iterator resultSet = dbApp.selectFromTable(arrSQLTerms , strarrOperators);
+            while(resultSet.hasNext()) {
+                System.out.println(resultSet.next());
+            }
         } catch (Exception exp) {
             System.out.println(exp.getClass() + ": " + exp.getMessage() + " because " + exp.getCause() );
             exp.printStackTrace();

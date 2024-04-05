@@ -760,11 +760,11 @@ public class BPlusIndex implements Serializable {
 
                 // Include value if its key fits within the provided range
                 if(lessThan){
-                    if (bound1.compareTo(dp.key) <= 0)
+                    if(bound1.compareTo(dp.key) >= 0)
                         values.addAll(dp.values);
                 }
                 else {
-                    if(bound1.compareTo(dp.key) >= 0)
+                    if(bound1.compareTo(dp.key) <= 0)
                         values.addAll(dp.values);
                 }
             }
@@ -806,11 +806,11 @@ public class BPlusIndex implements Serializable {
 
                 // Include value if its key fits within the provided range
                 if(lessThan){
-                    if (bound1.compareTo(dp.key) < 0)
+                    if(bound1.compareTo(dp.key) > 0)
                         values.addAll(dp.values);
                 }
                 else {
-                    if(bound1.compareTo(dp.key) > 0)
+                    if(bound1.compareTo(dp.key) < 0)
                         values.addAll(dp.values);
                 }
             }
