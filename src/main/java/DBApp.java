@@ -349,8 +349,8 @@ public class DBApp {
         try {
             DBApp dbApp = new DBApp();
 //----------------------------------------Students Table-------------------------------------------------------
-            // **** Create ****
-//            String strTableName = "Student";
+            // ** Create **
+            String strTableName = "Student";
 //            Hashtable htblColNameType = new Hashtable();
 //            htblColNameType.put("name", "java.lang.String");
 //            htblColNameType.put("gpa", "java.lang.double");
@@ -359,7 +359,7 @@ public class DBApp {
 //            dbApp.createIndex(strTableName, "gpa", "gpaIndex");
             Table table = Table.getTable(allTables,"Student");
             Hashtable<String, Object> htblColNameValue = new Hashtable<>();
-//            // **** insert ****
+//            // ** insert **
 //            Random random = new Random();
 //            double[] gpas = {1.8707343572991275, 4.794898718343688, 4.248665186144998, 3.17081958974137, 0.09320194237640356, 0.9725099510902641, 4.089370321938262, 1.6642600553325182, 1.3182128065760583, 4.998746444195267};
 //            int[] ids = {60140, 66455, 53268, 43418, 49819, 3715, 93972, 18801, 41104, 40187};
@@ -375,7 +375,6 @@ public class DBApp {
 //                    randAlpha = random.nextInt(26);
 //                    name += alpha.charAt(randAlpha);
 //                }
-//                Hashtable<String, Object> htblColNameValue = new Hashtable<>();
 //                htblColNameValue.put("name", name);
 //                htblColNameValue.put("gpa", randGpa);
 //                htblColNameValue.put("id", randomNumber);
@@ -385,9 +384,10 @@ public class DBApp {
 //            table.viewTable();
 //            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
 //            System.out.println("test after insertion is : "+ IndexControler.testIndexTable(table));
-////                                           //  **** update ****
-            htblColNameValue.put("name", "Saeed");
-            htblColNameValue.put("gpa", 500.001);
+//////                                           //  ** update **
+//            htblColNameValue.clear();
+//            htblColNameValue.put("name", "Saeed");
+//            htblColNameValue.put("gpa", 500.001);
 //            dbApp.updateTable("Student", "3715", htblColNameValue);
 //            dbApp.updateTable("Student", "93972", htblColNameValue);
 //            dbApp.updateTable("Student", "40187", htblColNameValue);
@@ -396,9 +396,10 @@ public class DBApp {
 //            table.viewTable();
 //            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
 //            System.out.println("test after update : "+IndexControler.testIndexTable(table));
-                                             // **** delete ****
+            // ** delete **
             System.out.println("👻💀Deleted💀👻");
-//            htblColNameValue.put("name", "plsu");
+            htblColNameValue.clear();
+            htblColNameValue.put("name", "pknn");
 //            htblColNameValue.put("gpa", 1.6642600553325182);
 //            htblColNameValue.put("id" ,40187);
             dbApp.deleteFromTable("Student", htblColNameValue);
