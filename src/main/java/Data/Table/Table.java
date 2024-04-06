@@ -201,7 +201,7 @@ public class Table implements Serializable {
     public ArrayList<Record> searchFor(Hashtable<Integer, Object> colIdxVal) throws IOException, ClassNotFoundException, DBAppException {
         for (String path : getPagePaths()) {
             // still need to adjust for index
-            Page page = (Page) FileCreator.readObject(path);
+            Page page = Page.readPage(path, this);
             ArrayList<Record> toRemove = new ArrayList<>();
             for (Record record : page) {
                 boolean matching = record.isMatching(colIdxVal);
@@ -212,7 +212,9 @@ public class Table implements Serializable {
         }
         throw new DBAppException("Not implemented yet"); // do not use method yet
     }
-
+    public Pair<Integer, Integer> search(Comparable clusterKey, int clusterIdx) throws IOException, ClassNotFoundException {
+        return search(clusterKey, clusterIdx, 0); // 5000
+    }
     // binary search on cluster Key
     public Pair<Integer, Integer> search(Comparable clusterKey, int clusterIdx, int start) throws IOException, ClassNotFoundException {
         int end = pagePaths.size() - 1;
@@ -221,7 +223,7 @@ public class Table implements Serializable {
         boolean checkBefore;
         while (start <= end) { // 2 pages -> start = 0; end = 1; mid = 0  id = 250 3000
             mid = start + (end - start) / 2;
-            Page page = (Page) FileCreator.readObject(pagePaths.get(mid));
+            Page page = Page.readPage(pagePaths.get(mid), this);
             checkBefore = false;
             if(page.isEmpty())
                 return new Pair<>(mid,0);
@@ -239,15 +241,15 @@ public class Table implements Serializable {
             // 2 : min = 50 max = 249
             // 3 : min = 251 max = 350
             if(checkBefore && mid > 0) {
-                Page temp = (Page) FileCreator.readObject(pagePaths.get(mid-1));
+                Page temp = Page.readPage(pagePaths.get(mid-1), this);
                 if(temp.size() < 200)
                     --mid;
             }
         }
         return new Pair<>(mid, recIdx); // 5000
     }
-    public Pair<Integer, Integer> search(Comparable clusterKey, int clusterIdx) throws IOException, ClassNotFoundException {
-        return search(clusterKey, clusterIdx, 0); // 5000
+    public Pair<Page, Record> searchRec(Comparable clusterKey, int clusterIdx) throws IOException, ClassNotFoundException {
+        return searchRec(clusterKey, clusterIdx, 0);
     }
     public Pair<Page, Record> searchRec(Comparable clusterKey, int clusterIdx, int start) throws IOException, ClassNotFoundException {
         int end = pagePaths.size() - 1;
@@ -256,7 +258,7 @@ public class Table implements Serializable {
         Page page = null;
         while (start <= end) { // 2 pages -> start = 0; end = 1; mid = 0  id = 250 3000
             mid = start + (end - start) / 2;
-            page = (Page) FileCreator.readObject(pagePaths.get(mid));
+            page = Page.readPage(pagePaths.get(mid), this);
             if(page.isEmpty())
                 return null;
             if (clusterKey.compareTo(page.get(0).get(clusterIdx)) < 0) {
@@ -269,9 +271,6 @@ public class Table implements Serializable {
             }
         }
         return rec == null? null : new Pair<>(page, rec);
-    }
-    public Pair<Page, Record> searchRec(Comparable clusterKey, int clusterIdx) throws IOException, ClassNotFoundException {
-        return searchRec(clusterKey, clusterIdx, 0);
     }
 
     public boolean hasRecords() {
@@ -297,7 +296,7 @@ public class Table implements Serializable {
     public void viewTable() throws IOException, ClassNotFoundException {
         if (!pagePaths.isEmpty()) {
             for (String pagePath : pagePaths) {
-                Page page = (Page) FileCreator.readObject(pagePath);
+                Page page = Page.readPage(pagePath, this);
                 System.out.println(page);
             }
         }
@@ -325,7 +324,7 @@ public class Table implements Serializable {
                 int pagePathIdx = (search(rec.get((int) (getClusterKeyAndIndex()[1])), (int) getClusterKeyAndIndex()[1])).x;
                 for (int i = pagePathIdx; i < pagePaths.size(); i++) {
                     String pagePath = pagePaths.get(i);
-                    Page page = (Page) FileCreator.readObject(pagePath);
+                    Page page = Page.readPage(pagePath, this);
                     if (rec != null) {
                         page.insertIntoPage(rec);
                         //remember to insert the record into the existing indices
@@ -347,7 +346,7 @@ public class Table implements Serializable {
                     //we will find out
                     if (this.pagePaths.indexOf(pagePath) < this.pagePaths.size() - 1) {
                         //inserting the overflow in the next page
-                        Page nextPage = ((Page) FileCreator.readObject(this.pagePaths.get(pagePaths.indexOf(pagePath) + 1)));
+                        Page nextPage = Page.readPage(this.pagePaths.get(pagePaths.indexOf(pagePath) + 1), this);
                         nextPage.insertIntoPage(overFlowRec);
                         IndexControler.updatePageIdxOverflow(overFlowRec,this);
                         nextPage.save();

@@ -4,21 +4,20 @@ package Data.Page;
 
 import Data.Handler.FileCreator;
 import Data.Handler.FileRemover;
+import Data.Index.BPlusIndex;
 import Data.Index.IndexControler;
+import Data.Index.Pointer;
 import Data.Table.MetaData;
 import Data.Table.Table;
 import Exceptions.DBAppException;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Vector;
+import java.util.*;
+
 public class Page extends Vector<Record>  {
     private static final long serialVersionUID = -9043778273416338053L;
-    private Table table ;
+    private transient Table table ;
     private String pageName ; // unnecessary attribute?
     private String pagePath ;
     public Page (Table table) throws IOException {
@@ -31,7 +30,11 @@ public class Page extends Vector<Record>  {
         save();
     }
 
-
+    public static Page readPage(String pagePath, Table table) throws IOException, ClassNotFoundException {
+        Page page = (Page) FileCreator.readObject(pagePath);
+        page.setTable(table);
+        return page;
+    }
     public void save() throws IOException {
         FileCreator.storeAsObject(this , this.pagePath);
         table.save();
@@ -139,6 +142,15 @@ public class Page extends Vector<Record>  {
             }
         }
         return mid;
+    }
+    public void removeAll(ArrayList<Record> toRemove, ArrayList<Integer> colIdxWBplus,
+                          ArrayList<BPlusIndex> affectedBPlus,
+                          ArrayList<Pointer> ptrsToRemove, int deletedIdx) throws IOException, ClassNotFoundException {
+        boolean changed = this.removeAll(toRemove);
+        if(this.isEmpty())
+            IndexControler.updatePageDeletion(affectedBPlus, deletedIdx);
+        // remove from all indicies
+        IndexControler.deleteFromIndex(colIdxWBplus, affectedBPlus, toRemove, ptrsToRemove);
     }
 
     @Override

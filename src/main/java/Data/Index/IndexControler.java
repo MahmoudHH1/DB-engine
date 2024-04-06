@@ -31,7 +31,7 @@ public class IndexControler {
             // insert values at this index into b+ idx
             int colIdx = table.idxFromName(strColName);
             for (int i = 0; i < table.getPagePaths().size(); i++) {
-                Page page = (Page) FileCreator.readObject(table.getPagePaths().get(i));
+                Page page = Page.readPage(table.getPagePaths().get(i), table);
                 for (Record record : page) {
                     b.insert(record.get(colIdx), new Pointer(i, record.get((int) table.getClusterKeyAndIndex()[1])));
                 }
@@ -235,7 +235,7 @@ public class IndexControler {
         ArrayList<TableColumn> cols = table.getAllColumnBIdxs();
 
         for(int i = 0; i< table.getPagePaths().size(); i++){
-            Page page = (Page) FileCreator.readObject(table.getPagePaths().get(i));
+            Page page = Page.readPage(table.getPagePaths().get(i), table);
 
             for(Record record : page){
                 for(TableColumn col : cols){
@@ -254,7 +254,7 @@ public class IndexControler {
         }
         return true;
     }
-    public static void updatePageDeletion(Table table, ArrayList<BPlusIndex> bPlusIndices, int deletedIdx) throws IOException, ClassNotFoundException {
+    public static void updatePageDeletion(ArrayList<BPlusIndex> bPlusIndices, int deletedIdx) throws IOException, ClassNotFoundException {
         for(BPlusIndex bplus: bPlusIndices) {
             BPlusIndex.LeafNode curr = bplus.firstLeaf;
             while (curr != null) {

@@ -13,13 +13,10 @@ import Data.Validator.TupleValidator;
 import Exceptions.DBAppException;
 import Grammars.gen.Grammars.SqlLexer;
 import Grammars.gen.Grammars.SqlParser;
-import org.antlr.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
@@ -191,20 +188,14 @@ public class DBApp {
             for (int i = 0; i < bplusFilter.size(); i++) {
                 Pointer currPtr = bplusFilter.get(i);
                 // if no page loaded or need new page then load new page
-                if(page == null){
-                    page = (Page) FileCreator.readObject(table.getPagePaths().get(currPtr.pageIdx));
-                    page.setTable(table);
-                }
+                if(page == null)
+                    page = Page.readPage(table.getPagePaths().get(currPtr.pageIdx), table);
                 else if (bplusFilter.get(i - 1).pageIdx != currPtr.pageIdx){
                     // remove records first from page
-                    page.removeAll(toRemove);
-                    if(page.isEmpty())
-                        IndexControler.updatePageDeletion(table, affectedBPlus, bplusFilter.get(i-1).pageIdx);
                     // remove from all indicies
-                    IndexControler.deleteFromIndex(colIdxWBplus, affectedBPlus, toRemove, ptrsToRemove);
-                    page.save();
-                    page = (Page) FileCreator.readObject(table.getPagePaths().get(currPtr.pageIdx));
-                    page.setTable(table);
+                    page.removeAll(toRemove, colIdxWBplus,
+                            affectedBPlus, ptrsToRemove, bplusFilter.get(i-1).pageIdx);
+                    page = Page.readPage(table.getPagePaths().get(currPtr.pageIdx), table);
                     // reset arraylists
                     toRemove = new ArrayList<>();
                     ptrsToRemove = new ArrayList<>();
@@ -219,14 +210,11 @@ public class DBApp {
                     ptrsToRemove.add(bplusFilter.get(i));
                     rowsAffected++;
                 }
-                last = bplusFilter.get(i).pageIdx ;
+                last = currPtr.pageIdx ;
             }
             // in case remains records
             if(!toRemove.isEmpty()){
-                page.removeAll(toRemove);
-                IndexControler.deleteFromIndex(colIdxWBplus, affectedBPlus, toRemove, ptrsToRemove);
-                if(page.isEmpty())
-                    IndexControler.updatePageDeletion(table, affectedBPlus, last);
+                page.removeAll(toRemove, colIdxWBplus, affectedBPlus, ptrsToRemove, last);
             }
 
             System.out.println(rowsAffected + " rows affected");
@@ -241,8 +229,7 @@ public class DBApp {
         for (int i = 0; i< table.getPagePaths().size(); i++) {
 
             // still need to adjust for index
-            Page page = (Page) FileCreator.readObject(table.getPagePaths().get(i));
-            page.setTable(table);
+            Page page = Page.readPage(table.getPagePaths().get(i), table);
             ArrayList<Record> toRemove = new ArrayList<>();
             ArrayList<Pointer> ptrsToRemove = new ArrayList<>();
             for (Record record : page) {
@@ -253,10 +240,7 @@ public class DBApp {
                     rowsAffected++;
                 }
             }
-            page.removeAll(toRemove);
-            IndexControler.deleteFromIndex(colIdxWBplus, affectedBPlus, toRemove, ptrsToRemove);
-            if(page.isEmpty())
-                IndexControler.updatePageDeletion(table, affectedBPlus, i);
+            page.removeAll(toRemove, colIdxWBplus, affectedBPlus, ptrsToRemove, i);
         }
         for(BPlusIndex bp : affectedBPlus)
             bp.save();
@@ -301,10 +285,9 @@ public class DBApp {
             Page page = null;
             for(int i = 0; i<result.size(); i++){
                 Pointer currPtr = result.get(i);
-                if(page == null || result.get(i-1).pageIdx != currPtr.pageIdx){
-                    page = (Page) FileCreator.readObject(table.getPagePaths().get(currPtr.pageIdx));
-                    page.setTable(table);
-                }
+                if(page == null || result.get(i-1).pageIdx != currPtr.pageIdx)
+                    page = Page.readPage(table.getPagePaths().get(currPtr.pageIdx), table);
+
                 Record record = page.searchRecord(currPtr.clusterKeyValue,
                         (int) table.getClusterKeyAndIndex()[1]);
                 validRecords.add(record);
@@ -312,8 +295,7 @@ public class DBApp {
         }
         else {
             for (String path : table.getPagePaths()) {
-                Page page = (Page) FileCreator.readObject(path);
-                page.setTable(table);
+                Page page = Page.readPage(path, table);
                 for (Record record : page) {
                     if (SQLTerm.evalExp(arrSQLTerms, record, table, strarrOperators)) {
                         validRecords.add(record);
