@@ -4,6 +4,7 @@ package Data.Page;
 
 import Data.Handler.FileCreator;
 import Data.Handler.FileRemover;
+import Data.Index.IndexControler;
 import Data.Table.MetaData;
 import Data.Table.Table;
 import Exceptions.DBAppException;
@@ -16,6 +17,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Vector;
 public class Page extends Vector<Record>  {
+    private static final long serialVersionUID = -9043778273416338053L;
     private Table table ;
     private String pageName ; // unnecessary attribute?
     private String pagePath ;
@@ -142,14 +144,13 @@ public class Page extends Vector<Record>  {
     @Override
     public boolean removeAll(Collection<?> c) {
         boolean changed = super.removeAll(c);
+        try {
+            this.save();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         if(this.isEmpty()){
-            FileRemover.removeFileFromDirectory(table.getTableName(),pageName);
-            File myObj = new File(this.pagePath + ".class");
-            if (myObj.delete()) {
-                System.out.println("Deleted the file: " + myObj.getName());
-            } else {
-                System.out.println("Failed to delete the file.");
-            }
+            FileRemover.removeFileFromDirectory(table ,pagePath);
         }
         return changed;
     }

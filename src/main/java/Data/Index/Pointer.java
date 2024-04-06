@@ -23,9 +23,6 @@ public class Pointer implements Comparable , Serializable {
 
     @Override
     public String toString() {
-        return "{" +
-                "pageIdx=" + pageIdx +
-                ", clusterKeyValue=" + clusterKeyValue +
-                '}';
+        return "pageIdx = " + pageIdx + " clustering key = " + clusterKeyValue ;
     }
 }

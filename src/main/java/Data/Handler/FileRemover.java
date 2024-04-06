@@ -30,26 +30,23 @@ public class FileRemover {
         }
     }
 
-    public static void removeFileFromDirectory(String tableName ,String fileName) {
+    public static void removeFileFromDirectory(Table table, String pagePath) {
         //looping through the given table only not all directories in the tables directory
-        String path = tablesDirectory + File.separator + tableName ;
-        fileName = fileName + ".class" ;
-        Path filePath = Paths.get(path, fileName);
+//        String path = tablesDirectory + File.separator + tableName ;
+//        fileName = fileName + ".class" ;
+        Path filePath = Paths.get(pagePath + ".class");
         try {
             if (Files.exists(filePath)) {
                 Files.delete(filePath);
-                System.out.println("File removed: " + fileName);
+                System.out.println("File removed: " + pagePath + ".class");
                 //remove the page from page paths
-                Table.getTable(MetaData.loadAllTables(),tableName).removePageFromArr(Table.getTableFilePath(tableName)+File.separator+fileName); ;
+                table.removePageFromArr(pagePath);
+                table.save();
             } else {
                 System.out.println("File does not exist.");
             }
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (DBAppException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         }
     }
 

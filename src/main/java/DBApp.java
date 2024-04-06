@@ -11,6 +11,12 @@ import Data.Table.Table;
 import Data.Table.TableColumn;
 import Data.Validator.TupleValidator;
 import Exceptions.DBAppException;
+import Grammars.gen.Grammars.SqlLexer;
+import Grammars.gen.Grammars.SqlParser;
+import org.antlr.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
 
 import java.io.File;
 import java.io.FileReader;
@@ -20,7 +26,7 @@ import java.util.*;
 
 
 public class DBApp {
-    public ArrayList<Table> allTables;
+    public static ArrayList<Table> allTables;
     public static ArrayList<BPlusIndex> allBPlusIndecies = new ArrayList<>();
 
 
@@ -47,7 +53,7 @@ public class DBApp {
                             Hashtable<String, String> htblColNameType) throws DBAppException, IOException {
         Table t = Table.getTable(allTables, strTableName);
         if (t != null) {
-            throw new DBAppException("Table is already exist");
+            throw new DBAppException("Table already exists");
         }
         ArrayList<TableColumn> allColumns = new ArrayList<>();
         for (String column : htblColNameType.keySet()) {
@@ -60,31 +66,31 @@ public class DBApp {
             allColumns.add(newColumn);
         }
         Table table = new Table(allColumns);
+        allTables.add(table);
     }
 
     // following method creates a B+tree index
     public void createIndex(String strTableName,
                             String strColName,
-                            String strIndexName) throws DBAppException, IOException {
-        try {
-            // check if column is clusterKey
-            // if clusterKey values in B+tree should be Pair(pageIdx, recordIdx)
-            // otherwise values should be primary key
-            Table table = Table.getTable(allTables, strTableName);
-            for (TableColumn col : table.getAllColumns()) {
-                if (col.getColumnName().equals(strColName)) {
-                    col.setIndexName(strIndexName);
-                    col.setIndexType("B+ Tree");
-                    table.save();
-                    break;
-                }
+                            String strIndexName) throws DBAppException, IOException, ClassNotFoundException {
+        Table table = Table.getTable(allTables, strTableName);
+
+        if(table.getColumnByName(strColName).isColumnBIdx())
+            throw new DBAppException("There is already an index on that column");
+        if(table.getAllColumnBIdxsNames().contains(strIndexName))
+            throw new DBAppException("There is already an index by that name");
+
+        for (TableColumn col : table.getAllColumns()) {
+            if (col.getColumnName().equals(strColName)) {
+                col.setIndexName(strIndexName);
+                col.setIndexType("B+ Tree");
+                table.save();
+                break;
             }
-            MetaData.updateOnMetaDataFile(strTableName, strColName, strIndexName);
-            BPlusIndex b = IndexControler.createIndex(table, strColName, strIndexName);
-            allBPlusIndecies.add(b);
-        } catch (Exception e) {
-            throw new DBAppException("not implemented yet");
         }
+        MetaData.updateOnMetaDataFile(strTableName, strColName, strIndexName);
+        BPlusIndex b = IndexControler.createIndex(table, strColName, strIndexName);
+        allBPlusIndecies.add(b);
     }
 
     // following method inserts one row only.
@@ -127,10 +133,12 @@ public class DBApp {
         Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
         Pair<Page, Record> pageAndRecord = table.searchRec( (Comparable) clusterKeyVal,(Integer) clusterKeyColIndex[1]) ;
         if (pageAndRecord != null) {
-            int pageIndex = table.getPagePaths().indexOf(pageAndRecord.x.getPagePath()) ;
+            int pageIndex = table.getPagePaths().indexOf(pageAndRecord.x.getPagePath());
             pageAndRecord.y.updateRecord(colIdxVal , htblColNameValue , clusterKeyVal ,pageIndex,table);
             pageAndRecord.x.save();
-                table.save();
+            table.save();
+        }else{
+            throw new DBAppException("The cluster Key :"+ clusterKeyVal +" Dosen't exist");
         }
     }
 
@@ -141,70 +149,117 @@ public class DBApp {
     public void deleteFromTable(String strTableName,
                                 Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
         Table table = Table.getTable(allTables, strTableName);
+        TupleValidator.IsValidTuple(htblColNameValue, table);
         int rowsAffected = 0;
 
         // map column name to idx
         Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
         // will hold pointers to matching records
-        Vector<Pointer> idxRemove = null;
+        Vector<Pointer> bplusFilter = null;
         // hold index of columns with b plus tree
         ArrayList<Integer> colIdxWBplus = table.colIdxWBPlus();
+        // hold all bplusaffected
         ArrayList<BPlusIndex> affectedBPlus = new ArrayList<>(colIdxWBplus.size());
+        //
+//        colIdxWBplus.retainAll(colIdxVal.keySet());
         for (int i : colIdxWBplus) {
             TableColumn col = table.getAllColumns().get(i);
             BPlusIndex bplus = IndexControler.readIndexByName(col.getIndexName(), table);
             affectedBPlus.add(bplus);
-            Vector<Pointer> pointers = bplus.search(colIdxVal.get(i));
-            if (idxRemove == null)
-                idxRemove = pointers;
-            else
-                Operations.intersect(idxRemove, pointers);
+            // search for queried value
+            if(colIdxVal.get(i) != null){
+                Vector<Pointer> pointers = bplus.search(colIdxVal.get(i));
+                if (bplusFilter == null)
+                    bplusFilter = pointers;
+                else
+                    Operations.intersect(bplusFilter, pointers);
+            }
         }
+        // remove columns with bplus
         colIdxWBplus.forEach(colIdxVal.keySet()::remove);
-//        colIdxVal.keySet().removeAll(colIdxWBplus);
+
         // if found index
-        /* to be optimized further*/
-        if (idxRemove != null) {
-            idxRemove.sort(Pointer::compareTo);
+        /* to be optimized further if cluster key is provided*/
+        if (bplusFilter != null) {
+            bplusFilter.sort(Pointer::compareTo);
             Page page = null;
+            // records to remove
             ArrayList<Record> toRemove = new ArrayList<>();
-            for (int i = 0; i < idxRemove.size(); i++) {
+            // their pointers
+            ArrayList<Pointer> ptrsToRemove = new ArrayList<>();
+            for (int i = 0; i < bplusFilter.size(); i++) {
+                Pointer currPtr = bplusFilter.get(i);
                 // if no page loaded or need new page then load new page
-                if (page == null || !idxRemove.get(i - 1).clusterKeyValue.equals(idxRemove.get(i).clusterKeyValue)){
-                    if(page != null)
-                        // remove records first
-                        page.removeAll(toRemove);
-                    page = (Page) FileCreator.readObject(table.getPagePaths().get(i));
+                if(page == null){
+                    page = (Page) FileCreator.readObject(table.getPagePaths().get(currPtr.pageIdx));
+                    page.setTable(table);
                 }
-                Record record = page.searchRecord(idxRemove.get(i).clusterKeyValue, (int) table.getClusterKeyAndIndex()[1]);
+                else if (bplusFilter.get(i - 1).pageIdx != currPtr.pageIdx){
+                    // remove records first from page
+                    page.removeAll(toRemove);
+                    if(page.isEmpty())
+                        IndexControler.updatePageDeletion(table, affectedBPlus, i-1);
+                    // remove from all indicies
+                    IndexControler.deleteFromIndex(colIdxWBplus, affectedBPlus, toRemove, ptrsToRemove);
+                    page.save();
+                    page = (Page) FileCreator.readObject(table.getPagePaths().get(currPtr.pageIdx));
+                    page.setTable(table);
+                    // reset arraylists
+                    toRemove = new ArrayList<>();
+                    ptrsToRemove = new ArrayList<>();
+                }
+
+                Record record = page.searchRecord(
+                        currPtr.clusterKeyValue,
+                        (int) table.getClusterKeyAndIndex()[1]);
+
                 if(record.isMatching(colIdxVal)){
                     toRemove.add(record);
+                    ptrsToRemove.add(bplusFilter.get(i));
                     rowsAffected++;
                 }
-                page.save();
             }
-            System.out.println(rowsAffected);
+            // in case remains records
+            if(!toRemove.isEmpty()){
+                page.removeAll(toRemove);
+                IndexControler.deleteFromIndex(colIdxWBplus, affectedBPlus, toRemove, ptrsToRemove);
+            }
+            System.out.println(rowsAffected + " rows affected");
+            for(BPlusIndex bp : affectedBPlus)
+                bp.save();
             table.save();
             return;
         }
+        // check whether hashtable has cluster key
+        // if so binary search then check if matching -------- to be implemented s------------
+        int clusterKey = (int) table.getClusterKeyAndIndex()[1];
+        for (int i = 0; i< table.getPagePaths().size(); i++) {
 
-        for (String path : table.getPagePaths()) {
             // still need to adjust for index
-            Page page = (Page) FileCreator.readObject(path);
+            Page page = (Page) FileCreator.readObject(table.getPagePaths().get(i));
+            page.setTable(table);
             ArrayList<Record> toRemove = new ArrayList<>();
+            ArrayList<Pointer> ptrsToRemove = new ArrayList<>();
             for (Record record : page) {
                 boolean matching = record.isMatching(colIdxVal);
-                if (matching)
+                if (matching){
                     toRemove.add(record);
+                    ptrsToRemove.add(new Pointer(i,record.get(clusterKey)));
+                    rowsAffected++;
+                }
             }
             page.removeAll(toRemove);
-            page.save();
+            IndexControler.deleteFromIndex(colIdxWBplus, affectedBPlus, toRemove, ptrsToRemove);
+            if(page.isEmpty())
+                IndexControler.updatePageDeletion(table, affectedBPlus, i);
         }
-        System.out.println(rowsAffected);
+        for(BPlusIndex bp : affectedBPlus)
+            bp.save();
+        System.out.println(rowsAffected + " rows affected");
         table.save();
 
-                //////////////////////////////////////////////////
-                // not completed yet
+        //////////////////////////////////////////////////
+        // not completed yet
 //        for (BPlusIndex b : allBPlusIndecies) {
 //            Enumeration<String> keys = htblColNameValue.keys();
 //            Enumeration<Object> values = htblColNameValue.elements();
@@ -220,31 +275,49 @@ public class DBApp {
     // age = 20 , gpa = 3.4, name = ahmed
     // {pointers} and gpa = 3.4 or {pointers}
     // {pointers} or {pointers}
+    // select * from student where age = 20 and name = ahmed
+    // select * from student where age = 20 or name = ahmed
+    // select * from student where age = 20 xor name = ahmed
     public Iterator selectFromTable(SQLTerm[] arrSQLTerms,
                                     String[] strarrOperators) throws DBAppException, IOException, ClassNotFoundException {
         ArrayList<Object> validRecords = new ArrayList<>();
+        // check whether arrSQLTerms is empty???
         Table table = Table.getTable(allTables, arrSQLTerms[0]._strTableName);
-        ArrayList<Vector<Pointer>> converted = new ArrayList<>();
-        for(int i = 0; i<arrSQLTerms.length; i++){
-            TableColumn col = table.getColumnByName(arrSQLTerms[i]._strColumnName);
-            if(col.isColumnBIdx()){
-                converted.add(IndexControler.search(table, col.getColumnName(), arrSQLTerms[i]._objValue));
+        ArrayList<Vector<Pointer>> converted = new ArrayList<>(arrSQLTerms.length);
+
+        if(SQLTerm.allColummnsBplus(table, arrSQLTerms, strarrOperators)){
+            for(int i = 0; i<arrSQLTerms.length; i++){
+                TableColumn col = table.getColumnByName(arrSQLTerms[i]._strColumnName);
+                converted.add(IndexControler.search(table, col.getColumnName(), arrSQLTerms[i]._objValue, arrSQLTerms[i]._strOperator));
                 arrSQLTerms[i] = null;
             }
-            else
-                converted.add(null);
-        }
-
-        for (String path : table.getPagePaths()) {
-            Page page = (Page) FileCreator.readObject(path);
-            for (Record record : page) {
-                if (SQLTerm.evalExp(arrSQLTerms, record, table, strarrOperators)) {
-                    validRecords.add(record);
+            ArrayList<Pointer> result = SQLTerm.evalPtrs(converted, strarrOperators);
+            result.sort(Pointer::compareTo);
+            Page page = null;
+            for(int i = 0; i<result.size(); i++){
+                Pointer currPtr = result.get(i);
+                if(page == null || result.get(i-1).pageIdx != currPtr.pageIdx){
+                    page = (Page) FileCreator.readObject(table.getPagePaths().get(currPtr.pageIdx));
+                    page.setTable(table);
                 }
+                Record record = page.searchRecord(currPtr.clusterKeyValue,
+                        (int) table.getClusterKeyAndIndex()[1]);
+                validRecords.add(record);
             }
         }
-        if (validRecords.size() == 0) {
-            validRecords.add("No valid results");
+        else {
+            for (String path : table.getPagePaths()) {
+                Page page = (Page) FileCreator.readObject(path);
+                page.setTable(table);
+                for (Record record : page) {
+                    if (SQLTerm.evalExp(arrSQLTerms, record, table, strarrOperators)) {
+                        validRecords.add(record);
+                    }
+                }
+            }
+            if (validRecords.size() == 0) {
+                validRecords.add("No valid results");
+            }
         }
         return validRecords.iterator();
     }
@@ -252,40 +325,143 @@ public class DBApp {
     // strbufSQL is a select, otherwise returns null.
     public Iterator parseSQL( StringBuffer strbufSQL ) throws
             DBAppException{
+        CharStream SQLin = CharStreams.fromString(strbufSQL.toString());
+
+        SqlLexer lexer = new SqlLexer(SQLin);
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        SqlParser parser = new SqlParser(tokens);
+        SqlParser.ParseContext tree = parser.parse();
+
         return null;
     }
 
     public void deleteTable(String tableName) throws DBAppException {
         Table.getTable(allTables, tableName).removeTable();
+
     }
 
     public static void main(String[] args) {
         try {
-            String strTableName = "Student";
             DBApp dbApp = new DBApp();
+//----------------------------------------Students Table-------------------------------------------------------
+            // **** Create ****
+            String strTableName = "Student";
+//            Hashtable htblColNameType = new Hashtable();
+//            htblColNameType.put("name", "java.lang.String");
+//            htblColNameType.put("gpa", "java.lang.double");
+//            htblColNameType.put("id", "java.lang.Integer");
+//            dbApp.createTable(strTableName, "id", htblColNameType);
+////            dbApp.createIndex(strTableName, "id", "idIndex");
+//            dbApp.createIndex(strTableName, "gpa", "gpaIndex");
+
+            Table table = Table.getTable(allTables,"Student");
+//            table.viewTable();
+//            System.out.println(FileCreator.readObject("E:\\DB 2 proj\\DB engine\\Data_Entry\\Tables\\Student\\Indices\\gpaIndex"));
+//            System.out.println(FileCreator.readObject("E:\\DB 2 proj\\DB engine\\Data_Entry\\Tables\\Student\\Indices\\idIndex"));
+//            table.reset();
+            // **** insert ****
+//            Random random = new Random();
+//            double[] gpas = {1.8707343572991275, 4.794898718343688, 4.248665186144998, 3.17081958974137, 0.09320194237640356, 0.9725099510902641, 4.089370321938262, 1.6642600553325182, 1.3182128065760583, 4.998746444195267};
+//            int[] ids = {60140, 66455, 53268, 43418, 49819, 3715, 93972, 18801, 41104, 40187};
+//            for (int i = 0; i < 10; i++) {
+//                String alpha = "abcdefghijklmnopqrstuvwxyz";
+////            int randomNumber = random.nextInt(100000) + 1;
+//                int randomNumber = ids[i];
+////            double randGpa = random.nextDouble(5);
+//                double randGpa = gpas[i];
+//                int randAlpha;
+//                String name = "";
+//                for (int j = 0; j < 4; j++) {
+//                    randAlpha = random.nextInt(26);
+//                    name += alpha.charAt(randAlpha);
+//                }
+//                Hashtable<String, Object> htblColNameValue = new Hashtable<>();
+//                htblColNameValue.put("name", name);
+//                htblColNameValue.put("gpa", randGpa);
+//                htblColNameValue.put("id", randomNumber);
+//                dbApp.insertIntoTable(strTableName, htblColNameValue);
+//            }
+//            System.out.println(Arrays.toString(ids));
+//            System.out.println(Arrays.toString(gpas));
+//            table.viewTable();
+//            System.out.println(IndexControler.testIndexTable(table));
+//            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
+
+            // **** update ****
+//            Hashtable<String, Object> htblColNameValue = new Hashtable<>();
+//            htblColNameValue.put("name", "aaa");
+//            htblColNameValue.put("gpa", 1.4);
+//            htblColNameValue.put("id", 10000);
+//            dbApp.insertIntoTable(strTableName, htblColNameValue);
+
+            Hashtable<String, Object> htblColNameValue = new Hashtable<>();
+            htblColNameValue.put("name" , "fxil");
+//            htblColNameValue.put("gpa" , 4.3);
+//            htblColNameValue.put("name" , "Mahmoud");
+//            dbApp.updateTable("Student", "3715", htblColNameValue);
+//            dbApp.updateTable("Student", "93972", htblColNameValue);
+//            dbApp.updateTable("Student", "40187", htblColNameValue);
+//            dbApp.updateTable("Student", "60140", htblColNameValue);
+////////            System.out.println(IndexControler.readIndexByName("idIndex", table));
+//            System.out.println("😂😂😂Updated😂😂");
+//            table.viewTable();
+//            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
+//            System.out.println(IndexControler.testIndexTable(table));
+////            // **** delete ****
+//            dbApp.deleteFromTable("Student", htblColNameValue);
+////
+//            System.out.println("👻💀Deleted💀👻");
+//            table.viewTable();
+//            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
+//            System.out.println(IndexControler.testIndexTable(table));
+//-----------------------------------------TAs Table-------------------------------------------------------
+//            String strTableName = "TAs";
+//            Hashtable htblColNameType = new Hashtable();
+//            htblColNameType.put("name", "java.lang.String");
+//            htblColNameType.put("salary", "java.lang.double");
+//            htblColNameType.put("id", "java.lang.Integer");
+//            dbApp.createTable(strTableName, "id", htblColNameType);
+//            dbApp.createIndex(strTableName, "id", "idIndex");
+//            dbApp.createIndex(strTableName, "salary", "salaryIndex");
+//
+
+//            System.out.println(IndexControler.readIndexByName("idIndex", table));
+//            System.out.println("😂😂😂😂😂");
+//            System.out.println(IndexControler.readIndexByName("salaryIndex", table));
+
+//            table.reset();
+//            Random random = new Random();
+//            for (int i = 0; i < 7; i++) {
+//                String alpha = "abcdefghijklmnopqrstuvwxyz";
+//                int randomid = random.nextInt(100000) + 1;
+//                double randSalary = random.nextDouble(5000);
+//                int randAlpha = random.nextInt(26);
+//                String name = "";
+//                for(int j = 0; j<4; j++){
+//                    randAlpha = random.nextInt(26);
+//                    name += alpha.charAt(randAlpha);
+//                }
+//                Hashtable<String, Object> htblColNameValue = new Hashtable<>();
+//                htblColNameValue.put("name", name);
+//                htblColNameValue.put("id", randomid);
+//                htblColNameValue.put("salary", randSalary);
+//                dbApp.insertIntoTable(strTableName, htblColNameValue);
+//            }
+//            table.viewTable();
+
+//--------------------------------------------------------------------------------------------------------
+//            System.out.println(MetaData.maxPageSize);
+
 //            Vector<BPlusIndex> res = loadAllTableIndices("Student");
 //            System.out.println(res.size());
 //            System.out.println((int)Table.getTable(dbApp.allTables,"Student").getClusterKeyAndIndex()[1]);
 //            System.out.println(Integer.valueOf((Table.getTable(dbApp.allTables, "Student").getClusterKeyAndIndex()).toString()));
 //            System.out.println(Table.getTable(dbApp.allTables,"Student").getClusterKeyAndIndex()[1]);
-//            Table table = Table.getTable(dbApp.allTables,"Student");
-//////            table.viewTable();
 //            table.viewTable();
-//            table.removeTable();
+////            table.removeTable();
+//
 
-            System.out.println(FileCreator.readObject("E:\\DB 2 proj\\DB engine\\Data_Entry\\Tables\\Student\\Indices\\gpaIndex"));
-            System.out.println(FileCreator.readObject("E:\\DB 2 proj\\DB engine\\Data_Entry\\Tables\\Student\\Indices\\idIndex"));
 //            FileRemover.removeFileFromDirectory("Student" , "Student1");
-//            Random random = new Random();
-////////////////////////////
-//            for (int i = 0; i < 700; i++) {
-//                int randomNumber = random.nextInt(100000) + 1;
-//                Hashtable<String, Object> htblColNameValue = new Hashtable<>();
-//                htblColNameValue.put("name", "Samaloty");
-//                htblColNameValue.put("gpa", 0.1);
-//                htblColNameValue.put("id", randomNumber );
-//                dbApp.insertIntoTable(strTableName, htblColNameValue);
-//            }
 //            System.out.println(MetaData.maxPageSize);
 //            Hashtable htblColNameType = new Hashtable();
 //            htblColNameType.put("name", "java.lang.String");
@@ -385,31 +561,40 @@ public class DBApp {
 ////            Page p = ((Page) FileCreator.readObject(table.getPagePaths().get(0)));
 //            System.out.println(p);
 //            table.viewTable();
-
-//            System.out.println("Selection Results:__________");
-//            SQLTerm[] arrSQLTerms;
-//            arrSQLTerms = new SQLTerm[]{new SQLTerm() , new SQLTerm()};
-//            arrSQLTerms[0]._strTableName =  "Student";
-//            arrSQLTerms[0]._strColumnName=  "name";
-//            arrSQLTerms[0]._strOperator  =  "=";
-//            arrSQLTerms[0]._objValue     =  "John Noor";
+//            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
+//            table.viewTable();
+            System.out.println("Selection Results:__________");
+            SQLTerm[] arrSQLTerms;
+            arrSQLTerms = new SQLTerm[1];
+            arrSQLTerms[0]=new SQLTerm();
+//            arrSQLTerms[1]=new SQLTerm();
+////            arrSQLTerms[0]._strTableName =  "Student";
+////            arrSQLTerms[0]._strColumnName=  "name";
+////            arrSQLTerms[0]._strOperator  =  "=";
+////            arrSQLTerms[0]._objValue     =  "ytsl";
 //
-//            arrSQLTerms[1]._strTableName =  "Student";
-//            arrSQLTerms[1]._strColumnName=  "gpa";
-//            arrSQLTerms[1]._strOperator  =  ">";
-//            arrSQLTerms[1]._objValue     =  new Double( 9.9 );
+            arrSQLTerms[0]._strTableName =  "Student";
+            arrSQLTerms[0]._strColumnName=  "gpa";
+            arrSQLTerms[0]._strOperator  =  ">";
+            arrSQLTerms[0]._objValue     =   3.1;
 //
-//            String[]strarrOperators = new String[1];
-//            strarrOperators[0] = "OR";
-
+            String[]strarrOperators = new String[0];
+//            strarrOperators[0] = "AND";
+//
             // select * from Student where name = "John Noor" or gpa = 1.5;
-//            Iterator resultSet = dbApp.selectFromTable(arrSQLTerms , strarrOperators);
-//            while(resultSet.hasNext()) {
-//                System.out.println(resultSet.next());
-//            }
+            Iterator resultSet = dbApp.selectFromTable(arrSQLTerms , strarrOperators);
+            while(resultSet.hasNext()) {
+                System.out.println(resultSet.next());
+            }
         } catch (Exception exp) {
+            System.out.println(exp.getClass() + ": " + exp.getMessage() + " because " + exp.getCause() );
             exp.printStackTrace();
+
         }
     }
+
+
+
+
 
 }

@@ -33,8 +33,9 @@ public class TupleValidator {
             isValid = false;
         }
         if (!isValid) {
-            throw new DBAppException("Check tuple values and their types");
+            throw new DBAppException("Check tuple values, their types and their name");
         }
+
 //        return isValid;
     }
 

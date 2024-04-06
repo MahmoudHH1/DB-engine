@@ -27,7 +27,6 @@ public class MetaData {
             String[] s = line.split(" = ");
             maxPageSize =  Integer.parseInt(s[1]);
         }
-        maxPageSize=  200;
     }
     public static void writeDataToMetaDatafile( ArrayList<TableColumn> allColumns)
     {

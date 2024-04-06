@@ -1,8 +1,12 @@
+import Data.Index.Operations;
+import Data.Index.Pointer;
 import Data.Page.Record;
 import Data.Table.Table;
 import Exceptions.DBAppException;
 
 import java.sql.SQLOutput;
+import java.util.ArrayList;
+import java.util.Vector;
 
 public class SQLTerm {
 
@@ -59,13 +63,47 @@ public class SQLTerm {
         }
     }
     private static boolean applyGates(boolean term1, String op, boolean term2) throws DBAppException {
-        switch (op) {
-            case "AND" : return term1 && term2;
-            case "OR" : return term1 || term2; // duplicates included 3adi wla eh
-            case "XOR" :return  term1 ^ term2;  // XOR is everything minus the intersection xy'+ x'y
-            default : throw new DBAppException("Invalid logical operator: " + op);
-        }
+        return switch (op) {
+            case "AND" -> term1 && term2;
+            case "OR" -> term1 || term2; // duplicates included 3adi wla eh
+            case "XOR" -> term1 ^ term2;  // XOR is everything minus the intersection xy'+ x'y
+            default -> throw new DBAppException("Invalid logical operator: " + op);
+        };
     }
+
+    public static boolean allColummnsBplus(Table table,SQLTerm[] terms, String[] strarrOperators) throws DBAppException {
+        for(int i = 0; i<terms.length; i++){
+            if(!table.getColumnByName(terms[i]._strColumnName).isColumnBIdx()){
+//                    &&!(i >= 1 && strarrOperators[i-1].equals("AND")))
+                return false;
+            }
+        }
+        return true;
+    }
+    public static ArrayList<Pointer> evalPtrs(ArrayList<Vector<Pointer>> converted, String[] ops) throws DBAppException {
+        if(converted.size() != ops.length+1)
+            throw new DBAppException("insufficient stuff");
+        if(converted.size() == 0)
+            return null;
+        // check size don't forget !!!!!!!!!!!
+        Vector<Pointer> res = converted.get(0);
+        for(int i = 1; i < converted.size(); i++){
+            switch (ops[i-1]) {
+                case "AND" :
+                    res = Operations.intersect(res, converted.get(i));
+                    break;
+                case "OR" :
+                    res = Operations.union(res, converted.get(i));
+                    break;
+                case "XOR" :
+                    res = Operations.xor(res, converted.get(i));
+                    break;
+                default : throw new DBAppException("Invalid logical operator: " + ops[i]);
+            }
+        }
+        return new ArrayList<>(res);
+    }
+
 
 
 }

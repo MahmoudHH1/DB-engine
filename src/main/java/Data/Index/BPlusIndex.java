@@ -5,10 +5,12 @@ import Data.Handler.Pair;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PipedInputStream;
 import java.io.Serializable;
 import java.util.*;
 
 public class BPlusIndex implements Serializable {
+    private static final long serialVersionUID = -9043778273416338053L;
     int m;
     InternalNode root;
     LeafNode firstLeaf;
@@ -55,139 +57,28 @@ public class BPlusIndex implements Serializable {
      * and appends the nodes onto a stringBuilder
      * @param sb the stringBuilder on which all the nodes are appended
      */
-//    private void traverse(StringBuilder sb){
-//        if (root==null) {
-//            sb.append(firstLeaf) ;
-//            return ;
-//        }
-//        Queue<Node> qu = new LinkedList<>();
-//        qu.add(root);
-//        // each iteration of while is one level
-//        while(!qu.isEmpty()){
-//            int size = qu.size(); // size of current level of tree
-//            // entire for loop for one level
-//            for(int i = 0; i < size; i++){
-//                Node curr = qu.remove();
-//                // if internal node meaning it has children then put children
-//                if(curr instanceof InternalNode node){
-//                    for(int j = 0; j < node.degree; j++)
-//                        qu.add(node.childPointers[j]);
-//                }
-//                sb.append(curr.toString()).append(" ");
-//            }
-//            sb.append('\n');
-//        }
-//    }
-//    private void traverse(StringBuilder sb) {
-//        if (root == null) {
-//            sb.append(firstLeaf);
-//            return;
-//        }
-//        Queue<Node> queue = new LinkedList<>();
-//        queue.add(root);
-//
-//        while (!queue.isEmpty()) {
-//            int levelSize = queue.size();
-//
-//            for (int i = 0; i < levelSize; i++) {
-//                Node node = queue.poll();
-//
-//                if (node instanceof InternalNode) {
-//                    InternalNode internalNode = (InternalNode) node;
-//                    sb.append("Internal Node: [");
-//                    for (int j = 0; j < internalNode.degree - 1; j++) {
-//                        if (j > 0) {
-//                            sb.append(", ");
-//                        }
-//                        sb.append(internalNode.keys[j]);
-//                    }
-//                    sb.append("]\t");
-//                    for (int j = 0; j < internalNode.degree; j++) {
-//                        if (internalNode.childPointers[j] != null) {
-//                            queue.add(internalNode.childPointers[j]);
-//                        }
-//                    }
-//                } else if (node instanceof LeafNode) {
-//                    LeafNode leafNode = (LeafNode) node;
-//                    sb.append("Leaf Node: [");
-//                    for (int j = 0; j < leafNode.numPairs; j++) {
-//                        if (j > 0) {
-//                            sb.append(", ");
-//                        }
-//                        sb.append(leafNode.dictionary[j].values);
-//                    }
-//                    sb.append("]");
-//                    if (leafNode.rightSibling != null) {
-//                        sb.append(" -> ");
-//                    }
-//                    queue.add(leafNode.rightSibling);
-//                }
-//            }
-//
-//            sb.append("\n");
-//        }
-//    }
-    // ,,,,,
-    private void traverse(StringBuilder sb) {
-        if (root == null) {
-            sb.append("[Empty Tree]");
-            return;
+    private void traverse(StringBuilder sb){
+        if (root==null) {
+            sb.append(firstLeaf) ;
+            return ;
         }
-
-        Queue<Node> queue = new LinkedList<>();
-        queue.add(root);
-
-        while (!queue.isEmpty()) {
-            int levelSize = queue.size();
-
-            for (int i = 0; i < levelSize; i++) {
-                Node node = queue.poll();
-
-                if (node instanceof InternalNode) {
-                    InternalNode internalNode = (InternalNode) node;
-                    sb.append(getIndentation(internalNode.getLevel()));
-                    sb.append("Internal Node: [");
-                    for (int j = 0; j < internalNode.degree - 1; j++) {
-                        if (j > 0) {
-                            sb.append(", ");
-                        }
-                        sb.append(internalNode.keys[j]);
-                    }
-                    sb.append("]\n");
-
-                    for (int j = 0; j < internalNode.degree; j++) {
-                        if (internalNode.childPointers[j] != null) {
-                            queue.add(internalNode.childPointers[j]);
-                        }
-                    }
-                } else if (node instanceof LeafNode) {
-                    LeafNode leafNode = (LeafNode) node;
-                    sb.append(getIndentation(leafNode.getLevel()));
-                    sb.append("Leaf Node: [");
-                    for (int j = 0; j < leafNode.numPairs; j++) {
-                        if (j > 0) {
-                            sb.append(", ");
-                        }
-                        sb.append(leafNode.dictionary[j].values);
-                    }
-                    sb.append("]");
-                    if (leafNode.rightSibling != null) {
-                        sb.append(" -> ");
-                    }
-                    queue.add(leafNode.rightSibling);
+        Queue<Node> qu = new LinkedList<>();
+        qu.add(root);
+        // each iteration of while is one level
+        while(!qu.isEmpty()){
+            int size = qu.size(); // size of current level of tree
+            // entire for loop for one level
+            for(int i = 0; i < size; i++){
+                Node curr = qu.remove();
+                // if internal node meaning it has children then put children
+                if(curr instanceof InternalNode node){
+                    for(int j = 0; j < node.degree; j++)
+                        qu.add(node.childPointers[j]);
                 }
+                sb.append(curr.toString()).append(" ");
             }
-
-            sb.append("\n");
+            sb.append('\n');
         }
-    }
-
-    private String getIndentation(int level) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < level; i++) {
-            sb.append(" ,,,"); // Two spaces for each level
-        }
-        return sb.toString();
     }
 
     /**
@@ -666,6 +557,7 @@ public class BPlusIndex implements Serializable {
 
                         // Update sibling pointer
                         sibling.rightSibling = ln.rightSibling;
+                        sibling.mergeDict(ln.dictionary);
 
                         // Check for deficiencies in parent
                         if (parent.isDeficient()) {
@@ -685,6 +577,8 @@ public class BPlusIndex implements Serializable {
 
                         // Update sibling pointer
                         sibling.leftSibling = ln.leftSibling;
+                        sibling.mergeDict(ln.dictionary);
+
                         if (sibling.leftSibling == null) {
                             firstLeaf = sibling;
                         }
@@ -834,7 +728,7 @@ public class BPlusIndex implements Serializable {
 		if (index < 0) {
 			return null;
 		} else {
-			return dps[index].values;
+			return new Vector<>(dps[index].values);
 		}
     }
     /**
@@ -842,18 +736,16 @@ public class BPlusIndex implements Serializable {
      * all values whose associated keys are within the range specified by
      * lowerBound and upperBound.
      *
-     * @param lowerBound: (int) the lower bound of the range
-     * @param upperBound: (int) the upper bound of the range
+     * @param bound: (int) the bound of the range
      * @return an unsorted Vector<Pointer> that holds all values of dictionary pairs
      * whose keys are within the specified range
      */
-    public Vector<Pointer> search(Object lowerBound, Object upperBound) {
+    public Vector<Pointer> searchInclusive(Object bound, boolean lessThan) {
 
         // Instantiate Double array to hold values
         Vector<Pointer> values = new Vector<>();
 
-        Comparable<Object> lower = (Comparable<Object>) lowerBound;
-        Comparable<Object> upper = (Comparable<Object>) upperBound;
+        Comparable<Object> bound1 = (Comparable<Object>) bound;
         // Iterate through the doubly linked list of leaves
         LeafNode currNode = this.firstLeaf;
         while (currNode != null) {
@@ -867,8 +759,59 @@ public class BPlusIndex implements Serializable {
                 if (dp == null) { break; }
 
                 // Include value if its key fits within the provided range
-                if (lower.compareTo(dp.key) <= 0 && upper.compareTo(dp.key) >= 0) {
-                    values.addAll(dp.values);
+                if(lessThan){
+                    if(bound1.compareTo(dp.key) >= 0)
+                        values.addAll(dp.values);
+                }
+                else {
+                    if(bound1.compareTo(dp.key) <= 0)
+                        values.addAll(dp.values);
+                }
+            }
+
+			/* Update the current node to be the right sibling,
+			   leaf traversal is from left to right */
+            currNode = currNode.rightSibling;
+
+        }
+        values.sort(Comparable::compareTo);
+        return values;
+    }
+    /**
+     * This method traverses the doubly linked list of the B+ tree and records
+     * all values whose associated keys are within the range specified by
+     * lowerBound and upperBound.
+     *
+     * @param bound: (Object) the bound of the range
+     * @return an unsorted Vector<Pointer> that holds all values of dictionary pairs
+     * whose keys are within the specified range
+     */
+    public Vector<Pointer> searchExclusive(Object bound, boolean lessThan) {
+
+        // Instantiate Double array to hold values
+        Vector<Pointer> values = new Vector<>();
+
+        Comparable<Object> bound1 = (Comparable<Object>) bound;
+        // Iterate through the doubly linked list of leaves
+        LeafNode currNode = this.firstLeaf;
+        while (currNode != null) {
+
+            // Iterate through the dictionary of each node
+            DictionaryPair[] dps = currNode.dictionary;
+            for (DictionaryPair dp : dps) {
+
+				/* Stop searching the dictionary once a null value is encountered
+				   as this the indicates the end of non-null values */
+                if (dp == null) { break; }
+
+                // Include value if its key fits within the provided range
+                if(lessThan){
+                    if(bound1.compareTo(dp.key) > 0)
+                        values.addAll(dp.values);
+                }
+                else {
+                    if(bound1.compareTo(dp.key) < 0)
+                        values.addAll(dp.values);
                 }
             }
 
@@ -887,7 +830,6 @@ public class BPlusIndex implements Serializable {
      */
     public class Node implements Serializable {
         InternalNode parent;
-        protected int level;
     }
 
     /**
@@ -903,10 +845,6 @@ public class BPlusIndex implements Serializable {
         InternalNode rightSibling;
         Object[] keys;
         Node[] childPointers;
-
-        public int getLevel() {
-            return level;
-        }
 
         /**
          * This method appends 'pointer' to the end of the childPointers
@@ -1081,9 +1019,7 @@ public class BPlusIndex implements Serializable {
         LeafNode leftSibling;
         LeafNode rightSibling;
         DictionaryPair[] dictionary;
-        public int getLevel() {
-            return level;
-        }
+
 
         // 2,3,5,1,7 -> // 1,2,3,5,7
         // 1,2,3,4,5 -> // 1,2,3,4,5
@@ -1093,24 +1029,29 @@ public class BPlusIndex implements Serializable {
          * within the dictionary to null.
          * @param index: the location within the dictionary to be set to null
          */
-        public void delete(int index) {
+        private void delete(int index) {
             // Delete dictionary pair from leaf
-            if(dictionary[index].values.isEmpty())
-                this.dictionary[index] = null;
+//            if(dictionary[index].values.isEmpty())
+            this.dictionary[index] = null;
 
             // Decrement numPairs
             numPairs--;
         }
-        public void delete(int index, Pointer value) {
+        private void delete(int index, Pointer value) {
 
             if(!dictionary[index].values.remove(value))
-                System.err.println("Value Not Found");;
-            // Delete dictionary pair from leaf
-            if(dictionary[index].values.isEmpty())
-                this.dictionary[index] = null;
+                System.err.println("Value Not Found");
 
-            // Decrement numPairs
-            numPairs--;
+            // Delete dictionary pair from leaf
+            if(dictionary[index].values.isEmpty()){
+//                this.dictionary[index] = null;
+                //shift all
+                for(int i = index; i<numPairs; i++)
+                    this.dictionary[i] = this.dictionary[i+1];
+                // Decrement numPairs
+                numPairs--;
+            }
+
         }
 
         /**
@@ -1129,6 +1070,9 @@ public class BPlusIndex implements Serializable {
 
                 return false;
             } else {
+//                System.out.println("dp 🖲️" + dp);
+//                System.out.println("leaf Node🌿🍀: " + Arrays.toString(Arrays.copyOfRange(dictionary, 0, numPairs)));
+//                System.out.println("NumPairs: " + numPairs);
                 // if duplicate dictionary pair then insert into existing
                 if(updateKeyVal(dp))
                     return true;
@@ -1136,6 +1080,8 @@ public class BPlusIndex implements Serializable {
 
                 this.dictionary[numPairs] = dp;
                 numPairs++;
+//                System.out.println(numPairs + " inserted dp💾: " + Arrays.toString(Arrays.copyOfRange(dictionary, 0, numPairs)));
+//                System.out.println();
                 Arrays.sort(this.dictionary, 0, numPairs);
 
                 return true;
@@ -1143,6 +1089,9 @@ public class BPlusIndex implements Serializable {
             }
         }
         private boolean updateKeyVal(DictionaryPair dp){
+            if(numPairs == 0 || this.dictionary[0] == null)
+                return false;
+
             Comparator<DictionaryPair> c = DictionaryPair::compareTo;
             int idx = Arrays.binarySearch(this.dictionary, 0, numPairs, dp, c);
             if(idx < 0)
@@ -1152,6 +1101,19 @@ public class BPlusIndex implements Serializable {
             return true;
         }
 
+        /**
+         * this method merges a dictionary with this
+         * leafnode's dictionary
+         * @param dps the dictionary to be merged with
+         */
+        public void mergeDict(DictionaryPair[] dps){
+            for(int i =0 ; i<dps.length && dps[i]!=null; i++){
+                this.dictionary[numPairs] = dps[i];
+                numPairs++;
+//                insert(dps[i]);
+            }
+            Arrays.sort(this.dictionary, 0, numPairs);
+        }
         /**
          * This simple method determines if the LeafNode is deficient, i.e.
          * the numPairs within the LeafNode object is below minNumPairs.
@@ -1218,7 +1180,7 @@ public class BPlusIndex implements Serializable {
         }
         @Override
         public String toString(){
-            return Arrays.toString(dictionary) + "->";
+            return Arrays.toString(Arrays.copyOfRange(dictionary, 0, numPairs)) + "->";
         }
     }
 
@@ -1268,35 +1230,6 @@ public class BPlusIndex implements Serializable {
         }
     }
 
-    private void appendNodeToString(Node node, StringBuilder treeString, int level) {
-        if (node instanceof LeafNode) {
-            appendLeafNodeToString((LeafNode) node, treeString, level);
-        } else if (node instanceof InternalNode) {
-            appendInternalNodeToString((InternalNode) node, treeString, level);
-        }
-    }
-
-    private void appendLeafNodeToString(LeafNode leafNode, StringBuilder treeString, int level) {
-        treeString.append("Leaf Node (Level ").append(level).append("): ");
-        for (int i = 0; i < leafNode.numPairs; i++) {
-            DictionaryPair pair = leafNode.dictionary[i];
-            treeString.append("(").append(pair.key).append(", ").append(pair.values).append(") ");
-        }
-        treeString.append("\n");
-    }
-
-    private void appendInternalNodeToString(InternalNode internalNode, StringBuilder treeString, int level) {
-        treeString.append("Internal Node (Level ").append(level).append("): ");
-        for (int i = 0; i < internalNode.degree - 1; i++) {
-            treeString.append(internalNode.keys[i]).append(" ");
-        }
-        treeString.append("\n");
-
-        for (int i = 0; i < internalNode.degree; i++) {
-            appendNodeToString(internalNode.childPointers[i], treeString, level + 1);
-        }
-    }
-
     public static void main(String[] args) {
 
         // Ensure correct number of arguments
@@ -1320,10 +1253,19 @@ public class BPlusIndex implements Serializable {
 
             // Create initial B+ tree
             BPlusIndex bpt = new BPlusIndex(3,"","","");
-            bpt.insert("Ahmed",new Pointer(99,90));
-            bpt.insert("Mo",new Pointer(20,40));
-            bpt.insert("Do",new Pointer(100,50));
-            System.out.println(bpt);
+            bpt.insert("ahmed",new Pointer(1,2));
+            bpt.insert("nora",new Pointer(99,3));
+            bpt.insert("hoda",new Pointer(99,40));
+
+            bpt.insert("hussein",new Pointer(99,5));
+
+            bpt.insert("peter",new Pointer(99,6));
+
+            bpt.insert("john",new Pointer(99,7));
+
+            bpt.insert("kareem",new Pointer(99,8));
+
+            System.out.println(bpt.search("kareem"));
 
 //
 //            System.out.println(bpt.search("Ahmed"));

@@ -24,16 +24,16 @@ public class IndexControler {
 
         BPlusIndex b = new BPlusIndex(10, table.getTableName(), strColName, strIndexName);
         // if col has records already
-        if(table.hasRecords()){
+        if (table.hasRecords()) {
             // load all pages
             // for each record
             // get idxCol index -> getcolIdx()
             // insert values at this index into b+ idx
             int colIdx = table.idxFromName(strColName);
-            for (int i = 0 ; i <table.getPagePaths().size(); i++) {
+            for (int i = 0; i < table.getPagePaths().size(); i++) {
                 Page page = (Page) FileCreator.readObject(table.getPagePaths().get(i));
-                for(Record record : page){
-                    b.insert(record.get(colIdx) , new Pointer(i,record.get((int)table.getClusterKeyAndIndex()[1])));
+                for (Record record : page) {
+                    b.insert(record.get(colIdx), new Pointer(i, record.get((int) table.getClusterKeyAndIndex()[1])));
                 }
             }
         }
@@ -41,7 +41,7 @@ public class IndexControler {
         return b;
     }
 
-    public static void insertIntoIndex(Record rec , int pageIdx , Table table , Hashtable<String, Object> insertedTuple) throws IOException, ClassNotFoundException, DBAppException {
+    public static void insertIntoIndex(Record rec, int pageIdx, Table table, Hashtable<String, Object> insertedTuple) throws IOException, ClassNotFoundException, DBAppException {
         Vector<BPlusIndex> allTableIndices = IndexControler.loadAllTableIndices(table.getTableName());
         for (BPlusIndex b : allTableIndices) {
             Enumeration<String> keys = insertedTuple.keys();
@@ -50,36 +50,70 @@ public class IndexControler {
                 String key = keys.nextElement();
                 Object value = values.nextElement();
                 if (b.getColName().equals(key)) {
-                    b.insert(value, new Pointer(pageIdx , rec.get((int)table.getClusterKeyAndIndex()[1])));
+                    b.insert(value, new Pointer(pageIdx, rec.get((int) table.getClusterKeyAndIndex()[1])));
                     b.save();
                 }
             }
         }
     }
 
-    public static void updatePageIdxOverflow(Record rec , Table table , Hashtable<String, Object> insertedTuple) throws IOException, ClassNotFoundException, DBAppException {
+    public static void updatePageIdxOverflow(Record rec, Table table) throws IOException, ClassNotFoundException, DBAppException {
         Vector<BPlusIndex> allTableIndices = IndexControler.loadAllTableIndices(table.getTableName());
         for (BPlusIndex b : allTableIndices) {
-            Enumeration<String> keys = insertedTuple.keys();
-            Enumeration<Object> values = insertedTuple.elements();
-            while (keys.hasMoreElements()) {
-                String key = keys.nextElement();
-                Object value = values.nextElement();
-                if (b.getColName().equals(key)) {
-                    Vector<Pointer> pointers =   b.search(value);
-                    for (Pointer p :pointers)
-                        if (p.clusterKeyValue==rec.get((int)table.getClusterKeyAndIndex()[1]))
-                            ++p.pageIdx ;
-                    b.save();
+            int i = table.idxFromName(b.getColName());
+            Comparable clusteringKey = rec.get((int)table.getClusterKeyAndIndex()[1]) ;
+            //getting all the pointers to the value of the coulumn
+            Vector<Pointer> pointers = b.search(rec.get(i)) ;
+            for (Pointer p : pointers){
+                if (p.clusterKeyValue.equals(clusteringKey)){
+                    b.delete(rec.get(i),p);
+                    b.insert(rec.get(i),new Pointer(p.pageIdx+1,clusteringKey));
+                    //break l 3yon ConcurrentModificationException
+                    break ;
                 }
+            }
+            b.save();
+        }
+    }
+
+    //    public static void updatePageIdxOverflow(Record rec , Table table , Hashtable<String, Object> insertedTuple) throws IOException, ClassNotFoundException, DBAppException {
+//        Vector<BPlusIndex> allTableIndices = IndexControler.loadAllTableIndices(table.getTableName());
+//        for (BPlusIndex b : allTableIndices) {
+//            Enumeration<String> keys = insertedTuple.keys();
+//            Enumeration<Object> values = insertedTuple.elements();
+//            while (keys.hasMoreElements()) {
+//                String key = keys.nextElement();
+//                Object value = values.nextElement();
+//                Comparable clusteringKey = rec.get((int)table.getClusterKeyAndIndex()[1]);
+//                if (b.getColName().equals(clusteringKey)) {
+//                    Vector<Pointer> pointers =   b.search(value);
+//                    for (Pointer p :pointers){
+//                        if (p.clusterKeyValue==clusteringKey){
+//                            ++p.pageIdx ;
+////                            Object comlumnToModify = rec.get(table.idxFromName(b.getColName()));
+////                            System.out.println((String)comlumnToModify + "  " + p.pageIdx );
+////                            b.delete(comlumnToModify,p);
+////                            b.insert(comlumnToModify,new Pointer(p.pageIdx+1,clusteringKey));
+//                            b.save();
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+    public static void deleteFromIndex(ArrayList<Integer> colIdxWBplus, ArrayList<BPlusIndex> affectedBPlus, ArrayList<Record> toRemove, ArrayList<Pointer> ptrsToRemove) {
+        for (int currCol : colIdxWBplus) {
+            // bplus tree of current column
+            BPlusIndex currBplus = affectedBPlus.get(currCol);
+            for (int j = 0; j < toRemove.size(); j++) {
+                Object key = toRemove.get(j).get(currCol);
+                Pointer p = ptrsToRemove.get(j);
+                currBplus.delete(key, p);
             }
         }
     }
 
-
-
-
-    /*
+    /**
         update({id : 1 , age : 20},{id : 2 , age :30},{id : 3 , age :20})
         [1,3] [2]     // values
     *   [20]  [30]   // keys
@@ -90,34 +124,40 @@ public class IndexControler {
     *
     *
     * */
-
     public static void updateIndex(
             Hashtable<String, Object> newColNameVal, // name in old and new is same
             Hashtable<String, Object> oldColNameVal,
-            Object clusterKeyVal ,
-            int pageIdx ,
+            Object clusterKeyVal,
+            int pageIdx,
             Table table
-        ) throws IOException, ClassNotFoundException, DBAppException {
-
+    ) throws IOException, ClassNotFoundException, DBAppException {
 
         String colName = oldColNameVal.keySet().iterator().next();
         TableColumn col = table.getColumnByName(colName);
+        if (col.getIndexName().equals("null")) {
+            throw new DBAppException("There is no index for : " + col.getColumnName() + " column");
+        }
         BPlusIndex idx = readIndexByName(col.getIndexName(), table);
 
-        Object oldValue = oldColNameVal.get(colName) ;
+        Object oldValue = oldColNameVal.get(colName);
         Vector<Pointer> pageIdxsAndClusterKeysValues = idx.search(oldValue); // [{0 , clusterKeyval1 } ,{1 ,clusterKeyval2}]
-        Pointer oldPointer = null ;
-        for(Pointer pointer : pageIdxsAndClusterKeysValues){
-            if(pointer.clusterKeyValue.compareTo(clusterKeyVal) == 0){
-                oldPointer =pointer ;
+        Pointer oldPointer = null;
+        if (pageIdxsAndClusterKeysValues == null) {
+            throw new DBAppException("Old value : " + oldValue + " to be updated not found in the index");
+        }
+        for (Pointer pointer : pageIdxsAndClusterKeysValues) {
+            if (pointer.clusterKeyValue.compareTo(clusterKeyVal) == 0) {
+                oldPointer = pointer;
             }
         }
         if (oldPointer != null) {
-            idx.delete(oldColNameVal.get(colName) , oldPointer);
-            idx.insert(newColNameVal.get(colName),new Pointer( pageIdx , clusterKeyVal) ); // insert new Pointer (pageIdx , cluter Keyval)
-        }else{
-            throw new DBAppException("This column has no B+ index");
+            idx.delete(oldColNameVal.get(colName), oldPointer);
+            idx.insert(newColNameVal.get(colName), new Pointer(pageIdx, clusterKeyVal)); // insert new Pointer (pageIdx , cluter Keyval)
+            idx.save();
+        } else {
+            throw new DBAppException("This column has no B+ index to update it");
         }
+
     }
 
     public Object searchOnIndex() {
@@ -138,8 +178,8 @@ public class IndexControler {
                 if (files != null) {
                     for (File file : files) {
                         //-6 de 3shan asheel .class elly ma7tota dy
-                        String idxPath = file.getPath().substring(0, file.getPath().length() - 6) ;
-                        BPlusIndex idx= (BPlusIndex) FileCreator.readObject(idxPath) ;
+                        String idxPath = file.getPath().substring(0, file.getPath().length() - 6);
+                        BPlusIndex idx = (BPlusIndex) FileCreator.readObject(idxPath);
                         allIndices.add(idx);
                     }
                 } else {
@@ -152,7 +192,7 @@ public class IndexControler {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new Vector<>() ;
+        return new Vector<>();
     }
 
 
@@ -168,9 +208,66 @@ public class IndexControler {
                 idxName;
         return (BPlusIndex) FileCreator.readObject(idxPath);
     }
-    public static Vector<Pointer> search(Table table, String colName, Object value) throws DBAppException, IOException, ClassNotFoundException {
+
+    public static Vector<Pointer> search(Table table, String colName, Object value, String operator) throws DBAppException, IOException, ClassNotFoundException {
         BPlusIndex bplus = readIndexByName(table.getColumnByName(colName).getIndexName(), table);
-        return bplus.search(value);
+        switch (operator) {
+            case "=":
+                return bplus.search(value);
+            case "!=":
+                return Operations.union(bplus.searchExclusive(value, true), bplus.searchExclusive(value, false));
+            case ">":
+                return bplus.searchExclusive(value, false);
+            case ">=":
+                return bplus.searchInclusive(value, false);
+            case "<":
+                return bplus.searchExclusive(value, true);
+            case "<=":
+                return bplus.searchInclusive(value, true);
+
+            default:
+                throw new DBAppException("Unsupported operator");
+        }
+
     }
+    public static boolean testIndexTable(Table table) throws IOException, ClassNotFoundException, DBAppException {
+        int clusterIdx =(int) table.getClusterKeyAndIndex()[1];
+        ArrayList<TableColumn> cols = table.getAllColumnBIdxs();
+
+        for(int i = 0; i< table.getPagePaths().size(); i++){
+            Page page = (Page) FileCreator.readObject(table.getPagePaths().get(i));
+
+            for(Record record : page){
+                for(TableColumn col : cols){
+                    BPlusIndex currBP = readIndexByName(col.getIndexName(), table);
+                    Object key = record.get(table.idxFromName(col.getColumnName()));
+                    Vector<Pointer> ptrs = currBP.search(key);
+                    int check = ptrs.indexOf(new Pointer(i, record.get(clusterIdx)));
+                    if(ptrs.get(check).pageIdx != i){
+                        System.out.println("incorrect pageIdx in bplus for key: " + record.get(clusterIdx));
+                        System.out.println("supposed to be: " + i + " but found " + ptrs.get(check).pageIdx);
+                        return false;
+                    }
+
+                }
+            }
+        }
+        return true;
+    }
+    public static void updatePageDeletion(Table table, ArrayList<BPlusIndex> bPlusIndices, int deletedIdx) throws IOException, ClassNotFoundException {
+        for(BPlusIndex bplus: bPlusIndices) {
+            BPlusIndex.LeafNode curr = bplus.firstLeaf;
+            while (curr != null) {
+                for (BPlusIndex.DictionaryPair dp : curr.dictionary) {
+                    if (dp == null) break;
+                    for (Pointer p : dp.values)
+                        if (p.pageIdx >= deletedIdx)
+                            p.pageIdx--;
+                }
+                curr = curr.rightSibling;
+            }
+        }
+    }
+
 
 }

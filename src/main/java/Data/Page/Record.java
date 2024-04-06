@@ -16,7 +16,6 @@ public class Record extends Vector<Comparable>{
         }
     }
 
-
     public void updateRecord(
             Hashtable<Integer, Object> colIdxVal,
             Hashtable<String, Object> colNameVal ,
@@ -27,11 +26,10 @@ public class Record extends Vector<Comparable>{
         if (colIdxVal.size() != colNameVal.size()) {
             throw new IllegalArgumentException("Hashtable sizes do not match");
         }
-        Enumeration<Integer> indexKeys = colIdxVal.keys();
         Enumeration<String> colKeys = colNameVal.keys(); // [id , name]
-        while (indexKeys.hasMoreElements() && colKeys.hasMoreElements()) {
-            int idx = indexKeys.nextElement();
+        while (colKeys.hasMoreElements()) {
             String colKey = colKeys.nextElement();
+            int idx = table.idxFromName(colKey);
 //             check if col has B+ idx
             if(table.isColumnNameBIdx(colKey)){
                 // create new HashTable with the onlt this key and this value  ex id : 1 only
