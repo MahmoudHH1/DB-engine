@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="🖲️🖲️💀🎓🪪💾">
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="el7a2 search range">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Index/BPlusIndex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Index/BPlusIndex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/SQLBonus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammars/SQLBonus.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DBApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -223,14 +222,6 @@
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
       <updated>1709364507752</updated>
-    </task>
-    <task id="LOCAL-00066" summary="toString() kolo">
-      <option name="closed" value="true" />
-      <created>1710706749770</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1710706749770</updated>
     </task>
     <task id="LOCAL-00067" summary="maven aho 3ashan mayez3aloosh">
       <option name="closed" value="true" />
@@ -600,7 +591,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712360284437</updated>
     </task>
-    <option name="localTasksCounter" value="113" />
+    <task id="LOCAL-00113" summary="el7a2 search range">
+      <option name="closed" value="true" />
+      <created>1712361588750</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1712361588750</updated>
+    </task>
+    <option name="localTasksCounter" value="114" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -675,7 +674,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="delete&#10;and Table hasIndex method" />
     <MESSAGE value="good now" />
     <MESSAGE value="adighkgkra" />
     <MESSAGE value="Operations" />
@@ -700,7 +698,8 @@
     <MESSAGE value="bonus" />
     <MESSAGE value="el2of" />
     <MESSAGE value="️️" />
-    <option name="LAST_COMMIT_MESSAGE" value="️️" />
+    <MESSAGE value="el7a2 search range" />
+    <option name="LAST_COMMIT_MESSAGE" value="el7a2 search range" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -725,11 +724,6 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/DBApp.java</url>
-          <line>159</line>
-          <option name="timeStamp" value="138" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/DBApp.java</url>
           <line>251</line>
           <option name="timeStamp" value="141" />
         </line-breakpoint>
@@ -737,11 +731,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/Data/Index/IndexControler.java</url>
           <line>106</line>
           <option name="timeStamp" value="142" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/DBApp.java</url>
-          <line>584</line>
-          <option name="timeStamp" value="146" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/DBApp.java</url>

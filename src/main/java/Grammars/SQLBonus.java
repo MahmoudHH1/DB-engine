@@ -7,6 +7,7 @@ import org.antlr.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.Token;
 
 import java.io.File;
 import java.util.Arrays;
@@ -21,7 +22,7 @@ public class SQLBonus {
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         SqlParser parser = new SqlParser(tokens);
         SqlParser.ParseContext tree = parser.parse();
-        System.out.println(tree);
+
     }
 
 }
