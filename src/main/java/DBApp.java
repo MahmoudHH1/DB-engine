@@ -199,7 +199,7 @@ public class DBApp {
                     // remove records first from page
                     page.removeAll(toRemove);
                     if(page.isEmpty())
-                        IndexControler.updatePageDeletion(table, affectedBPlus, i-1);
+                        IndexControler.updatePageDeletion(table, affectedBPlus, bplusFilter.get(i-1).pageIdx);
                     // remove from all indicies
                     IndexControler.deleteFromIndex(colIdxWBplus, affectedBPlus, toRemove, ptrsToRemove);
                     page.save();
@@ -219,7 +219,7 @@ public class DBApp {
                     ptrsToRemove.add(bplusFilter.get(i));
                     rowsAffected++;
                 }
-                last =i ;
+                last = bplusFilter.get(i).pageIdx ;
             }
             // in case remains records
             if(!toRemove.isEmpty()){

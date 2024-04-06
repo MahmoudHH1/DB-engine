@@ -1,6 +1,7 @@
 package Grammars;
 
 import Data.Index.BPlusIndex;
+import Grammars.gen.Grammars.SqlBaseVisitor;
 import Grammars.gen.Grammars.SqlLexer;
 import Grammars.gen.Grammars.SqlParser;
 import org.antlr.runtime.tree.ParseTree;
@@ -21,7 +22,10 @@ public class SQLBonus {
         SqlLexer lexer = new SqlLexer(charStream);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         SqlParser parser = new SqlParser(tokens);
+
         SqlParser.ParseContext tree = parser.parse();
+        MyVisitor visitor = new MyVisitor();
+        visitor.visit(tree);
 
     }
 
