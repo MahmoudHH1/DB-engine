@@ -13,9 +13,11 @@ import Exceptions.DBAppException;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serial;
 import java.util.*;
 
 public class Page extends Vector<Record>  {
+    @Serial
     private static final long serialVersionUID = -9043778273416338053L;
     private transient Table table ;
     private String pageName ; // unnecessary attribute?

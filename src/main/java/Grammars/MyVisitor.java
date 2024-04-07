@@ -9,6 +9,9 @@ import java.util.ArrayList;
 public class MyVisitor extends SqlBaseVisitor<SQLStatement> {
     // will contain all info needed about statement
     private SQLStatement parsedStatement;
+    // if I want to parse more than one statement seperated by semicolons
+    // probably won't use
+    public int numStatements;
     @Override public SQLStatement visitParse(SqlParser.ParseContext ctx) {
 
         return visitChildren(ctx);
@@ -29,19 +32,24 @@ public class MyVisitor extends SqlBaseVisitor<SQLStatement> {
         return visitChildren(ctx);
     }
     @Override public SQLStatement visitCreate_index_stmt(SqlParser.Create_index_stmtContext ctx) {
+        parsedStatement.type = Statement.CRTABLE;
         return visitChildren(ctx);
     }
     @Override public SQLStatement visitCreate_table_stmt(SqlParser.Create_table_stmtContext ctx) {
+        parsedStatement.type = Statement.CRINDEX;
         return visitChildren(ctx);
     }
     @Override public SQLStatement visitDelete_stmt(SqlParser.Delete_stmtContext ctx) {
+        parsedStatement.type = Statement.DELETE;
         return visitChildren(ctx);
     }
 
     @Override public SQLStatement visitInsert_stmt(SqlParser.Insert_stmtContext ctx) {
+        parsedStatement.type = Statement.INSERT;
         return visitChildren(ctx);
     }
     @Override public SQLStatement visitSimple_select_stmt(SqlParser.Simple_select_stmtContext ctx) {
+
         return visitChildren(ctx);
     }
 

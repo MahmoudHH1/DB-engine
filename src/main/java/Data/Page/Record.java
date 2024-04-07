@@ -6,9 +6,12 @@ import Data.Table.TableColumn;
 import Exceptions.DBAppException;
 
 import java.io.IOException;
+import java.io.Serial;
 import java.util.*;
 
 public class Record extends Vector<Comparable>{
+    @Serial
+    private static final long serialVersionUID = -9043778273416338053L;
     public void insertRecord(Hashtable<Integer , Object> ht) {
         this.setSize(ht.size());
         for(int idx : ht.keySet()){

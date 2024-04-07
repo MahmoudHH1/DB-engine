@@ -1,8 +1,11 @@
 package Data.Index;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class Pointer implements Comparable , Serializable {
+    @Serial
+    private static final long serialVersionUID = -9043778273416338053L;
     public int pageIdx;
     public Comparable clusterKeyValue;
 

@@ -19,6 +19,7 @@ import java.io.IOException;
 
 public class Table implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -9043778273416338053L;
     private Vector<String> pagePaths; // page paths
     private transient ArrayList<TableColumn> allColumns;
@@ -256,7 +257,16 @@ public class Table implements Serializable {
         }
         return new Pair<>(mid, recIdx); // 5000
     }
-    public Pair<Page, Record> searchRec(Comparable clusterKey, int clusterIdx) throws IOException, ClassNotFoundException {
+    public Pair<Page, Record> searchRec(Comparable clusterKey, int clusterIdx) throws IOException, ClassNotFoundException, DBAppException {
+        TableColumn clusterCol = getAllColumns().get(clusterIdx);
+        if(clusterCol.isColumnBIdx()){
+            Vector<Pointer> ptrs = IndexControler.search(this, clusterCol.getColumnName(), clusterKey,"=");
+            if(ptrs == null)
+                return null;
+            Pointer p = ptrs.get(0);
+            Page page = Page.readPage(getPagePaths().get(p.pageIdx), this);
+            return new Pair<>(page, page.searchRecord(clusterKey, clusterIdx));
+        }
         return searchRec(clusterKey, clusterIdx, 0);
     }
     public Pair<Page, Record> searchRec(Comparable clusterKey, int clusterIdx, int start) throws IOException, ClassNotFoundException {
