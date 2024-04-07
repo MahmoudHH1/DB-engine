@@ -57,7 +57,7 @@ public class IndexControler {
         Vector<BPlusIndex> allTableIndices = IndexControler.loadAllTableIndices(table.getTableName());
         for (BPlusIndex b : allTableIndices) {
             int i = table.idxFromName(b.getColName());
-            Comparable clusteringKey = rec.get((int)table.getClusterKeyAndIndex()[1]) ;
+            Comparable<?> clusteringKey = rec.get((int)table.getClusterKeyAndIndex()[1]) ;
             //getting all the pointers to the value of the coulumn
             Vector<Pointer> pointers = b.search(rec.get(i)) ;
             for (Pointer p : pointers){
@@ -117,8 +117,6 @@ public class IndexControler {
     *   delete (20 ,1 )
     *   [3] [2]     // values
     *   [20]  [30]   // keys
-    *
-    *
     * */
     public static void updateIndex(
             Hashtable<String, Object> newColNameVal, // name in old and new is same
@@ -155,10 +153,6 @@ public class IndexControler {
         }
 
     }
-
-    public Object searchOnIndex() {
-        return new Object();
-    } // for return the cluster Key value of B+
 
     public static Vector<BPlusIndex> loadAllTableIndices(String tableName) throws IOException, ClassNotFoundException {
         try {
@@ -207,29 +201,22 @@ public class IndexControler {
 
     public static Vector<Pointer> search(Table table, String colName, Object value, String operator) throws DBAppException, IOException, ClassNotFoundException {
         BPlusIndex bplus = readIndexByName(table.getColumnByName(colName).getIndexName(), table);
-        switch (operator) {
-            case "=":
-                return bplus.search(value);
-            case "!=":
-                return Operations.union(bplus.searchExclusive(value, true), bplus.searchExclusive(value, false));
-            case ">":
-                return bplus.searchExclusive(value, false);
-            case ">=":
-                return bplus.searchInclusive(value, false);
-            case "<":
-                return bplus.searchExclusive(value, true);
-            case "<=":
-                return bplus.searchInclusive(value, true);
-
-            default:
-                throw new DBAppException("Unsupported operator");
-        }
+        return switch (operator) {
+            case "=" -> bplus.search(value);
+            case "!=" -> Operations.union(bplus.searchExclusive(value, true), bplus.searchExclusive(value, false));
+            case ">" -> bplus.searchExclusive(value, false);
+            case ">=" -> bplus.searchInclusive(value, false);
+            case "<" -> bplus.searchExclusive(value, true);
+            case "<=" -> bplus.searchInclusive(value, true);
+            default -> throw new DBAppException("Unsupported operator");
+        };
 
     }
     public static Vector<Pointer> searchIntersect(Table table, ArrayList<Integer> colIdxWBplus,
                                                   Hashtable<Integer, Object> colIdxVal,
-                                                  ArrayList<BPlusIndex> affectedBPlus,
-                                                  Vector<Pointer> bplusFilter) throws IOException, ClassNotFoundException {
+                                                  ArrayList<BPlusIndex> affectedBPlus)
+            throws IOException, ClassNotFoundException {
+        Vector<Pointer> bplusFilter = null;
         for (int i : colIdxWBplus) {
             TableColumn col = table.getAllColumns().get(i);
             BPlusIndex bplus = IndexControler.readIndexByName(col.getIndexName(), table);
@@ -269,7 +256,7 @@ public class IndexControler {
         }
         return true;
     }
-    public static void updatePageDeletion(ArrayList<BPlusIndex> bPlusIndices, int deletedIdx) throws IOException, ClassNotFoundException {
+    public static void updatePageDeletion(ArrayList<BPlusIndex> bPlusIndices, int deletedIdx) {
         for(BPlusIndex bplus: bPlusIndices) {
             BPlusIndex.LeafNode curr = bplus.firstLeaf;
             while (curr != null) {

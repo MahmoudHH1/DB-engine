@@ -4,19 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="pageIdx mesh ay haga index i">
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="maxPageSize needed to be used in table search.&#10;Optimization using clusterKey in delete.&#10;Pointer equality adjustment">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Data/Index/IndexControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Index/IndexControler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Index/Pointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Index/Pointer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Page/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Page/Page.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Data/Table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Table/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/MyVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammars/MyVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DBApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/IndexControler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/IndexControler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Page/Page$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Page/Page$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Page/Page.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Page/Page.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Table/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Table/Table.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SQLTerm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SQLTerm.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -237,14 +230,6 @@
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
       <updated>1709364507752</updated>
-    </task>
-    <task id="LOCAL-00067" summary="maven aho 3ashan mayez3aloosh">
-      <option name="closed" value="true" />
-      <created>1711208819888</created>
-      <option name="number" value="00067" />
-      <option name="presentableId" value="LOCAL-00067" />
-      <option name="project" value="LOCAL" />
-      <updated>1711208819888</updated>
     </task>
     <task id="LOCAL-00068" summary="dependencies and plugins in pom.xml">
       <option name="closed" value="true" />
@@ -614,7 +599,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712419707010</updated>
     </task>
-    <option name="localTasksCounter" value="114" />
+    <task id="LOCAL-00114" summary="maxPageSize needed to be used in table search.&#10;Optimization using clusterKey in delete.&#10;Pointer equality adjustment">
+      <option name="closed" value="true" />
+      <created>1712493229098</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1712493229099</updated>
+    </task>
+    <option name="localTasksCounter" value="115" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -689,7 +682,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="good now" />
     <MESSAGE value="adighkgkra" />
     <MESSAGE value="Operations" />
     <MESSAGE value="Operations xor" />
@@ -714,7 +706,8 @@
     <MESSAGE value="el2of" />
     <MESSAGE value="️️" />
     <MESSAGE value="pageIdx mesh ay haga index i" />
-    <option name="LAST_COMMIT_MESSAGE" value="pageIdx mesh ay haga index i" />
+    <MESSAGE value="maxPageSize needed to be used in table search.&#10;Optimization using clusterKey in delete.&#10;Pointer equality adjustment" />
+    <option name="LAST_COMMIT_MESSAGE" value="maxPageSize needed to be used in table search.&#10;Optimization using clusterKey in delete.&#10;Pointer equality adjustment" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

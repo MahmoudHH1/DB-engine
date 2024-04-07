@@ -40,10 +40,10 @@ public class SQLTerm {
     // collapses boolean array to one bool
     // true or false and true xor true -> false
     private static boolean foldBool(boolean[] terms, String[] ops) throws DBAppException {
-        if(terms.length != ops.length+1)
-            throw new DBAppException("insufficient stuff");
         if(terms.length == 0)
             return true;
+        if(terms.length != ops.length+1)
+            throw new DBAppException("insufficient stuff");
         boolean res = terms[0];
         for(int i = 1; i < terms.length; i++)
             res = applyGates(res, ops[i-1], terms[i]);
@@ -72,8 +72,8 @@ public class SQLTerm {
     }
 
     public static boolean allColummnsBplus(Table table,SQLTerm[] terms, String[] strarrOperators) throws DBAppException {
-        for(int i = 0; i<terms.length; i++){
-            if(!table.getColumnByName(terms[i]._strColumnName).isColumnBIdx()){
+        for (SQLTerm term : terms) {
+            if (!table.getColumnByName(term._strColumnName).isColumnBIdx()) {
 //                    &&!(i >= 1 && strarrOperators[i-1].equals("AND")))
                 return false;
             }
@@ -81,10 +81,10 @@ public class SQLTerm {
         return true;
     }
     public static ArrayList<Pointer> evalPtrs(ArrayList<Vector<Pointer>> converted, String[] ops) throws DBAppException {
+        if(converted.isEmpty())
+            return null;
         if(converted.size() != ops.length+1)
             throw new DBAppException("insufficient stuff");
-        if(converted.size() == 0)
-            return null;
         // check size don't forget !!!!!!!!!!!
         Vector<Pointer> res = converted.get(0);
         for(int i = 1; i < converted.size(); i++){

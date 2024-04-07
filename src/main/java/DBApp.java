@@ -1,8 +1,6 @@
-import Data.Handler.FileCreator;
 import Data.Handler.Pair;
 import Data.Index.BPlusIndex;
 import Data.Index.IndexControler;
-import Data.Index.Operations;
 import Data.Index.Pointer;
 import Data.Page.Page;
 import Data.Page.Record;
@@ -48,8 +46,8 @@ public class DBApp {
     public void createTable(String strTableName,
                             String strClusteringKeyColumn,
                             Hashtable<String, String> htblColNameType) throws DBAppException, IOException {
-        Table t = Table.getTable(allTables, strTableName);
-        if (t != null) {
+
+        if (Table.exists(allTables, strTableName)) {
             throw new DBAppException("Table already exists");
         }
         ArrayList<TableColumn> allColumns = new ArrayList<>();
@@ -72,19 +70,16 @@ public class DBApp {
                             String strIndexName) throws DBAppException, IOException, ClassNotFoundException {
         Table table = Table.getTable(allTables, strTableName);
 
-        if(table.getColumnByName(strColName).isColumnBIdx())
+        TableColumn col = table.getColumnByName(strColName);
+        if(col.isColumnBIdx())
             throw new DBAppException("There is already an index on that column");
         if(table.getAllColumnBIdxsNames().contains(strIndexName))
             throw new DBAppException("There is already an index by that name");
 
-        for (TableColumn col : table.getAllColumns()) {
-            if (col.getColumnName().equals(strColName)) {
-                col.setIndexName(strIndexName);
-                col.setIndexType("B+ Tree");
-                table.save();
-                break;
-            }
-        }
+        col.setIndexName(strIndexName);
+        col.setIndexType("B+ Tree");
+        table.save();
+
         MetaData.updateOnMetaDataFile(strTableName, strColName, strIndexName);
         BPlusIndex b = IndexControler.createIndex(table, strColName, strIndexName);
         allBPlusIndecies.add(b);
@@ -97,10 +92,12 @@ public class DBApp {
         //checking whether the table exists or not
         boolean tableExists = false;
         for (Table table : allTables)
-            if (table.getTableName().equals(strTableName))
+            if (table.getTableName().equals(strTableName)) {
                 tableExists = true;
+                break;
+            }
         if (tableExists)
-            Table.getTable(this.allTables, strTableName).insertIntoTable(htblColNameValue);
+            Table.getTable(allTables, strTableName).insertIntoTable(htblColNameValue);
         else
             throw new DBAppException("The table is not implemented yet");
     }
@@ -120,12 +117,8 @@ public class DBApp {
         Object[] clusterKeyColIndex = (table.getClusterKeyAndIndex());
 
         switch (((TableColumn) clusterKeyColIndex[0]).getColumnType()) {
-            case "java.lang.double":
-                clusterKeyVal = Double.parseDouble(strClusteringKeyValue);
-                break;
-            case "java.lang.Integer":
-                clusterKeyVal = Integer.parseInt(strClusteringKeyValue);
-                break;
+            case "java.lang.double" -> clusterKeyVal = Double.parseDouble(strClusteringKeyValue);
+            case "java.lang.Integer" -> clusterKeyVal = Integer.parseInt(strClusteringKeyValue);
         }
         Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
         Pair<Page, Record> pageAndRecord = table.searchRec( (Comparable) clusterKeyVal,(Integer) clusterKeyColIndex[1]) ;
@@ -147,6 +140,7 @@ public class DBApp {
                                 Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
         Table table = Table.getTable(allTables, strTableName);
         TupleValidator.IsValidTuple(htblColNameValue, table);
+
         int rowsAffected = 0;
         int clusterKeyIdx = (int) table.getClusterKeyAndIndex()[1];
 
@@ -160,7 +154,7 @@ public class DBApp {
         ArrayList<BPlusIndex> affectedBPlus = new ArrayList<>(colIdxWBplus.size());
 
         // search for matching pointers using index
-        bplusFilter = IndexControler.searchIntersect(table, colIdxWBplus, colIdxVal, affectedBPlus, bplusFilter);
+        bplusFilter = IndexControler.searchIntersect(table, colIdxWBplus, colIdxVal, affectedBPlus);
         // if clusterKey is queried only one record can be deleted
         if(colIdxVal.containsKey(clusterKeyIdx)){
             Pointer primaryPointer = new Pointer(0, colIdxVal.get(clusterKeyIdx));
@@ -277,6 +271,10 @@ public class DBApp {
                 arrSQLTerms[i] = null;
             }
             ArrayList<Pointer> result = SQLTerm.evalPtrs(converted, strarrOperators);
+            if(result == null){
+                validRecords.add("No valid results");
+                return validRecords.iterator();
+            }
             result.sort(Pointer::compareTo);
             Page page = null;
             for(int i = 0; i<result.size(); i++){
@@ -298,7 +296,7 @@ public class DBApp {
                     }
                 }
             }
-            if (validRecords.size() == 0) {
+            if (validRecords.isEmpty()) {
                 validRecords.add("No valid results");
             }
         }

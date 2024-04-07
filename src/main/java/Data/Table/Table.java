@@ -75,13 +75,21 @@ public class Table implements Serializable {
                 name + File.separator + name;
     }
 
-    public static Table getTable(ArrayList<Table> allTables, String tableName) {
+    public static Table getTable(ArrayList<Table> allTables, String tableName) throws DBAppException {
         for (Table table : allTables) {
             if (table.tableName.equals(tableName)) {
                 return table;
             }
         }
-        return null;
+        throw new DBAppException("Table Not Found");
+    }
+    public static boolean exists(ArrayList<Table> allTables, String tableName){
+        try {
+            getTable(allTables, tableName);
+            return true;
+        }catch (DBAppException e){
+            return false;
+        }
     }
     public void reset() throws IOException {
         pagePaths = new Vector<>();
