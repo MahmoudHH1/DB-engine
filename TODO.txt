@@ -5,3 +5,4 @@
 4- all indices stuff
 5- add attribute to table to store all its indicies instead of load all indices
 6- Hashtables inputs can be null or empyt???
+7- BPlusIndex handle deficiency we keda rage3 (line 185)
