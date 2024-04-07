@@ -221,7 +221,21 @@ public class Table implements Serializable {
         }
         throw new DBAppException("Not implemented yet"); // do not use method yet
     }
-    public Pair<Integer, Integer> search(Comparable clusterKey, int clusterIdx) throws IOException, ClassNotFoundException {
+    public Pair<Integer, Integer> search(Comparable clusterKey, int clusterIdx) throws IOException, ClassNotFoundException, DBAppException {
+        TableColumn clusterCol = getAllColumns().get(clusterIdx);
+        if(clusterCol.isColumnBIdx()){
+            Vector<Pointer> ptrs = IndexControler.search(this, clusterCol.getColumnName(), clusterKey,"<");
+            if(ptrs == null || ptrs.isEmpty())
+                return new Pair<>(0,0);
+            ptrs.sort(Pointer::compareTo);
+            Pointer p = ptrs.get(ptrs.size()-1);
+
+            Page page = Page.readPage(getPagePaths().get(p.pageIdx), this);
+            int pageIdx = p.pageIdx;
+            if(page.size() >= MetaData.maxPageSize)
+                ++pageIdx;
+            return new Pair<>(pageIdx, null);
+        }
         return search(clusterKey, clusterIdx, 0); // 5000
     }
     // binary search on cluster Key
@@ -346,7 +360,6 @@ public class Table implements Serializable {
                     if (rec != null) {
                         page.insertIntoPage(rec);
                         //remember to insert the record into the existing indices
-                        int pageIdx = pagePathIdx ;
                         IndexControler.insertIntoIndex(rec,pagePathIdx,this,insertedTuple);
                         rec = null;
                     }

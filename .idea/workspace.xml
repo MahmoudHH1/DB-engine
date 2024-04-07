@@ -4,19 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="shakek fel bplus">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Data/BTree/BTree.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Data/BTree/BTreeInnerNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Data/BTree/BTreeLeafNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Data/BTree/BTreeNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Data/BTree/BTreeTest.java" afterDir="false" />
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Comparing both btrees; probably won't switch.&#10;Optimized table.searchRec() to use clusterKey index if exists.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Index/Pointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Index/Pointer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TODO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Data/Page/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Page/Page.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Page/Record.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Page/Record.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Table/MetaData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Table/MetaData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Data/Table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Table/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/MyVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammars/MyVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DBApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$DictionaryPair.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$DictionaryPair.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$InternalNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$InternalNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$LeafNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$LeafNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$Node.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/IndexControler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/IndexControler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/Pointer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/Pointer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Data/Page/Page$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Page/Page$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Data/Page/Page.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Page/Page.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Data/Page/Record.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Page/Record.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Data/Table/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Table/Table.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SQLTerm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SQLTerm.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -237,14 +243,6 @@
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
       <updated>1709364507752</updated>
-    </task>
-    <task id="LOCAL-00071" summary="TODO.txt to not forget what to do">
-      <option name="closed" value="true" />
-      <created>1711210124691</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1711210124691</updated>
     </task>
     <task id="LOCAL-00072" summary="TODO.txt to not forget what to do">
       <option name="closed" value="true" />
@@ -614,7 +612,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712506396485</updated>
     </task>
-    <option name="localTasksCounter" value="118" />
+    <task id="LOCAL-00118" summary="Comparing both btrees; probably won't switch.&#10;Optimized table.searchRec() to use clusterKey index if exists.">
+      <option name="closed" value="true" />
+      <created>1712527101261</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1712527101261</updated>
+    </task>
+    <option name="localTasksCounter" value="119" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -689,7 +695,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="got intersection of pointers in delete" />
     <MESSAGE value="dbapp delete and page" />
     <MESSAGE value="added search with start location" />
     <MESSAGE value="saeed update idx" />
@@ -714,7 +719,8 @@
     <MESSAGE value="improvements" />
     <MESSAGE value="tazbitat we bonus" />
     <MESSAGE value="shakek fel bplus" />
-    <option name="LAST_COMMIT_MESSAGE" value="shakek fel bplus" />
+    <MESSAGE value="Comparing both btrees; probably won't switch.&#10;Optimized table.searchRec() to use clusterKey index if exists." />
+    <option name="LAST_COMMIT_MESSAGE" value="Comparing both btrees; probably won't switch.&#10;Optimized table.searchRec() to use clusterKey index if exists." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -93,8 +93,6 @@ public class MetaData {
             while(line != null && s.length <6){
                 s = line.split(",");
                 line = br.readLine();
-                if(line == null)
-                    break;
             }
             if(line == null)
                 break;

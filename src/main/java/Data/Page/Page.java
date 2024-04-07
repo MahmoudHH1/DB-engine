@@ -66,14 +66,15 @@ public class Page extends Vector<Record>  {
 
     public void insertIntoPage (Record rec) throws DBAppException, IOException, ClassNotFoundException {
         //getting the clustering key index
-        int clusterKeyIdx = (int)Table.getTable(MetaData.loadAllTables(),table.getTableName()).getClusterKeyAndIndex()[1] ;
+        // you already have the table why do this?????
+//        int clusterKeyIdx = (int)Table.getTable(MetaData.loadAllTables(),table.getTableName()).getClusterKeyAndIndex()[1] ;
+        int clusterKeyIdx = (int) table.getClusterKeyAndIndex()[1] ;
         if (searchRecord(rec.get(clusterKeyIdx) ,clusterKeyIdx)==null){
             this.add(rec) ;
             sortRecords(clusterKeyIdx);
         }
-        else {
+        else
             throw new DBAppException("non unique primary key") ;
-        }
     }
 
     public Comparable [] getRange() throws IOException, ClassNotFoundException, DBAppException {
