@@ -75,7 +75,7 @@ public class Table implements Serializable {
                 name + File.separator + name;
     }
 
-    public static Table getTable(ArrayList<Table> allTables, String tableName) throws DBAppException {
+    public static Table getTable(ArrayList<Table> allTables, String tableName) {
         for (Table table : allTables) {
             if (table.tableName.equals(tableName)) {
                 return table;
@@ -242,7 +242,7 @@ public class Table implements Serializable {
             // 3 : min = 251 max = 350
             if(checkBefore && mid > 0) {
                 Page temp = Page.readPage(pagePaths.get(mid-1), this);
-                if(temp.size() < 200)
+                if(temp.size() < MetaData.maxPageSize)
                     --mid;
             }
         }

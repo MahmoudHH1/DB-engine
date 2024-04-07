@@ -148,6 +148,7 @@ public class DBApp {
         Table table = Table.getTable(allTables, strTableName);
         TupleValidator.IsValidTuple(htblColNameValue, table);
         int rowsAffected = 0;
+        int clusterKeyIdx = (int) table.getClusterKeyAndIndex()[1];
 
         // map column name to idx
         Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
@@ -157,24 +158,32 @@ public class DBApp {
         ArrayList<Integer> colIdxWBplus = table.colIdxWBPlus();
         // hold all bplusaffected
         ArrayList<BPlusIndex> affectedBPlus = new ArrayList<>(colIdxWBplus.size());
-        //
-//        colIdxWBplus.retainAll(colIdxVal.keySet());
-        for (int i : colIdxWBplus) {
-            TableColumn col = table.getAllColumns().get(i);
-            BPlusIndex bplus = IndexControler.readIndexByName(col.getIndexName(), table);
-            affectedBPlus.add(bplus);
-            // search for queried value
-            if(colIdxVal.get(i) != null){
-                Vector<Pointer> pointers = bplus.search(colIdxVal.get(i));
-                if (bplusFilter == null)
-                    bplusFilter = pointers;
-                else
-                    Operations.intersect(bplusFilter, pointers);
+
+        // search for matching pointers using index
+        bplusFilter = IndexControler.searchIntersect(table, colIdxWBplus, colIdxVal, affectedBPlus, bplusFilter);
+        // if clusterKey is queried only one record can be deleted
+        if(colIdxVal.containsKey(clusterKeyIdx)){
+            Pointer primaryPointer = new Pointer(0, colIdxVal.get(clusterKeyIdx));
+            // if pointer is already bplusFilter remove all other pointers
+            // otherwise binarysearch and put its pointer as the only
+            if(bplusFilter != null){
+                int i = bplusFilter.indexOf(primaryPointer);
+                if(i < 0){
+                    // not found so no rows will match
+                    System.out.println("rows Affected: " + rowsAffected);
+                    return;
+                }
+                primaryPointer = bplusFilter.get(i);
+            } else {
+                int pageIdx = (table.search((Comparable) colIdxVal.get(clusterKeyIdx), clusterKeyIdx)).x;
+                primaryPointer = new Pointer(pageIdx, colIdxVal.get(clusterKeyIdx));
             }
+            bplusFilter = new Vector<>(1);
+            bplusFilter.add(primaryPointer);
         }
+
         // remove columns with bplus
         colIdxWBplus.forEach(colIdxVal.keySet()::remove);
-
         // if found index
         /* to be optimized further if cluster key is provided*/
         if (bplusFilter != null) {
@@ -184,6 +193,7 @@ public class DBApp {
             ArrayList<Record> toRemove = new ArrayList<>();
             // their pointers
             ArrayList<Pointer> ptrsToRemove = new ArrayList<>();
+
             int last = 0;
             for (int i = 0; i < bplusFilter.size(); i++) {
                 Pointer currPtr = bplusFilter.get(i);
@@ -203,7 +213,7 @@ public class DBApp {
 
                 Record record = page.searchRecord(
                         currPtr.clusterKeyValue,
-                        (int) table.getClusterKeyAndIndex()[1]);
+                        clusterKeyIdx);
 
                 if(record.isMatching(colIdxVal)){
                     toRemove.add(record);
@@ -223,9 +233,9 @@ public class DBApp {
             table.save();
             return;
         }
+        // linear
         // check whether hashtable has cluster key
         // if so binary search then check if matching -------- to be implemented s------------
-        int clusterKey = (int) table.getClusterKeyAndIndex()[1];
         for (int i = 0; i< table.getPagePaths().size(); i++) {
 
             // still need to adjust for index
@@ -236,30 +246,16 @@ public class DBApp {
                 boolean matching = record.isMatching(colIdxVal);
                 if (matching){
                     toRemove.add(record);
-                    ptrsToRemove.add(new Pointer(i,record.get(clusterKey)));
+                    ptrsToRemove.add(new Pointer(i,record.get(clusterKeyIdx)));
                     rowsAffected++;
                 }
             }
             page.removeAll(toRemove, colIdxWBplus, affectedBPlus, ptrsToRemove, i);
         }
+        System.out.println(rowsAffected + " rows affected");
         for(BPlusIndex bp : affectedBPlus)
             bp.save();
-        System.out.println(rowsAffected + " rows affected");
         table.save();
-
-        //////////////////////////////////////////////////
-        // not completed yet
-//        for (BPlusIndex b : allBPlusIndecies) {
-//            Enumeration<String> keys = htblColNameValue.keys();
-//            Enumeration<Object> values = htblColNameValue.elements();
-//            while (keys.hasMoreElements()) {
-//                String key = keys.nextElement();
-//                Object value = values.nextElement();
-//                if (b.getTableName().equals(strTableName) && b.getColName().equals(key)) {
-//                    b.delete(value);
-//                }
-//            }
-//        }
     }
     // age = 20 , gpa = 3.4, name = ahmed
     // {pointers} and gpa = 3.4 or {pointers}
@@ -375,14 +371,14 @@ public class DBApp {
 //            dbApp.updateTable("Student", "40187", htblColNameValue);
 //            dbApp.updateTable("Student", "60140", htblColNameValue);
 //            System.out.println("😂😂😂Updated😂😂");
-//            table.viewTable();
-//            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
-//            System.out.println("test after update : "+IndexControler.testIndexTable(table));
+            table.viewTable();
+            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
+            System.out.println("test after update : "+IndexControler.testIndexTable(table));
             // ** delete **
             System.out.println("👻💀Deleted💀👻");
-            htblColNameValue.clear();
-            htblColNameValue.put("name", "pknn");
-//            htblColNameValue.put("gpa", 1.6642600553325182);
+//            htblColNameValue.clear();
+            htblColNameValue.put("name", "yjmb");
+            htblColNameValue.put("gpa", 1.6642600553325182);
 //            htblColNameValue.put("id" ,40187);
             dbApp.deleteFromTable("Student", htblColNameValue);
             table.viewTable();

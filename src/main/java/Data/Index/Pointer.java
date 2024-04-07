@@ -18,7 +18,9 @@ public class Pointer implements Comparable , Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        return compareTo(obj) == 0;
+        if(obj instanceof Pointer)
+            return compareTo(obj) == 0;
+        return false;
     }
 
     @Override

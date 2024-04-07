@@ -81,7 +81,7 @@ public class Page extends Vector<Record>  {
     }
 
     //this function is simply checking whether the size
-    //of the page exceeded 200, and it returns the overflow
+    //of the page exceeded maxPageSize, and it returns the overflow
     //record and remove it from the page
     /* THIS METHOD GET EXECUTED AFTER SORTING EL PAGE
     * 3SHAN MNLBSSH FEL 7ETA  */

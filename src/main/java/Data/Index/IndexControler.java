@@ -10,10 +10,6 @@ import Data.Table.Table;
 import Data.Table.TableColumn;
 import Exceptions.DBAppException;
 
-import javax.print.attribute.HashPrintJobAttributeSet;
-import java.awt.*;
-import javax.swing.*;
-import java.io.File;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -229,6 +225,25 @@ public class IndexControler {
                 throw new DBAppException("Unsupported operator");
         }
 
+    }
+    public static Vector<Pointer> searchIntersect(Table table, ArrayList<Integer> colIdxWBplus,
+                                                  Hashtable<Integer, Object> colIdxVal,
+                                                  ArrayList<BPlusIndex> affectedBPlus,
+                                                  Vector<Pointer> bplusFilter) throws IOException, ClassNotFoundException {
+        for (int i : colIdxWBplus) {
+            TableColumn col = table.getAllColumns().get(i);
+            BPlusIndex bplus = IndexControler.readIndexByName(col.getIndexName(), table);
+            affectedBPlus.add(bplus);
+            // search for queried value
+            if(colIdxVal.get(i) != null){
+                Vector<Pointer> pointers = bplus.search(colIdxVal.get(i));
+                if (bplusFilter == null)
+                    bplusFilter = pointers;
+                else
+                    Operations.intersect(bplusFilter, pointers);
+            }
+        }
+        return bplusFilter;
     }
     public static boolean testIndexTable(Table table) throws IOException, ClassNotFoundException, DBAppException {
         int clusterIdx =(int) table.getClusterKeyAndIndex()[1];
