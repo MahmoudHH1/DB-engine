@@ -259,9 +259,11 @@ public class DBApp {
     // select * from student where age = 20 xor name = ahmed
     public Iterator selectFromTable(SQLTerm[] arrSQLTerms,
                                     String[] strarrOperators) throws DBAppException, IOException, ClassNotFoundException {
+        SQLTerm.validateSqlTerms(arrSQLTerms);
         ArrayList<Object> validRecords = new ArrayList<>();
-        // check whether arrSQLTerms is empty???
         Table table = Table.getTable(allTables, arrSQLTerms[0]._strTableName);
+
+        // check whether arrSQLTerms is empty???
         ArrayList<Vector<Pointer>> converted = new ArrayList<>(arrSQLTerms.length);
 
         if(SQLTerm.allColummnsBplus(table, arrSQLTerms, strarrOperators)){

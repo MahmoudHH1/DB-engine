@@ -88,20 +88,20 @@ public class SQLTerm {
         // check size don't forget !!!!!!!!!!!
         Vector<Pointer> res = converted.get(0);
         for(int i = 1; i < converted.size(); i++){
-            switch (ops[i-1]) {
-                case "AND" :
-                    res = Operations.intersect(res, converted.get(i));
-                    break;
-                case "OR" :
-                    res = Operations.union(res, converted.get(i));
-                    break;
-                case "XOR" :
-                    res = Operations.xor(res, converted.get(i));
-                    break;
-                default : throw new DBAppException("Invalid logical operator: " + ops[i]);
-            }
+            res = switch (ops[i - 1]) {
+                case "AND" -> Operations.intersect(res, converted.get(i));
+                case "OR" -> Operations.union(res, converted.get(i));
+                case "XOR" -> Operations.xor(res, converted.get(i));
+                default -> throw new DBAppException("Invalid logical operator: " + ops[i]);
+            };
         }
         return new ArrayList<>(res);
+    }
+    public static void validateSqlTerms(SQLTerm[] arrSQLTerms) throws DBAppException {
+        for(int i =0 ; i < arrSQLTerms.length-1; i++){
+            if(arrSQLTerms[i]._strTableName.equals(arrSQLTerms[i+1]._strTableName))
+                throw new DBAppException("Mini DataBase does not support joins");
+        }
     }
 
 
