@@ -25,7 +25,7 @@ public class SQLBonus {
             MyVisitor visitor = new MyVisitor();
             visitor.visit(tree);
         } catch (RuntimeException e){
-            throw new DBAppException("Syntax error");
+            throw new DBAppException("Syntax Error Or Unsupported Statement",e);
         }
 
 

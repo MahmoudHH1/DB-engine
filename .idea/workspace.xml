@@ -4,25 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="optimized search for insert. &#10;Warning⚠️: table.search() return Pair(pageIdx, null) if index on clusterKey">
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Clean up + Optimization.&#10;Bonus: override _errHandler in sql parser.&#10;Removed some unneeded rules from sql.g4">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TODO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Index/BPlusIndex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Index/BPlusIndex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Page/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Page/Page.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Table/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/MyVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammars/MyVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Exceptions/DBAppException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Exceptions/DBAppException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/SQLBonus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammars/SQLBonus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/Sql.g4" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammars/Sql.g4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/gen/Grammars/SqlLexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammars/gen/Grammars/SqlLexer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/gen/Grammars/SqlParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammars/gen/Grammars/SqlParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/pockets.g4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DBApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Page/Page$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Page/Page$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Page/Page.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Page/Page.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Table/MetaData.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Table/MetaData.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Table/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Table/Table.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -249,30 +234,6 @@
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
       <updated>1709364507752</updated>
-    </task>
-    <task id="LOCAL-00073" summary="Gama3hom fe package">
-      <option name="closed" value="true" />
-      <created>1711394875793</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1711394875793</updated>
-    </task>
-    <task id="LOCAL-00074" summary="Akhiraaaaaaaaan aaaaaaaahhhhh antlr zabat ma3 maven we 3amal el lexer wel parser🥳🥳🥳🥳🎈🎉🎊🪅">
-      <option name="closed" value="true" />
-      <created>1711446197794</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1711446197794</updated>
-    </task>
-    <task id="LOCAL-00075" summary="aflkdjasjkf">
-      <option name="closed" value="true" />
-      <created>1711725292131</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1711725292132</updated>
     </task>
     <task id="LOCAL-00076" summary="primary keys within bplustree is now sorted for later use">
       <option name="closed" value="true" />
@@ -626,7 +587,31 @@
       <option name="project" value="LOCAL" />
       <updated>1712530627842</updated>
     </task>
-    <option name="localTasksCounter" value="120" />
+    <task id="LOCAL-00120" summary="optimized search for insert. &#10;Warning⚠️: table.search() return Pair(pageIdx, null) if index on clusterKey">
+      <option name="closed" value="true" />
+      <created>1712552547092</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1712552547094</updated>
+    </task>
+    <task id="LOCAL-00121" summary="Clean up + Optimization.&#10;Bonus: override _errHandler in sql parser.&#10;Removed some unneeded rules from sql.g4">
+      <option name="closed" value="true" />
+      <created>1712552683400</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1712552683400</updated>
+    </task>
+    <task id="LOCAL-00122" summary="Clean up + Optimization.&#10;Bonus: override _errHandler in sql parser.&#10;Removed some unneeded rules from sql.g4">
+      <option name="closed" value="true" />
+      <created>1712552702779</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1712552702779</updated>
+    </task>
+    <option name="localTasksCounter" value="123" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -701,7 +686,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added search with start location" />
     <MESSAGE value="saeed update idx" />
     <MESSAGE value="aidousgup" />
     <MESSAGE value="select and IndexControler" />
@@ -726,7 +710,8 @@
     <MESSAGE value="shakek fel bplus" />
     <MESSAGE value="Comparing both btrees; probably won't switch.&#10;Optimized table.searchRec() to use clusterKey index if exists." />
     <MESSAGE value="optimized search for insert. &#10;Warning⚠️: table.search() return Pair(pageIdx, null) if index on clusterKey" />
-    <option name="LAST_COMMIT_MESSAGE" value="optimized search for insert. &#10;Warning⚠️: table.search() return Pair(pageIdx, null) if index on clusterKey" />
+    <MESSAGE value="Clean up + Optimization.&#10;Bonus: override _errHandler in sql parser.&#10;Removed some unneeded rules from sql.g4" />
+    <option name="LAST_COMMIT_MESSAGE" value="Clean up + Optimization.&#10;Bonus: override _errHandler in sql parser.&#10;Removed some unneeded rules from sql.g4" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
