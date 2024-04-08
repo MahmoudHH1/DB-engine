@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Clean up + Optimization.&#10;Bonus: override _errHandler in sql parser.&#10;Removed some unneeded rules from sql.g4">
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Exception constructors ad message">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Grammars/SqlOld.g4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Exceptions/DBAppException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Exceptions/DBAppException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/SQLBonus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammars/SQLBonus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/SQLStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammars/SQLStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/Sql.g4" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammars/Sql.g4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Exceptions/DBAppException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Exceptions/DBAppException.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,41 +74,41 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.BPlusIndex.executor&quot;: &quot;Run&quot;,
-    &quot;Application.DBApp.executor&quot;: &quot;Run&quot;,
-    &quot;Application.FileRemover.executor&quot;: &quot;Run&quot;,
-    &quot;Application.MetaData.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Record.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Table.executor&quot;: &quot;Run&quot;,
-    &quot;Application.TableColumn.executor&quot;: &quot;Run&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/java projects/DB-engine/src/main/java/MySQLGrammar&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.BPlusIndex.executor": "Run",
+    "Application.DBApp.executor": "Run",
+    "Application.FileRemover.executor": "Run",
+    "Application.MetaData.executor": "Run",
+    "Application.Record.executor": "Run",
+    "Application.Table.executor": "Run",
+    "Application.TableColumn.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/java projects/DB-engine/src/main/java/Grammars/gen/Grammars",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "Errors"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\java projects\DB-engine\src\main\java\MySQLGrammar" />
       <recent name="D:\java projects\DB-engine\src\main\java\Grammars" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\java projects\DB-engine\src\main\java\Grammars" />
       <recent name="D:\java projects\DB-engine\src\main\java\Data\BTree" />
       <recent name="D:\java projects\DB-engine\src\main\java\Data" />
       <recent name="D:\java projects\DB-engine\src\main\java\MySQLGrammar" />
-      <recent name="D:\java projects\DB-engine\src\main\java\Grammars" />
       <recent name="D:\java projects\DB-engine\src\main\java\TSQLGrammar\" />
     </key>
   </component>
@@ -234,14 +237,6 @@
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
       <updated>1709364507752</updated>
-    </task>
-    <task id="LOCAL-00076" summary="primary keys within bplustree is now sorted for later use">
-      <option name="closed" value="true" />
-      <created>1711726960104</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1711726960105</updated>
     </task>
     <task id="LOCAL-00077" summary=";aflabfdj">
       <option name="closed" value="true" />
@@ -611,7 +606,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712552702779</updated>
     </task>
-    <option name="localTasksCounter" value="123" />
+    <task id="LOCAL-00123" summary="Exception constructors ad message">
+      <option name="closed" value="true" />
+      <created>1712553538039</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1712553538039</updated>
+    </task>
+    <option name="localTasksCounter" value="124" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -686,7 +689,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="saeed update idx" />
     <MESSAGE value="aidousgup" />
     <MESSAGE value="select and IndexControler" />
     <MESSAGE value="nezbot now" />
@@ -711,7 +713,8 @@
     <MESSAGE value="Comparing both btrees; probably won't switch.&#10;Optimized table.searchRec() to use clusterKey index if exists." />
     <MESSAGE value="optimized search for insert. &#10;Warning⚠️: table.search() return Pair(pageIdx, null) if index on clusterKey" />
     <MESSAGE value="Clean up + Optimization.&#10;Bonus: override _errHandler in sql parser.&#10;Removed some unneeded rules from sql.g4" />
-    <option name="LAST_COMMIT_MESSAGE" value="Clean up + Optimization.&#10;Bonus: override _errHandler in sql parser.&#10;Removed some unneeded rules from sql.g4" />
+    <MESSAGE value="Exception constructors ad message" />
+    <option name="LAST_COMMIT_MESSAGE" value="Exception constructors ad message" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

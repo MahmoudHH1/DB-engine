@@ -51,22 +51,19 @@ sql_stmt
     | delete_stmt
     | insert_stmt
     | simple_select_stmt
-    | select_stmt
     | update_stmt)
  ;
-
+// Don't forget to fix expr
 create_index_stmt
  : K_CREATE K_INDEX
    ( database_name '.' )? index_name K_ON table_name '(' indexed_column ')'
-   ( K_WHERE expr )?
  ;
 
 create_table_stmt
- : K_CREATE K_TABLE /* */
+ : K_CREATE K_TABLE /* ******** */
    ( database_name '.' )? table_name
-   ( '(' column_def ( ',' table_constraint | ',' column_def )* ')' ( K_WITHOUT IDENTIFIER )?
-   | K_AS select_stmt 
-   ) (unknown)?
+   ( '(' column_def ( ',' table_constraint | ',' column_def )* ')' // how to get primary key constraint?
+   )
  ;
 
 delete_stmt
@@ -77,29 +74,13 @@ delete_stmt
 insert_stmt
  : K_INSERT K_INTO
    ( database_name '.' )? table_name ( '(' column_name ( ',' column_name )* ')' ) /* removed question mark here*/
-   ( K_VALUES '(' expr ( ',' expr )* ')' ( ',' '(' expr ( ',' expr )* ')' )*
+   ( K_VALUES '(' literal_value ( ',' literal_value )* ')'
+//   ( K_VALUES '(' expr ( ',' expr )* ')' ( ',' '(' expr ( ',' expr )* ')' )*
    )
  ;
 
 simple_select_stmt
- : ( common_table_expression ( ',' common_table_expression )* )?
-   select_core ( K_ORDER K_BY ordering_term ( ',' ordering_term )* )?
-   ( K_LIMIT expr ( ( K_OFFSET | ',' ) expr )? )?
- ;
-
-select_stmt
- : (  common_table_expression ( ',' common_table_expression )* )?
-   select_or_values ( compound_operator select_or_values )*
-   ( K_ORDER K_BY ordering_term ( ',' ordering_term )* )?
-   ( K_LIMIT expr ( ( K_OFFSET | ',' ) expr )? )?
- ;
-
-select_or_values
- : K_SELECT ( K_DISTINCT | K_ALL )? result_column ( ',' result_column )*
-   ( K_FROM ( table_or_subquery ( ',' table_or_subquery )* | join_clause ) )?
-   ( K_WHERE expr )?
-   ( K_GROUP K_BY expr ( ',' expr )* ( K_HAVING expr )? )?
- | K_VALUES '(' expr ( ',' expr )* ')' ( ',' '(' expr ( ',' expr )* ')' )*
+ : select_core
  ;
 
 update_stmt
@@ -119,48 +100,11 @@ type_name
 column_constraint
  : ( K_CONSTRAINT name )?
    ( column_constraint_primary_key
-   | column_constraint_foreign_key
-   | column_constraint_not_null
-   | column_constraint_null
-   | K_UNIQUE conflict_clause
-   | K_CHECK '(' expr ')'
-   | column_default
-   | K_COLLATE collation_name
    )
  ;
 
 column_constraint_primary_key
- : K_PRIMARY K_KEY ( K_ASC | K_DESC )? conflict_clause K_AUTOINCREMENT?
- ;
-
-column_constraint_foreign_key
- : foreign_key_clause
- ;
-
-column_constraint_not_null
- : K_NOT K_NULL conflict_clause
- ;
-
-column_constraint_null
- : K_NULL conflict_clause
- ;
-
-column_default
- : K_DEFAULT (column_default_value | '(' expr ')' | K_NEXTVAL '(' expr ')' | any_name )  ( '::' any_name+ )?
- ;
-
-column_default_value
- : ( signed_number | literal_value )
- ;
-
-conflict_clause
- : ( K_ON K_CONFLICT ( K_ROLLBACK
-                     | K_ABORT
-                     | K_FAIL
-                     | K_IGNORE
-                     | K_REPLACE
-                     )
-   )?
+ : K_PRIMARY K_KEY
  ;
 
 /*
@@ -178,107 +122,52 @@ conflict_clause
 */
 expr
  : literal_value
- | BIND_PARAMETER
+// | BIND_PARAMETER
  | ( ( database_name '.' )? table_name '.' )? column_name
- | unary_operator expr
- | expr '||' expr
- | expr ( '*' | '/' | '%' ) expr
- | expr ( '+' | '-' ) expr
- | expr ( '<<' | '>>' | '&' | '|' ) expr
+// | expr '||' expr
+// | expr ( '*' | '/' | '%' ) expr
+// | expr ( '+' | '-' ) expr
+// | expr ( '<<' | '>>' | '&' | '|' ) expr
  | expr ( '<' | '<=' | '>' | '>=' ) expr
- | expr ( '=' | '==' | '!=' | '<>' | K_IS | K_IS K_NOT | K_IN | K_LIKE | K_GLOB | K_MATCH | K_REGEXP ) expr
+ | expr ( '=' | '==' | '!=' | '<>' /*| K_IS | K_IS K_NOT | K_IN | K_LIKE | K_GLOB | K_MATCH | K_REGEXP*/ ) expr
  | expr K_AND expr
  | expr K_OR expr
- | function_name '(' ( K_DISTINCT? expr ( ',' expr )* | '*' )? ')'
+// | function_name '(' ( K_DISTINCT? expr ( ',' expr )* | '*' )? ')'
  | '(' expr ')'
- | K_CAST '(' expr K_AS type_name ')'
- | expr K_COLLATE collation_name
- | expr K_NOT? ( K_LIKE | K_GLOB | K_REGEXP | K_MATCH ) expr ( K_ESCAPE expr )?
- | expr ( K_ISNULL | K_NOTNULL | K_NOT K_NULL )
- | expr K_IS K_NOT? expr
- | expr K_NOT? K_BETWEEN expr K_AND expr
- | expr K_NOT? K_IN ( '(' ( select_stmt
-                          | expr ( ',' expr )*
-                          )? 
-                      ')'
-                    | ( database_name '.' )? table_name )
- | ( ( K_NOT )? K_EXISTS )? '(' select_stmt ')'
- | K_CASE expr? ( K_WHEN expr K_THEN expr )+ ( K_ELSE expr )? K_END
- | raise_function
- ;
-
-foreign_key_clause
- : K_REFERENCES ( database_name '.' )? foreign_table ( '(' fk_target_column_name ( ',' fk_target_column_name )* ')' )?
-   ( ( K_ON ( K_DELETE | K_UPDATE ) ( K_SET K_NULL
-                                    | K_SET K_DEFAULT
-                                    | K_CASCADE
-                                    | K_RESTRICT
-                                    | K_NO K_ACTION )
-     | K_MATCH name
-     ) 
-   )*
-   ( K_NOT? K_DEFERRABLE ( K_INITIALLY K_DEFERRED | K_INITIALLY K_IMMEDIATE )? K_ENABLE? )?
- ;
-
-fk_target_column_name
- : name
+// | K_CAST '(' expr K_AS type_name ')'
+// | expr K_COLLATE collation_name
+// | expr K_NOT? ( K_LIKE | K_GLOB | K_REGEXP | K_MATCH ) expr ( K_ESCAPE expr )?
+// | expr ( K_ISNULL | K_NOTNULL | K_NOT K_NULL )
+// | expr K_IS K_NOT? expr
+// | expr K_NOT? K_BETWEEN expr K_AND expr
+// | K_CASE expr? ( K_WHEN expr K_THEN expr )+ ( K_ELSE expr )? K_END
+// | raise_function
  ;
 
 raise_function
- : K_RAISE '(' ( K_IGNORE 
+ : K_RAISE '(' ( K_IGNORE
                | ( K_ROLLBACK | K_ABORT | K_FAIL ) ',' error_message )
            ')'
  ;
 
 indexed_column
- : column_name ( K_COLLATE collation_name )? ( K_ASC | K_DESC )?
+ : column_name
  ;
 
 table_constraint
  : ( K_CONSTRAINT name )?
    ( table_constraint_primary_key
-   | table_constraint_key
-   | table_constraint_unique
-   | K_CHECK '(' expr ')'
-   | table_constraint_foreign_key
    )
  ;
 
 table_constraint_primary_key
- : K_PRIMARY K_KEY '(' indexed_column ( ',' indexed_column )* ')' conflict_clause
+ : K_PRIMARY K_KEY '(' indexed_column ')'
  ;
 
-table_constraint_foreign_key
- : K_FOREIGN K_KEY '(' fk_origin_column_name ( ',' fk_origin_column_name )* ')' foreign_key_clause
- ;
-
-table_constraint_unique
- : K_UNIQUE K_KEY? name? '(' indexed_column ( ',' indexed_column )* ')' conflict_clause
- ;
-
-table_constraint_key
- : K_KEY name? '(' indexed_column ( ',' indexed_column )* ')' conflict_clause
- ;
-
-fk_origin_column_name
- : column_name
- ;
-
-with_clause
- : K_WITH K_RECURSIVE? cte_table_name K_AS '(' select_stmt ')' ( ',' cte_table_name K_AS '(' select_stmt ')' )*
- ;
 
 qualified_table_name
- : ( database_name '.' )? table_name ( K_INDEXED K_BY index_name
-                                     | K_NOT K_INDEXED )?
- ;
-
-ordering_term
- : expr ( K_COLLATE collation_name )? ( K_ASC | K_DESC )?
- ;
-
-common_table_expression
- : table_name ( '(' column_name ( ',' column_name )* ')' )? K_AS '(' select_stmt ')'
+ : ( database_name '.' )? table_name /*( K_INDEXED K_BY index_name
+                                     | K_NOT K_INDEXED )?*/
  ;
 
 result_column
@@ -289,46 +178,18 @@ result_column
 
 table_or_subquery
  : ( database_name '.' )? table_name ( K_AS? table_alias )?
-   ( K_INDEXED K_BY index_name
+   /*( K_INDEXED K_BY index_name
    | K_NOT K_INDEXED )?
- | '(' ( table_or_subquery ( ',' table_or_subquery )*
-       | join_clause )
-   ')' ( K_AS? table_alias )?
- | '(' select_stmt ')' ( K_AS? table_alias )?
+ | '(' ( table_or_subquery ( ',' table_or_subquery )*)*/
+   /*')' ( K_AS? table_alias )?*/
  ;
 
-join_clause
- : table_or_subquery ( join_operator table_or_subquery join_constraint )*
- ;
-
-join_operator
- : ','
- | K_NATURAL? ( K_LEFT K_OUTER? | K_INNER | K_CROSS )? K_JOIN
- ;
-
-join_constraint
- : ( K_ON expr
-   | K_USING '(' column_name ( ',' column_name )* ')' )?
- ;
 
 select_core
  : K_SELECT ( K_DISTINCT | K_ALL )? result_column ( ',' result_column )*
-   ( K_FROM ( table_or_subquery ( ',' table_or_subquery )* | join_clause ) )?
-   ( K_WHERE expr )?
-   ( K_GROUP K_BY expr ( ',' expr )* ( K_HAVING expr )? )?
- | K_VALUES '(' expr ( ',' expr )* ')' ( ',' '(' expr ( ',' expr )* ')' )*
- ;
-
-compound_operator
- : K_UNION
- | K_UNION K_ALL
- | K_INTERSECT
- | K_EXCEPT
- ;
-
-cte_table_name
- : table_name ( '(' column_name ( ',' column_name )* ')' )?
- ;
+   ( K_FROM ( table_or_subquery )?
+   ( K_WHERE expr )?)
+   ;
 
 signed_number
  : ( ( '+' | '-' )? NUMERIC_LITERAL | '*' )
