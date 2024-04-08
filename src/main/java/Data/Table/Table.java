@@ -232,8 +232,7 @@ public class Table implements Serializable {
 
             Page page = Page.readPage(getPagePaths().get(p.pageIdx), this);
             int pageIdx = p.pageIdx;
-            if(page.size() >= MetaData.maxPageSize)
-                ++pageIdx;
+
             return new Pair<>(pageIdx, null);
         }
         return search(clusterKey, clusterIdx, 0); // 5000
@@ -275,7 +274,7 @@ public class Table implements Serializable {
         TableColumn clusterCol = getAllColumns().get(clusterIdx);
         if(clusterCol.isColumnBIdx()){
             Vector<Pointer> ptrs = IndexControler.search(this, clusterCol.getColumnName(), clusterKey,"=");
-            if(ptrs == null)
+            if(ptrs == null || ptrs.isEmpty())
                 return null;
             Pointer p = ptrs.get(0);
             Page page = Page.readPage(getPagePaths().get(p.pageIdx), this);

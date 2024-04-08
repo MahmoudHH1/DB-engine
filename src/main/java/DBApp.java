@@ -274,7 +274,7 @@ public class DBApp {
             }
             ArrayList<Pointer> result = SQLTerm.evalPtrs(converted, strarrOperators);
             if(result == null){
-                validRecords.add("No valid results");
+                validRecords.add(null);
                 return validRecords.iterator();
             }
             result.sort(Pointer::compareTo);
@@ -299,7 +299,7 @@ public class DBApp {
                 }
             }
             if (validRecords.isEmpty()) {
-                validRecords.add("No valid results");
+                validRecords.add(null);
             }
         }
         return validRecords.iterator();

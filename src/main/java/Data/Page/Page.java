@@ -63,6 +63,7 @@ public class Page extends Vector<Record>  {
     public void setPagePath(String pagePath) {
         this.pagePath = pagePath;
     }
+    public boolean isFull(){return this.size() >= MetaData.maxPageSize; }
 
     public void insertIntoPage (Record rec) throws DBAppException, IOException, ClassNotFoundException {
         //getting the clustering key index
