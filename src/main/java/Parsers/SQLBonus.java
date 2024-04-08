@@ -7,7 +7,7 @@ import org.antlr.v4.runtime.*;
 
 public class SQLBonus {
     public static void main(String[] args) throws DBAppException {
-        String query = "Create table Student(name CHAR(5) Primary Key)";
+        String query = "insert into table(name, age) values('mahmoud', 14)";
         SQLStatement sql = new SQLStatement();
         try{
             CharStream charStream = CharStreams.fromString(query);

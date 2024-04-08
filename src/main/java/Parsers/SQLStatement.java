@@ -7,7 +7,7 @@ public class SQLStatement {
     public Statement type;
     public String tableName;
     public String clusterColumn;
-    public String indexName
+    public String indexName;
     public ArrayList<String> columnNames = new ArrayList<>();
     public ArrayList<String> colTypes = new ArrayList<>(){
         @Override
@@ -23,8 +23,6 @@ public class SQLStatement {
             return super.add(s);
         }
     };
-    public ArrayList<Object> values = new ArrayList<>(){
-
-    };
+    public ArrayList<Object> values = new ArrayList<>();
 
 }

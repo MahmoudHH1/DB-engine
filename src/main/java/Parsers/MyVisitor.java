@@ -3,6 +3,7 @@ package Parsers;
 
 import Parsers.gen.Parsers.SqlBaseVisitor;
 import Parsers.gen.Parsers.SqlParser;
+import org.antlr.v4.runtime.tree.TerminalNode;
 
 public class MyVisitor extends SqlBaseVisitor<SQLStatement> {
     // will contain all info needed about statement
@@ -116,7 +117,19 @@ public class MyVisitor extends SqlBaseVisitor<SQLStatement> {
     @Override public SQLStatement visitSigned_number(SqlParser.Signed_numberContext ctx) { return visitChildren(ctx); }
     
     @Override public SQLStatement visitLiteral_value(SqlParser.Literal_valueContext ctx) {
-        parsedStatement.values.add(ctx.getText());
+        TerminalNode s = ctx.STRING_LITERAL();
+        TerminalNode i = ctx.INT_LITERAL();
+        TerminalNode d = ctx.NUMERIC_LITERAL();
+        if(s != null){
+            parsedStatement.values.add(s.getText().substring(1,s.getText().length()-1));
+            System.out.println(s.getText().substring(1,s.getText().length()-1));
+        } else if(i != null){
+            parsedStatement.values.add(Integer.parseInt(i.getText()));
+            System.out.println(i);
+        } else{
+            parsedStatement.values.add(Double.parseDouble(d.getText()));
+            System.out.println(d);
+        }
         return visitChildren(ctx);
     }
     @Override public SQLStatement visitKeyword(SqlParser.KeywordContext ctx) { return visitChildren(ctx); }
