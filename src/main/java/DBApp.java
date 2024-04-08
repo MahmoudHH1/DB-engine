@@ -9,8 +9,8 @@ import Data.Table.Table;
 import Data.Table.TableColumn;
 import Data.Validator.TupleValidator;
 import Exceptions.DBAppException;
-import Grammars.gen.Grammars.SqlLexer;
-import Grammars.gen.Grammars.SqlParser;
+import Parsers.gen.Parsers.SqlLexer;
+import Parsers.gen.Parsers.SqlParser;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -259,6 +259,7 @@ public class DBApp {
     // select * from student where age = 20 xor name = ahmed
     public Iterator selectFromTable(SQLTerm[] arrSQLTerms,
                                     String[] strarrOperators) throws DBAppException, IOException, ClassNotFoundException {
+        // column types not checked here so do it
         SQLTerm.validateSqlTerms(arrSQLTerms);
         ArrayList<Object> validRecords = new ArrayList<>();
         Table table = Table.getTable(allTables, arrSQLTerms[0]._strTableName);

@@ -4,13 +4,133 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Exception constructors ad message">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Grammars/SqlOld.g4" afterDir="false" />
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Bonus">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Parsers/MyVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/SQLStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammars/SQLStatement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/Sql.g4" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammars/Sql.g4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Exceptions/DBAppException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Exceptions/DBAppException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TODO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/MyVisitor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/SQLBonus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parsers/SQLBonus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/SQLStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parsers/SQLStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/Sql.g4" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parsers/Sql.g4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/SqlOld.g4" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parsers/SqlOld.g4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/Statement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parsers/Statement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/gen/Grammars/Sql.interp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/gen/Grammars/Sql.tokens" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/gen/Grammars/SqlBaseListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/gen/Grammars/SqlBaseVisitor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/gen/Grammars/SqlLexer.interp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/gen/Grammars/SqlLexer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/gen/Grammars/SqlLexer.tokens" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/gen/Grammars/SqlListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/gen/Grammars/SqlParser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/gen/Grammars/SqlVisitor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DBApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlBaseListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlBaseVisitor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlLexer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Alter_table_addContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Alter_table_add_constraintContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Alter_table_stmtContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Analyze_stmtContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Any_nameContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Attach_stmtContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Begin_stmtContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Collation_nameContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Column_aliasContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Column_constraintContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Column_constraint_foreign_keyContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Column_constraint_not_nullContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Column_constraint_nullContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Column_constraint_primary_keyContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Column_defContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Column_defaultContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Column_default_valueContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Column_nameContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Commit_stmtContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Common_table_expressionContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Compound_operatorContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Compound_select_stmtContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Conflict_clauseContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Create_index_stmtContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Create_table_stmtContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Create_trigger_stmtContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Create_view_stmtContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Create_virtual_table_stmtContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Cte_table_nameContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Database_nameContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Delete_stmtContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Delete_stmt_limitedContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Detach_stmtContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Drop_index_stmtContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Drop_table_stmtContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Drop_trigger_stmtContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Drop_view_stmtContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$ErrorContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Error_messageContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$ExprContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Factored_select_stmtContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Fk_origin_column_nameContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Fk_target_column_nameContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Foreign_key_clauseContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Foreign_tableContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Function_nameContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Index_nameContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Indexed_columnContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Insert_stmtContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Join_clauseContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Join_constraintContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Join_operatorContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$KeywordContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Literal_valueContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Module_argumentContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Module_nameContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$NameContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$New_table_nameContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Ordering_termContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$ParseContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Pragma_nameContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Pragma_stmtContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Pragma_valueContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Qualified_table_nameContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Raise_functionContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Reindex_stmtContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Release_stmtContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Result_columnContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Rollback_stmtContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Savepoint_nameContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Savepoint_stmtContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Select_coreContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Select_or_valuesContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Select_stmtContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Signed_numberContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Simple_select_stmtContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Source_table_nameContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Sql_stmtContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Sql_stmt_listContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Table_aliasContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Table_constraintContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Table_constraint_foreign_keyContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Table_constraint_keyContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Table_constraint_primary_keyContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Table_constraint_uniqueContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Table_nameContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Table_or_index_nameContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Table_or_subqueryContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Transaction_nameContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Trigger_nameContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Type_nameContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Unary_operatorContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$UnknownContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Update_stmtContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Update_stmt_limitedContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$Vacuum_stmtContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$View_nameContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser$With_clauseContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlParser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Grammars/gen/Grammars/SqlVisitor.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +212,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/java projects/DB-engine/src/main/java/Grammars/gen/Grammars",
+    "last_opened_file_path": "D:/java projects/DB-engine/src/main/java/Parsers/gen",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -105,11 +225,11 @@
       <recent name="D:\java projects\DB-engine\src\main\java\Grammars" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\java projects\DB-engine\src\main\java\Parsers" />
       <recent name="D:\java projects\DB-engine\src\main\java\Grammars" />
       <recent name="D:\java projects\DB-engine\src\main\java\Data\BTree" />
       <recent name="D:\java projects\DB-engine\src\main\java\Data" />
       <recent name="D:\java projects\DB-engine\src\main\java\MySQLGrammar" />
-      <recent name="D:\java projects\DB-engine\src\main\java\TSQLGrammar\" />
     </key>
   </component>
   <component name="RunManager" selected="Application.SQLBonus">
@@ -140,11 +260,11 @@
       </method>
     </configuration>
     <configuration name="SQLBonus" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Grammars.SQLBonus" />
+      <option name="MAIN_CLASS_NAME" value="Parsers.SQLBonus" />
       <module name="Database-Engine" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Grammars.*" />
+          <option name="PATTERN" value="Parsers.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -237,14 +357,6 @@
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
       <updated>1709364507752</updated>
-    </task>
-    <task id="LOCAL-00077" summary=";aflabfdj">
-      <option name="closed" value="true" />
-      <created>1711746382003</created>
-      <option name="number" value="00077" />
-      <option name="presentableId" value="LOCAL-00077" />
-      <option name="project" value="LOCAL" />
-      <updated>1711746382004</updated>
     </task>
     <task id="LOCAL-00078" summary=";aflabfdj">
       <option name="closed" value="true" />
@@ -614,7 +726,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712553538039</updated>
     </task>
-    <option name="localTasksCounter" value="124" />
+    <task id="LOCAL-00124" summary="Bonus">
+      <option name="closed" value="true" />
+      <created>1712582606382</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1712582606383</updated>
+    </task>
+    <option name="localTasksCounter" value="125" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -689,7 +809,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="aidousgup" />
     <MESSAGE value="select and IndexControler" />
     <MESSAGE value="nezbot now" />
     <MESSAGE value="quick" />
@@ -714,7 +833,8 @@
     <MESSAGE value="optimized search for insert. &#10;Warning⚠️: table.search() return Pair(pageIdx, null) if index on clusterKey" />
     <MESSAGE value="Clean up + Optimization.&#10;Bonus: override _errHandler in sql parser.&#10;Removed some unneeded rules from sql.g4" />
     <MESSAGE value="Exception constructors ad message" />
-    <option name="LAST_COMMIT_MESSAGE" value="Exception constructors ad message" />
+    <MESSAGE value="Bonus" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bonus" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -743,12 +863,12 @@
           <option name="timeStamp" value="138" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Grammars/gen/Grammars/SqlParser.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/Parsers/gen/Grammars/SqlParser.java</url>
           <line>426</line>
           <option name="timeStamp" value="141" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Grammars/gen/Grammars/SqlParser.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/Parsers/gen/Grammars/SqlParser.java</url>
           <line>677</line>
           <option name="timeStamp" value="142" />
         </line-breakpoint>

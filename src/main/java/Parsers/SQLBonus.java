@@ -1,20 +1,14 @@
-package Grammars;
+package Parsers;
 
-import Data.Index.BPlusIndex;
 import Exceptions.DBAppException;
-import Grammars.gen.Grammars.SqlBaseVisitor;
-import Grammars.gen.Grammars.SqlLexer;
-import Grammars.gen.Grammars.SqlParser;
-import org.antlr.runtime.tree.ParseTree;
+import Parsers.gen.Parsers.SqlLexer;
+import Parsers.gen.Parsers.SqlParser;
 import org.antlr.v4.runtime.*;
-
-import java.io.File;
-import java.util.Arrays;
-import java.util.Comparator;
 
 public class SQLBonus {
     public static void main(String[] args) throws DBAppException {
-        String query = "Create Table;";
+        String query = "Create table Student(name CHAR(5) Primary Key)";
+        SQLStatement sql = new SQLStatement();
         try{
             CharStream charStream = CharStreams.fromString(query);
             SqlLexer lexer = new SqlLexer(charStream);

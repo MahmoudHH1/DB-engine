@@ -143,13 +143,6 @@ expr
 // | K_CASE expr? ( K_WHEN expr K_THEN expr )+ ( K_ELSE expr )? K_END
 // | raise_function
  ;
-
-raise_function
- : K_RAISE '(' ( K_IGNORE
-               | ( K_ROLLBACK | K_ABORT | K_FAIL ) ',' error_message )
-           ')'
- ;
-
 indexed_column
  : column_name
  ;
@@ -172,8 +165,8 @@ qualified_table_name
 
 result_column
  : '*'
- | table_name '.' '*'
- | expr ( K_AS? column_alias )?
+// | table_name '.' '*'
+// | expr ( K_AS? column_alias )?
  ;
 
 table_or_subquery
@@ -186,8 +179,8 @@ table_or_subquery
 
 
 select_core
- : K_SELECT ( K_DISTINCT | K_ALL )? result_column ( ',' result_column )*
-   ( K_FROM ( table_or_subquery )?
+ : K_SELECT /*( K_DISTINCT | K_ALL )?*/ result_column
+   ( K_FROM ( table_or_subquery )
    ( K_WHERE expr )?)
    ;
 
@@ -197,6 +190,7 @@ signed_number
 
 literal_value
  : NUMERIC_LITERAL
+ | INT_LITERAL
  | STRING_LITERAL
  | BLOB_LITERAL
  | K_NULL
@@ -205,21 +199,21 @@ literal_value
  | K_CURRENT_TIMESTAMP
  ;
 
-unary_operator
- : '-'
- | '+'
- | '~'
- | K_NOT
- ;
+//unary_operator
+// : '-'
+// | '+'
+// | '~'
+// | K_NOT
+// ;
 
-error_message
- : STRING_LITERAL
- ;
-
-column_alias
- : IDENTIFIER
- | STRING_LITERAL
- ;
+//error_message
+// : STRING_LITERAL
+// ;
+//
+//column_alias
+// : IDENTIFIER
+// | STRING_LITERAL
+// ;
 
 keyword
  : K_ABORT
@@ -353,17 +347,17 @@ keyword
 // TODO check all names below
 
 //[a-zA-Z_0-9\t \-\[\]\=]+
-unknown
- : .+
- ;
+//unknown
+// : .+
+// ;
 
 name
  : any_name
  ;
 
-function_name
- : any_name
- ;
+//function_name
+// : any_name
+// ;
 
 database_name
  : any_name
@@ -373,57 +367,57 @@ table_name
  : any_name
  ;
 
-table_or_index_name 
- : any_name
- ;
+//table_or_index_name
+// : any_name
+// ;
 
-new_table_name 
- : any_name
- ;
+//new_table_name
+// : any_name
+// ;
 
 column_name 
  : any_name
  ;
 
-collation_name 
- : any_name
- ;
-
-foreign_table 
- : any_name
- ;
+//collation_name
+// : any_name
+// ;
+//
+//foreign_table
+// : any_name
+// ;
 
 index_name 
  : any_name
  ;
 
-trigger_name
- : any_name
- ;
+//trigger_name
+// : any_name
+// ;
 
-view_name 
- : any_name
- ;
-
-module_name 
- : any_name
- ;
-
-pragma_name 
- : any_name
- ;
-
-savepoint_name 
- : any_name
- ;
+//view_name
+// : any_name
+// ;
+//
+//module_name
+// : any_name
+// ;
+//
+//pragma_name
+// : any_name
+// ;
+//
+//savepoint_name
+// : any_name
+// ;
 
 table_alias 
  : any_name
  ;
 
-transaction_name
- : any_name
- ;
+//transaction_name
+// : any_name
+// ;
 
 any_name
  : IDENTIFIER 
@@ -593,9 +587,12 @@ IDENTIFIER
  | [a-zA-Z_] [a-zA-Z_0-9]* // TODO check: needs more chars in set
  ;
 
+INT_LITERAL
+ : DIGIT+
+ ;
 NUMERIC_LITERAL
- : DIGIT+ ( '.' DIGIT* )? ( E [-+]? DIGIT+ )?
- | '.' DIGIT+ ( E [-+]? DIGIT+ )?
+ : DIGIT+ ( '.' DIGIT* ) ( E [-+]? DIGIT+ )?
+ | '.' DIGIT+ ( E [-+]? DIGIT+ )? // TODO remove E?
  ;
 
 BIND_PARAMETER

@@ -1,4 +1,4 @@
-package Grammars;
+package Parsers;
 
 public enum Statement {
     CRTABLE,
