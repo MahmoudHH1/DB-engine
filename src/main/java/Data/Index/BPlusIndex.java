@@ -1358,6 +1358,8 @@ public class BPlusIndex implements Serializable {
 
 //		} catch (FileNotFoundException e) {
 //			System.err.println(e);
+            BPlusIndex bp = new BPlusIndex(3, "", "","");
+
         } catch (IllegalArgumentException e) {
             System.err.println(e);
 //		} catch (IOException e) {

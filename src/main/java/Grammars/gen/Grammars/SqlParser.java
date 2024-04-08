@@ -13,8 +13,27 @@ import org.antlr.v4.runtime.Vocabulary;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue"})
 public class SqlParser extends Parser {
+	protected ANTLRErrorStrategy _errHandler = new DefaultErrorStrategy(){
+		@Override
+		public void reportError(Parser recognizer, RecognitionException e) {
+			throw new RuntimeException(e);
+//			if (!this.inErrorRecoveryMode(recognizer)) {
+//				this.beginErrorCondition(recognizer);
+//				if (e instanceof NoViableAltException) {
+//					this.reportNoViableAlternative(recognizer, (NoViableAltException)e);
+//				} else if (e instanceof InputMismatchException) {
+//					this.reportInputMismatch(recognizer, (InputMismatchException)e);
+//				} else if (e instanceof FailedPredicateException) {
+//					this.reportFailedPredicate(recognizer, (FailedPredicateException)e);
+//				} else {
+//					System.err.println("unknown recognition error type: " + e.getClass().getName());
+//					recognizer.notifyErrorListeners(e.getOffendingToken(), e.getMessage(), e);
+//				}
+//
+//			}
+		}
+	};
 	static { RuntimeMetaData.checkVersion("4.13.1", RuntimeMetaData.VERSION); }
-
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();

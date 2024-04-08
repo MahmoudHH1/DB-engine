@@ -4,25 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Comparing both btrees; probably won't switch.&#10;Optimized table.searchRec() to use clusterKey index if exists.">
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="optimized search for insert. &#10;Warning⚠️: table.search() return Pair(pageIdx, null) if index on clusterKey">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TODO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Index/BPlusIndex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Index/BPlusIndex.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Data/Page/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Page/Page.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Table/MetaData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Table/MetaData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Data/Table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Table/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$DictionaryPair.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$DictionaryPair.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$InternalNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$InternalNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$LeafNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$LeafNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$Node.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/MyVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammars/MyVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/SQLBonus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammars/SQLBonus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/Sql.g4" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammars/Sql.g4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/gen/Grammars/SqlLexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammars/gen/Grammars/SqlLexer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/gen/Grammars/SqlParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammars/gen/Grammars/SqlParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammars/pockets.g4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DBApp.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/IndexControler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/IndexControler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/Pointer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/Pointer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Data/Page/Page$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Page/Page$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Data/Page/Page.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Page/Page.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Page/Record.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Page/Record.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Data/Table/MetaData.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Table/MetaData.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Data/Table/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Table/Table.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SQLTerm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SQLTerm.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,7 +124,7 @@
       <recent name="D:\java projects\DB-engine\src\main\java\TSQLGrammar\" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.BTreeTest">
+  <component name="RunManager" selected="Application.SQLBonus">
     <configuration name="BTreeTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Data.BTree.BTreeTest" />
       <module name="Database-Engine" />
@@ -138,19 +138,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DBApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="DBApp" />
-      <module name="Database-Engine" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="MetaData" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Data.Table.MetaData" />
       <module name="Database-Engine" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="Data.Table.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SQLBonus" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Grammars.SQLBonus" />
+      <module name="Database-Engine" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Grammars.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -199,18 +205,18 @@
     </configuration>
     <list>
       <item itemvalue="Application.BTreeTest" />
-      <item itemvalue="Application.DBApp" />
+      <item itemvalue="Application.SQLBonus" />
       <item itemvalue="Application.MetaData" />
       <item itemvalue="Application.TableColumn" />
       <item itemvalue="Application.Table" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.SQLBonus" />
         <item itemvalue="Application.BTreeTest" />
         <item itemvalue="Application.Table" />
         <item itemvalue="Application.TableColumn" />
         <item itemvalue="Application.MetaData" />
-        <item itemvalue="Application.DBApp" />
       </list>
     </recent_temporary>
   </component>
@@ -243,14 +249,6 @@
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
       <updated>1709364507752</updated>
-    </task>
-    <task id="LOCAL-00072" summary="TODO.txt to not forget what to do">
-      <option name="closed" value="true" />
-      <created>1711321180972</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1711321180973</updated>
     </task>
     <task id="LOCAL-00073" summary="Gama3hom fe package">
       <option name="closed" value="true" />
@@ -620,7 +618,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712527101261</updated>
     </task>
-    <option name="localTasksCounter" value="119" />
+    <task id="LOCAL-00119" summary="optimized search for insert. &#10;Warning⚠️: table.search() return Pair(pageIdx, null) if index on clusterKey">
+      <option name="closed" value="true" />
+      <created>1712530627842</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1712530627842</updated>
+    </task>
+    <option name="localTasksCounter" value="120" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -695,7 +701,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="dbapp delete and page" />
     <MESSAGE value="added search with start location" />
     <MESSAGE value="saeed update idx" />
     <MESSAGE value="aidousgup" />
@@ -720,7 +725,8 @@
     <MESSAGE value="tazbitat we bonus" />
     <MESSAGE value="shakek fel bplus" />
     <MESSAGE value="Comparing both btrees; probably won't switch.&#10;Optimized table.searchRec() to use clusterKey index if exists." />
-    <option name="LAST_COMMIT_MESSAGE" value="Comparing both btrees; probably won't switch.&#10;Optimized table.searchRec() to use clusterKey index if exists." />
+    <MESSAGE value="optimized search for insert. &#10;Warning⚠️: table.search() return Pair(pageIdx, null) if index on clusterKey" />
+    <option name="LAST_COMMIT_MESSAGE" value="optimized search for insert. &#10;Warning⚠️: table.search() return Pair(pageIdx, null) if index on clusterKey" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -742,6 +748,21 @@
           <url>file://$PROJECT_DIR$/src/main/java/Data/Handler/FileRemover.java</url>
           <line>42</line>
           <option name="timeStamp" value="137" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Data/BTree/BTreeTest.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="138" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Grammars/gen/Grammars/SqlParser.java</url>
+          <line>426</line>
+          <option name="timeStamp" value="141" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Grammars/gen/Grammars/SqlParser.java</url>
+          <line>677</line>
+          <option name="timeStamp" value="142" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

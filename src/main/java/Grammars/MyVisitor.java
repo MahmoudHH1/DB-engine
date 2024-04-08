@@ -13,30 +13,34 @@ public class MyVisitor extends SqlBaseVisitor<SQLStatement> {
     // probably won't use
     public int numStatements;
     @Override public SQLStatement visitParse(SqlParser.ParseContext ctx) {
-
+        System.out.println("parse");
         return visitChildren(ctx);
     }
      
     @Override public SQLStatement visitError(SqlParser.ErrorContext ctx) {
         parsedStatement = null;
+        System.out.println("error");
         return null;
     }
      
     @Override public SQLStatement visitSql_stmt_list(SqlParser.Sql_stmt_listContext ctx) {
-        
+        System.out.println("sql_stmt_list");
         return visitChildren(ctx);
     }
      
     @Override public SQLStatement visitSql_stmt(SqlParser.Sql_stmtContext ctx) {
         parsedStatement = new SQLStatement();
+        System.out.println("sql_stmt");
         return visitChildren(ctx);
     }
     @Override public SQLStatement visitCreate_index_stmt(SqlParser.Create_index_stmtContext ctx) {
         parsedStatement.type = Statement.CRTABLE;
+        System.out.println("Create Table");
         return visitChildren(ctx);
     }
     @Override public SQLStatement visitCreate_table_stmt(SqlParser.Create_table_stmtContext ctx) {
         parsedStatement.type = Statement.CRINDEX;
+        System.out.println("Create Index");
         return visitChildren(ctx);
     }
     @Override public SQLStatement visitDelete_stmt(SqlParser.Delete_stmtContext ctx) {

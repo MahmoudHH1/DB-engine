@@ -6,3 +6,4 @@
 7- BPlusIndex handle deficiency we keda. rage3 (line 185)
 8- update optimize with clusterKey index ✅
 9- insert optimized with clusterKey index ✅
+- BONUS: Remove unneeded rules from SQL grammar for simplicity?
