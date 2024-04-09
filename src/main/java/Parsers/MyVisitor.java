@@ -70,11 +70,6 @@ public class MyVisitor extends SqlBaseVisitor<SQLStatement> {
         System.out.println("table Name: " + parsedStatement.tableName);
         return visitChildren(ctx);
     }
-    @Override public SQLStatement visitQualified_table_name(SqlParser.Qualified_table_nameContext ctx) {
-        parsedStatement.tableName = ctx.getText();
-        System.out.println("table Name: " + parsedStatement.tableName);
-        return visitChildren(ctx);
-    }
     
     @Override public SQLStatement visitColumn_def(SqlParser.Column_defContext ctx) {
         String colName = ctx.column_name().getText();
@@ -85,7 +80,7 @@ public class MyVisitor extends SqlBaseVisitor<SQLStatement> {
             throw new RuntimeException("Cannot have two columns with the same name");
 
         parsedStatement.columnNames.add(colName);
-        parsedStatement.colTypes.add(ctx.type_name().get(0).getText());
+        parsedStatement.colTypes.add(ctx.type_name().name().getText());
 
         if(!ctx.column_constraint().isEmpty()){
             if(parsedStatement.clusterColumn != null)

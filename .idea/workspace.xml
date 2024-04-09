@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Bonus: imporving grammar sql.g4">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Bonus: improving">
       <change beforePath="$PROJECT_DIR$/src/main/java/Parsers/MyVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parsers/MyVisitor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -233,14 +232,6 @@
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
       <updated>1709364507752</updated>
-    </task>
-    <task id="LOCAL-00082" summary="Pointer in bplus tree">
-      <option name="closed" value="true" />
-      <created>1712094762418</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL-00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1712094762418</updated>
     </task>
     <task id="LOCAL-00083" summary="delete&#10;and Table hasIndex method">
       <option name="closed" value="true" />
@@ -610,7 +601,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712669058322</updated>
     </task>
-    <option name="localTasksCounter" value="129" />
+    <task id="LOCAL-00129" summary="Bonus: improving">
+      <option name="closed" value="true" />
+      <created>1712671570569</created>
+      <option name="number" value="00129" />
+      <option name="presentableId" value="LOCAL-00129" />
+      <option name="project" value="LOCAL" />
+      <updated>1712671570569</updated>
+    </task>
+    <option name="localTasksCounter" value="130" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -685,7 +684,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Select bel 7ob mengher test" />
     <MESSAGE value="testing we tacccck" />
     <MESSAGE value="zabat moshkela zaharet wahda tania " />
     <MESSAGE value="zabat moshkela zaharet wahda tania " />
@@ -710,7 +708,8 @@
     <MESSAGE value="Bonus: missing update,delete and testing as well as expr parsing." />
     <MESSAGE value="Bonus: missing update,delete and testing as well as expr parsing" />
     <MESSAGE value="Bonus: imporving grammar sql.g4" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bonus: imporving grammar sql.g4" />
+    <MESSAGE value="Bonus: improving" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bonus: improving" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
