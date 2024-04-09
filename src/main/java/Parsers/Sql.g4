@@ -159,8 +159,6 @@ table_constraint_primary_key
 
 result_column
  : '*'
-// | table_name '.' '*'
-// | expr ( K_AS? column_alias )?
  ;
 
 
@@ -171,7 +169,7 @@ select_core
    ;
 
 signed_number
- : ( ( '+' | '-' )? NUMERIC_LITERAL | '*' )
+ : ( ( '+' | '-' )? INT_LITERAL | '*' )
  ;
 
 literal_value
@@ -179,22 +177,6 @@ literal_value
  | INT_LITERAL
  | STRING_LITERAL
  ;
-
-//unary_operator
-// : '-'
-// | '+'
-// | '~'
-// | K_NOT
-// ;
-
-//error_message
-// : STRING_LITERAL
-// ;
-//
-//column_alias
-// : IDENTIFIER
-// | STRING_LITERAL
-// ;
 
 keyword
  : K_AND
@@ -501,7 +483,7 @@ K_OFFSET : O F F S E T;
 K_ON : O N;
 K_ONLY : O N L Y;
 K_OR : O R;
-K_XOR : X R;
+K_XOR : X O R;
 K_ORDER : O R D E R;
 K_OUTER : O U T E R;
 K_PLAN : P L A N;

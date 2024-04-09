@@ -60,21 +60,20 @@ public class MyVisitor extends SqlBaseVisitor<SQLStatement> {
         System.out.println(parsedStatement.type);
         return visitChildren(ctx);
     }
-    @Override public SQLStatement visitSingle_expr(SqlParser.Single_exprContext ctx) {
-        parsedStatement.clusterColumn = ctx.cluster_column().getText();
-        parsedStatement.clusterVal = ctx.literal_value().getText();
-        return visitChildren(ctx.literal_value());
-    }
     @Override public SQLStatement visitTable_name(SqlParser.Table_nameContext ctx) {
         parsedStatement.tableName = ctx.getText();
         System.out.println("table Name: " + parsedStatement.tableName);
         return visitChildren(ctx);
     }
+    @Override public SQLStatement visitSingle_expr(SqlParser.Single_exprContext ctx) {
+        parsedStatement.clusterColumn = ctx.cluster_column().getText();
+        parsedStatement.clusterVal = ctx.literal_value().getText();
+        return visitChildren(ctx.literal_value());
+    }
+
     
     @Override public SQLStatement visitColumn_def(SqlParser.Column_defContext ctx) {
         String colName = ctx.column_name().getText();
-        if(ctx.type_name().isEmpty())
-            throw new RuntimeException("Missing Datatype for column" + colName);
 
         if(parsedStatement.columnNames.contains(colName))
             throw new RuntimeException("Cannot have two columns with the same name");
@@ -85,6 +84,7 @@ public class MyVisitor extends SqlBaseVisitor<SQLStatement> {
         if(!ctx.column_constraint().isEmpty()){
             if(parsedStatement.clusterColumn != null)
                 throw new RuntimeException("Can only have one clustering/Primary column");
+
             parsedStatement.clusterColumn = colName;
         }
 
@@ -97,11 +97,18 @@ public class MyVisitor extends SqlBaseVisitor<SQLStatement> {
     
     @Override public SQLStatement visitColumn_constraint_primary_key(SqlParser.Column_constraint_primary_keyContext ctx) { return visitChildren(ctx); }
     
-    @Override public SQLStatement visitExpr(SqlParser.ExprContext ctx) { return visitChildren(ctx); }
+    @Override public SQLStatement visitExpr(SqlParser.ExprContext ctx) {
+        String op = ctx.getChild(1).getText();
+        System.out.println(op);
+        switch (op){
+            case "AND", "OR", "XOR" -> parsedStatement.logicalOp.add(op);
+        }
+        return visitChildren(ctx);
+    }
     
 
     @Override public SQLStatement visitIndexed_column(SqlParser.Indexed_columnContext ctx) {
-
+        parsedStatement.indexedColumn = ctx.getText();
         return visitChildren(ctx);
     }
     
@@ -110,6 +117,7 @@ public class MyVisitor extends SqlBaseVisitor<SQLStatement> {
     @Override public SQLStatement visitTable_constraint_primary_key(SqlParser.Table_constraint_primary_keyContext ctx) {
         if(parsedStatement.clusterColumn != null)
             throw new RuntimeException("Cannot have multiple Primarey keys declarations");
+
         parsedStatement.clusterColumn = ctx.getText();
         return visitChildren(ctx.cluster_column());
     }
@@ -138,9 +146,12 @@ public class MyVisitor extends SqlBaseVisitor<SQLStatement> {
         }
         return visitChildren(ctx);
     }
-    @Override public SQLStatement visitKeyword(SqlParser.KeywordContext ctx) { return visitChildren(ctx); }
-
-    @Override public SQLStatement visitName(SqlParser.NameContext ctx) { return visitChildren(ctx); }
+    @Override public SQLStatement visitAny_comparison(SqlParser.Any_comparisonContext ctx) {
+        String comp = ctx.getText();
+        parsedStatement.comparisons.add(comp);
+        System.out.println(comp);
+        return visitChildren(ctx);
+    }
     @Override public SQLStatement visitColumn_name(SqlParser.Column_nameContext ctx) {
         parsedStatement.columnNames.add(ctx.getText());
         System.out.println(ctx.getText());

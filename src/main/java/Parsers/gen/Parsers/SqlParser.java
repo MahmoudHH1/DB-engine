@@ -2026,7 +2026,7 @@ public class SqlParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class Signed_numberContext extends ParserRuleContext {
-		public TerminalNode NUMERIC_LITERAL() { return getToken(SqlParser.NUMERIC_LITERAL, 0); }
+		public TerminalNode INT_LITERAL() { return getToken(SqlParser.INT_LITERAL, 0); }
 		public TerminalNode STAR() { return getToken(SqlParser.STAR, 0); }
 		public TerminalNode PLUS() { return getToken(SqlParser.PLUS, 0); }
 		public TerminalNode MINUS() { return getToken(SqlParser.MINUS, 0); }
@@ -2061,7 +2061,7 @@ public class SqlParser extends Parser {
 			switch (_input.LA(1)) {
 			case PLUS:
 			case MINUS:
-			case NUMERIC_LITERAL:
+			case INT_LITERAL:
 				{
 				setState(310);
 				_errHandler.sync(this);
@@ -2082,7 +2082,7 @@ public class SqlParser extends Parser {
 				}
 
 				setState(312);
-				match(NUMERIC_LITERAL);
+				match(INT_LITERAL);
 				}
 				break;
 			case STAR:
@@ -2982,7 +2982,7 @@ public class SqlParser extends Parser {
 		"\u0000\u0133\u0134\u0003 \u0010\u0000\u0134-\u0001\u0000\u0000\u0000\u0135"+
 		"\u0137\u0007\u0002\u0000\u0000\u0136\u0135\u0001\u0000\u0000\u0000\u0136"+
 		"\u0137\u0001\u0000\u0000\u0000\u0137\u0138\u0001\u0000\u0000\u0000\u0138"+
-		"\u013b\u0005\u0094\u0000\u0000\u0139\u013b\u0005\u0007\u0000\u0000\u013a"+
+		"\u013b\u0005\u0093\u0000\u0000\u0139\u013b\u0005\u0007\u0000\u0000\u013a"+
 		"\u0136\u0001\u0000\u0000\u0000\u013a\u0139\u0001\u0000\u0000\u0000\u013b"+
 		"/\u0001\u0000\u0000\u0000\u013c\u013d\u0007\u0003\u0000\u0000\u013d1\u0001"+
 		"\u0000\u0000\u0000\u013e\u013f\u0007\u0004\u0000\u0000\u013f3\u0001\u0000"+
