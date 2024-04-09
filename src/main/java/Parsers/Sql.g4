@@ -74,7 +74,6 @@ eq_expr
  : eq_expr K_AND eq_expr
  | column_name ('=' | '==') literal_value
  | literal_value ('=' | '==') column_name
- | '(' eq_expr ')'
  ;
 insert_stmt
  : K_INSERT K_INTO
@@ -138,7 +137,6 @@ expr
  | expr K_AND expr
  | expr K_OR expr
  | expr K_XOR expr
- | '(' expr ')'
  ;
 
 any_comparison
@@ -165,19 +163,11 @@ result_column
 // | expr ( K_AS? column_alias )?
  ;
 
-table_or_subquery
- : ( database_name '.' )? table_name ( K_AS? table_alias )?
-   /*( K_INDEXED K_BY index_name
-   | K_NOT K_INDEXED )?
- | '(' ( table_or_subquery ( ',' table_or_subquery )*)*/
-   /*')' ( K_AS? table_alias )?*/
- ;
-
 
 select_core
  : K_SELECT /*( K_DISTINCT | K_ALL )?*/ result_column
-   ( K_FROM ( table_or_subquery )
-   ( K_WHERE expr )?)
+   ( K_FROM ( table_name )
+   ( K_WHERE expr ))
    ;
 
 signed_number
@@ -207,14 +197,7 @@ literal_value
 // ;
 
 keyword
- : K_ABORT
- | K_ACTION
- | K_ADD
- | K_AFTER
- | K_ALL
- | K_ALTER
- | K_ANALYZE
- | K_AND
+ : K_AND
  | K_AS
  | K_ASC
  | K_ATTACH
@@ -350,10 +333,6 @@ name
 // : any_name
 // ;
 
-database_name
- : any_name
- ;
-
 table_name 
  : any_name
  ;
@@ -405,10 +384,6 @@ index_name
 // : any_name
 // ;
 
-table_alias 
- : any_name
- ;
-
 //transaction_name
 // : any_name
 // ;
@@ -446,13 +421,6 @@ NOT_EQ1 : '!=';
 NOT_EQ2 : '<>';
 
 // http://www.sqlite.org/lang_keywords.html
-K_ABORT : A B O R T;
-K_ACTION : A C T I O N;
-K_ADD : A D D;
-K_AFTER : A F T E R;
-K_ALL : A L L;
-K_ALTER : A L T E R;
-K_ANALYZE : A N A L Y Z E;
 K_AND : A N D;
 K_AS : A S;
 K_ASC : A S C;

@@ -118,8 +118,6 @@ public class MyVisitor extends SqlBaseVisitor<SQLStatement> {
     
     @Override public SQLStatement visitResult_column(SqlParser.Result_columnContext ctx) { return visitChildren(ctx); }
     
-    @Override public SQLStatement visitTable_or_subquery(SqlParser.Table_or_subqueryContext ctx) { return visitChildren(ctx); }
-    
     @Override public SQLStatement visitSelect_core(SqlParser.Select_coreContext ctx) { return visitChildren(ctx); }
     
     @Override public SQLStatement visitSigned_number(SqlParser.Signed_numberContext ctx) { return visitChildren(ctx); }
@@ -143,11 +141,6 @@ public class MyVisitor extends SqlBaseVisitor<SQLStatement> {
     @Override public SQLStatement visitKeyword(SqlParser.KeywordContext ctx) { return visitChildren(ctx); }
 
     @Override public SQLStatement visitName(SqlParser.NameContext ctx) { return visitChildren(ctx); }
-
-    @Override public SQLStatement visitDatabase_name(SqlParser.Database_nameContext ctx) { return visitChildren(ctx); }
-    
-
-
     @Override public SQLStatement visitColumn_name(SqlParser.Column_nameContext ctx) {
         parsedStatement.columnNames.add(ctx.getText());
         System.out.println(ctx.getText());
@@ -157,8 +150,6 @@ public class MyVisitor extends SqlBaseVisitor<SQLStatement> {
         parsedStatement.indexName = ctx.getText();
         return visitChildren(ctx);
     }
-
-    @Override public SQLStatement visitTable_alias(SqlParser.Table_aliasContext ctx) { return visitChildren(ctx); }
 
     @Override public SQLStatement visitAny_name(SqlParser.Any_nameContext ctx) { return visitChildren(ctx); }
 }
