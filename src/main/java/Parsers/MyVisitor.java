@@ -8,18 +8,11 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 public class MyVisitor extends SqlBaseVisitor<SQLStatement> {
     // will contain all info needed about statement
     public SQLStatement parsedStatement;
-    @Override public SQLStatement visitParse(SqlParser.ParseContext ctx) {
-        return visitChildren(ctx);
-    }
-    
+
     @Override public SQLStatement visitError(SqlParser.ErrorContext ctx) {
         return parsedStatement = null;
     }
-    
-    @Override public SQLStatement visitSql_stmt_list(SqlParser.Sql_stmt_listContext ctx) {
-        return visitChildren(ctx);
-    }
-    
+
     @Override public SQLStatement visitSql_stmt(SqlParser.Sql_stmtContext ctx) {
         parsedStatement = new SQLStatement();
         return visitChildren(ctx);
@@ -90,13 +83,7 @@ public class MyVisitor extends SqlBaseVisitor<SQLStatement> {
 
         return visitChildren(ctx.column_name());
     }
-    
-    @Override public SQLStatement visitType_name(SqlParser.Type_nameContext ctx) { return visitChildren(ctx); }
-    
-    @Override public SQLStatement visitColumn_constraint(SqlParser.Column_constraintContext ctx) { return visitChildren(ctx); }
-    
-    @Override public SQLStatement visitColumn_constraint_primary_key(SqlParser.Column_constraint_primary_keyContext ctx) { return visitChildren(ctx); }
-    
+
     @Override public SQLStatement visitExpr(SqlParser.ExprContext ctx) {
         String op = ctx.getChild(1).getText();
         System.out.println(op);
@@ -111,9 +98,7 @@ public class MyVisitor extends SqlBaseVisitor<SQLStatement> {
         parsedStatement.indexedColumn = ctx.getText();
         return visitChildren(ctx);
     }
-    
-    @Override public SQLStatement visitTable_constraint(SqlParser.Table_constraintContext ctx) { return visitChildren(ctx); }
-    
+
     @Override public SQLStatement visitTable_constraint_primary_key(SqlParser.Table_constraint_primary_keyContext ctx) {
         if(parsedStatement.clusterColumn != null)
             throw new RuntimeException("Cannot have multiple Primarey keys declarations");
@@ -121,15 +106,8 @@ public class MyVisitor extends SqlBaseVisitor<SQLStatement> {
         parsedStatement.clusterColumn = ctx.getText();
         return visitChildren(ctx.cluster_column());
     }
-    
 
-    
-    @Override public SQLStatement visitResult_column(SqlParser.Result_columnContext ctx) { return visitChildren(ctx); }
-    
-    @Override public SQLStatement visitSelect_core(SqlParser.Select_coreContext ctx) { return visitChildren(ctx); }
-    
-    @Override public SQLStatement visitSigned_number(SqlParser.Signed_numberContext ctx) { return visitChildren(ctx); }
-    
+
     @Override public SQLStatement visitLiteral_value(SqlParser.Literal_valueContext ctx) {
         TerminalNode s = ctx.STRING_LITERAL();
         TerminalNode i = ctx.INT_LITERAL();
@@ -162,5 +140,4 @@ public class MyVisitor extends SqlBaseVisitor<SQLStatement> {
         return visitChildren(ctx);
     }
 
-    @Override public SQLStatement visitAny_name(SqlParser.Any_nameContext ctx) { return visitChildren(ctx); }
 }
