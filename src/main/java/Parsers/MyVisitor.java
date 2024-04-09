@@ -7,7 +7,7 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 
 public class MyVisitor extends SqlBaseVisitor<SQLStatement> {
     // will contain all info needed about statement
-    private SQLStatement parsedStatement;
+    public SQLStatement parsedStatement;
     @Override public SQLStatement visitParse(SqlParser.ParseContext ctx) {
         return visitChildren(ctx);
     }
@@ -60,6 +60,11 @@ public class MyVisitor extends SqlBaseVisitor<SQLStatement> {
         System.out.println(parsedStatement.type);
         return visitChildren(ctx);
     }
+    @Override public SQLStatement visitSingle_expr(SqlParser.Single_exprContext ctx) {
+        parsedStatement.clusterColumn = ctx.cluster_column().getText();
+        parsedStatement.clusterVal = ctx.literal_value().getText();
+        return visitChildren(ctx.literal_value());
+    }
     @Override public SQLStatement visitTable_name(SqlParser.Table_nameContext ctx) {
         parsedStatement.tableName = ctx.getText();
         System.out.println("table Name: " + parsedStatement.tableName);
@@ -100,11 +105,19 @@ public class MyVisitor extends SqlBaseVisitor<SQLStatement> {
     @Override public SQLStatement visitExpr(SqlParser.ExprContext ctx) { return visitChildren(ctx); }
     
 
-    @Override public SQLStatement visitIndexed_column(SqlParser.Indexed_columnContext ctx) { return visitChildren(ctx); }
+    @Override public SQLStatement visitIndexed_column(SqlParser.Indexed_columnContext ctx) {
+
+        return visitChildren(ctx);
+    }
     
     @Override public SQLStatement visitTable_constraint(SqlParser.Table_constraintContext ctx) { return visitChildren(ctx); }
     
-    @Override public SQLStatement visitTable_constraint_primary_key(SqlParser.Table_constraint_primary_keyContext ctx) { return visitChildren(ctx); }
+    @Override public SQLStatement visitTable_constraint_primary_key(SqlParser.Table_constraint_primary_keyContext ctx) {
+        if(parsedStatement.clusterColumn != null)
+            throw new RuntimeException("Cannot have multiple Primarey keys declarations");
+        parsedStatement.clusterColumn = ctx.getText();
+        return visitChildren(ctx.indexed_column().column_name().any_name());
+    }
     
 
     

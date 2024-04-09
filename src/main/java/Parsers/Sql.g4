@@ -56,26 +56,30 @@ sql_stmt
 // Don't forget to fix expr
 create_index_stmt
  : K_CREATE K_INDEX
-   ( database_name '.' )? index_name K_ON table_name '(' indexed_column ')'
+    index_name K_ON table_name '(' indexed_column ')'
  ;
 
 create_table_stmt
  : K_CREATE K_TABLE /* ******** */
-   ( database_name '.' )? table_name
+   table_name
    ( '(' column_def ( ',' table_constraint | ',' column_def )* ')' // how to get primary key constraint?
    )
  ;
 
 delete_stmt
- : K_DELETE K_FROM qualified_table_name
-   ( K_WHERE expr )?
+ : K_DELETE K_FROM table_name
+   ( K_WHERE eq_expr )
  ;
-
+eq_expr
+ : eq_expr K_AND eq_expr
+ | column_name ('=' | '==') literal_value
+ | literal_value ('=' | '==') column_name
+ | '(' eq_expr ')'
+ ;
 insert_stmt
  : K_INSERT K_INTO
-   ( database_name '.' )? table_name ( '(' column_name ( ',' column_name )* ')' ) /* removed question mark here*/
+   table_name ( '(' column_name ( ',' column_name )* ')' ) /* removed question mark here*/
    ( K_VALUES '(' literal_value ( ',' literal_value )* ')'
-//   ( K_VALUES '(' expr ( ',' expr )* ')' ( ',' '(' expr ( ',' expr )* ')' )*
    )
  ;
 
@@ -84,16 +88,19 @@ simple_select_stmt
  ;
 
 update_stmt
- : K_UPDATE qualified_table_name
+ : K_UPDATE table_name
    K_SET column_name '=' literal_value ( ',' column_name '=' literal_value )* ( K_WHERE single_expr )
 //   K_SET column_name '=' expr ( ',' column_name '=' expr )* ( K_WHERE expr )
  ;
+
 single_expr
- : column_name '=' literal_value
+ : cluster_column '=' literal_value
+ | literal_value '=' cluster_column
  ;
 
 column_def
- : column_name ( column_constraint | type_name )*
+ : column_name type_name (column_constraint)?
+ | column_name (column_constraint)? type_name
  ;
 
 type_name
@@ -126,31 +133,20 @@ column_constraint_primary_key
     XOR
 */
 expr
- : literal_value
-// | BIND_PARAMETER
- | ( ( database_name '.' )? table_name '.' )? column_name
-// | expr '||' expr
-// | expr ( '*' | '/' | '%' ) expr
-// | expr ( '+' | '-' ) expr
-// | expr ( '<<' | '>>' | '&' | '|' ) expr
- | expr ( '<' | '<=' | '>' | '>=' ) expr
- | expr ( '=' | '==' | '!=' | '<>' /*| K_IS | K_IS K_NOT | K_IN | K_LIKE | K_GLOB | K_MATCH | K_REGEXP*/ ) expr
+ : column_name any_comparison literal_value
+ | literal_value any_comparison column_name
  | expr K_AND expr
  | expr K_OR expr
  | expr K_XOR expr
-// | function_name '(' ( K_DISTINCT? expr ( ',' expr )* | '*' )? ')'
  | '(' expr ')'
-// | K_CAST '(' expr K_AS type_name ')'
-// | expr K_COLLATE collation_name
-// | expr K_NOT? ( K_LIKE | K_GLOB | K_REGEXP | K_MATCH ) expr ( K_ESCAPE expr )?
-// | expr ( K_ISNULL | K_NOTNULL | K_NOT K_NULL )
-// | expr K_IS K_NOT? expr
-// | expr K_NOT? K_BETWEEN expr K_AND expr
-// | K_CASE expr? ( K_WHEN expr K_THEN expr )+ ( K_ELSE expr )? K_END
-// | raise_function
+ ;
+
+any_comparison
+ : '<' | '<=' | '>' | '>='
+ | '=' | '==' | '!=' | '<>'
  ;
 indexed_column
- : column_name
+ : any_name
  ;
 
 table_constraint
@@ -160,13 +156,7 @@ table_constraint
  ;
 
 table_constraint_primary_key
- : K_PRIMARY K_KEY '(' indexed_column ')'
- ;
-
-
-qualified_table_name
- : ( database_name '.' )? table_name /*( K_INDEXED K_BY index_name
-                                     | K_NOT K_INDEXED )?*/
+ : K_PRIMARY K_KEY '(' cluster_column ')'
  ;
 
 result_column
@@ -377,6 +367,9 @@ table_name
 // ;
 
 column_name 
+ : any_name
+ ;
+cluster_column
  : any_name
  ;
 
