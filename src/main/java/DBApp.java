@@ -9,11 +9,14 @@ import Data.Table.Table;
 import Data.Table.TableColumn;
 import Data.Validator.TupleValidator;
 import Exceptions.DBAppException;
+import Parsers.MyVisitor;
+import Parsers.SQLStatement;
 import Parsers.gen.Parsers.SqlLexer;
 import Parsers.gen.Parsers.SqlParser;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.VocabularyImpl;
 
 import java.io.IOException;
 import java.util.*;
@@ -315,6 +318,9 @@ public class DBApp {
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         SqlParser parser = new SqlParser(tokens);
         SqlParser.ParseContext tree = parser.parse();
+        MyVisitor visitor = new MyVisitor();
+        visitor.visit(tree);
+        SQLStatement sql = visitor.parsedStatement;
 
         return null;
     }

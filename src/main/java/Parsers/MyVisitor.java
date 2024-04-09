@@ -87,6 +87,7 @@ public class MyVisitor extends SqlBaseVisitor<SQLStatement> {
     @Override public SQLStatement visitExpr(SqlParser.ExprContext ctx) {
         String op = ctx.getChild(1).getText();
         System.out.println(op);
+        op = op.toUpperCase();
         switch (op){
             case "AND", "OR", "XOR" -> parsedStatement.logicalOp.add(op);
         }

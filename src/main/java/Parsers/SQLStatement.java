@@ -28,7 +28,7 @@ public class SQLStatement {
             int rem = s.indexOf('(');
             s = s.substring(0,rem);
             switch (s.toUpperCase()) {
-                case "CHAR", "VARCHAR" -> super.add("java.lang.String");
+                case "CHAR", "VARCHAR", "STRING" -> super.add("java.lang.String");
                 case "SMALLINT", "MEDIUMINT", "INT", "INTEGER", "BIGINT" -> super.add("java.lang.Integer");
                 case "FLOAT", "DOUBLE", "DOUBLE PRECISION", "DECIMAL", "DEC" -> super.add("java.lang.double"); // double or Double?
                 default -> throw new RuntimeException("Unknown type");
