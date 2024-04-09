@@ -85,7 +85,11 @@ simple_select_stmt
 
 update_stmt
  : K_UPDATE qualified_table_name
-   K_SET column_name '=' expr ( ',' column_name '=' expr )* ( K_WHERE expr )
+   K_SET column_name '=' literal_value ( ',' column_name '=' literal_value )* ( K_WHERE single_expr )
+//   K_SET column_name '=' expr ( ',' column_name '=' expr )* ( K_WHERE expr )
+ ;
+single_expr
+ : column_name '=' literal_value
  ;
 
 column_def
@@ -119,6 +123,7 @@ column_constraint_primary_key
     =    ==   !=   <>   IS   IS NOT   IN   LIKE   GLOB   MATCH   REGEXP
     AND
     OR
+    XOR
 */
 expr
  : literal_value
@@ -132,6 +137,7 @@ expr
  | expr ( '=' | '==' | '!=' | '<>' /*| K_IS | K_IS K_NOT | K_IN | K_LIKE | K_GLOB | K_MATCH | K_REGEXP*/ ) expr
  | expr K_AND expr
  | expr K_OR expr
+ | expr K_XOR expr
 // | function_name '(' ( K_DISTINCT? expr ( ',' expr )* | '*' )? ')'
  | '(' expr ')'
 // | K_CAST '(' expr K_AS type_name ')'
@@ -192,11 +198,6 @@ literal_value
  : NUMERIC_LITERAL
  | INT_LITERAL
  | STRING_LITERAL
- | BLOB_LITERAL
- | K_NULL
- | K_CURRENT_TIME
- | K_CURRENT_DATE
- | K_CURRENT_TIMESTAMP
  ;
 
 //unary_operator
@@ -539,6 +540,7 @@ K_OFFSET : O F F S E T;
 K_ON : O N;
 K_ONLY : O N L Y;
 K_OR : O R;
+K_XOR : X R;
 K_ORDER : O R D E R;
 K_OUTER : O U T E R;
 K_PLAN : P L A N;
