@@ -116,7 +116,7 @@ public class MyVisitor extends SqlBaseVisitor<SQLStatement> {
         if(parsedStatement.clusterColumn != null)
             throw new RuntimeException("Cannot have multiple Primarey keys declarations");
         parsedStatement.clusterColumn = ctx.getText();
-        return visitChildren(ctx.indexed_column().column_name().any_name());
+        return visitChildren(ctx.cluster_column());
     }
     
 
