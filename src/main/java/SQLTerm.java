@@ -80,6 +80,32 @@ public class SQLTerm {
         }
         return true;
     }
+    public static boolean isBplusUseful(Table table,SQLTerm[] terms, String[] strarrOperators) throws DBAppException {
+        boolean[] bplusUsable = new boolean[terms.length];
+        // first run populates boolean array
+        // it looks at "AND"'s and the presence of indices
+        for(int i = 0; i< terms.length-1; i++){
+            if(strarrOperators[i].equals("AND")){
+                boolean goodB = table.getColumnByName(terms[i]._strColumnName).isColumnBIdx()
+                        || table.getColumnByName(terms[i+1]._strColumnName).isColumnBIdx();
+                bplusUsable[i] =goodB;
+                bplusUsable[i+1] =goodB;
+            }
+            else if(!bplusUsable[i]){
+                bplusUsable[i] = table.getColumnByName(terms[i]._strColumnName).isColumnBIdx();
+            }
+        }
+        // check last one
+        if(!bplusUsable[bplusUsable.length-1])
+            bplusUsable[bplusUsable.length-1] =  table.getColumnByName(terms[terms.length-1]._strColumnName).isColumnBIdx();
+        // this one checks if boolean array is all true
+        for (boolean b : bplusUsable) {
+            if (!b)
+                return false;
+        }
+        return true;
+
+    }
     public static ArrayList<Pointer> evalPtrs(ArrayList<Vector<Pointer>> converted, String[] ops) throws DBAppException {
         if(converted.isEmpty())
             return null;

@@ -5,12 +5,15 @@ import Parsers.gen.Parsers.SqlLexer;
 import Parsers.gen.Parsers.SqlParser;
 import org.antlr.v4.runtime.*;
 
+import java.util.Hashtable;
+
 public class SQLBonus {
     public static void main(String[] args) throws DBAppException {
         String insert = "insert into table(name, age) values('mahmoud', 14)";
         String select = "select * from table where age < 20 xor name >= 'ahmed';";
+        String createT = "Create Table student(name,age)";
         try{
-            CharStream charStream = CharStreams.fromString(select);
+            CharStream charStream = CharStreams.fromString(createT);
             SqlLexer lexer = new SqlLexer(charStream);
             CommonTokenStream tokens = new CommonTokenStream(lexer);
             SqlParser parser = new SqlParser(tokens);
