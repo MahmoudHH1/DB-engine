@@ -32,7 +32,7 @@ public class BPlusIndex implements Serializable {
         this.path = "Data_Entry" + File.separator +
                     "Tables"+ File.separator +
                     tableName + File.separator+
-                    "indices"+File.separator+
+                    "Indices"+File.separator+
                     idxName;
     }
     public String getIndexPath(){

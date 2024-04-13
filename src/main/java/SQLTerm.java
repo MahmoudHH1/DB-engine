@@ -151,7 +151,7 @@ public class SQLTerm {
     }
     public static void validateSqlTerms(SQLTerm[] arrSQLTerms) throws DBAppException {
         for(int i =0 ; i < arrSQLTerms.length-1; i++){
-            if(arrSQLTerms[i]._strTableName.equals(arrSQLTerms[i+1]._strTableName))
+            if(!arrSQLTerms[i]._strTableName.equals(arrSQLTerms[i+1]._strTableName))
                 throw new DBAppException("Mini DataBase does not support joins");
         }
     }
