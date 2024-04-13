@@ -11,12 +11,12 @@ import Data.Validator.TupleValidator;
 import Exceptions.DBAppException;
 import Parsers.MyVisitor;
 import Parsers.SQLStatement;
+import Parsers.SQLTerm;
 import Parsers.gen.Parsers.SqlLexer;
 import Parsers.gen.Parsers.SqlParser;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.VocabularyImpl;
 
 import java.io.IOException;
 import java.util.*;
@@ -149,15 +149,14 @@ public class DBApp {
 
         // map column name to idx
         Hashtable<Integer, Object> colIdxVal = table.getColIdxVal(htblColNameValue);
-        // will hold pointers to matching records
-        Vector<Pointer> bplusFilter = null;
+
         // hold index of columns with b plus tree
         ArrayList<Integer> colIdxWBplus = table.colIdxWBPlus();
         // hold all bplusaffected
         ArrayList<BPlusIndex> affectedBPlus = new ArrayList<>(colIdxWBplus.size());
 
         // search for matching pointers using index
-        bplusFilter = IndexControler.searchIntersect(table, colIdxWBplus, colIdxVal, affectedBPlus);
+        Vector<Pointer> bplusFilter = IndexControler.searchIntersect(table, colIdxWBplus, colIdxVal, affectedBPlus);
         // if clusterKey is queried only one record can be deleted
         if(colIdxVal.containsKey(clusterKeyIdx)){
             Pointer primaryPointer = new Pointer(0, colIdxVal.get(clusterKeyIdx));
@@ -311,7 +310,7 @@ public class DBApp {
     // below method returns Iterator with result set if passed
     // strbufSQL is a select, otherwise returns null.
     public Iterator parseSQL( StringBuffer strbufSQL ) throws
-            DBAppException{
+            DBAppException, IOException, ClassNotFoundException {
         CharStream SQLin = CharStreams.fromString(strbufSQL.toString());
 
         SqlLexer lexer = new SqlLexer(SQLin);
@@ -321,6 +320,25 @@ public class DBApp {
         MyVisitor visitor = new MyVisitor();
         visitor.visit(tree);
         SQLStatement sql = visitor.parsedStatement;
+        switch (sql.type){
+            case DELETE -> deleteFromTable(sql.tableName, sql.htblColNameValue());
+            case INSERT -> insertIntoTable(sql.tableName, sql.htblColNameValue());
+            case UPDATE -> {
+                String clusterColName = Table.getTable(allTables, sql.tableName).getClusterKey().getColumnName();
+                if(!sql.clusterColumn.equals(clusterColName))
+                    throw new DBAppException("you can only update records with specific cluster key");
+
+                Hashtable<String, Object> hashtable = sql.htblColNameValue();
+                if(hashtable.containsKey(clusterColName))
+                    throw new DBAppException("You cannot update the clustering key");
+
+                updateTable(sql.tableName, sql.clusterVal, hashtable);
+            }
+            case CRTABLE -> createTable(sql.tableName, sql.clusterColumn, sql.htblColNameType());
+            case CRINDEX -> createIndex(sql.tableName, sql.indexedColumn, sql.indexName);
+            case SELECT -> selectFromTable(sql.getSqlTerm(), sql.getLogicalOps());
+
+        }
 
         return null;
     }

@@ -536,8 +536,8 @@ INT_LITERAL
  : DIGIT+
  ;
 NUMERIC_LITERAL
- : DIGIT+ ( '.' DIGIT* ) ( E [-+]? DIGIT+ )?
- | '.' DIGIT+ ( E [-+]? DIGIT+ )? // TODO remove E?
+ : DIGIT+ ( '.' DIGIT* )
+ | '.' DIGIT+ // TODO remove E?
  ;
 
 BIND_PARAMETER

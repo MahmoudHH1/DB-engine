@@ -3,6 +3,8 @@ package Parsers;
 import Exceptions.DBAppException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Hashtable;
 
 public class SQLStatement {
 
@@ -42,5 +44,32 @@ public class SQLStatement {
     public ArrayList<Object> values = new ArrayList<>();
     // holds logical operators (AND, OR, XOR). for select
     public ArrayList<String> logicalOp = new ArrayList<>();
+    public Hashtable<String, Object> htblColNameValue(){
+        Hashtable<String, Object> htbl = new Hashtable<>();
+        for(int i = 0; i < columnNames.size(); i++){
+            htbl.put(columnNames.get(i), values.get(i));
+        }
+        return htbl;
+    }
+    public Hashtable<String, String> htblColNameType(){
+        Hashtable<String, String> hashtable = new Hashtable<>();
+        for(int i = 0; i<columnNames.size(); i++)
+            hashtable.put(columnNames.get(i), colTypes.get(i));
+        return hashtable;
+    }
+    public SQLTerm[] getSqlTerm(){
+        SQLTerm[] sqlTerms = new SQLTerm[columnNames.size()];
+        for(int i = 0; i<sqlTerms.length; i++){
+            sqlTerms[i] = new SQLTerm();
+            sqlTerms[i]._strTableName = tableName;
+            sqlTerms[i]._strColumnName = columnNames.get(i);
+            sqlTerms[i]._objValue = values.get(i);
+            sqlTerms[i]._strOperator = comparisons.get(i);
+        }
+        return sqlTerms;
+    }
+    public String[] getLogicalOps(){
+        return logicalOp.toArray(new String[0]);
+    }
 
 }

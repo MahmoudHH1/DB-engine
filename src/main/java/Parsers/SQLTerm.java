@@ -1,10 +1,11 @@
+package Parsers;
+
 import Data.Index.Operations;
 import Data.Index.Pointer;
 import Data.Page.Record;
 import Data.Table.Table;
 import Exceptions.DBAppException;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Stack;
 import java.util.Vector;
