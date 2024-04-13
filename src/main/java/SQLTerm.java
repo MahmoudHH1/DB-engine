@@ -6,6 +6,7 @@ import Exceptions.DBAppException;
 
 import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.Stack;
 import java.util.Vector;
 
 public class SQLTerm {
@@ -111,17 +112,42 @@ public class SQLTerm {
             return null;
         if(converted.size() != ops.length+1)
             throw new DBAppException("insufficient stuff");
+
         // check size don't forget !!!!!!!!!!!
-        Vector<Pointer> res = converted.get(0);
-        for(int i = 1; i < converted.size(); i++){
-            res = switch (ops[i - 1]) {
-                case "AND" -> Operations.intersect(res, converted.get(i));
-                case "OR" -> Operations.union(res, converted.get(i));
-                case "XOR" -> Operations.xor(res, converted.get(i));
-                default -> throw new DBAppException("Invalid logical operator: " + ops[i]);
-            };
+        String[] orderedOps = {"AND", "OR", "XOR"};
+        Stack<Vector<Pointer>> st = new Stack<>();
+        st.push(converted.get(0));
+
+        for(int i = 0; i<3; i++){
+            for(int j = 0; j<converted.size()-1; j++){
+                if(ops[j].equals(orderedOps[i])){
+                    Vector<Pointer> temp = st.pop();
+
+                    temp = switch (ops[j].toUpperCase()) {
+                        case "AND" -> Operations.intersect(temp, converted.get(j+1));
+                        case "OR" -> Operations.union(temp, converted.get(j+1));
+                        case "XOR" -> Operations.xor(temp, converted.get(j+1));
+                        default -> throw new DBAppException("Invalid logical operator: " + ops[i]);
+                    };
+                    st.push(temp);
+                } else
+                    st.push(converted.get(j+1));
+
+            }
         }
-        return new ArrayList<>(res);
+        System.out.println("size of stack: " + st.size());
+        return new ArrayList<>(st.pop());
+
+        // this one evaluates without priority
+//        for(int i = 1; i < converted.size(); i++){
+//            res = switch (ops[i - 1]) {
+//                case "AND" -> Operations.intersect(res, converted.get(i));
+//                case "OR" -> Operations.union(res, converted.get(i));
+//                case "XOR" -> Operations.xor(res, converted.get(i));
+//                default -> throw new DBAppException("Invalid logical operator: " + ops[i]);
+//            };
+//        }
+//        return new ArrayList<>(res);
     }
     public static void validateSqlTerms(SQLTerm[] arrSQLTerms) throws DBAppException {
         for(int i =0 ; i < arrSQLTerms.length-1; i++){
