@@ -202,8 +202,7 @@ public class Table implements Serializable {
     public void appendPagePath(String filePath) {
         pagePaths.add(filePath);
     }
-    public void updateMIN_MAX(int pageIndex) throws IOException, ClassNotFoundException, DBAppException {
-        Page p = Page.readPage(pagePaths.get(pageIndex),this);
+    public void updateMIN_MAX(int pageIndex, Page p) throws IOException, ClassNotFoundException, DBAppException {
         Pair<Comparable,Comparable> newMinMax = new Pair<>(p.getRange().x , p.getRange().y);
         minMax.set(pageIndex, newMinMax);
     }
