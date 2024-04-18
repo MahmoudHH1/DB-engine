@@ -368,6 +368,7 @@ public class Table implements Serializable {
                 Page firstPage = new Page(this);
                 firstPage.add(rec);
                 IndexControler.insertIntoIndex(rec , 0 , this,insertedTuple);
+                updateMIN_MAX(0,firstPage);
                 //remember to insert the values in the existing indices
                 firstPage.save();
             } else {
@@ -378,6 +379,7 @@ public class Table implements Serializable {
                     Page page = Page.readPage(pagePath, this);
                     if (rec != null) {
                         page.insertIntoPage(rec);
+                        updateMIN_MAX( i, page);
                         //remember to insert the record into the existing indices
                         IndexControler.insertIntoIndex(rec,pagePathIdx,this,insertedTuple);
                         rec = null;
@@ -387,18 +389,18 @@ public class Table implements Serializable {
                     //until you reach the last page of the table
                     overFlowRec = page.overFlow();
                     page.save();
-
                     //if overflow is null after the value is inserted
                     //break out of the for loop for time complexity concerns
                     if (overFlowRec == null)
                         break;
                     //can I read the next page while I am in this page
                     //we will find out
-                    if (this.pagePaths.indexOf(pagePath) < this.pagePaths.size() - 1) {
+                    if (i < this.pagePaths.size() - 1) {
                         //inserting the overflow in the next page
-                        Page nextPage = Page.readPage(this.pagePaths.get(pagePaths.indexOf(pagePath) + 1), this);
+                        Page nextPage = Page.readPage(this.pagePaths.get(i + 1), this);
                         nextPage.insertIntoPage(overFlowRec);
                         IndexControler.updatePageIdxOverflow(overFlowRec,this);
+                        updateMIN_MAX(i,nextPage);
                         nextPage.save();
                     }
                 }
@@ -408,6 +410,7 @@ public class Table implements Serializable {
                     Page newP = new Page(this);
                     newP.insertIntoPage(overFlowRec);
                     IndexControler.updatePageIdxOverflow(overFlowRec,this);
+                    updateMIN_MAX(pagePaths.size()-1,newP);
                     newP.save();
                 }
             }
