@@ -275,7 +275,7 @@ public class Table implements Serializable {
 //                    --mid;
 //            }
         }
-        return mid-1; // 5000
+        return mid <= 0? mid: mid-1; // 5000
     }
     public Pair<Page, Record> searchRec(Comparable clusterKey, int clusterIdx) throws IOException, ClassNotFoundException, DBAppException {
         TableColumn clusterCol = getAllColumns().get(clusterIdx);
