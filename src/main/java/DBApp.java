@@ -367,6 +367,7 @@ public class DBApp {
             Table table = Table.getTable(allTables,"Student");
 //            Hashtable<String, Object> htblColNameValue = new Hashtable<>();
 ////            // ** insert **
+//            Hashtable htblColNameValue = new Hashtable();
 //            Random random = new Random();
 //            double[] gpas = {1.8707343572991275, 4.794898718343688, 4.248665186144998, 3.17081958974137, 0.09320194237640356, 0.9725099510902641, 4.089370321938262, 1.6642600553325182, 1.3182128065760583, 4.998746444195267};
 //            int[] ids = {60140, 66455, 53268, 43418, 49819, 3715, 93972, 18801, 41104, 40187};
@@ -400,7 +401,7 @@ public class DBApp {
 //            dbApp.updateTable("Student", "40187", htblColNameValue);
 //            dbApp.updateTable("Student", "60140", htblColNameValue);
 //            System.out.println("😂😂😂Updated😂😂");
-//            table.viewTable();
+            table.viewTable();
 //            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
 //            System.out.println("test after update : "+IndexControler.testIndexTable(table));
 //            // ** delete **
@@ -448,30 +449,30 @@ public class DBApp {
 //            }
 
 //--------------------------------------------------------------------------------------------------------
-        table.viewTable();
-        System.out.println("Selection Results:__________");
-          SQLTerm[] arrSQLTerms;
-          arrSQLTerms = new SQLTerm[2];
-          arrSQLTerms[0]=new SQLTerm();
-          arrSQLTerms[1]=new SQLTerm();
-          arrSQLTerms[0]._strTableName =  "Student";
-          arrSQLTerms[0]._strColumnName=  "name";
-          arrSQLTerms[0]._strOperator  =  "=";
-          arrSQLTerms[0]._objValue     =  "rkzt";
-        //
-          arrSQLTerms[1]._strTableName =  "Student";
-          arrSQLTerms[1]._strColumnName=  "gpa";
-          arrSQLTerms[1]._strOperator  =  ">";
-          arrSQLTerms[1]._objValue     =   3.1;
-        //
-          String[]strarrOperators = new String[1];
-          strarrOperators[0] = "AND";
-        //
-          // select * from Student where name = "John Noor" or gpa = 1.5;
-          Iterator resultSet = dbApp.selectFromTable(arrSQLTerms , strarrOperators);
-          while(resultSet.hasNext()) {
-              System.out.println(resultSet.next());
-          }
+//        table.viewTable();
+//        System.out.println("Selection Results:__________");
+//          SQLTerm[] arrSQLTerms;
+//          arrSQLTerms = new SQLTerm[2];
+//          arrSQLTerms[0]=new SQLTerm();
+//          arrSQLTerms[1]=new SQLTerm();
+//          arrSQLTerms[0]._strTableName =  "Student";
+//          arrSQLTerms[0]._strColumnName=  "name";
+//          arrSQLTerms[0]._strOperator  =  "=";
+//          arrSQLTerms[0]._objValue     =  "rkzt";
+//        //
+//          arrSQLTerms[1]._strTableName =  "Student";
+//          arrSQLTerms[1]._strColumnName=  "gpa";
+//          arrSQLTerms[1]._strOperator  =  ">";
+//          arrSQLTerms[1]._objValue     =   3.1;
+//        //
+//          String[]strarrOperators = new String[1];
+//          strarrOperators[0] = "AND";
+//        //
+//          // select * from Student where name = "John Noor" or gpa = 1.5;
+//          Iterator resultSet = dbApp.selectFromTable(arrSQLTerms , strarrOperators);
+//          while(resultSet.hasNext()) {
+//              System.out.println(resultSet.next());
+//          }
       } catch (Exception exp) {
           System.out.println(exp.getClass() + ": " + exp.getMessage() + " because " + exp.getCause() );
           exp.printStackTrace();

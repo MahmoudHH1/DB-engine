@@ -258,11 +258,13 @@ public class Table implements Serializable {
 //                break;
 //            }
 //            checkBefore = false;
+
+            //x is min and y is max
             Pair<Comparable, Comparable> minmax = minMax.get(mid);
-            if(clusterKey.compareTo(minmax) < 0){
+            if(clusterKey.compareTo(minmax.x) < 0){
                 end = mid -1;
                 checkBefore = true;
-            } else if (clusterKey.compareTo(minmax) > 0) {
+            } else if (clusterKey.compareTo(minmax.y) > 0) {
                 start = mid +1;
             } else
                 break;
@@ -370,12 +372,13 @@ public class Table implements Serializable {
                 Page firstPage = new Page(this);
                 firstPage.add(rec);
                 IndexControler.insertIntoIndex(rec , 0 , this,insertedTuple);
-                updateMIN_MAX(0,firstPage);
+                appendMinMax(firstPage);
                 //remember to insert the values in the existing indices
                 firstPage.save();
             } else {
                 // search returns x = pageIdx and y = record idx
-                int pagePathIdx = search(rec.get((int) (getClusterKeyAndIndex()[1])), (int) getClusterKeyAndIndex()[1]);
+                int clusterIdx = (int) getClusterKeyAndIndex()[1];
+                int pagePathIdx = search(rec.get(clusterIdx), clusterIdx);
                 for (int i = pagePathIdx; i < pagePaths.size(); i++) {
                     String pagePath = pagePaths.get(i);
                     Page page = Page.readPage(pagePath, this);
@@ -412,7 +415,7 @@ public class Table implements Serializable {
                     Page newP = new Page(this);
                     newP.insertIntoPage(overFlowRec);
                     IndexControler.updatePageIdxOverflow(overFlowRec,this);
-                    updateMIN_MAX(pagePaths.size()-1,newP);
+                    appendMinMax(newP);
                     newP.save();
                 }
             }

@@ -29,7 +29,6 @@ public class Page extends Vector<Record>  {
         table.setPageNum(table.getPageNum()+1); // next page num
         this.pagePath = table.getTableDir()+File.separator+pageName ;
         table.appendPagePath(this.pagePath);
-        table.appendMinMax(this);
         System.out.println(pagePath);
         save();
     }

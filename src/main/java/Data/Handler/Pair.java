@@ -1,6 +1,8 @@
 package Data.Handler;
 
-public class Pair<K,T> {
+import java.io.Serializable;
+
+public class Pair<K,T> implements Serializable {
     public K x;
     public T y;
     public int max;
