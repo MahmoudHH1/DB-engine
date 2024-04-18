@@ -203,8 +203,7 @@ public class Table implements Serializable {
         pagePaths.add(filePath);
     }
     public void updateMIN_MAX(int pageIndex, Page p) throws IOException, ClassNotFoundException, DBAppException {
-        Pair<Comparable,Comparable> newMinMax = new Pair<>(p.getRange().x , p.getRange().y);
-        minMax.set(pageIndex, newMinMax);
+        minMax.set(pageIndex, p.getRange());
     }
 
     // skeleton method for searching for records O(n)
