@@ -356,6 +356,9 @@ public class Table implements Serializable {
             }
         }
     }
+    public void displayMinMax(){
+        System.out.println(minMax.toString());
+    }
 
     public void insertIntoTable(
             Hashtable<String, Object> insertedTuple
@@ -405,7 +408,7 @@ public class Table implements Serializable {
                         Page nextPage = Page.readPage(this.pagePaths.get(i + 1), this);
                         nextPage.insertIntoPage(overFlowRec);
                         IndexControler.updatePageIdxOverflow(overFlowRec,this);
-                        updateMIN_MAX(i,nextPage);
+                        updateMIN_MAX(i+1,nextPage);
                         nextPage.save();
                     }
                 }
