@@ -22,6 +22,7 @@ public class Table implements Serializable {
     @Serial
     private static final long serialVersionUID = -9043778273416338053L;
     private Vector<String> pagePaths; // page paths
+    private Vector<Pair<Object, Object>> minMax;
     private transient ArrayList<TableColumn> allColumns;
     static String tablesDirectory = "Data_Entry" + File.separator + "Tables";
     private String tableFilePath;
@@ -32,6 +33,7 @@ public class Table implements Serializable {
 
     public Table(ArrayList<TableColumn> allColumns) throws IOException {
         this.pagePaths = new Vector<>();
+        this.minMax = new Vector<>();
         this.tableName = allColumns.get(0).getTableName();
         this.tableDir = tablesDirectory + File.separator + tableName;
         this.allColumns = allColumns;
@@ -289,19 +291,32 @@ public class Table implements Serializable {
         Page page = null;
         while (start <= end) { // 2 pages -> start = 0; end = 1; mid = 0  id = 250 3000
             mid = start + (end - start) / 2;
-            page = Page.readPage(pagePaths.get(mid), this);
-            if(page.isEmpty())
-                return null;
-            if (clusterKey.compareTo(page.get(0).get(clusterIdx)) < 0) {
+            Pair<Object, Object> minmax = minMax.get(mid);
+//            page = Page.readPage(pagePaths.get(mid), this);
+            // search with reading page ->
+//            if(page.isEmpty())
+//                return null;
+//            if (clusterKey.compareTo(page.get(0).get(clusterIdx)) < 0) {
+//                end = mid - 1;
+//            } else if (clusterKey.compareTo(page.get(page.size() - 1).get(clusterIdx)) > 0) {
+//                start = mid + 1;
+//            } else {
+//                rec = page.searchRecord(clusterKey, clusterIdx);
+//                break;
+//            }
+
+            // x is min, y is max
+            if(clusterKey.compareTo(minmax.x) < 0){
                 end = mid - 1;
-            } else if (clusterKey.compareTo(page.get(page.size() - 1).get(clusterIdx)) > 0) {
+            } else if (clusterKey.compareTo(minmax.y) > 0) {
                 start = mid + 1;
             } else {
+                page = Page.readPage(pagePaths.get(mid), this);
                 rec = page.searchRecord(clusterKey, clusterIdx);
                 break;
             }
         }
-        return rec == null? null : new Pair<>(page, rec);
+        return rec == null || page == null? null : new Pair<>(page, rec);
     }
 
     public boolean hasRecords() {
@@ -339,7 +354,7 @@ public class Table implements Serializable {
             TupleValidator.IsValidTuple(insertedTuple, this);
             Record rec = new Record();
             rec.insertRecord(getColIdxVal(insertedTuple));
-            //
+
             //overflow record for shifting purposes
             Record overFlowRec = new Record();
             //if it is the first record to be inserted

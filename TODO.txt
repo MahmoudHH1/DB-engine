@@ -8,3 +8,4 @@
 9- insert optimized with clusterKey index ✅
 - redo evalutaion of sqlterms
 - BONUS: Remove unneeded rules from SQL grammar for simplicity?
+- brin shit
