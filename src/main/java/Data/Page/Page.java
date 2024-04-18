@@ -23,12 +23,13 @@ public class Page extends Vector<Record>  {
     private transient Table table ;
     private String pageName ; // unnecessary attribute?
     private String pagePath ;
-    public Page (Table table) throws IOException {
+    public Page (Table table) throws IOException, DBAppException, ClassNotFoundException {
         this.table = table ;
         this.pageName = table.getTableName() + table.getPageNum() ;
         table.setPageNum(table.getPageNum()+1); // next page num
         this.pagePath = table.getTableDir()+File.separator+pageName ;
         table.appendPagePath(this.pagePath);
+        table.appendMinMax(this);
         System.out.println(pagePath);
         save();
     }

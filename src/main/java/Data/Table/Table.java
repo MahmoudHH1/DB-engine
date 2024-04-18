@@ -3,7 +3,6 @@ package Data.Table;
 import Data.Handler.FileCreator;
 import Data.Handler.FileRemover;
 import Data.Handler.Pair;
-import Data.Index.BPlusIndex;
 import Data.Index.IndexControler;
 import Data.Index.Pointer;
 import Data.Page.Page;
@@ -203,6 +202,9 @@ public class Table implements Serializable {
 
     public void appendPagePath(String filePath) {
         pagePaths.add(filePath);
+    }
+    public void appendMinMax(Page p) throws DBAppException, IOException, ClassNotFoundException {
+        minMax.add(p.getRange());
     }
     public void updateMIN_MAX(int pageIndex, Page p) throws IOException, ClassNotFoundException, DBAppException {
         minMax.set(pageIndex, p.getRange());

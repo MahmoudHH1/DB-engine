@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="delete updates minmax isa">
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="minor mistake">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Page/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Page/Page.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Data/Table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Table/Table.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -218,14 +220,6 @@
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
       <updated>1709364507752</updated>
-    </task>
-    <task id="LOCAL-00091" summary="added search with start location">
-      <option name="closed" value="true" />
-      <created>1712105547423</created>
-      <option name="number" value="00091" />
-      <option name="presentableId" value="LOCAL-00091" />
-      <option name="project" value="LOCAL" />
-      <updated>1712105547423</updated>
     </task>
     <task id="LOCAL-00092" summary="select and IndexControler">
       <option name="closed" value="true" />
@@ -595,7 +589,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713468542834</updated>
     </task>
-    <option name="localTasksCounter" value="138" />
+    <task id="LOCAL-00138" summary="minor mistake">
+      <option name="closed" value="true" />
+      <created>1713468846893</created>
+      <option name="number" value="00138" />
+      <option name="presentableId" value="LOCAL-00138" />
+      <option name="project" value="LOCAL" />
+      <updated>1713468846893</updated>
+    </task>
+    <option name="localTasksCounter" value="139" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -670,7 +672,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed search ginving reference not copy" />
     <MESSAGE value="bonus" />
     <MESSAGE value="el2of" />
     <MESSAGE value="️️" />
@@ -695,7 +696,8 @@
     <MESSAGE value="fadel nestakhdemo" />
     <MESSAGE value="Saeed added updateMIN_MAX" />
     <MESSAGE value="delete updates minmax isa" />
-    <option name="LAST_COMMIT_MESSAGE" value="delete updates minmax isa" />
+    <MESSAGE value="minor mistake" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor mistake" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
