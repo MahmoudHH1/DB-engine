@@ -67,6 +67,7 @@ public class DBApp {
         allTables.add(table);
     }
 
+    //write documentation for the following function
     // following method creates a B+tree index
     public void createIndex(String strTableName,
                             String strColName,
@@ -474,9 +475,6 @@ public class DBApp {
       } catch (Exception exp) {
           System.out.println(exp.getClass() + ": " + exp.getMessage() + " because " + exp.getCause() );
           exp.printStackTrace();
-
       }
     }
-
-
-    }
+}
