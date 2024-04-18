@@ -230,9 +230,10 @@ public class Page extends Vector<Record>  {
                           ArrayList<BPlusIndex> affectedBPlus,
                           ArrayList<Pointer> ptrsToRemove, int deletedIdx) throws IOException, ClassNotFoundException, DBAppException {
         this.removeAll(toRemove);
-        table.updateMIN_MAX(deletedIdx, this);
         if(this.isEmpty())
             IndexControler.updatePageDeletion(affectedBPlus, deletedIdx);
+        else
+            table.updateMIN_MAX(deletedIdx, this);
         // remove from all indicies
         IndexControler.deleteFromIndex(colIdxWBplus, affectedBPlus, toRemove, ptrsToRemove);
     }

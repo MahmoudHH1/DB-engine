@@ -8,10 +8,23 @@ import Exceptions.DBAppException;
 import java.io.IOException;
 import java.io.Serial;
 import java.util.*;
-
+/**
+ * Represents a record in a database. Inherits from `Vector<Comparable>` to manage
+ * a dynamic and thread safe list of comparable objects (Integer, Double, String).
+ */
 public class Record extends Vector<Comparable>{
+    /**
+     * Serial version UID for serialization purposes.
+     */
     @Serial
     private static final long serialVersionUID = -9043778273416338053L;
+
+    /**
+     * Inserts the values from the Hashtable into the correct
+     * indices in a record
+     *
+     * @param ht A Hashtable containing the data to be inserted into the record.
+     */
     public void insertRecord(Hashtable<Integer , Object> ht) {
         this.setSize(ht.size());
         for(int idx : ht.keySet()){
@@ -19,6 +32,18 @@ public class Record extends Vector<Comparable>{
         }
     }
 
+    /**
+     * Updates a record with new values from Hashtable.
+     *
+     * @param colIdxVal A Hashtable containing column index, value pairs to be updated.
+     * @param colNameVal A Hashtable containing column name, value pairs to be updated.
+     * @param clusterKeyVal The value of the cluster key.
+     * @param pageIdx The index of the page to be updated.
+     * @param table The `Table` object to which the record belongs.
+     * @throws DBAppException if there is a database application error.
+     * @throws IOException if there is an I/O error.
+     * @throws ClassNotFoundException if a class is not found during runtime.
+     */
     public void updateRecord(
             Hashtable<Integer, Object> colIdxVal,
             Hashtable<String, Object> colNameVal ,
@@ -47,7 +72,11 @@ public class Record extends Vector<Comparable>{
         }
     }
 
-
+    /**
+     * Returns a string representation of the record, formatted as a CSV-style string.
+     *
+     * @return A string representing the record, with elements separated by commas.
+     */
     @Override
     public synchronized String toString() {
         StringBuilder record = new StringBuilder();
@@ -62,6 +91,12 @@ public class Record extends Vector<Comparable>{
         record.append('"');
         return record.toString();
     }
+    /**
+     * Checks if the values in the hashtable match with ones in the record.
+     *
+     * @param ht A Hashtable containing the values to check against the record.
+     * @return True if the record matches the values, otherwise false.
+     */
     public boolean isMatching(Hashtable<Integer, Object> ht){
         for(int idx : ht.keySet()){
             if(!get(idx).equals(ht.get(idx)))
@@ -69,18 +104,5 @@ public class Record extends Vector<Comparable>{
         }
         return true;
     }
-
-    public static void main(String[] args) {
-
-    }
-
-//    @Override public int compareTo(Student comparestu) {
-//        int compareage
-//                = ((Student)comparestu).getStudentage();
-//
-//        //  For Ascending order
-//        return this.studentage - compareage;
-//
-//    }
 
 }
