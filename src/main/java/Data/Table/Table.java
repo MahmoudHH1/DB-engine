@@ -202,6 +202,11 @@ public class Table implements Serializable {
     public void appendPagePath(String filePath) {
         pagePaths.add(filePath);
     }
+    public void updateMIN_MAX(int pageIndex) throws IOException, ClassNotFoundException, DBAppException {
+        Page p = Page.readPage(pagePaths.get(pageIndex),this);
+        Pair<Comparable,Comparable> newMinMax = new Pair<>(p.getRange().x , p.getRange().y);
+        minMax.set(pageIndex, newMinMax);
+    }
 
     // skeleton method for searching for records O(n)
     // To be modified later
@@ -405,6 +410,8 @@ public class Table implements Serializable {
             this.save();
     }
 
+
+
     public static <T extends Comparable<T>> boolean isBetween(T value, T minValue, T maxValue) {
         return value.compareTo(minValue) >= 0 && value.compareTo(maxValue) <= 0;
     }
@@ -421,6 +428,7 @@ public class Table implements Serializable {
         MetaData.deleteTableFromCSV(this.getTableName());
         FileRemover.removeDirectory(this.getTableName());
     }
+
 
 
     //----------------------------------------------------------------------------------------------
