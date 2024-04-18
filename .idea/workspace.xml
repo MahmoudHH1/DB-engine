@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Saeed added updateMIN_MAX" />
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Saeed added updateMIN_MAX">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Page/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Page/Page.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Table/Table.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

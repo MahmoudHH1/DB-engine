@@ -82,7 +82,7 @@ public class Page extends Vector<Record>  {
     public Pair<Comparable,Comparable> getRange() throws IOException, ClassNotFoundException, DBAppException {
         //getting the clustering key index
         int clusterKeyIdx = (int)Table.getTable(MetaData.loadAllTables(),table.getTableName()).getClusterKeyAndIndex()[1] ;
-        return new Pair (this.get(0).get(clusterKeyIdx) , this.get(this.size()-1).get(clusterKeyIdx));
+        return new Pair<> (this.get(0).get(clusterKeyIdx) , this.get(this.size()-1).get(clusterKeyIdx));
     }
 
     //this function is simply checking whether the size
@@ -150,8 +150,9 @@ public class Page extends Vector<Record>  {
     }
     public void removeAll(ArrayList<Record> toRemove, ArrayList<Integer> colIdxWBplus,
                           ArrayList<BPlusIndex> affectedBPlus,
-                          ArrayList<Pointer> ptrsToRemove, int deletedIdx) throws IOException, ClassNotFoundException {
-        boolean changed = this.removeAll(toRemove);
+                          ArrayList<Pointer> ptrsToRemove, int deletedIdx) throws IOException, ClassNotFoundException, DBAppException {
+        this.removeAll(toRemove);
+        table.updateMIN_MAX(deletedIdx, this);
         if(this.isEmpty())
             IndexControler.updatePageDeletion(affectedBPlus, deletedIdx);
         // remove from all indicies
@@ -161,6 +162,7 @@ public class Page extends Vector<Record>  {
     @Override
     public boolean removeAll(Collection<?> c) {
         boolean changed = super.removeAll(c);
+
         try {
             this.save();
         } catch (IOException e) {

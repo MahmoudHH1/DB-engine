@@ -196,7 +196,9 @@ public class Table implements Serializable {
     }
 
     public void removePageFromArr(String pagePath) {
-        this.pagePaths.remove(pagePath);
+        int i = pagePaths.indexOf(pagePath);
+        pagePaths.remove(i);
+        minMax.remove(i);
     }
 
     public void appendPagePath(String filePath) {
