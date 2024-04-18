@@ -223,54 +223,58 @@ public class Table implements Serializable {
         }
         throw new DBAppException("Not implemented yet"); // do not use method yet
     }
-    public Pair<Integer, Integer> search(Comparable clusterKey, int clusterIdx) throws IOException, ClassNotFoundException, DBAppException {
+    public int search(Comparable clusterKey, int clusterIdx) throws IOException, ClassNotFoundException, DBAppException {
         TableColumn clusterCol = getAllColumns().get(clusterIdx);
         if(clusterCol.isColumnBIdx()){
             Vector<Pointer> ptrs = IndexControler.search(this, clusterCol.getColumnName(), clusterKey,"<");
             if(ptrs == null || ptrs.isEmpty())
-                return new Pair<>(0,0);
+                return 0;
             ptrs.sort(Pointer::compareTo);
             Pointer p = ptrs.get(ptrs.size()-1);
 
-            Page page = Page.readPage(getPagePaths().get(p.pageIdx), this);
-            int pageIdx = p.pageIdx;
-
-            return new Pair<>(pageIdx, null);
+            return p.pageIdx;
         }
         return search(clusterKey, clusterIdx, 0); // 5000
     }
     // binary search on cluster Key
-    public Pair<Integer, Integer> search(Comparable clusterKey, int clusterIdx, int start) throws IOException, ClassNotFoundException {
+    public int search(Comparable clusterKey, int clusterIdx, int start) throws IOException, ClassNotFoundException {
         int end = pagePaths.size() - 1;
         int mid = 0;
-        int recIdx = 0;
         boolean checkBefore;
         while (start <= end) { // 2 pages -> start = 0; end = 1; mid = 0  id = 250 3000
             mid = start + (end - start) / 2;
-            Page page = Page.readPage(pagePaths.get(mid), this);
-            checkBefore = false;
-            if(page.isEmpty())
-                return new Pair<>(mid,0);
-            if (clusterKey.compareTo(page.get(0).get(clusterIdx)) < 0) {
-                end = mid - 1;
+//            Page page = Page.readPage(pagePaths.get(mid), this);
+//            if(page.isEmpty())
+//                return mid;
+//            if (clusterKey.compareTo(page.get(0).get(clusterIdx)) < 0) {
+//                end = mid - 1;
+//                checkBefore = true;
+//            } else if (clusterKey.compareTo(page.get(page.size() - 1).get(clusterIdx)) > 0) {
+//                start = mid + 1;
+//            } else {
+//                break;
+//            }
+//            checkBefore = false;
+            Pair<Comparable, Comparable> minmax = minMax.get(mid);
+            if(clusterKey.compareTo(minmax) < 0){
+                end = mid -1;
                 checkBefore = true;
-            } else if (clusterKey.compareTo(page.get(page.size() - 1).get(clusterIdx)) > 0) {
-                start = mid + 1;
-            } else {
-                recIdx = page.searchRecordIdx(clusterKey, clusterIdx);
+            } else if (clusterKey.compareTo(minmax) > 0) {
+                start = mid +1;
+            } else
                 break;
-            }
+
             // 0 : min = 0 max = 39
             // 1 : min = 40 max = 70
             // 2 : min = 50 max = 249
             // 3 : min = 251 max = 350
-            if(checkBefore && mid > 0) {
-                Page temp = Page.readPage(pagePaths.get(mid-1), this);
-                if(temp.size() < MetaData.maxPageSize)
-                    --mid;
-            }
+//            if(checkBefore && mid > 0) {
+//                Page temp = Page.readPage(pagePaths.get(mid-1), this);
+//                if(temp.size() < MetaData.maxPageSize)
+//                    --mid;
+//            }
         }
-        return new Pair<>(mid, recIdx); // 5000
+        return mid-1; // 5000
     }
     public Pair<Page, Record> searchRec(Comparable clusterKey, int clusterIdx) throws IOException, ClassNotFoundException, DBAppException {
         TableColumn clusterCol = getAllColumns().get(clusterIdx);
@@ -290,7 +294,7 @@ public class Table implements Serializable {
         Record rec = null;
         Page page = null;
         while (start <= end) { // 2 pages -> start = 0; end = 1; mid = 0  id = 250 3000
-                mid = start + (end - start) / 2;
+            mid = start + (end - start) / 2;
             Pair<Comparable, Comparable> minmax = minMax.get(mid);
 //            page = Page.readPage(pagePaths.get(mid), this);
             // search with reading page ->
@@ -367,7 +371,7 @@ public class Table implements Serializable {
                 firstPage.save();
             } else {
                 // search returns x = pageIdx and y = record idx
-                int pagePathIdx = (search(rec.get((int) (getClusterKeyAndIndex()[1])), (int) getClusterKeyAndIndex()[1])).x;
+                int pagePathIdx = search(rec.get((int) (getClusterKeyAndIndex()[1])), (int) getClusterKeyAndIndex()[1]);
                 for (int i = pagePathIdx; i < pagePaths.size(); i++) {
                     String pagePath = pagePaths.get(i);
                     Page page = Page.readPage(pagePath, this);

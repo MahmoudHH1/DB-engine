@@ -175,7 +175,7 @@ public class DBApp {
                 }
                 primaryPointer = bplusFilter.get(i);
             } else {
-                int pageIdx = (table.search((Comparable) colIdxVal.get(clusterKeyIdx), clusterKeyIdx)).x;
+                int pageIdx = table.search((Comparable) colIdxVal.get(clusterKeyIdx), clusterKeyIdx);
                 primaryPointer = new Pointer(pageIdx, colIdxVal.get(clusterKeyIdx));
             }
             bplusFilter = new Vector<>(1);

@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Saeed added updateMIN_MAX">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Data/Table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Table/Table.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -219,6 +220,14 @@
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
       <updated>1709364507752</updated>
+    </task>
+    <task id="LOCAL-00089" summary="got intersection of pointers in delete">
+      <option name="closed" value="true" />
+      <created>1712100335405</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1712100335406</updated>
     </task>
     <task id="LOCAL-00090" summary="dbapp delete and page">
       <option name="closed" value="true" />
@@ -671,6 +680,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="zabat moshkela zaharet wahda tania " />
     <MESSAGE value="khalas oij;grg" />
     <MESSAGE value="fixed search ginving reference not copy" />
     <MESSAGE value="bonus" />
