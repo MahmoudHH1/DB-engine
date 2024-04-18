@@ -22,12 +22,12 @@ public class Table implements Serializable {
     @Serial
     private static final long serialVersionUID = -9043778273416338053L;
     private Vector<String> pagePaths; // page paths
-    private Vector<Pair<Object, Object>> minMax;
+    private Vector<Pair<Comparable, Comparable>> minMax;
     private transient ArrayList<TableColumn> allColumns;
-    static String tablesDirectory = "Data_Entry" + File.separator + "Tables";
+    static final String tablesDirectory = "Data_Entry" + File.separator + "Tables";
     private String tableFilePath;
-    private String tableDir;
-    private String tableName;
+    private final String tableDir;
+    private final String tableName;
     private int pageNum = 1;
 
 
@@ -195,10 +195,6 @@ public class Table implements Serializable {
         this.pageNum = pageNum;
     }
 
-    public void setTableName(String tableName) {
-        this.tableName = tableName;
-    }
-
     public void removePageFromArr(String pagePath) {
         this.pagePaths.remove(pagePath);
     }
@@ -290,8 +286,8 @@ public class Table implements Serializable {
         Record rec = null;
         Page page = null;
         while (start <= end) { // 2 pages -> start = 0; end = 1; mid = 0  id = 250 3000
-            mid = start + (end - start) / 2;
-            Pair<Object, Object> minmax = minMax.get(mid);
+                mid = start + (end - start) / 2;
+            Pair<Comparable, Comparable> minmax = minMax.get(mid);
 //            page = Page.readPage(pagePaths.get(mid), this);
             // search with reading page ->
 //            if(page.isEmpty())

@@ -117,7 +117,10 @@ public class DBApp {
         TupleValidator.IsValidTuple(htblColNameValue, table);
 
         Object clusterKeyVal = strClusteringKeyValue;
-        Object[] clusterKeyColIndex = (table.getClusterKeyAndIndex());
+        if(strClusteringKeyValue.isEmpty()) // strClusteringKeyValue.replace(" ", "").isEmpty();
+            throw new DBAppException("Nothing given to search with.");
+        Object[] clusterKeyColIndex = table.getClusterKeyAndIndex();
+        // not checking if string is empty or if string can be parsed
 
         switch (((TableColumn) clusterKeyColIndex[0]).getColumnType()) {
             case "java.lang.double" -> clusterKeyVal = Double.parseDouble(strClusteringKeyValue);
@@ -323,6 +326,9 @@ public class DBApp {
         switch (sql.type){
             case DELETE -> deleteFromTable(sql.tableName, sql.htblColNameValue());
             case INSERT -> insertIntoTable(sql.tableName, sql.htblColNameValue());
+            case CRTABLE -> createTable(sql.tableName, sql.clusterColumn, sql.htblColNameType());
+            case CRINDEX -> createIndex(sql.tableName, sql.indexedColumn, sql.indexName);
+            case SELECT -> selectFromTable(sql.getSqlTerm(), sql.getLogicalOps());
             case UPDATE -> {
                 String clusterColName = Table.getTable(allTables, sql.tableName).getClusterKey().getColumnName();
                 if(!sql.clusterColumn.equals(clusterColName))
@@ -334,9 +340,6 @@ public class DBApp {
 
                 updateTable(sql.tableName, sql.clusterVal, hashtable);
             }
-            case CRTABLE -> createTable(sql.tableName, sql.clusterColumn, sql.htblColNameType());
-            case CRINDEX -> createIndex(sql.tableName, sql.indexedColumn, sql.indexName);
-            case SELECT -> selectFromTable(sql.getSqlTerm(), sql.getLogicalOps());
 
         }
 
