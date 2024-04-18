@@ -358,14 +358,14 @@ public class DBApp {
 //----------------------------------------Students Table-------------------------------------------------------
             // ** Create **
             String strTableName = "Student";
-            Hashtable htblColNameType = new Hashtable();
-            htblColNameType.put("name", "java.lang.String");
-            htblColNameType.put("gpa", "java.lang.double");
-            htblColNameType.put("id", "java.lang.Integer");
-            dbApp.createTable(strTableName, "id", htblColNameType);
-            dbApp.createIndex(strTableName, "gpa", "gpaIndex");
+//            Hashtable htblColNameType = new Hashtable();
+//            htblColNameType.put("name", "java.lang.String");
+//            htblColNameType.put("gpa", "java.lang.double");
+//            htblColNameType.put("id", "java.lang.Integer");
+//            dbApp.createTable(strTableName, "id", htblColNameType);
+//            dbApp.createIndex(strTableName, "gpa", "gpaIndex");
             Table table = Table.getTable(allTables,"Student");
-////            // ** insert **
+//            // ** insert **
             Hashtable<String, Object> htblColNameValue = new Hashtable<>();
             Random random = new Random();
             double[] gpas = {1.8707343572991275, 4.794898718343688, 4.248665186144998, 3.17081958974137, 0.09320194237640356, 0.9725099510902641, 4.089370321938262, 1.6642600553325182, 1.3182128065760583, 4.998746444195267};
@@ -391,9 +391,10 @@ public class DBApp {
             table.viewTable();
             System.out.println(IndexControler.readIndexByName("gpaIndex", table));
             System.out.println("test after insertion is : "+ IndexControler.testIndexTable(table));
+            table.displayMinMax();
+
 //////                                           //  ** update **
 //            htblColNameValue.clear();
-            table.displayMinMax();
 //            htblColNameValue.put("name", "Saeed");
 //            htblColNameValue.put("gpa", 500.001);
 //            dbApp.updateTable("Student", "3715", htblColNameValue);

@@ -82,7 +82,13 @@ public class Page extends Vector<Record>  {
     public Pair<Comparable,Comparable> getRange() throws IOException, ClassNotFoundException, DBAppException {
         //getting the clustering key index
         int clusterKeyIdx = (int)Table.getTable(MetaData.loadAllTables(),table.getTableName()).getClusterKeyAndIndex()[1] ;
-        return new Pair<> (this.get(0).get(clusterKeyIdx) , this.get(this.size()-1).get(clusterKeyIdx));
+        int pageSize = MetaData.maxPageSize ;
+        int lastPageElementIdx ;
+        if (this.size()>pageSize)
+            lastPageElementIdx = this.size()-2 ;
+        else
+            lastPageElementIdx = this.size()-1 ;
+        return new Pair<> (this.get(0).get(clusterKeyIdx) , this.get(lastPageElementIdx).get(clusterKeyIdx));
     }
 
     //this function is simply checking whether the size
