@@ -1,8 +1,4 @@
 package Data.Index;
-
-
-// this class is just mapping between the DBApp and the BPlusIndex to make the DBApp leaner
-
 import Data.Handler.FileCreator;
 import Data.Page.Page;
 import Data.Page.Record;
@@ -13,9 +9,22 @@ import Exceptions.DBAppException;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-
+/**
+ * The IndexController class serves as a mapping between the DBApp and the BPlusIndex to streamline operations
+ * and manage indices efficiently.
+ */
 public class IndexControler {
-
+    /**
+     * Creates a BPlusIndex for the specified column.
+     *
+     * @param table        The table for which the index is being created.
+     * @param strColName   The name of the column on which the index is being created.
+     * @param strIndexName The name of the index being created.
+     * @return The created BPlusIndex.
+     * @throws IOException       If an I/O error occurs.
+     * @throws ClassNotFoundException If the class of a serialized object cannot be found.
+     * @throws DBAppException    If an error occurs in the DBApp.
+     */
     public static BPlusIndex createIndex(Table table, String strColName, String strIndexName) throws IOException, ClassNotFoundException, DBAppException {
 
         BPlusIndex b = new BPlusIndex(10, table.getTableName(), strColName, strIndexName);
@@ -36,6 +45,17 @@ public class IndexControler {
         b.save();
         return b;
     }
+    /**
+     * Inserts a record into the index.
+     *
+     * @param rec            The record to be inserted.
+     * @param pageIdx        The index of the page where the record is inserted.
+     * @param table          The table to which the record belongs.
+     * @param insertedTuple  The tuple containing the values to be inserted.
+     * @throws IOException       If an I/O error occurs.
+     * @throws ClassNotFoundException If the class of a serialized object cannot be found.
+     * @throws DBAppException    If an error occurs in the DBApp.
+     */
 
     public static void insertIntoIndex(Record rec, int pageIdx, Table table, Hashtable<String, Object> insertedTuple) throws IOException, ClassNotFoundException, DBAppException {
         Vector<BPlusIndex> allTableIndices = IndexControler.loadAllTableIndices(table.getTableName());
@@ -52,6 +72,15 @@ public class IndexControler {
             }
         }
     }
+    /**
+     * Updates the page index in the BPlus index in case of overflow in the pages happend.
+     *
+     * @param rec   The record to be updated.
+     * @param table The table where the record belongs.
+     * @throws IOException       If an I/O error occurs.
+     * @throws ClassNotFoundException If the class of a serialized object cannot be found.
+     * @throws DBAppException    If an error occurs in the DBApp.
+     */
 
     public static void updatePageIdxOverflow(Record rec, Table table) throws IOException, ClassNotFoundException, DBAppException {
         Vector<BPlusIndex> allTableIndices = IndexControler.loadAllTableIndices(table.getTableName());
@@ -72,31 +101,14 @@ public class IndexControler {
         }
     }
 
-    //    public static void updatePageIdxOverflow(Record rec , Table table , Hashtable<String, Object> insertedTuple) throws IOException, ClassNotFoundException, DBAppException {
-//        Vector<BPlusIndex> allTableIndices = IndexControler.loadAllTableIndices(table.getTableName());
-//        for (BPlusIndex b : allTableIndices) {
-//            Enumeration<String> keys = insertedTuple.keys();
-//            Enumeration<Object> values = insertedTuple.elements();
-//            while (keys.hasMoreElements()) {
-//                String key = keys.nextElement();
-//                Object value = values.nextElement();
-//                Comparable clusteringKey = rec.get((int)table.getClusterKeyAndIndex()[1]);
-//                if (b.getColName().equals(clusteringKey)) {
-//                    Vector<Pointer> pointers =   b.search(value);
-//                    for (Pointer p :pointers){
-//                        if (p.clusterKeyValue==clusteringKey){
-//                            ++p.pageIdx ;
-////                            Object comlumnToModify = rec.get(table.idxFromName(b.getColName()));
-////                            System.out.println((String)comlumnToModify + "  " + p.pageIdx );
-////                            b.delete(comlumnToModify,p);
-////                            b.insert(comlumnToModify,new Pointer(p.pageIdx+1,clusteringKey));
-//                            b.save();
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
+    /**
+     * Deletes records from the specified BPlusIndex based on the provided parameters.
+     *
+     * @param colIdxWBplus   The list of column indices associated with the BPlusIndex to be updated.
+     * @param affectedBPlus  The list of affected BPlusIndex instances.
+     * @param toRemove       The list of records to be removed.
+     * @param ptrsToRemove   The list of pointers corresponding to the records to be removed.
+     */
     public static void deleteFromIndex(ArrayList<Integer> colIdxWBplus, ArrayList<BPlusIndex> affectedBPlus, ArrayList<Record> toRemove, ArrayList<Pointer> ptrsToRemove) {
         for (int currCol : colIdxWBplus) {
             // bplus tree of current column
@@ -108,16 +120,18 @@ public class IndexControler {
             }
         }
     }
-
     /**
-        update({id : 1 , age : 20},{id : 2 , age :30},{id : 3 , age :20})
-        [1,3] [2]     // values
-    *   [20]  [30]   // keys
-    *   searchIdx(key = 20)-> return  [1,3]
-    *   delete (20 ,1 )
-    *   [3] [2]     // values
-    *   [20]  [30]   // keys
-    * */
+     * Updates the BPlusIndex with new values after a record update.
+     *
+     * @param newColNameVal   The new column name-value pair.
+     * @param oldColNameVal   The old column name-value pair.
+     * @param clusterKeyVal   The cluster key value.
+     * @param pageIdx         The index of the page where the record is located.
+     * @param table           The table to which the record belongs.
+     * @throws IOException       If an I/O error occurs.
+     * @throws ClassNotFoundException If the class of a serialized object cannot be found.
+     * @throws DBAppException    If an error occurs in the DBApp.
+     */
     public static void updateIndex(
             Hashtable<String, Object> newColNameVal, // name in old and new is same
             Hashtable<String, Object> oldColNameVal,
@@ -153,6 +167,14 @@ public class IndexControler {
         }
 
     }
+    /**
+     * Loads all BPlusIndex instances associated with the specified table.
+     *
+     * @param tableName The name of the table.
+     * @return A vector containing all BPlusIndex instances associated with the table.
+     * @throws IOException       If an I/O error occurs.
+     * @throws ClassNotFoundException If the class of a serialized object cannot be found.
+     */
 
     public static Vector<BPlusIndex> loadAllTableIndices(String tableName) throws IOException, ClassNotFoundException {
         try {
@@ -184,7 +206,15 @@ public class IndexControler {
         }
         return new Vector<>();
     }
-
+    /**
+     * Reads a BPlusIndex from the file system based on its name and associated table.
+     *
+     * @param idxName The name of the BPlusIndex.
+     * @param table   The table associated with the BPlusIndex.
+     * @return The BPlusIndex read from the file system.
+     * @throws IOException       If an I/O error occurs.
+     * @throws ClassNotFoundException If the class of a serialized object cannot be found.
+     */
 
     public static BPlusIndex readIndexByName(String idxName, Table table) throws IOException, ClassNotFoundException {
         String idxPath = "Data_Entry" +
@@ -199,6 +229,19 @@ public class IndexControler {
         return (BPlusIndex) FileCreator.readObject(idxPath);
     }
 
+    /**
+     * Searches for records in the specified BPlusIndex based on the given value and operator.
+     *
+     * @param table    The table to which the BPlusIndex belongs.
+     * @param colName  The name of the column associated with the BPlusIndex.
+     * @param value    The value to search for.
+     * @param operator The comparison operator for the search operation.
+     * @return A vector containing pointers to the records matching the search criteria.
+     * @throws DBAppException       If the operator is unsupported.
+     * @throws IOException          If an I/O error occurs.
+     * @throws ClassNotFoundException If the class of a serialized object cannot be found.
+     */
+
     public static Vector<Pointer> search(Table table, String colName, Object value, String operator) throws DBAppException, IOException, ClassNotFoundException {
         BPlusIndex bplus = readIndexByName(table.getColumnByName(colName).getIndexName(), table);
         return switch (operator) {
@@ -212,6 +255,17 @@ public class IndexControler {
         };
 
     }
+    /**
+     * Searches for records in multiple BPlusIndex instances and returns the intersection of the results.
+     *
+     * @param table       The table to which the BPlusIndex instances belong.
+     * @param colIdxWBplus The list of column indices associated with the BPlusIndex instances to be searched.
+     * @param colIdxVal   The hashtable containing column indices and their corresponding values to search for.
+     * @param affectedBPlus The list to which the affected BPlusIndex instances are added.
+     * @return A vector containing pointers to the records that intersect in all BPlusIndex instances.
+     * @throws IOException          If an I/O error occurs.
+     * @throws ClassNotFoundException If the class of a serialized object cannot be found.
+     */
     public static Vector<Pointer> searchIntersect(Table table, ArrayList<Integer> colIdxWBplus,
                                                   Hashtable<Integer, Object> colIdxVal,
                                                   ArrayList<BPlusIndex> affectedBPlus)
@@ -232,6 +286,16 @@ public class IndexControler {
         }
         return bplusFilter;
     }
+
+    /**
+     * Verifies the consistency between the data in the table and its associated indices.
+     *
+     * @param table The table to be tested.
+     * @return true if the indices are consistent with the table data, false otherwise.
+     * @throws IOException       If an I/O error occurs.
+     * @throws ClassNotFoundException If the class of a serialized object cannot be found.
+     * @throws DBAppException    If an error occurs in the DBApp.
+     */
     public static boolean testIndexTable(Table table) throws IOException, ClassNotFoundException, DBAppException {
         int clusterIdx =(int) table.getClusterKeyAndIndex()[1];
         ArrayList<TableColumn> cols = table.getAllColumnBIdxs();
@@ -256,6 +320,13 @@ public class IndexControler {
         }
         return true;
     }
+
+    /**
+     * Updates page indices in the BPlusIndex instances after a page deletion.
+     *
+     * @param bPlusIndices The list of BPlusIndex instances to be updated.
+     * @param deletedIdx   The index of the deleted page.
+     */
     public static void updatePageDeletion(ArrayList<BPlusIndex> bPlusIndices, int deletedIdx) {
         for(BPlusIndex bplus: bPlusIndices) {
             BPlusIndex.LeafNode curr = bplus.firstLeaf;
