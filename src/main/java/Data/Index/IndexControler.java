@@ -26,7 +26,7 @@ public class IndexControler {
      */
     public static void createIndex(Table table, String strColName, String strIndexName) throws IOException, ClassNotFoundException, DBAppException {
 
-        BPlusIndex b = new BPlusIndex(3, table.getTableName(), strColName, strIndexName);
+        BPlusIndex b = new BPlusIndex(4, table.getTableName(), strColName, strIndexName);
         // if col has records already
         if (table.hasRecords()) {
             // load all pages

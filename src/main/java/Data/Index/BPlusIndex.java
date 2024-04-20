@@ -75,12 +75,13 @@ public class BPlusIndex implements Serializable {
             // entire for loop for one level
             for(int i = 0; i < size; i++){
                 Node curr = qu.remove();
+                sb.append(curr.toString()).append("   ⚡   ");
                 // if internal node meaning it has children then put children
                 if(curr instanceof InternalNode node){
                     for(int j = 0; j < node.degree; j++)
                         qu.add(node.childPointers[j]);
                 }
-                sb.append(curr.toString()).append(" ");
+                sb.append(curr.toString()).append("   ⚡  ");
             }
             sb.append('\n');
         }
@@ -1068,6 +1069,9 @@ public class BPlusIndex implements Serializable {
          */
         ////////////// revisesssssssssssssssssssssssssssssss
         public boolean insert(DictionaryPair dp) {
+            // if duplicate dictionary pair then insert into existing
+            if(updateKeyVal(dp))
+                return true;
             if (this.isFull()) {
 
                 /* Flow of execution goes here when numPairs == maxNumPairs */
@@ -1077,9 +1081,7 @@ public class BPlusIndex implements Serializable {
 //                System.out.println("dp 🖲️" + dp);
 //                System.out.println("leaf Node🌿🍀: " + Arrays.toString(Arrays.copyOfRange(dictionary, 0, numPairs)));
 //                System.out.println("NumPairs: " + numPairs);
-                // if duplicate dictionary pair then insert into existing
-                if(updateKeyVal(dp))
-                    return true;
+
                 // Insert dictionary pair, increment numPairs, sort dictionary
 
                 this.dictionary[numPairs] = dp;
@@ -1097,6 +1099,7 @@ public class BPlusIndex implements Serializable {
                 return false;
 
             Comparator<DictionaryPair> c = DictionaryPair::compareTo;
+
             int idx = Arrays.binarySearch(this.dictionary, 0, numPairs, dp, c);
             if(idx < 0)
                 return false;
