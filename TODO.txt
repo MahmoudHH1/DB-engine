@@ -3,12 +3,11 @@
 2- use general variable maxPageSize where needed ✅
 4- all indices stuff ✅
 6- Hashtables inputs can be null or empyt???
-7- BPlusIndex handle deficiency we keda. rage3 (line 185)
+7- BPlusIndex handle deficiency we keda. rage3 (line 185)✅
 8- update optimize with clusterKey index ✅
 9- insert optimized with clusterKey index ✅
-- redo evalutaion of sqlterms
 - BONUS: Remove unneeded rules from SQL grammar for simplicity ✅
-- Perform logical operations by priority
+- Perform logical operations by priority✅
 - Insert: how is uniqueness checked? ✅
 - brin shit✅
-- truncate table
+- truncate table✅

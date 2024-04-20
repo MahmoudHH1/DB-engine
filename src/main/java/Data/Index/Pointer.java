@@ -23,6 +23,12 @@ public class Pointer implements Comparable , Serializable {
         this.clusterKeyValue = (Comparable) key;
     }
 
+    /**
+     * compares pointers using their clusterKeyValue attribute
+     *
+     * @param o the object to be compared.
+     * @return returns the compareTo between both clusterKeyValues
+     */
     @Override
     public int compareTo(Object o) {
         return this.clusterKeyValue.compareTo(((Pointer)o).clusterKeyValue);

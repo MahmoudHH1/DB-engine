@@ -4,18 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Priority of Logical operations">
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Made deleteFromTable delete all pages when hashtable is empty.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Handler/FileRemover.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Handler/FileRemover.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Page/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Page/Page.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Table/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/DBApp$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DBApp$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DBApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Page/Page$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Page/Page$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Page/Page.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Page/Page.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Page/Record.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Page/Record.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/SQLTerm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/SQLTerm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TODO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Index/Pointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Index/Pointer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -239,14 +231,6 @@
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
       <updated>1709364507752</updated>
-    </task>
-    <task id="LOCAL-00095" summary="quick">
-      <option name="closed" value="true" />
-      <created>1712180556482</created>
-      <option name="number" value="00095" />
-      <option name="presentableId" value="LOCAL-00095" />
-      <option name="project" value="LOCAL" />
-      <updated>1712180556482</updated>
     </task>
     <task id="LOCAL-00096" summary="tawzi3">
       <option name="closed" value="true" />
@@ -616,7 +600,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713615317123</updated>
     </task>
-    <option name="localTasksCounter" value="142" />
+    <task id="LOCAL-00142" summary="Made deleteFromTable delete all pages when hashtable is empty.">
+      <option name="closed" value="true" />
+      <created>1713627781872</created>
+      <option name="number" value="00142" />
+      <option name="presentableId" value="LOCAL-00142" />
+      <option name="project" value="LOCAL" />
+      <updated>1713627781873</updated>
+    </task>
+    <option name="localTasksCounter" value="143" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -691,7 +683,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="pageIdx mesh ay haga index i" />
     <MESSAGE value="maxPageSize needed to be used in table search.&#10;Optimization using clusterKey in delete.&#10;Pointer equality adjustment" />
     <MESSAGE value="improvements" />
     <MESSAGE value="tazbitat we bonus" />
@@ -716,7 +707,8 @@
     <MESSAGE value="Saeed added some documentations" />
     <MESSAGE value="record documentation" />
     <MESSAGE value="Priority of Logical operations" />
-    <option name="LAST_COMMIT_MESSAGE" value="Priority of Logical operations" />
+    <MESSAGE value="Made deleteFromTable delete all pages when hashtable is empty." />
+    <option name="LAST_COMMIT_MESSAGE" value="Made deleteFromTable delete all pages when hashtable is empty." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
