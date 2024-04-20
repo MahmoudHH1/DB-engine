@@ -341,7 +341,7 @@ public class IndexControler {
             }
         }
     }
-    public static void deleteAllTableIndices(Table table) throws IOException, ClassNotFoundException {
+    public static void clearAllTableIndices(Table table) throws IOException, ClassNotFoundException {
         for(TableColumn col : table.getAllColumns()){
             if(col.isColumnBIdx()){
                 BPlusIndex b = readIndexByName(col.getIndexName(), table);

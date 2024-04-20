@@ -448,7 +448,7 @@ public class Table implements Serializable {
         for(String path: pagePaths)
             FileRemover.removeFileFromDirectory(path);
         reset();
-        IndexControler.deleteAllTableIndices(this);
+        IndexControler.clearAllTableIndices(this);
     }
 
 
