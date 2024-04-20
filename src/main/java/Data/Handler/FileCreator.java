@@ -38,4 +38,7 @@ public class FileCreator {
         fileIn.close();
         return o;
     }
+//    public static void createStorageDir(){
+//        File
+//    }
 }

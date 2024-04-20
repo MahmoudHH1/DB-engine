@@ -75,7 +75,7 @@ public class BPlusIndex implements Serializable {
             // entire for loop for one level
             for(int i = 0; i < size; i++){
                 Node curr = qu.remove();
-                sb.append(curr.toString()).append("   ⚡   ");
+                sb.append("   ⚡   ");
                 // if internal node meaning it has children then put children
                 if(curr instanceof InternalNode node){
                     for(int j = 0; j < node.degree; j++)
