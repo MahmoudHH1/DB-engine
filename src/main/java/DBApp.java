@@ -27,16 +27,20 @@ public class DBApp {
     public static ArrayList<Table> allTables;
 
 
-    public DBApp() throws IOException, ClassNotFoundException {
+    public DBApp() throws DBAppException {
         init();
     }
 
     // this does whatever initialization you would like
     // or leave it empty if there is no code you want to
     // execute at application startup
-    public void init() throws IOException, ClassNotFoundException {
-        allTables = MetaData.loadAllTables();
-        MetaData.loadPageSize();
+    public void init() throws DBAppException {
+        try{
+            allTables = MetaData.loadAllTables();
+            MetaData.loadPageSize();
+        } catch (Exception e){
+            throw new DBAppException(e);
+        }
     }
 
     // following method creates one table only
@@ -48,6 +52,9 @@ public class DBApp {
     public void createTable(String strTableName,
                             String strClusteringKeyColumn,
                             Hashtable<String, String> htblColNameType) throws DBAppException, IOException {
+        if(strTableName == null || strTableName.isEmpty() || strClusteringKeyColumn == null
+        || strClusteringKeyColumn.isEmpty() || htblColNameType == null || htblColNameType.isEmpty())
+            throw new DBAppException("Missing method arguments");
 
         if (Table.exists(allTables, strTableName)) {
             throw new DBAppException("Table already exists");
@@ -71,6 +78,10 @@ public class DBApp {
     public void createIndex(String strTableName,
                             String strColName,
                             String strIndexName) throws DBAppException, IOException, ClassNotFoundException {
+        if(strTableName == null || strTableName.isEmpty() || strColName == null
+                || strColName.isEmpty() || strIndexName == null || strIndexName.isEmpty())
+            throw new DBAppException("Missing method arguments");
+
         Table table = Table.getTable(allTables, strTableName);
 
         TableColumn col = table.getColumnByName(strColName);
@@ -91,6 +102,10 @@ public class DBApp {
     // htblColNameValue must include a value for the primary key
     public void insertIntoTable(String strTableName,
                                 Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
+        if(strTableName == null || strTableName.isEmpty()
+                || htblColNameValue == null || htblColNameValue.isEmpty())
+            throw new DBAppException("Missing method arguments");
+
         //checking whether the table exists or not
         boolean tableExists = false;
         for (Table table : allTables)
@@ -111,13 +126,18 @@ public class DBApp {
     public void updateTable(String strTableName,
                             String strClusteringKeyValue,
                             Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
+        if(strTableName == null || strTableName.isEmpty()
+        || strClusteringKeyValue == null || strClusteringKeyValue.isEmpty())
+            throw new DBAppException("Missing method arguments");
+
+        if( htblColNameValue == null || htblColNameValue.isEmpty())
+            return;
+
         // check if htblColNameValue size  = table.allcol.size()
         Table table = Table.getTable(allTables, strTableName);
         TupleValidator.IsValidTuple(htblColNameValue, table);
 
         Object clusterKeyVal = strClusteringKeyValue;
-        if(strClusteringKeyValue.isEmpty()) // strClusteringKeyValue.replace(" ", "").isEmpty();
-            throw new DBAppException("Nothing given to search with.");
         Object[] clusterKeyColIndex = table.getClusterKeyAndIndex();
         // not checking if string is empty or if string can be parsed
 
@@ -143,10 +163,17 @@ public class DBApp {
     // htblColNameValue enteries are ANDED together
     public void deleteFromTable(String strTableName,
                                 Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
+        if(strTableName == null || strTableName.isEmpty())
+            throw new DBAppException("Missing method arguments");
+
         Table table = Table.getTable(allTables, strTableName);
-        TupleValidator.IsValidTuple(htblColNameValue, table);
-        if(htblColNameValue.isEmpty())
+
+        if(htblColNameValue == null ||htblColNameValue.isEmpty()){
             table.deleteAllPages();
+            return;
+        }
+
+        TupleValidator.IsValidTuple(htblColNameValue, table);
 
         int rowsAffected = 0;
         int clusterKeyIdx = (int) table.getClusterKeyAndIndex()[1];

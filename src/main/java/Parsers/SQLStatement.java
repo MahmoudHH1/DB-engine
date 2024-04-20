@@ -28,7 +28,9 @@ public class SQLStatement {
         @Override
         public boolean add(String s) {
             int rem = s.indexOf('(');
-            s = s.substring(0,rem);
+            if(rem > 0)
+                s = s.substring(0,rem);
+            
             switch (s.toUpperCase()) {
                 case "CHAR", "VARCHAR", "STRING" -> super.add("java.lang.String");
                 case "SMALLINT", "MEDIUMINT", "INT", "INTEGER", "BIGINT" -> super.add("java.lang.Integer");

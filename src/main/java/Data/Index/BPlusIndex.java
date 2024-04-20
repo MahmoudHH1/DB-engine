@@ -1233,4 +1233,28 @@ public class BPlusIndex implements Serializable {
             return key.toString() + "-> " + values.toString();
         }
     }
+    public static void main(String[] args){
+        BPlusIndex b= new BPlusIndex(3, "","", "");
+        Pointer p = new Pointer(1,3);
+        Random r = new Random();
+
+        b.insert(2, p);
+        b.insert(3,p);
+        b.insert(4,p);
+        b.insert(1,p);
+        b.insert(5,p);
+        b.insert(7,p);
+        b.insert(8,p);
+        b.insert(9, p);
+        b.insert(10, p);
+        b.insert(11, p);
+        System.out.println(b);
+        b.delete(11, p);
+        b.delete(10, p);
+        System.out.println(b);
+        System.out.println(b.search(10));
+        b.delete(9, p);
+        System.out.println(b.search(8));
+
+    }
 }

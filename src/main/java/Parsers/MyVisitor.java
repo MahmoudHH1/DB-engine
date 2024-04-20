@@ -74,7 +74,7 @@ public class MyVisitor extends SqlBaseVisitor<SQLStatement> {
         parsedStatement.columnNames.add(colName);
         parsedStatement.colTypes.add(ctx.type_name().name().getText());
 
-        if(!ctx.column_constraint().isEmpty()){
+        if(ctx.column_constraint() != null && !ctx.column_constraint().isEmpty()){
             if(parsedStatement.clusterColumn != null)
                 throw new RuntimeException("Can only have one clustering/Primary column");
 
