@@ -298,7 +298,7 @@ public class DBApp {
             for (String path : table.getPagePaths()) {
                 Page page = Page.readPage(path, table);
                 for (Record record : page) {
-                    if (SQLTerm.evalExp(arrSQLTerms, record, table, strarrOperators)) {
+                    if (SQLTerm.evalExpLinear(arrSQLTerms, record, table, strarrOperators)) {
                         validRecords.add(record);
                     }
                 }

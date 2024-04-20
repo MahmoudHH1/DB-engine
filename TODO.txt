@@ -10,4 +10,5 @@
 - BONUS: Remove unneeded rules from SQL grammar for simplicity ✅
 - Perform logical operations by priority
 - Insert: how is uniqueness checked? ✅
-- brin shit
+- brin shit✅
+- truncate table
