@@ -392,9 +392,9 @@ public class DBApp {
 //            htblColNameType.put("id", "java.lang.Integer");
 //            dbApp.createTable(strTableName, "id", htblColNameType);
 //            dbApp.createIndex(strTableName, "gpa", "gpaIndex");
-            Table table = Table.getTable(allTables,"Student");
+//            Table table = Table.getTable(allTables,"Student");
 //            // ** insert **
-            Hashtable<String, Object> htblColNameValue = new Hashtable<>();
+//            Hashtable<String, Object> htblColNameValue = new Hashtable<>();
 //            Random random = new Random();
 //            double[] gpas = {1.8707343572991275, 4.794898718343688, 4.248665186144998, 3.17081958974137, 0.09320194237640356, 0.9725099510902641, 4.089370321938262, 1.6642600553325182, 1.3182128065760583, 4.998746444195267};
 //            int[] ids = {60140, 66455, 53268, 43418, 49819, 3715, 93972, 18801, 41104, 40187};
@@ -419,7 +419,7 @@ public class DBApp {
 //            table.viewTable();
 //            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
 //            System.out.println("test after insertion is : "+ IndexControler.testIndexTable(table));
-            table.displayMinMax();
+//            table.displayMinMax();
 
 //////                                           //  ** update **
 //            htblColNameValue.clear();
@@ -430,20 +430,20 @@ public class DBApp {
 //            dbApp.updateTable("Student", "40187", htblColNameValue);
 //            dbApp.updateTable("Student", "60140", htblColNameValue);
 //            System.out.println("😂😂😂Updated😂😂");
-            table.viewTable();
+//            table.viewTable();
 //            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
 //            System.out.println("test after update : "+IndexControler.testIndexTable(table));
 //            // ** delete **
-            System.out.println("👻💀Delete💀👻");
+//            System.out.println("👻💀Delete💀👻");
 ////            htblColNameValue.clear();
 //            htblColNameValue.put("name", "yjmb");
 //            htblColNameValue.put("gpa", 1.6642600553325182);
 //            htblColNameValue.put("id" ,40187);
-            dbApp.deleteFromTable("Student", htblColNameValue);
-            table.viewTable();
-            table.displayMinMax();
-            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
-            System.out.println("test after deletion : "+IndexControler.testIndexTable(table));
+//            dbApp.deleteFromTable("Student", htblColNameValue);
+//            table.viewTable();
+//            table.displayMinMax();
+//            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
+//            System.out.println("test after deletion : "+IndexControler.testIndexTable(table));
 //-----------------------------------------TAs Table-------------------------------------------------------
 //            String strTableName = "TAs";
 //            Hashtable htblColNameType = new Hashtable();

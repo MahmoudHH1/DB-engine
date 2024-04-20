@@ -347,7 +347,4 @@ public class IndexControler {
             }
         }
     }
-
-
-
 }

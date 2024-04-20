@@ -98,12 +98,6 @@ public class TableColumn {
                 "," + indexType + '\n' ;
     }
 
-    public static void main(String[] args) {
-//        TableColumn c = new TableColumn("Student" , "ID",
-//                "java.lang.String" , true , null , null  );
-//
-//        System.out.println(c);
-    }
 }
 
 

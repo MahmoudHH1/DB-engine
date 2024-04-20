@@ -85,14 +85,16 @@ public class Table implements Serializable {
         }
         throw new DBAppException("Table Not Found");
     }
-    public static boolean exists(ArrayList<Table> allTables, String tableName){
+
+    public static boolean exists(ArrayList<Table> allTables, String tableName) {
         try {
             getTable(allTables, tableName);
             return true;
-        }catch (DBAppException e){
+        } catch (DBAppException e) {
             return false;
         }
     }
+
     public void reset() throws IOException {
         pagePaths = new Vector<>();
         minMax = new Vector<>();
@@ -117,6 +119,7 @@ public class Table implements Serializable {
         }
         return allColIdxs;
     }
+
     public ArrayList<String> getAllColumnBIdxsNames() {
         ArrayList<String> allColIdxs = new ArrayList<>();
         for (TableColumn col : allColumns) {
@@ -126,9 +129,10 @@ public class Table implements Serializable {
         }
         return allColIdxs;
     }
+
     public ArrayList<Integer> colIdxWBPlus() {
         ArrayList<Integer> allColIdxs = new ArrayList<>();
-        for (int i = 0; i<allColumns.size(); i++) {
+        for (int i = 0; i < allColumns.size(); i++) {
             if (allColumns.get(i).isColumnBIdx()) {
                 allColIdxs.add(i);
             }
@@ -140,6 +144,7 @@ public class Table implements Serializable {
         TableColumn col = getColumnByName(colName);
         return col.isColumnBIdx();
     }
+
     public boolean hasIndex(int colIdx) throws DBAppException {
         return allColumns.get(colIdx).isColumnBIdx();
     }
@@ -204,9 +209,11 @@ public class Table implements Serializable {
     public void appendPagePath(String filePath) {
         pagePaths.add(filePath);
     }
+
     public void appendMinMax(Page p) throws DBAppException, IOException, ClassNotFoundException {
         minMax.add(p.getRange());
     }
+
     public void updateMIN_MAX(int pageIndex, Page p) throws IOException, ClassNotFoundException, DBAppException {
         minMax.set(pageIndex, p.getRange());
     }
@@ -227,19 +234,21 @@ public class Table implements Serializable {
         }
         throw new DBAppException("Not implemented yet"); // do not use method yet
     }
+
     public int search(Comparable clusterKey, int clusterIdx) throws IOException, ClassNotFoundException, DBAppException {
         TableColumn clusterCol = getAllColumns().get(clusterIdx);
-        if(clusterCol.isColumnBIdx()){
-            Vector<Pointer> ptrs = IndexControler.search(this, clusterCol.getColumnName(), clusterKey,"<");
-            if(ptrs == null || ptrs.isEmpty())
+        if (clusterCol.isColumnBIdx()) {
+            Vector<Pointer> ptrs = IndexControler.search(this, clusterCol.getColumnName(), clusterKey, "<");
+            if (ptrs == null || ptrs.isEmpty())
                 return 0;
             ptrs.sort(Pointer::compareTo);
-            Pointer p = ptrs.get(ptrs.size()-1);
+            Pointer p = ptrs.get(ptrs.size() - 1);
 
             return p.pageIdx;
         }
         return search(clusterKey, clusterIdx, 0); // 5000
     }
+
     // binary search on cluster Key
     public int search(Comparable clusterKey, int clusterIdx, int start) throws IOException, ClassNotFoundException {
         int end = pagePaths.size() - 1;
@@ -247,46 +256,24 @@ public class Table implements Serializable {
         boolean checkBefore;
         while (start <= end) { // 2 pages -> start = 0; end = 1; mid = 0  id = 250 3000
             mid = start + (end - start) / 2;
-//            Page page = Page.readPage(pagePaths.get(mid), this);
-//            if(page.isEmpty())
-//                return mid;
-//            if (clusterKey.compareTo(page.get(0).get(clusterIdx)) < 0) {
-//                end = mid - 1;
-//                checkBefore = true;
-//            } else if (clusterKey.compareTo(page.get(page.size() - 1).get(clusterIdx)) > 0) {
-//                start = mid + 1;
-//            } else {
-//                break;
-//            }
-//            checkBefore = false;
-
             //x is min and y is max
             Pair<Comparable, Comparable> minmax = minMax.get(mid);
-            if(clusterKey.compareTo(minmax.x) < 0){
-                end = mid -1;
+            if (clusterKey.compareTo(minmax.x) < 0) {
+                end = mid - 1;
                 checkBefore = true;
             } else if (clusterKey.compareTo(minmax.y) > 0) {
-                start = mid +1;
+                start = mid + 1;
             } else
                 break;
-
-            // 0 : min = 0 max = 39
-            // 1 : min = 40 max = 70
-            // 2 : min = 50 max = 249
-            // 3 : min = 251 max = 350
-//            if(checkBefore && mid > 0) {
-//                Page temp = Page.readPage(pagePaths.get(mid-1), this);
-//                if(temp.size() < MetaData.maxPageSize)
-//                    --mid;
-//            }
         }
-        return mid <= 0? mid: mid-1; // 5000
+        return mid <= 0 ? mid : mid - 1; // 5000
     }
+
     public Pair<Page, Record> searchRec(Comparable clusterKey, int clusterIdx) throws IOException, ClassNotFoundException, DBAppException {
         TableColumn clusterCol = getAllColumns().get(clusterIdx);
-        if(clusterCol.isColumnBIdx()){
-            Vector<Pointer> ptrs = IndexControler.search(this, clusterCol.getColumnName(), clusterKey,"=");
-            if(ptrs == null || ptrs.isEmpty())
+        if (clusterCol.isColumnBIdx()) {
+            Vector<Pointer> ptrs = IndexControler.search(this, clusterCol.getColumnName(), clusterKey, "=");
+            if (ptrs == null || ptrs.isEmpty())
                 return null;
             Pointer p = ptrs.get(0);
             Page page = Page.readPage(getPagePaths().get(p.pageIdx), this);
@@ -294,29 +281,17 @@ public class Table implements Serializable {
         }
         return searchRec(clusterKey, clusterIdx, 0);
     }
+
     public Pair<Page, Record> searchRec(Comparable clusterKey, int clusterIdx, int start) throws IOException, ClassNotFoundException {
         int end = pagePaths.size() - 1;
-        int mid ;
+        int mid;
         Record rec = null;
         Page page = null;
         while (start <= end) { // 2 pages -> start = 0; end = 1; mid = 0  id = 250 3000
             mid = start + (end - start) / 2;
             Pair<Comparable, Comparable> minmax = minMax.get(mid);
-//            page = Page.readPage(pagePaths.get(mid), this);
-            // search with reading page ->
-//            if(page.isEmpty())
-//                return null;
-//            if (clusterKey.compareTo(page.get(0).get(clusterIdx)) < 0) {
-//                end = mid - 1;
-//            } else if (clusterKey.compareTo(page.get(page.size() - 1).get(clusterIdx)) > 0) {
-//                start = mid + 1;
-//            } else {
-//                rec = page.searchRecord(clusterKey, clusterIdx);
-//                break;
-//            }
-
             // x is min, y is max
-            if(clusterKey.compareTo(minmax.x) < 0){
+            if (clusterKey.compareTo(minmax.x) < 0) {
                 end = mid - 1;
             } else if (clusterKey.compareTo(minmax.y) > 0) {
                 start = mid + 1;
@@ -326,7 +301,7 @@ public class Table implements Serializable {
                 break;
             }
         }
-        return rec == null || page == null? null : new Pair<>(page, rec);
+        return rec == null || page == null ? null : new Pair<>(page, rec);
     }
 
     public boolean hasRecords() {
@@ -346,9 +321,6 @@ public class Table implements Serializable {
         return false;
     }
 
-    //----------------------------------------------------------------------------------
-    //functions by MX
-
     public void viewTable() throws IOException, ClassNotFoundException {
         if (!pagePaths.isEmpty()) {
             for (String pagePath : pagePaths) {
@@ -357,105 +329,82 @@ public class Table implements Serializable {
             }
         }
     }
-    public void displayMinMax(){
+
+    public void displayMinMax() {
         System.out.println(minMax.toString());
     }
 
     public void insertIntoTable(
             Hashtable<String, Object> insertedTuple
-        )throws DBAppException, IOException, ClassNotFoundException {
-            TupleValidator.IsValidTuple(insertedTuple, this);
-            Record rec = new Record();
-            rec.insertRecord(getColIdxVal(insertedTuple));
+    ) throws DBAppException, IOException, ClassNotFoundException {
+        TupleValidator.IsValidTuple(insertedTuple, this);
+        Record rec = new Record();
+        rec.insertRecord(getColIdxVal(insertedTuple));
 
-            //overflow record for shifting purposes
-            Record overFlowRec = new Record();
-            //if it is the first record to be inserted
-            if (pagePaths.isEmpty()) {
-                //creating a new page
-                Page firstPage = new Page(this);
-                firstPage.add(rec);
-                IndexControler.insertIntoIndex(rec , 0 , this,insertedTuple);
-                appendMinMax(firstPage);
-                //remember to insert the values in the existing indices
-                firstPage.save();
-            } else {
-                // search returns x = pageIdx and y = record idx
-                int clusterIdx = (int) getClusterKeyAndIndex()[1];
-                int pagePathIdx = search(rec.get(clusterIdx), clusterIdx);
-                for (int i = pagePathIdx; i < pagePaths.size(); i++) {
-                    String pagePath = pagePaths.get(i);
-                    Page page = Page.readPage(pagePath, this);
-                    if (rec != null) {
-                        page.insertIntoPage(rec);
-                        updateMIN_MAX( i, page);
-                        //remember to insert the record into the existing indices
-                        IndexControler.insertIntoIndex(rec,pagePathIdx,this,insertedTuple);
-                        rec = null;
-                    }
-                    //if the record is inserted successfully there will be no overflow
-                    //if overflow insert the keep inserting and shifting all records
-                    //until you reach the last page of the table
-                    overFlowRec = page.overFlow();
-                    page.save();
-                    //if overflow is null after the value is inserted
-                    //break out of the for loop for time complexity concerns
-                    if (overFlowRec == null)
-                        break;
-                    //can I read the next page while I am in this page
-                    //we will find out
-                    if (i < this.pagePaths.size() - 1) {
-                        //inserting the overflow in the next page
-                        Page nextPage = Page.readPage(this.pagePaths.get(i + 1), this);
-                        nextPage.insertIntoPage(overFlowRec);
-                        IndexControler.updatePageIdxOverflow(overFlowRec,this);
-                        updateMIN_MAX(i+1,nextPage);
-                        nextPage.save();
-                    }
+        //overflow record for shifting purposes
+        Record overFlowRec = new Record();
+        //if it is the first record to be inserted
+        if (pagePaths.isEmpty()) {
+            //creating a new page
+            Page firstPage = new Page(this);
+            firstPage.add(rec);
+            IndexControler.insertIntoIndex(rec, 0, this, insertedTuple);
+            appendMinMax(firstPage);
+            firstPage.save();
+        } else {
+            // search returns x = pageIdx and y = record idx
+            int clusterIdx = (int) getClusterKeyAndIndex()[1];
+            int pagePathIdx = search(rec.get(clusterIdx), clusterIdx);
+            for (int i = pagePathIdx; i < pagePaths.size(); i++) {
+                String pagePath = pagePaths.get(i);
+                Page page = Page.readPage(pagePath, this);
+                if (rec != null) {
+                    page.insertIntoPage(rec);
+                    updateMIN_MAX(i, page);
+                    IndexControler.insertIntoIndex(rec, pagePathIdx, this, insertedTuple);
+                    rec = null;
                 }
-                //checking whether I reached the last page and the overflow is not inserted yet
-                //making a new page to insert the overflow
-                if (overFlowRec != null) {
-                    Page newP = new Page(this);
-                    newP.insertIntoPage(overFlowRec);
-                    IndexControler.updatePageIdxOverflow(overFlowRec,this);
-                    appendMinMax(newP);
-                    newP.save();
+                //if the record is inserted successfully there will be no overflow
+                //if overflow insert the keep inserting and shifting all records
+                //until you reach the last page of the table
+                overFlowRec = page.overFlow();
+                page.save();
+                //if overflow is null after the value is inserted
+                //break out of the for loop for time complexity concerns
+                if (overFlowRec == null)
+                    break;
+                if (i < this.pagePaths.size() - 1) {
+                    //inserting the overflow in the next page
+                    Page nextPage = Page.readPage(this.pagePaths.get(i + 1), this);
+                    nextPage.insertIntoPage(overFlowRec);
+                    IndexControler.updatePageIdxOverflow(overFlowRec, this);
+                    updateMIN_MAX(i + 1, nextPage);
+                    nextPage.save();
                 }
             }
-            this.save();
-    }
-
-
-
-    public static <T extends Comparable<T>> boolean isBetween(T value, T minValue, T maxValue) {
-        return value.compareTo(minValue) >= 0 && value.compareTo(maxValue) <= 0;
-    }
-
-    public static <T extends Comparable<T>> boolean isless(T value, T firstVal, T SecondVal) {
-        return value.compareTo(firstVal) < 0 && value.compareTo(SecondVal) < 0;
-    }
-
-    public static <T extends Comparable<T>> boolean isGreater(T value, T firstVal, T SecondVal) {
-        return value.compareTo(firstVal) > 0 && value.compareTo(SecondVal) > 0;
+            //checking whether I reached the last page and the overflow is not inserted yet
+            //making a new page to insert the overflow
+            if (overFlowRec != null) {
+                Page newP = new Page(this);
+                newP.insertIntoPage(overFlowRec);
+                IndexControler.updatePageIdxOverflow(overFlowRec, this);
+                appendMinMax(newP);
+                newP.save();
+            }
+        }
+        this.save();
     }
 
     public void removeTable() {
         MetaData.deleteTableFromCSV(this.getTableName());
         FileRemover.removeDirectory(this.getTableName());
     }
+
     public void deleteAllPages() throws IOException, ClassNotFoundException {
-        for(String path: pagePaths)
+        for (String path : pagePaths)
             FileRemover.removeFileFromDirectory(path);
         reset();
         IndexControler.clearAllTableIndices(this);
     }
 
-
-
-
-    //----------------------------------------------------------------------------------------------
-
-    public static void main(String[] args) throws IOException, DBAppException {
-    }
 }

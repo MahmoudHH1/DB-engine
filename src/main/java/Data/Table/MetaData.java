@@ -3,13 +3,14 @@ package Data.Table;
 import Data.Handler.FileCreator;
 import Data.Handler.Pair;
 import Data.Table.TableColumn;
+
 import java.io.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.*;
-import java.nio.file.* ;
+import java.nio.file.*;
 
 import static java.nio.file.Path.*;
 
@@ -22,26 +23,27 @@ public class MetaData {
 
     public static void createMetaData() throws IOException {
         File file = new File(metaPath);
-        if(!file.exists()){
+        if (!file.exists()) {
             FileWriter writer = new FileWriter(metaPath);
             writer.write("Table_Name,Column_Name,Column_Type,Clustering_Key,Index_Name,Index_Type\n");
             writer.close();
         }
 
     }
+
     public static void loadPageSize() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(configPath));
         String line = br.readLine();
-        if(line != null){
+        if (line != null) {
             String[] s = line.split(" = ");
-            maxPageSize =  Integer.parseInt(s[1]);
+            maxPageSize = Integer.parseInt(s[1]);
         }
     }
-    public static void writeDataToMetaDatafile( ArrayList<TableColumn> allColumns)
-    {
+
+    public static void writeDataToMetaDatafile(ArrayList<TableColumn> allColumns) {
         try {
-            FileWriter myWriter = new FileWriter(metaPath , true);
-            for(TableColumn column : allColumns){
+            FileWriter myWriter = new FileWriter(metaPath, true);
+            for (TableColumn column : allColumns) {
                 myWriter.append(column.toString());
             }
             myWriter.close();
@@ -80,6 +82,7 @@ public class MetaData {
             e.printStackTrace();
         }
     }
+
     private static String convertArrStr(String[] strArr, String delimiter) {
         StringBuilder sb = new StringBuilder();
         for (String str : strArr)
@@ -97,13 +100,13 @@ public class MetaData {
 
         br.readLine(); // skip first line
         String line = br.readLine();
-        while(line != null) {
+        while (line != null) {
             String[] s = line.split(",");
-            while(line != null && s.length <6){
+            while (line != null && s.length < 6) {
                 s = line.split(",");
                 line = br.readLine();
             }
-            if(line == null)
+            if (line == null)
                 break;
             TableColumn col = new TableColumn(s[0], s[1], s[2], Boolean.parseBoolean(s[3]), s[4], s[5]);
 
@@ -155,16 +158,6 @@ public class MetaData {
             e.printStackTrace();
         }
     }
-
-    public static void main(String[] args){
-        deleteTableFromCSV("Student");
-//        Hashtable<String,Object> htblColNameValue = new Hashtable<>();
-//        htblColNameValue.put("id", new Integer( 2343432 ));
-//        htblColNameValue.put("name", new String("Ahmed Noor" ) );
-//        htblColNameValue.put("gpa", new Double( 0.95 ) );
-//        System.out.println(IsValidTuple("Student" , htblColNameValue)) ;
-    }
-
 
 
 }
