@@ -401,6 +401,9 @@ public class DBApp {
             int[] ids = {60140, 66455, 53268, 43418, 49819, 3715, 93972, 18801, 41104, 40187, 63426, 73432, 73345, 3691, 472};
             for (int i = 0; i < 15; i++) {
                 String alpha = "abcdefghijklmnopqrstuvwxyz";
+                System.out.println(i);
+                if(i == 13)
+                    System.out.println("stop");
 //            int randomNumber = random.nextInt(100000) + 1;
                 int randomNumber = ids[i];
 //            double randGpa = random.nextDouble(5);
