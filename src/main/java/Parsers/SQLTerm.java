@@ -79,15 +79,15 @@ public class SQLTerm {
     private static boolean applyComparison(Object o1, String comp, Object o2) throws DBAppException {
         Comparable c1 = (Comparable) o1;
         Comparable c2 = (Comparable) o2;
-        switch (comp) {
-            case "=" : return c1.compareTo(c2) == 0;
-            case "!=" :return c1.compareTo(c2) != 0;
-            case ">" :return c1.compareTo(c2) > 0;
-            case ">=" :return c1.compareTo(c2) >= 0;
-            case "<" :return c1.compareTo(c2) < 0;
-            case "<=" :return c1.compareTo(c2) <= 0;
-            default :throw new DBAppException("Unsupported operator");
-        }
+        return switch (comp) {
+            case "=" -> c1.compareTo(c2) == 0;
+            case "!=" -> c1.compareTo(c2) != 0;
+            case ">" -> c1.compareTo(c2) > 0;
+            case ">=" -> c1.compareTo(c2) >= 0;
+            case "<" -> c1.compareTo(c2) < 0;
+            case "<=" -> c1.compareTo(c2) <= 0;
+            default -> throw new DBAppException("Unsupported operator");
+        };
     }
     private static boolean applyGates(boolean term1, String op, boolean term2) throws DBAppException {
         return switch (op) {
@@ -98,7 +98,7 @@ public class SQLTerm {
         };
     }
 
-    public static boolean allColummnsBplus(Table table,SQLTerm[] terms, String[] strarrOperators) throws DBAppException {
+    public static boolean allColummnsBplus(Table table,SQLTerm[] terms) throws DBAppException {
         for (SQLTerm term : terms) {
             if (!table.getColumnByName(term._strColumnName).isColumnBIdx()) {
                 return false;

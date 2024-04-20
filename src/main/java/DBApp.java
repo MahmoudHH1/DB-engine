@@ -273,7 +273,7 @@ public class DBApp {
         // check whether arrSQLTerms is empty???
         ArrayList<Vector<Pointer>> converted = new ArrayList<>(arrSQLTerms.length);
 
-        if(SQLTerm.allColummnsBplus(table, arrSQLTerms, strarrOperators)){
+        if(SQLTerm.allColummnsBplus(table, arrSQLTerms)){
             for(int i = 0; i<arrSQLTerms.length; i++){
                 TableColumn col = table.getColumnByName(arrSQLTerms[i]._strColumnName);
                 converted.add(IndexControler.search(table, col.getColumnName(), arrSQLTerms[i]._objValue, arrSQLTerms[i]._strOperator));
@@ -414,8 +414,9 @@ public class DBApp {
 //            htblColNameValue.put("id" ,40187);
             dbApp.deleteFromTable("Student", htblColNameValue);
             table.viewTable();
-//            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
-//            System.out.println("test after deletion : "+IndexControler.testIndexTable(table));
+            table.displayMinMax();
+            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
+            System.out.println("test after deletion : "+IndexControler.testIndexTable(table));
 //-----------------------------------------TAs Table-------------------------------------------------------
 //            String strTableName = "TAs";
 //            Hashtable htblColNameType = new Hashtable();

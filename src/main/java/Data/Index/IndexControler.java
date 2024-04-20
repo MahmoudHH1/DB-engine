@@ -20,14 +20,13 @@ public class IndexControler {
      * @param table        The table for which the index is being created.
      * @param strColName   The name of the column on which the index is being created.
      * @param strIndexName The name of the index being created.
-     * @return The created BPlusIndex.
-     * @throws IOException       If an I/O error occurs.
+     * @throws IOException            If an I/O error occurs.
      * @throws ClassNotFoundException If the class of a serialized object cannot be found.
-     * @throws DBAppException    If an error occurs in the DBApp.
+     * @throws DBAppException         If an error occurs in the DBApp.
      */
-    public static BPlusIndex createIndex(Table table, String strColName, String strIndexName) throws IOException, ClassNotFoundException, DBAppException {
+    public static void createIndex(Table table, String strColName, String strIndexName) throws IOException, ClassNotFoundException, DBAppException {
 
-        BPlusIndex b = new BPlusIndex(10, table.getTableName(), strColName, strIndexName);
+        BPlusIndex b = new BPlusIndex(3, table.getTableName(), strColName, strIndexName);
         // if col has records already
         if (table.hasRecords()) {
             // load all pages
@@ -43,7 +42,6 @@ public class IndexControler {
             }
         }
         b.save();
-        return b;
     }
     /**
      * Inserts a record into the index.

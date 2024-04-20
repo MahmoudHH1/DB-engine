@@ -4,10 +4,39 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Modified deleteAllPages to clear BPlusIndex">
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="name change">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/Student/Indices/gpaIndex.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/Student/Student.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/Student/Student1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/Student/Student2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data_Entry/Tables/Student/Student3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data_Entry/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data_Entry/metadata.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Data/Index/IndexControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Index/IndexControler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Table/Table.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Parsers/SQLTerm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parsers/SQLTerm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Parsers/Sql.g4" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parsers/Sql.g4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Parsers/gen/Parsers/Sql.interp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parsers/gen/Parsers/Sql.interp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Parsers/gen/Parsers/Sql.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parsers/gen/Parsers/Sql.tokens" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Parsers/gen/Parsers/SqlLexer.interp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parsers/gen/Parsers/SqlLexer.interp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Parsers/gen/Parsers/SqlLexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parsers/gen/Parsers/SqlLexer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Parsers/gen/Parsers/SqlLexer.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parsers/gen/Parsers/SqlLexer.tokens" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Parsers/gen/Parsers/SqlParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parsers/gen/Parsers/SqlParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Parsers/gen/Parsers/SqlVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parsers/gen/Parsers/SqlVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DBApp$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DBApp$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DBApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Data/Handler/FileRemover.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Handler/FileRemover.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$DictionaryPair.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$DictionaryPair.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$InternalNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$InternalNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$LeafNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$LeafNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex$Node.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/IndexControler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/IndexControler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/Pointer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/Pointer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Data/Page/Page.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Page/Page.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Data/Table/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Table/Table.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,14 +134,14 @@
       <recent name="D:\java projects\DB-engine\src\main\java\Grammars" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\java projects\DB-engine\src\test\java" />
       <recent name="D:\java projects\DB-engine\src\main\java\Parsers" />
       <recent name="D:\java projects\DB-engine\src\main\java\Grammars" />
       <recent name="D:\java projects\DB-engine\src\main\java\Data\BTree" />
       <recent name="D:\java projects\DB-engine\src\main\java\Data" />
-      <recent name="D:\java projects\DB-engine\src\main\java\MySQLGrammar" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.SQLTerm">
+  <component name="RunManager" selected="Application.DBApp">
     <configuration name="BTreeTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Data.BTree.BTreeTest" />
       <module name="Database-Engine" />
@@ -194,8 +223,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.SQLTerm" />
         <item itemvalue="Application.DBApp" />
+        <item itemvalue="Application.SQLTerm" />
         <item itemvalue="Application.SQLBonus" />
         <item itemvalue="Application.BTreeTest" />
         <item itemvalue="Application.Table" />
@@ -231,14 +260,6 @@
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
       <updated>1709364507752</updated>
-    </task>
-    <task id="LOCAL-00098" summary="testing we tacccck">
-      <option name="closed" value="true" />
-      <created>1712241628185</created>
-      <option name="number" value="00098" />
-      <option name="presentableId" value="LOCAL-00098" />
-      <option name="project" value="LOCAL" />
-      <updated>1712241628185</updated>
     </task>
     <task id="LOCAL-00099" summary="testing we tacccck">
       <option name="closed" value="true" />
@@ -608,7 +629,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713628588760</updated>
     </task>
-    <option name="localTasksCounter" value="145" />
+    <task id="LOCAL-00145" summary="name change">
+      <option name="closed" value="true" />
+      <created>1713630378618</created>
+      <option name="number" value="00145" />
+      <option name="presentableId" value="LOCAL-00145" />
+      <option name="project" value="LOCAL" />
+      <updated>1713630378618</updated>
+    </task>
+    <option name="localTasksCounter" value="146" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -683,7 +712,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="tazbitat we bonus" />
     <MESSAGE value="shakek fel bplus" />
     <MESSAGE value="Comparing both btrees; probably won't switch.&#10;Optimized table.searchRec() to use clusterKey index if exists." />
     <MESSAGE value="optimized search for insert. &#10;Warning⚠️: table.search() return Pair(pageIdx, null) if index on clusterKey" />
@@ -708,7 +736,8 @@
     <MESSAGE value="Made deleteFromTable delete all pages when hashtable is empty." />
     <MESSAGE value="documented compareTo" />
     <MESSAGE value="Modified deleteAllPages to clear BPlusIndex" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modified deleteAllPages to clear BPlusIndex" />
+    <MESSAGE value="name change" />
+    <option name="LAST_COMMIT_MESSAGE" value="name change" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -735,11 +764,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/Parsers/gen/Grammars/SqlParser.java</url>
           <line>677</line>
           <option name="timeStamp" value="142" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Parsers/SQLTerm.java</url>
-          <line>147</line>
-          <option name="timeStamp" value="147" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
