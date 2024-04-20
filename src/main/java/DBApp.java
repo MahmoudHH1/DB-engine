@@ -412,8 +412,8 @@ public class DBApp {
 //            htblColNameValue.put("name", "yjmb");
 //            htblColNameValue.put("gpa", 1.6642600553325182);
 //            htblColNameValue.put("id" ,40187);
-//            dbApp.deleteFromTable("Student", htblColNameValue);
-//            table.viewTable();
+            dbApp.deleteFromTable("Student", htblColNameValue);
+            table.viewTable();
 //            System.out.println(IndexControler.readIndexByName("gpaIndex", table));
 //            System.out.println("test after deletion : "+IndexControler.testIndexTable(table));
 //-----------------------------------------TAs Table-------------------------------------------------------

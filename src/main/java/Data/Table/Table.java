@@ -444,10 +444,11 @@ public class Table implements Serializable {
         MetaData.deleteTableFromCSV(this.getTableName());
         FileRemover.removeDirectory(this.getTableName());
     }
-    public void deleteAllPages() throws IOException {
+    public void deleteAllPages() throws IOException, ClassNotFoundException {
         for(String path: pagePaths)
             FileRemover.removeFileFromDirectory(path);
         reset();
+        IndexControler.deleteAllTableIndices(this);
     }
 
 

@@ -35,6 +35,11 @@ public class BPlusIndex implements Serializable {
                 "Indices"+File.separator+
                 idxName;
     }
+    public void clearAndSave() throws IOException {
+        root = null;
+        firstLeaf = null;
+        save();
+    }
     public String getIndexPath(){
         return this.path ;
     }

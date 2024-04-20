@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="Made deleteFromTable delete all pages when hashtable is empty.">
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="documented compareTo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TODO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Index/Pointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Index/Pointer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Index/BPlusIndex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Index/BPlusIndex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Index/IndexControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Index/IndexControler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Table/Table.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -231,14 +233,6 @@
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
       <updated>1709364507752</updated>
-    </task>
-    <task id="LOCAL-00096" summary="tawzi3">
-      <option name="closed" value="true" />
-      <created>1712191876395</created>
-      <option name="number" value="00096" />
-      <option name="presentableId" value="LOCAL-00096" />
-      <option name="project" value="LOCAL" />
-      <updated>1712191876396</updated>
     </task>
     <task id="LOCAL-00097" summary="Select bel 7ob mengher test">
       <option name="closed" value="true" />
@@ -608,7 +602,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713627781873</updated>
     </task>
-    <option name="localTasksCounter" value="143" />
+    <task id="LOCAL-00143" summary="documented compareTo">
+      <option name="closed" value="true" />
+      <created>1713628150836</created>
+      <option name="number" value="00143" />
+      <option name="presentableId" value="LOCAL-00143" />
+      <option name="project" value="LOCAL" />
+      <updated>1713628150837</updated>
+    </task>
+    <option name="localTasksCounter" value="144" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -683,7 +685,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="maxPageSize needed to be used in table search.&#10;Optimization using clusterKey in delete.&#10;Pointer equality adjustment" />
     <MESSAGE value="improvements" />
     <MESSAGE value="tazbitat we bonus" />
     <MESSAGE value="shakek fel bplus" />
@@ -708,7 +709,8 @@
     <MESSAGE value="record documentation" />
     <MESSAGE value="Priority of Logical operations" />
     <MESSAGE value="Made deleteFromTable delete all pages when hashtable is empty." />
-    <option name="LAST_COMMIT_MESSAGE" value="Made deleteFromTable delete all pages when hashtable is empty." />
+    <MESSAGE value="documented compareTo" />
+    <option name="LAST_COMMIT_MESSAGE" value="documented compareTo" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
