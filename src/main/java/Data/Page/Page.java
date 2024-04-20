@@ -253,7 +253,7 @@ public class Page extends Vector<Record>  {
             throw new RuntimeException(e);
         }
         if(this.isEmpty()){
-            FileRemover.removeFileFromDirectory(table ,pagePath);
+            FileRemover.removePageFromTable(table ,pagePath);
         }
         return changed;
     }

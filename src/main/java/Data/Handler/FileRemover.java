@@ -36,12 +36,12 @@ public class FileRemover {
     }
 
     /**
-     * Removes a file from the directory and updates the associated table.
+     * Removes a page from the directory and updates the associated table.
      *
      * @param table    The table associated with the file.
      * @param pagePath The path of the file to be removed.
      */
-    public static void removeFileFromDirectory(Table table, String pagePath) {
+    public static void removePageFromTable(Table table, String pagePath) {
         Path filePath = Paths.get(pagePath + ".class");
         try {
             if (Files.exists(filePath)) {
@@ -50,6 +50,25 @@ public class FileRemover {
                 //remove the page from page paths
                 table.removePageFromArr(pagePath);
                 table.save();
+            } else {
+                System.out.println("File does not exist.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * removes page from table's directory without affecting array.
+     *
+     * @param pagePath the path of the page to be deleted
+     */
+    public static void removeFileFromDirectory(String pagePath) {
+        Path filePath = Paths.get(pagePath + ".class");
+        try {
+            if (Files.exists(filePath)) {
+                Files.delete(filePath);
+                System.out.println("File removed: " + pagePath + ".class");
             } else {
                 System.out.println("File does not exist.");
             }

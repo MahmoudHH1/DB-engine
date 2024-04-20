@@ -84,7 +84,7 @@ public class DBApp {
         table.save();
 
         MetaData.updateOnMetaDataFile(strTableName, strColName, strIndexName);
-        BPlusIndex b = IndexControler.createIndex(table, strColName, strIndexName);
+        IndexControler.createIndex(table, strColName, strIndexName);
     }
 
     // following method inserts one row only.
@@ -145,6 +145,8 @@ public class DBApp {
                                 Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
         Table table = Table.getTable(allTables, strTableName);
         TupleValidator.IsValidTuple(htblColNameValue, table);
+        if(htblColNameValue.isEmpty())
+            table.deleteAllPages();
 
         int rowsAffected = 0;
         int clusterKeyIdx = (int) table.getClusterKeyAndIndex()[1];

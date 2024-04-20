@@ -95,6 +95,7 @@ public class Table implements Serializable {
     }
     public void reset() throws IOException {
         pagePaths = new Vector<>();
+        minMax = new Vector<>();
         pageNum = 1;
         save();
     }
@@ -443,6 +444,12 @@ public class Table implements Serializable {
         MetaData.deleteTableFromCSV(this.getTableName());
         FileRemover.removeDirectory(this.getTableName());
     }
+    public void deleteAllPages() throws IOException {
+        for(String path: pagePaths)
+            FileRemover.removeFileFromDirectory(path);
+        reset();
+    }
+
 
 
 
