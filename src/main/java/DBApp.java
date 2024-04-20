@@ -38,6 +38,7 @@ public class DBApp {
         try{
             allTables = MetaData.loadAllTables();
             MetaData.loadPageSize();
+            MetaData.createMetaData();
         } catch (Exception e){
             throw new DBAppException(e);
         }

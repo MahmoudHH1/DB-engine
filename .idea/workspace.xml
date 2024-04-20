@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="push gamed">
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="creeate MetaData.csv if not found">
       <change beforePath="$PROJECT_DIR$/src/main/java/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Table/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Table/TableColumn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Table/TableColumn.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +110,7 @@
       <recent name="D:\java projects\DB-engine\src\main\java\Data" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.SQLBonus">
+  <component name="RunManager" selected="Application.DBApp">
     <configuration name="BPlusIndex" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Data.Index.BPlusIndex" />
       <module name="Database-Engine" />
@@ -194,9 +192,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.DBApp" />
         <item itemvalue="Application.SQLBonus" />
         <item itemvalue="Application.BPlusIndex" />
-        <item itemvalue="Application.DBApp" />
         <item itemvalue="Application.SQLTerm" />
         <item itemvalue="Application.BTreeTest" />
       </list>
@@ -231,14 +229,6 @@
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
       <updated>1709364507752</updated>
-    </task>
-    <task id="LOCAL-00101" summary="testing we tacccck">
-      <option name="closed" value="true" />
-      <created>1712243285874</created>
-      <option name="number" value="00101" />
-      <option name="presentableId" value="LOCAL-00101" />
-      <option name="project" value="LOCAL" />
-      <updated>1712243285874</updated>
     </task>
     <task id="LOCAL-00102" summary="zabat moshkela zaharet wahda tania 💀💀">
       <option name="closed" value="true" />
@@ -608,7 +598,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713641051608</updated>
     </task>
-    <option name="localTasksCounter" value="148" />
+    <task id="LOCAL-00148" summary="creeate MetaData.csv if not found">
+      <option name="closed" value="true" />
+      <created>1713641979515</created>
+      <option name="number" value="00148" />
+      <option name="presentableId" value="LOCAL-00148" />
+      <option name="project" value="LOCAL" />
+      <updated>1713641979515</updated>
+    </task>
+    <option name="localTasksCounter" value="149" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -683,7 +681,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="optimized search for insert. &#10;Warning⚠️: table.search() return Pair(pageIdx, null) if index on clusterKey" />
     <MESSAGE value="Clean up + Optimization.&#10;Bonus: override _errHandler in sql parser.&#10;Removed some unneeded rules from sql.g4" />
     <MESSAGE value="Exception constructors ad message" />
     <MESSAGE value="Bonus" />
@@ -708,7 +705,8 @@
     <MESSAGE value="name change" />
     <MESSAGE value="grammar" />
     <MESSAGE value="push gamed" />
-    <option name="LAST_COMMIT_MESSAGE" value="push gamed" />
+    <MESSAGE value="creeate MetaData.csv if not found" />
+    <option name="LAST_COMMIT_MESSAGE" value="creeate MetaData.csv if not found" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
