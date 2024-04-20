@@ -4,17 +4,46 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="grammar">
+    <list default="true" id="fb42b14b-88c4-43e5-8ff2-f6f11ff08115" name="Changes" comment="push gamed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Index/BPlusIndex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Index/BPlusIndex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Parsers/MyVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parsers/MyVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Parsers/SQLStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parsers/SQLStatement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/DBApp$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DBApp$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DBApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/BPlusIndex.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Index/IndexControler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Index/IndexControler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/SQLTerm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/SQLTerm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Data/Table/MetaData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Data/Table/MetaData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/MyVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/MyVisitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/SQLStatement$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/SQLStatement$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/SQLStatement.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/SQLStatement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlLexer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlLexer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Any_comparisonContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Any_comparisonContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Any_nameContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Any_nameContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Cluster_columnContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Cluster_columnContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Column_constraintContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Column_constraintContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Column_constraint_primary_keyContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Column_constraint_primary_keyContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Column_defContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Column_defContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Column_nameContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Column_nameContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Create_index_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Create_index_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Create_table_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Create_table_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Delete_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Delete_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Eq_exprContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Eq_exprContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$ErrorContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$ErrorContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$ExprContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$ExprContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Index_nameContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Index_nameContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Indexed_columnContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Indexed_columnContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Insert_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Insert_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$KeywordContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$KeywordContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Literal_valueContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Literal_valueContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$NameContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$NameContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$ParseContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$ParseContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Result_columnContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Result_columnContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Select_coreContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Select_coreContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Signed_numberContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Signed_numberContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Simple_select_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Simple_select_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Single_exprContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Single_exprContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Sql_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Sql_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Sql_stmt_listContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Sql_stmt_listContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Table_constraintContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Table_constraintContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Table_constraint_primary_keyContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Table_constraint_primary_keyContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Table_nameContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Table_nameContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Type_nameContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Type_nameContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Update_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser$Update_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parsers/gen/Parsers/SqlParser.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -238,14 +267,6 @@
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
       <updated>1709364507752</updated>
-    </task>
-    <task id="LOCAL-00100" summary="testing we tacccck">
-      <option name="closed" value="true" />
-      <created>1712243238378</created>
-      <option name="number" value="00100" />
-      <option name="presentableId" value="LOCAL-00100" />
-      <option name="project" value="LOCAL" />
-      <updated>1712243238378</updated>
     </task>
     <task id="LOCAL-00101" summary="testing we tacccck">
       <option name="closed" value="true" />
@@ -615,7 +636,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713633768438</updated>
     </task>
-    <option name="localTasksCounter" value="147" />
+    <task id="LOCAL-00147" summary="push gamed">
+      <option name="closed" value="true" />
+      <created>1713641051608</created>
+      <option name="number" value="00147" />
+      <option name="presentableId" value="LOCAL-00147" />
+      <option name="project" value="LOCAL" />
+      <updated>1713641051608</updated>
+    </task>
+    <option name="localTasksCounter" value="148" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -690,7 +719,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Comparing both btrees; probably won't switch.&#10;Optimized table.searchRec() to use clusterKey index if exists." />
     <MESSAGE value="optimized search for insert. &#10;Warning⚠️: table.search() return Pair(pageIdx, null) if index on clusterKey" />
     <MESSAGE value="Clean up + Optimization.&#10;Bonus: override _errHandler in sql parser.&#10;Removed some unneeded rules from sql.g4" />
     <MESSAGE value="Exception constructors ad message" />
@@ -715,7 +743,8 @@
     <MESSAGE value="Modified deleteAllPages to clear BPlusIndex" />
     <MESSAGE value="name change" />
     <MESSAGE value="grammar" />
-    <option name="LAST_COMMIT_MESSAGE" value="grammar" />
+    <MESSAGE value="push gamed" />
+    <option name="LAST_COMMIT_MESSAGE" value="push gamed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

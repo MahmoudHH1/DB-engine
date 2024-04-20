@@ -20,6 +20,15 @@ public class MetaData {
 
     public static int maxPageSize;
 
+    public static void createMetaData() throws IOException {
+        File file = new File(metaPath);
+        if(!file.exists()){
+            FileWriter writer = new FileWriter(metaPath);
+            writer.write("Table_Name,Column_Name,Column_Type,Clustering_Key,Index_Name,Index_Type\n");
+            writer.close();
+        }
+
+    }
     public static void loadPageSize() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(configPath));
         String line = br.readLine();
