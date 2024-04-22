@@ -417,7 +417,9 @@ public class DBApp {
                 htblColNameValue.put("name", name);
                 htblColNameValue.put("gpa", randGpa);
                 htblColNameValue.put("id", randomNumber);
+                BPlusIndex b = IndexControler.readIndexByName("gpaIndex", table);
                 dbApp.insertIntoTable(strTableName, htblColNameValue);
+                System.out.println(b);
             }
             System.out.println("😂😂😂Start Values😂😂");
             table.viewTable();

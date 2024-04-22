@@ -208,7 +208,25 @@ public class BPlusIndex implements Serializable {
         }
         // Borrow:
         else if (in.leftSibling != null && in.leftSibling.isLendable()) {
-            sibling = in.leftSibling;
+            sibling = in.leftSibling; // TODO: work on this maybe
+
+            // Copy 1 key and pointer from sibling (atm just 1 key)
+            Object borrowedKey = sibling.keys[sibling.degree-1];
+            Node pointer = sibling.childPointers[sibling.degree];
+
+            // Copy root key and pointer into parent
+            in.keys[0] = parent.keys[parent.degree-1];
+            in.childPointers[0] = pointer;
+
+            // Copy borrowedKey into root
+            parent.keys[parent.degree-1] = borrowedKey;
+
+            // Delete key and pointer from sibling
+            sibling.removePointer(sibling.degree-1);
+            Arrays.sort(sibling.keys);
+//            sibling.removePointer(0);
+            shiftDown(in.childPointers, 1);
+
         } else if (in.rightSibling != null && in.rightSibling.isLendable()) {
             sibling = in.rightSibling;
 
@@ -226,13 +244,35 @@ public class BPlusIndex implements Serializable {
             // Delete key and pointer from sibling
             sibling.removePointer(0);
             Arrays.sort(sibling.keys);
-            sibling.removePointer(0);
+//            sibling.removePointer(0);
             shiftDown(in.childPointers, 1);
+
         }
 
         // Merge: mafihash haga leh?????????
-        else if (in.leftSibling != null && in.leftSibling.isMergeable()) {
+        else if (in.leftSibling != null && in.leftSibling.isMergeable()) { // TODO: work on this maybe
+            sibling = in.leftSibling;
 
+            // Copy rightmost key in parent to beginning of sibling's keys &
+            // delete key from parent
+            sibling.keys[sibling.degree - 1] = parent.keys[parent.degree - 2];
+            Arrays.sort(sibling.keys, 0, sibling.degree);
+            parent.keys[parent.degree - 2] = null;
+
+            // Copy in's child pointer over to sibling's list of child pointers
+            for (int i = 0; i < in.childPointers.length; i++) {
+                if (in.childPointers[i] != null) {
+                    sibling.prependChildPointer(in.childPointers[i]);
+                    in.childPointers[i].parent = sibling;
+                    in.removePointer(i);
+                }
+            }
+
+            // Delete child pointer from grandparent to deficient node
+            parent.removePointer(in);
+
+            // Remove left sibling
+            sibling.leftSibling = in.leftSibling;
         } else if (in.rightSibling != null && in.rightSibling.isMergeable()) {
             sibling = in.rightSibling;
 
@@ -263,7 +303,6 @@ public class BPlusIndex implements Serializable {
             handleDeficiency(parent);
         }
     }
-
     /**
      * This is a simple method that determines if the B+ tree is empty or not.
      * @return a boolean indicating if the B+ tree is empty or not
