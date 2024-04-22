@@ -210,22 +210,22 @@ public class BPlusIndex implements Serializable {
         else if (in.leftSibling != null && in.leftSibling.isLendable()) {
             sibling = in.leftSibling; // TODO: work on this maybe
 
-            // Copy 1 key and pointer from sibling (atm just 1 key)
-            Object borrowedKey = sibling.keys[sibling.degree-1];
-            Node pointer = sibling.childPointers[sibling.degree];
-
-            // Copy root key and pointer into parent
-            in.keys[0] = parent.keys[parent.degree-1];
-            in.childPointers[0] = pointer;
-
-            // Copy borrowedKey into root
-            parent.keys[parent.degree-1] = borrowedKey;
-
-            // Delete key and pointer from sibling
-            sibling.removePointer(sibling.degree-1);
-            Arrays.sort(sibling.keys);
-//            sibling.removePointer(0);
-            shiftDown(in.childPointers, 1);
+//            // Copy 1 key and pointer from sibling (atm just 1 key)
+//            Object borrowedKey = sibling.keys[sibling.degree-1];
+//            Node pointer = sibling.childPointers[sibling.degree];
+//
+//            // Copy root key and pointer into parent
+//            in.keys[0] = parent.keys[parent.degree-1];
+//            in.childPointers[0] = pointer;
+//
+//            // Copy borrowedKey into root
+//            parent.keys[parent.degree-1] = borrowedKey;
+//
+//            // Delete key and pointer from sibling
+//            sibling.removePointer(sibling.degree-1);
+//            Arrays.sort(sibling.keys);
+////            sibling.removePointer(0);
+//            shiftDown(in.childPointers, 1);
 
         } else if (in.rightSibling != null && in.rightSibling.isLendable()) {
             sibling = in.rightSibling;
@@ -250,29 +250,29 @@ public class BPlusIndex implements Serializable {
         }
 
         // Merge: mafihash haga leh?????????
-        else if (in.leftSibling != null && in.leftSibling.isMergeable()) { // TODO: work on this maybe
-            sibling = in.leftSibling;
-
-            // Copy rightmost key in parent to beginning of sibling's keys &
-            // delete key from parent
-            sibling.keys[sibling.degree - 1] = parent.keys[parent.degree - 2];
-            Arrays.sort(sibling.keys, 0, sibling.degree);
-            parent.keys[parent.degree - 2] = null;
-
-            // Copy in's child pointer over to sibling's list of child pointers
-            for (int i = 0; i < in.childPointers.length; i++) {
-                if (in.childPointers[i] != null) {
-                    sibling.prependChildPointer(in.childPointers[i]);
-                    in.childPointers[i].parent = sibling;
-                    in.removePointer(i);
-                }
-            }
-
-            // Delete child pointer from grandparent to deficient node
-            parent.removePointer(in);
-
-            // Remove left sibling
-            sibling.leftSibling = in.leftSibling;
+        else if (in.leftSibling != null && in.leftSibling.isMergeable()) {
+//            sibling = in.leftSibling; // TODO: work on this maybe
+//
+//            // Copy rightmost key in parent to beginning of sibling's keys &
+//            // delete key from parent
+//            sibling.keys[sibling.degree - 1] = parent.keys[parent.degree - 2];
+//            Arrays.sort(sibling.keys, 0, sibling.degree);
+//            parent.keys[parent.degree - 2] = null;
+//
+//            // Copy in's child pointer over to sibling's list of child pointers
+//            for (int i = 0; i < in.childPointers.length; i++) {
+//                if (in.childPointers[i] != null) {
+//                    sibling.prependChildPointer(in.childPointers[i]);
+//                    in.childPointers[i].parent = sibling;
+//                    in.removePointer(i);
+//                }
+//            }
+//
+//            // Delete child pointer from grandparent to deficient node
+//            parent.removePointer(in);
+//
+//            // Remove left sibling
+//            sibling.leftSibling = in.leftSibling;
         } else if (in.rightSibling != null && in.rightSibling.isMergeable()) {
             sibling = in.rightSibling;
 
@@ -601,7 +601,7 @@ public class BPlusIndex implements Serializable {
 
                         // Update sibling pointer
                         sibling.rightSibling = ln.rightSibling;
-                        sibling.mergeDict(ln.dictionary);
+//                        sibling.mergeDict(ln.dictionary);
 
                         // Check for deficiencies in parent
                         if (parent.isDeficient()) {
@@ -621,7 +621,7 @@ public class BPlusIndex implements Serializable {
 
                         // Update sibling pointer
                         sibling.leftSibling = ln.leftSibling;
-                        sibling.mergeDict(ln.dictionary);
+//                        sibling.mergeDict(ln.dictionary);
 
                         if (sibling.leftSibling == null) {
                             firstLeaf = sibling;
@@ -1088,10 +1088,10 @@ public class BPlusIndex implements Serializable {
 
             // Delete dictionary pair from leaf
             if(dictionary[index].values.isEmpty()){
-//                this.dictionary[index] = null;
+                this.dictionary[index] = null;
                 //shift all
-                for(int i = index; i<numPairs; i++)
-                    this.dictionary[i] = this.dictionary[i+1];
+//                for(int i = index; i<numPairs; i++)
+//                    this.dictionary[i] = this.dictionary[i+1];
                 // Decrement numPairs
                 numPairs--;
             }
@@ -1203,7 +1203,7 @@ public class BPlusIndex implements Serializable {
          */
         public LeafNode(int m, DictionaryPair dp) {
             this.maxNumPairs = m - 1;
-            this.minNumPairs = (int)(Math.ceil((double) m /2) - 1);
+            this.minNumPairs = (int)(Math.ceil(m/2) - 1);
             this.dictionary = new DictionaryPair[m];
             this.numPairs = 0;
             this.insert(dp);
@@ -1219,7 +1219,7 @@ public class BPlusIndex implements Serializable {
          */
         public LeafNode(int m, DictionaryPair[] dps, InternalNode parent) {
             this.maxNumPairs = m - 1;
-            this.minNumPairs = (int)(Math.ceil((double) m /2) - 1);
+            this.minNumPairs = (int)(Math.ceil(m/2) - 1);
             this.dictionary = dps;
             this.numPairs = linearNullSearch(dps);
             this.parent = parent;
@@ -1296,7 +1296,9 @@ public class BPlusIndex implements Serializable {
         System.out.println(b);
         System.out.println(b.search(10));
         b.delete(9, p);
-        System.out.println(b.search(8));
+        System.out.println(b);
+        b.delete(8,p);
+        System.out.println(b);
 
     }
 }
